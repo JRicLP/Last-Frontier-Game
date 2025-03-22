@@ -23,4 +23,43 @@ public class Nomade {
         this.habilidadesNomade="Médico";
         this.localizacaoNomade=localizacaoNomade;
     }
+    //Métodos getter para acessar os valores dos atributos
+    public String getNomeNomade() {
+        return nomeNomade;
+    }
+    public int getFomeNomade() {
+        return fomeNomade;
+    }
+    public int getVidaNomade() {
+        return vidaNomade;
+    }
+    public int getSedeNomade() {
+        return sedeNomade;
+    }
+    public int getSanidadeNomade() {
+        return sanidadeNomade;
+    }
+    public int getEnergiaNomade() {
+        return energiaNomade;
+    }
+    public String getInventarioNomade() {
+        return inventarioNomade;
+    }
+    public String getHabilidadesNomade() {
+        return habilidadesNomade;
+    }
+    public String getLocalizacaoNomade() {
+        return localizacaoNomade;
+    }
+    //Método para mostrar status
+    public void mostrarStatus(){
+        System.out.println("Nome: " + nomeNomade);
+        System.out.println("Vida: " + vidaNomade);
+        System.out.println("Sede: " + sedeNomade);
+        System.out.println("Fome: "+ fomeNomade);
+        System.out.println("Energia: "+ energiaNomade);
+        System.out.println("Sanidade: "+ sanidadeNomade);
+        System.out.println(" Inventário: "+ inventarioNomade);
+        System.out.println("Localização: "+ localizacaoNomade);
+    }
 }
