@@ -23,6 +23,45 @@ public class Cientista {
         this.habilidadesCientista="Mecânico";
         this.localizacaoCientista=localizacaoCientista;
     }
+    //Métodos getter para acessar os valores dos atributos
+    public String getNomeCientista() {
+        return nomeCientista;
+    }
+    public int getFomeCientista() {
+        return fomeCientista;
+    }
+    public int getVidaCientista() {
+        return vidaCientista;
+    }
+    public int getSedeCientista() {
+        return sedeCientista;
+    }
+    public int getSanidadeCientista() {
+        return sanidadeCientista;
+    }
+    public int getEnergiaCientista() {
+        return energiaCientista;
+    }
+    public String getInventarioCientista() {
+        return inventarioCientista;
+    }
+    public String getHabilidadesCientista() {
+        return habilidadesCientista;
+    }
+    public String getLocalizacaoCientista() {
+        return localizacaoCientista;
+    }
+    //Método para mostrar status
+    public void mostrarStatus(){
+        System.out.println("Nome: " + nomeCientista);
+        System.out.println("Vida: " + vidaCientista);
+        System.out.println("Sede: " + sedeCientista);
+        System.out.println("Fome: "+ fomeCientista);
+        System.out.println("Energia: "+ energiaCientista);
+        System.out.println("Sanidade: "+ sanidadeCientista);
+        System.out.println(" Inventário: "+ inventarioCientista);
+        System.out.println("Localização: "+ localizacaoCientista);
+    }
 }
 
 
