@@ -23,4 +23,43 @@ public class Explorador {
         this.habilidadesExplorador=habilidadesExplorador;
         this.localizacaoExplorador=localizacaoExplorador;
     }
+    //Métodos getter, para acessar os valores dos atributos
+    public String getNomeExplorador(){
+        return nomeExplorador;
+    }
+    public int getVidaExploradro(){
+        return vidaExplorador;
+    }
+    public int getEnergiaExplorador() {
+        return energiaExplorador;
+    }
+    public int getSedeExplorador(){
+        return sedeExplorador;
+    }
+    public int getFomeExplorador() {
+        return fomeExplorador;
+    }
+    public int getSanidadeExplorador() {
+        return sanidadeExplorador;
+    }
+    public String getHabilidadesExplorador() {
+        return habilidadesExplorador;
+    }
+    public String getInventarioExplorador() {
+        return inventarioExplorador;
+    }
+    public void getLocalizacaoExplorador(String localizacaoExplorador) {
+        this.localizacaoExplorador = localizacaoExplorador;
+    }
+    //Método para mostrar status
+    public void mostrarStatus(){
+        System.out.println("Nome: " + nomeExplorador);
+        System.out.println("Vida: " + vidaExplorador);
+        System.out.println("Sede: " + sedeExplorador);
+        System.out.println("Fome: "+ fomeExplorador);
+        System.out.println("Energia: "+ energiaExplorador);
+        System.out.println("Sanidade: "+ sanidadeExplorador);
+        System.out.println(" Inventário: "+ inventarioExplorador);
+        System.out.println("Localização: "+ localizacaoExplorador);
+    }
 }
