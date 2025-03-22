@@ -23,4 +23,43 @@ public class Pirata {
         this.habilidadesPirata="Sobrevivente nato";
         this.localizacaoPirata=localizacaoPirata;
     }
+     //Métodos getter para acessar os valores dos atributos
+    public String getNomePirata() {
+        return nomePirata;
+    }
+    public int getFomePirata() {
+        return fomePirata;
+    }
+    public int getVidaPirata() {
+        return vidaPirata;
+    }
+    public int getSedePirata() {
+        return sedePirata;
+    }
+    public int getSanidadePirata() {
+        return sanidadePirata;
+    }
+    public int getEnergiaCacador() {
+        return energiaPirata;
+    }
+    public String getInventarioPirata() {
+        return inventarioPirata;
+    }
+    public String getHabilidadesPirata() {
+        return habilidadesPirata;
+    }
+    public String getLocalizacaoPirata() {
+        return localizacaoPirata;
+    }
+    //Método para mostrar status
+    public void mostrarStatus(){
+        System.out.println("Nome: " + nomePirata);
+        System.out.println("Vida: " + vidaPirata);
+        System.out.println("Sede: " + sedePirata);
+        System.out.println("Fome: "+ fomePirata);
+        System.out.println("Energia: "+ energiaPirata);
+        System.out.println("Sanidade: "+ sanidadePirata);
+        System.out.println(" Inventário: "+ inventarioPirata);
+        System.out.println("Localização: "+ localizacaoPirata);
+    }
 }
