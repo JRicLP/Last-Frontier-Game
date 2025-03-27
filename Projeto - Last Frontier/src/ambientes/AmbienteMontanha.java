@@ -14,5 +14,22 @@ public class AmbienteMontanha extends Ambientes {
         this.climaInstavel = climaInstavel;
         this.baixaVegetacao = baixaVegetacao;
     }
-
+    public void setTerrenoAcidentado(){
+        this.terrenoAcidentado = terrenoAcidentado;
+    }
+    public String getTerrenoAcidentado(){
+        return terrenoAcidentado;
+    }
+    public void setClimaInstavel(){
+        this.climaInstavel = climaInstavel;
+    }
+    public String getClimaInstavel(){
+        return climaInstavel;
+    }
+    public void setBaixaVegetacao(){
+        this.baixaVegetacao = baixaVegetacao;
+    }
+    public String getBaixaVegetacao(){
+        return baixaVegetacao;
+    }
 }

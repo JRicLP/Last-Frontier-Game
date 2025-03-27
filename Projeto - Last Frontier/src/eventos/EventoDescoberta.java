@@ -14,4 +14,22 @@ public class EventoDescoberta extends Eventos{
         this.recursoEncontrado = recursoEncontrado;
         this.condicaoEspecial = condicaoEspecial;
     }
+    public void setTipoDescoberta(){
+        this.tipoDescoberta = tipoDescoberta;
+    }
+    public String getTipoDescoberta(){
+        return tipoDescoberta;
+    }
+    public void setRecursoEncontrado(){
+        this.recursoEncontrado = recursoEncontrado;
+    }
+    public String getRecursoEncontrado(){
+        return recursoEncontrado;
+    }
+    public void setCondicaoEspecial(boolean condicaoEspecial){
+        this.condicaoEspecial = condicaoEspecial;
+    }
+    public boolean isCondicaoEspecial(){
+        return condicaoEspecial;
+    }
 }

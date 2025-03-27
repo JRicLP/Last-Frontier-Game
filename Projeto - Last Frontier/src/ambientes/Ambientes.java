@@ -1,6 +1,6 @@
 package ambientes;
 
-public class Ambientes {
+public class Ambientes { //Essa classe será abstrata
     //Atributos da superclasse:
     private String nomeAmbiente;
     private String descricaoAmbiente;
@@ -18,14 +18,46 @@ public class Ambientes {
         this.probabilidadeEventos = probabilidadeEventos;
         this.climaDominante = climaDominante;
     }
-    public void explorarAmbiente(){
-
+    public void setNomeAmbiente(){
+        this.nomeAmbiente = nomeAmbiente;
     }
-    public void gerarEvento(){
-
+    public String getNomeAmbiente(){
+        return nomeAmbiente;
     }
-    public void modificarClima(){
-
+    public void setDescricaoAmbiente(){
+        this.descricaoAmbiente = descricaoAmbiente;
     }
-
+    public String getDescricaoAmbiente(){
+        return descricaoAmbiente;
+    }
+    public void setDificuldadeAmbiente(double dificuldadeAmbiente){
+        this.dificuldadeAmbiente =  dificuldadeAmbiente;
+    }
+    public double getDificuldadeAmbiente(){
+        return dificuldadeAmbiente;
+    }
+    public void setRecursosAmbiente(){
+        this.recursosAmbiente = recursosAmbiente;
+    }
+    public String getRecursosAmbiente(){
+        return recursosAmbiente;
+    }
+    public void setProbabilidadeEventos(double probabilidadeEventos){
+        this.probabilidadeEventos =  probabilidadeEventos;
+    }
+    public double getProbabilidadeEventos(){
+        return probabilidadeEventos;
+    }
+    public void setClimaDominante(){
+        this.climaDominante = climaDominante;
+    }
+    public String getClimaDominante(){
+        return climaDominante;
+    }
+    public void explorarAmbiente(){ //Metodo geral
+    }
+    public void gerarEvento(){ //Metodo geral
+    }
+    public void modificarClima(){ //Metodo geral
+    }
 }

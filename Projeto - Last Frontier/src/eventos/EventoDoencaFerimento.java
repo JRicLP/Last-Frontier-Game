@@ -14,4 +14,22 @@ public class EventoDoencaFerimento extends Eventos{
         this.impactoDoencaFerimento = impactoDoencaFerimento;
         this.curaDisponivel = curaDisponivel;
     }
+    public void setTipoCondicao(){
+        this.tipoCondicao = tipoCondicao;
+    }
+    public String getTipoCondicao(){
+        return tipoCondicao;
+    }
+    public void setImpactoDoencaFerimento(){
+        this.impactoDoencaFerimento = impactoDoencaFerimento;
+    }
+    public String getImpactoDoencaFerimento(){
+        return impactoDoencaFerimento;
+    }
+    public void setCuraDisponivel(boolean curaDisponivel){
+        this.curaDisponivel = curaDisponivel;
+    }
+    public boolean isCuraDisponivel(){
+        return curaDisponivel;
+    }
 }

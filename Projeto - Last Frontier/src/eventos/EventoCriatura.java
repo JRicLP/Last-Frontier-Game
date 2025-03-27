@@ -14,4 +14,22 @@ public class EventoCriatura extends Eventos{
         this.nivelPerigo = nivelPerigo;
         this.opcaoAcao = opcaoAcao;
     }
+    public void setTipoCriatura(){
+        this.tipoCriatura = tipoCriatura;
+    }
+    public String getTipoCriatura(){
+        return tipoCriatura;
+    }
+    public void setNivelPerigo(double nivelPerigo){
+        this.nivelPerigo = nivelPerigo;
+    }
+    public double getNivelPerigo(){
+        return nivelPerigo;
+    }
+    public void setOpcaoAcao(){
+        this.opcaoAcao = opcaoAcao;
+    }
+    public String getOpcaoAcao(){
+        return opcaoAcao;
+    }
 }

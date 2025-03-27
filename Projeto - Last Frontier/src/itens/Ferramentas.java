@@ -11,7 +11,18 @@ public class Ferramentas extends Item {
         this.tipoFerramenta = tipoFerramenta;
         this.eficienciaFerramenta = eficienciaFerramenta;
     }
-    public void usarFerramenta(){
-
+    public void setTipoFerramenta(){
+        this.tipoFerramenta = tipoFerramenta;
+    }
+    public String getTipoFerramenta(){
+        return tipoFerramenta;
+    }
+    public void setEficienciaFerramenta(double eficienciaFerramenta){
+        this.eficienciaFerramenta = eficienciaFerramenta;
+    }
+    public double getEficienciaFerramenta(){
+        return eficienciaFerramenta;
+    }
+    public void usarFerramenta(){ //Metodo que será sobrescrito
     }
 }

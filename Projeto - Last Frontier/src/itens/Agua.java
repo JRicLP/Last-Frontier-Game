@@ -10,7 +10,18 @@ public class Agua extends Item{
         this.purezaAgua = purezaAgua;
         this.volumeAgua = volumeAgua;
     }
-    public void beberAgua(){
-
+    public void setPurezaAgua(double purezaAgua){
+        this.purezaAgua = purezaAgua;
+    }
+    public double getPurezaAgua(){
+        return purezaAgua;
+    }
+    public void setVolumeAgua(double volumeAgua){
+        this.volumeAgua = volumeAgua;
+    }
+    public double getVolumeAgua(){
+        return volumeAgua;
+    }
+    public void beberAgua(){ //Metodo sobrescrito
     }
 }

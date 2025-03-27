@@ -15,4 +15,22 @@ public class AmbienteRuinas extends Ambientes{
         this.presencaSobreviventes = presencaSobreviventes;
         this.baixoRiscoClimatico = baixoRiscoClimatico;
     }
+    public void setEstruturasInstaveis(){
+        this.estruturasInstaveis = estruturasInstaveis;
+    }
+    public String getEstruturasInstaveis(){
+        return estruturasInstaveis;
+    }
+    public void setPresencaSobreviventes(){
+        this.presencaSobreviventes = presencaSobreviventes;
+    }
+    public String getPresencaSobreviventes(){
+        return presencaSobreviventes;
+    }
+    public void setBaixoRiscoClimatico(){
+        this.baixoRiscoClimatico = baixoRiscoClimatico;
+    }
+    public String getBaixoRiscoClimatico(){
+        return baixoRiscoClimatico;
+    }
 }

@@ -15,4 +15,22 @@ public class AmbienteLagoRio extends Ambientes{
         this.possibilidadePesca = possibilidadePesca;
         this.terrenoLamacento = terrenoLamacento;
     }
+    public void setAguaAbundante(){
+        this.aguaAbundante = aguaAbundante;
+    }
+    public String getAguaAbundante(){
+        return aguaAbundante;
+    }
+    public void setPossibilidadePesca(){
+        this.possibilidadePesca = possibilidadePesca;
+    }
+    public String getPossibilidadePesca(){
+        return possibilidadePesca;
+    }
+    public void setTerrenoLamacento(){
+        this.terrenoLamacento = terrenoLamacento;
+    }
+    public String getTerrenoLamacento(){
+        return terrenoLamacento;
+    }
 }

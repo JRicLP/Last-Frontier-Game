@@ -1,6 +1,6 @@
 package eventos;
 
-public class Eventos{
+public class Eventos{ //Essa classe será abstrata
     //Atributos da superclasse:
     private String nomeEvento;
     private String descricaoEvento;
@@ -16,7 +16,36 @@ public class Eventos{
         this.impactoEvento = impactoEvento;
         this.condicaoEvento = condicaoEvento;
     }
-    public void exercutarEvento(){
-
+    public void setNomeEvento(){
+        this.nomeEvento = nomeEvento;
+    }
+    public String getNomeEvento(){
+        return nomeEvento;
+    }
+    public void setDescricaoEvento(){
+        this.descricaoEvento = descricaoEvento;
+    }
+    public String getDescricaoEvento(){
+        return descricaoEvento;
+    }
+    public void setProbabilidadeEvento(double probabilidadeEvento){
+        this.probabilidadeEvento = probabilidadeEvento;
+    }
+    public double getProbabilidadeEvento(){
+        return probabilidadeEvento;
+    }
+    public void setImpactoEvento(){
+        this.impactoEvento = impactoEvento;
+    }
+    public String getImpactoEvento(){
+        return impactoEvento;
+    }
+    public void setCondicaoEvento(){
+        this.condicaoEvento = condicaoEvento;
+    }
+    public String getCondicaoEvento(){
+        return condicaoEvento;
+    }
+    public void exercutarEvento(){ //Esse metodo será sobrescrito nas subclasses
     }
 }

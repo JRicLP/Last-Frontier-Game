@@ -13,7 +13,24 @@ public class Armas extends Item{
         this.danoArma = danoArma;
         this.alcanceArma = alcanceArma;
     }
-    public void atacar(){
-
+    public void setTipoArma(){
+        this.tipoArma = tipoArma;
+    }
+    public String getTipoArma(){
+        return tipoArma;
+    }
+    public void setDanoArma(double danoArma){
+        this.danoArma =  danoArma;
+    }
+    public double getDanoArma(){
+        return danoArma;
+    }
+    public void setAlcanceArma(double alcanceArma){
+        this.alcanceArma = alcanceArma;
+    }
+    public double getAlcanceArma(){
+        return alcanceArma;
+    }
+    public void atacar(){ //Metodo que será sobrescrito
     }
 }

@@ -15,4 +15,22 @@ public class AmbienteCaverna extends Ambientes {
         this.criaturasEstranhas = criaturasEstranhas;
         this.aguaGotejamento = aguaGotejamento;
     }
+    public void setPoucaLuz(){
+        this.poucaLuz = poucaLuz;
+    }
+    public String getPoucaLuz(){
+        return poucaLuz;
+    }
+    public void setCriaturasEstranhas(){
+        this.criaturasEstranhas = criaturasEstranhas;
+    }
+    public String getCriaturasEstranhas(){
+        return criaturasEstranhas;
+    }
+    public void setAguaGotejamento(){
+        this.aguaGotejamento = aguaGotejamento;
+    }
+    public String getAguaGotejamento(){
+        return aguaGotejamento;
+    }
 }
