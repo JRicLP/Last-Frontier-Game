@@ -1,7 +1,7 @@
 package eventos;
 
-public class Animais extends EventoCriatura{
-    public Animais(String nomeEvento, String descricaoEvento, double probabilidadeEvento, String impactoEvento, String condicaoEvento, String tipoCriatura,
+public class EventoAnimais extends EventoCriatura{
+    public EventoAnimais(String nomeEvento, String descricaoEvento, double probabilidadeEvento, String impactoEvento, String condicaoEvento, String tipoCriatura,
                    double nivelPerigo, String opcaoAcao) {
         super(nomeEvento, descricaoEvento, probabilidadeEvento, impactoEvento, condicaoEvento, tipoCriatura, nivelPerigo, opcaoAcao);
     }
@@ -16,7 +16,7 @@ public class Animais extends EventoCriatura{
     public void criarAnimalDinamico(String nomeEvento, String descricaoEvento, double probabilidadeEvento,
                                     String impactoEvento, String condicaoEvento, String tipoCriatura,
                                     double nivelPerigo, String opcaoAcao){
-        Animais animal=new Animais(nomeEvento, descricaoEvento, probabilidadeEvento,
+        EventoAnimais animal=new EventoAnimais(nomeEvento, descricaoEvento, probabilidadeEvento,
                 impactoEvento, condicaoEvento, tipoCriatura, nivelPerigo, opcaoAcao);
 
         animal.exibirAnimal();
@@ -52,7 +52,7 @@ public class Animais extends EventoCriatura{
                 "Tartaruga Medicinal", 0," pode carregar ervas raras na sua carapaça, também indica o local dessas plantas");
 
         criarAnimalDinamico(" Aparição de peixe", "Os peixes estão nos rios prontos para a pesca",0.9,
-                " Aumento de comida", "Ocorre quando o personagem estiver em rios e lagos", " Peixe",
-                0, " Serve de comida, o personagem irá pescá-lo");
+                " Aumento de comida", "Ocorre quando o personagem estiver em rios e lagos", " Peixe", 0,
+                            " Serve de comida, o personagem irá pescá-lo");
     }
 }
