@@ -15,19 +15,19 @@ public class AmbienteFloresta extends Ambientes {
         this.faunaAbundante = faunaAbundante;
         this.climaUmido = climaUmido;
     }
-    public void setVegetacaoDensa(){
+    public void setVegetacaoDensa(String vegetacaoDensa){
         this.vegetacaoDensa = vegetacaoDensa;
     }
     public String getVegetacaoDensa(){
         return vegetacaoDensa;
     }
-    public void setFaunaAbundante(){
+    public void setFaunaAbundante(String faunaAbundante){
         this.faunaAbundante = faunaAbundante;
     }
     public String getFaunaAbundante(){
         return faunaAbundante;
     }
-    public void setClimaUmido(){
+    public void setClimaUmido(String climaUmido){
         this.climaUmido = climaUmido;
     }
     public String getClimaUmido(){

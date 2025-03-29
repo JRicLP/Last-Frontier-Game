@@ -16,13 +16,13 @@ public class Eventos{ //Essa classe será abstrata
         this.impactoEvento = impactoEvento;
         this.condicaoEvento = condicaoEvento;
     }
-    public void setNomeEvento(){
+    public void setNomeEvento(String nomeEvento){
         this.nomeEvento = nomeEvento;
     }
     public String getNomeEvento(){
         return nomeEvento;
     }
-    public void setDescricaoEvento(){
+    public void setDescricaoEvento(String descricaoEvento){
         this.descricaoEvento = descricaoEvento;
     }
     public String getDescricaoEvento(){
@@ -34,13 +34,13 @@ public class Eventos{ //Essa classe será abstrata
     public double getProbabilidadeEvento(){
         return probabilidadeEvento;
     }
-    public void setImpactoEvento(){
+    public void setImpactoEvento(String impactoEvento){
         this.impactoEvento = impactoEvento;
     }
     public String getImpactoEvento(){
         return impactoEvento;
     }
-    public void setCondicaoEvento(){
+    public void setCondicaoEvento(String condicaoEvento){
         this.condicaoEvento = condicaoEvento;
     }
     public String getCondicaoEvento(){

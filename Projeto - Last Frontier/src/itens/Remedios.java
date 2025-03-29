@@ -10,13 +10,13 @@ public class Remedios extends Item {
         this.tipoRemedio = tipoRemedio;
         this.efeitoRemedio = efeitoRemedio;
     }
-    public void setTipoRemedio(){
+    public void setTipoRemedio(String tipoRemedio){
         this.tipoRemedio = tipoRemedio;
     }
     public String getTipoRemedio(){
         return tipoRemedio;
     }
-    public void setEfeitoRemedio(){
+    public void setEfeitoRemedio(String efeitoRemedio){
         this.efeitoRemedio = efeitoRemedio;
     }
     public void usarRemedio(){ //Metodo que será sobrescrito

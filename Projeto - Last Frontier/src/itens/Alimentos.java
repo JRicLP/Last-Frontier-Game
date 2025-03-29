@@ -17,7 +17,7 @@ public class Alimentos extends Item {
     public double getValorNutricional(){
         return valorNutricional;
     }
-    public void setTipoAlimento(){
+    public void setTipoAlimento(String tipoAlimento){
         this.tipoAlimento = tipoAlimento;
     }
     public String getTipoAlimento(){

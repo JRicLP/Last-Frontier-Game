@@ -11,7 +11,7 @@ public class Ferramentas extends Item {
         this.tipoFerramenta = tipoFerramenta;
         this.eficienciaFerramenta = eficienciaFerramenta;
     }
-    public void setTipoFerramenta(){
+    public void setTipoFerramenta(String tipoFerramenta){
         this.tipoFerramenta = tipoFerramenta;
     }
     public String getTipoFerramenta(){

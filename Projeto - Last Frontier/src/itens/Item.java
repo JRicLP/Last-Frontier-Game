@@ -11,7 +11,7 @@ public class Item { //Essa classe deverá ser abstrata
         this.pesoItem = pesoItem;
         this.durabilidadeItem = durabilidadeItem;
     }
-    public void setNomeItem(){
+    public void setNomeItem(String nomeItem){
         this.nomeItem = nomeItem;
     }
     public String getNomeItem(){

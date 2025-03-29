@@ -18,13 +18,13 @@ public class Ambientes { //Essa classe será abstrata
         this.probabilidadeEventos = probabilidadeEventos;
         this.climaDominante = climaDominante;
     }
-    public void setNomeAmbiente(){
+    public void setNomeAmbiente(String nomeAmbiente){
         this.nomeAmbiente = nomeAmbiente;
     }
     public String getNomeAmbiente(){
         return nomeAmbiente;
     }
-    public void setDescricaoAmbiente(){
+    public void setDescricaoAmbiente(String descricaoAmbiente){
         this.descricaoAmbiente = descricaoAmbiente;
     }
     public String getDescricaoAmbiente(){
@@ -36,7 +36,7 @@ public class Ambientes { //Essa classe será abstrata
     public double getDificuldadeAmbiente(){
         return dificuldadeAmbiente;
     }
-    public void setRecursosAmbiente(){
+    public void setRecursosAmbiente(String recursosAmbiente){
         this.recursosAmbiente = recursosAmbiente;
     }
     public String getRecursosAmbiente(){
@@ -48,7 +48,7 @@ public class Ambientes { //Essa classe será abstrata
     public double getProbabilidadeEventos(){
         return probabilidadeEventos;
     }
-    public void setClimaDominante(){
+    public void setClimaDominante(String climaDominante){
         this.climaDominante = climaDominante;
     }
     public String getClimaDominante(){

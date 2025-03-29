@@ -11,7 +11,7 @@ public class Inventario {
         this.pesoInventario = pesoInventario;
         this.capacidadeInventario = capacidadeInventario;
     }
-    public void setListaItens(){
+    public void setListaItens(String listaItens){
         this.listaItens = listaItens;
     }
     public String getListaItens(){

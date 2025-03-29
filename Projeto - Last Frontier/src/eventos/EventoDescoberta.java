@@ -14,13 +14,13 @@ public class EventoDescoberta extends Eventos{
         this.recursoEncontrado = recursoEncontrado;
         this.condicaoEspecial = condicaoEspecial;
     }
-    public void setTipoDescoberta(){
+    public void setTipoDescoberta(String tipoDescoberta){
         this.tipoDescoberta = tipoDescoberta;
     }
     public String getTipoDescoberta(){
         return tipoDescoberta;
     }
-    public void setRecursoEncontrado(){
+    public void setRecursoEncontrado(String recursoEncontrado){
         this.recursoEncontrado = recursoEncontrado;
     }
     public String getRecursoEncontrado(){

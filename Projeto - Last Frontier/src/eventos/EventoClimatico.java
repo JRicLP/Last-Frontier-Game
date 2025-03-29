@@ -15,7 +15,7 @@ public class EventoClimatico extends Eventos {
         this.duracaoClima = duracaoClima;
         this.efeitoClima = efeitoClima;
     }
-    public void setTipoClima() {
+    public void setTipoClima(String tipoClima) {
         this.tipoClima = tipoClima;
     }
     public String getTipoClima() {
@@ -27,7 +27,7 @@ public class EventoClimatico extends Eventos {
     public double getDuracaoClima(){
         return duracaoClima;
     }
-    public void setEfeitoClima(){
+    public void setEfeitoClima(String efeitoClima){
         this.efeitoClima = efeitoClima;
     }
     public String getEfeitoClima(){

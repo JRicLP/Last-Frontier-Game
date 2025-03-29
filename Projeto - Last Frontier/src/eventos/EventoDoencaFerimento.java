@@ -14,13 +14,13 @@ public class EventoDoencaFerimento extends Eventos{
         this.impactoDoencaFerimento = impactoDoencaFerimento;
         this.curaDisponivel = curaDisponivel;
     }
-    public void setTipoCondicao(){
+    public void setTipoCondicao(String tipoCondicao){
         this.tipoCondicao = tipoCondicao;
     }
     public String getTipoCondicao(){
         return tipoCondicao;
     }
-    public void setImpactoDoencaFerimento(){
+    public void setImpactoDoencaFerimento(String impactoDoencaFerimento){
         this.impactoDoencaFerimento = impactoDoencaFerimento;
     }
     public String getImpactoDoencaFerimento(){

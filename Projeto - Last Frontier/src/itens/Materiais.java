@@ -10,7 +10,7 @@ public class Materiais extends Item {
         this.tipoMaterial = tipoMaterial;
         this.resistenciaMaterial = resistenciaMaterial;
     }
-    public void setTipoMaterial(){
+    public void setTipoMaterial(String tipoMaterial){
         this.tipoMaterial = tipoMaterial;
     }
     public String getTipoMaterial(){

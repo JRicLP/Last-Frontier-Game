@@ -13,7 +13,7 @@ public class Armas extends Item{
         this.danoArma = danoArma;
         this.alcanceArma = alcanceArma;
     }
-    public void setTipoArma(){
+    public void setTipoArma(String tipoArma){
         this.tipoArma = tipoArma;
     }
     public String getTipoArma(){
