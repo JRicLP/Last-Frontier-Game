@@ -1,6 +1,8 @@
 package ambientes;
 
-public class Ambientes { //Essa classe será abstrata
+import interfaces.AmbientActions;
+
+public abstract class Ambientes implements AmbientActions { //Essa classe será abstrata
     //Atributos da superclasse:
     private String nomeAmbiente;
     private String descricaoAmbiente;
@@ -8,7 +10,7 @@ public class Ambientes { //Essa classe será abstrata
     private String recursosAmbiente;
     private double probabilidadeEventos;
     private String climaDominante;
-    //Métodos da superclasse:
+    //Métodos construtor da superclasse:
     public Ambientes(String nomeAmbiente, String descricaoAmbiente, double dificuldadeAmbiente,
                      String recursosAmbiente, double probabilidadeEventos, String climaDominante){
         this.nomeAmbiente = nomeAmbiente;
@@ -18,6 +20,7 @@ public class Ambientes { //Essa classe será abstrata
         this.probabilidadeEventos = probabilidadeEventos;
         this.climaDominante = climaDominante;
     }
+    //Metodos acessores da superclasse:
     public void setNomeAmbiente(String nomeAmbiente){
         this.nomeAmbiente = nomeAmbiente;
     }
@@ -54,10 +57,18 @@ public class Ambientes { //Essa classe será abstrata
     public String getClimaDominante(){
         return climaDominante;
     }
-    public void explorarAmbiente(){ //Metodo geral
+    //Metodos implementados na superclasse:
+    @Override
+    public void exlorar() {
+
     }
-    public void gerarEvento(){ //Metodo geral
+
+    @Override
+    public void gerarEvento() {
+
     }
-    public void modificarClima(){ //Metodo geral
+    @Override
+    public void modificarClima() {
+
     }
 }

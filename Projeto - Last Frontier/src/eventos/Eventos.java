@@ -1,13 +1,15 @@
 package eventos;
 
-public class Eventos{ //Essa classe será abstrata
+import interfaces.EventsActions;
+
+public abstract class Eventos implements EventsActions { //Essa classe será abstrata
     //Atributos da superclasse:
     private String nomeEvento;
     private String descricaoEvento;
     private double probabilidadeEvento;
     private String impactoEvento;
     private String condicaoEvento;
-    //Métodos da superclasse:
+    //Metodo construtor:
     public Eventos(String nomeEvento, String descricaoEvento, double probabilidadeEvento,
                   String impactoEvento, String condicaoEvento){
         this.nomeEvento = nomeEvento;
@@ -16,6 +18,7 @@ public class Eventos{ //Essa classe será abstrata
         this.impactoEvento = impactoEvento;
         this.condicaoEvento = condicaoEvento;
     }
+    //Metodos acessores:
     public void setNomeEvento(String nomeEvento){
         this.nomeEvento = nomeEvento;
     }
@@ -46,6 +49,9 @@ public class Eventos{ //Essa classe será abstrata
     public String getCondicaoEvento(){
         return condicaoEvento;
     }
-    public void exercutarEvento(){ //Esse metodo será sobrescrito nas subclasses
+    //Metodos implementados:
+    @Override
+    public void executar() {
+
     }
 }

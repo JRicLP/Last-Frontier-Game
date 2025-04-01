@@ -1,20 +1,24 @@
 package inventario;
 
-public class Inventario {
+import interfaces.InventoryActions;
+import itens.Item;
+
+public class Inventario implements InventoryActions {
     //Atributos da classe:
-    private String listaItens; //Esse membro será um Array, posteriormente será modificado
+    private String[] listaItens; //Esse membro será um Array, posteriormente será modificado
     private double pesoInventario;
     private double capacidadeInventario;
-    //Métodos da classe:
-    public Inventario(String listaItens, double pesoInventario, double capacidadeInventario){
+    //Metodo construtor:
+    public Inventario(String[] listaItens, double pesoInventario, double capacidadeInventario){
         this.listaItens = listaItens;
         this.pesoInventario = pesoInventario;
         this.capacidadeInventario = capacidadeInventario;
     }
-    public void setListaItens(String listaItens){
+    //Metodos acessores:
+    public void setListaItens(String[] listaItens){
         this.listaItens = listaItens;
     }
-    public String getListaItens(){
+    public String[] getListaItens(){
         return listaItens;
     }
     public void setPesoInventario(double pesoInventario){
@@ -23,7 +27,7 @@ public class Inventario {
     public double getPesoInventario(){
         return pesoInventario;
     }
-    public void setCapacidadeInventario(){
+    public void setCapacidadeInventario(double capacidadeInventario){
         this.capacidadeInventario = capacidadeInventario;
     }
     public double getCapacidadeInventario(){
@@ -34,5 +38,20 @@ public class Inventario {
     public void removerItem(){ //Metodo geral
     }
     public void usarItem(){ //Metodo geral
+    }
+    //Metodos implementados:
+    @Override
+    public void adicionarItem(Item itemAdicionado) {
+
+    }
+
+    @Override
+    public void removerItem(Item itemRemovido) {
+
+    }
+
+    @Override
+    public void usarItem(Item itemUsado) {
+
     }
 }

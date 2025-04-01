@@ -5,12 +5,13 @@ public class Alimentos extends Item {
     private double valorNutricional;
     private String tipoAlimento;
     private int prazoValidade;
-    //Métodos da subclasse:
+    //Metodo construtor:
     public Alimentos(String nomeItem, double pesoItem, double durabilidadeItem, double valorNutricional, String tipoAlimento){
         super(nomeItem, pesoItem, durabilidadeItem);
         this.valorNutricional = valorNutricional;
         this.tipoAlimento = tipoAlimento;
     }
+    //Metodos acessores:
     public void setValorNutricional(double valorNutricional){
         this.valorNutricional = valorNutricional;
     }
@@ -29,6 +30,8 @@ public class Alimentos extends Item {
     public int getPrazoValidade(){
         return prazoValidade;
     }
-    public void consumirAlimento(){ //Metodo sobrescrito
+    //Metodo sobrescrito
+    public void consumirAlimento(String nomeItem) {
+
     }
 }

@@ -1,11 +1,13 @@
 package itens;
 
-public class Armas extends Item{
+import interfaces.WeaponsActions;
+
+public class Armas extends Item implements WeaponsActions {
     //Atributos da subclasse:
     private String tipoArma;
     private double danoArma;
     private double alcanceArma;
-    //Métodos da subclasse:
+    //Metodo construtor:
     public Armas(String nomeItem, double pesoItem, double durabilidadeItem, String tipoArma, double danoArma,
                  double alcanceArma){
         super(nomeItem, pesoItem, durabilidadeItem);
@@ -13,6 +15,7 @@ public class Armas extends Item{
         this.danoArma = danoArma;
         this.alcanceArma = alcanceArma;
     }
+    //Metodos acessores:
     public void setTipoArma(String tipoArma){
         this.tipoArma = tipoArma;
     }
@@ -32,5 +35,10 @@ public class Armas extends Item{
         return alcanceArma;
     }
     public void atacar(){ //Metodo que será sobrescrito
+    }
+    //Metodos implementados:
+    @Override
+    public void atacar(String alvo) {
+
     }
 }

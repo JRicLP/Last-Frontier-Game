@@ -1,15 +1,18 @@
 package itens;
 
-public class Materiais extends Item {
+import interfaces.MaterialsActions;
+
+public class Materiais extends Item implements MaterialsActions {
     //Atributos da classe:
     private String tipoMaterial;
     private double resistenciaMaterial;
-    //Métodos da classe:
+    //Metodo construtor:
     public Materiais(String nomeItem, double pesoItem, double durabilidadeItem, String tipoMaterial, double resistenciaMaterial){
         super(nomeItem, pesoItem, durabilidadeItem);
         this.tipoMaterial = tipoMaterial;
         this.resistenciaMaterial = resistenciaMaterial;
     }
+    //Metodos acessores:
     public void setTipoMaterial(String tipoMaterial){
         this.tipoMaterial = tipoMaterial;
     }
@@ -23,5 +26,10 @@ public class Materiais extends Item {
         return resistenciaMaterial;
     }
     public void combinarMaterial(){ //Metodo que será sobrescrito
+    }
+    //Metodo implementado:
+    @Override
+    public void combinarMateriais(String nomeItem1, String nomeItem2) { //Metodo especial para materiais
+
     }
 }

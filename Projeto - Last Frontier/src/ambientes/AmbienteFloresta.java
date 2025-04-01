@@ -5,7 +5,7 @@ public class AmbienteFloresta extends Ambientes {
     private String vegetacaoDensa;
     private String faunaAbundante;
     private String climaUmido;
-    //Metodos da subclasse:
+    //Metodo construtor:
     public AmbienteFloresta(String nomeAmbiente, String descricaoAmbiente, double dificuldadeAmbiente,
                             String recursosAmbiente, double probabilidadeEventos, String climaDominante, String vegetacaoDensa,
                             String faunaAbundante, String climaUmido) {
@@ -15,6 +15,7 @@ public class AmbienteFloresta extends Ambientes {
         this.faunaAbundante = faunaAbundante;
         this.climaUmido = climaUmido;
     }
+    //Metodos acessores:
     public void setVegetacaoDensa(String vegetacaoDensa){
         this.vegetacaoDensa = vegetacaoDensa;
     }

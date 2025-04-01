@@ -5,7 +5,7 @@ public class AmbienteRuinas extends Ambientes{
     private String estruturasInstaveis;
     private String presencaSobreviventes;
     private String baixoRiscoClimatico;
-    //Métodos da subclasse:
+    //Metodo construtor:
     public AmbienteRuinas(String nomeAmbiente, String descricaoAmbiente, float dificuldadeAmbiente,
                           String recursosAmbiente, float probabilidadeEventos, String climaDominante,
                           String estruturasInstaveis, String presencaSobreviventes, String baixoRiscoClimatico){
@@ -15,6 +15,7 @@ public class AmbienteRuinas extends Ambientes{
         this.presencaSobreviventes = presencaSobreviventes;
         this.baixoRiscoClimatico = baixoRiscoClimatico;
     }
+    //Metodos acessores:
     public void setEstruturasInstaveis(String estruturasInstaveis){
         this.estruturasInstaveis = estruturasInstaveis;
     }

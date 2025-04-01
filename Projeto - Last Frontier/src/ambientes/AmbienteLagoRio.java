@@ -5,7 +5,7 @@ public class AmbienteLagoRio extends Ambientes{
     private String aguaAbundante;
     private String possibilidadePesca;
     private String terrenoLamacento;
-    //Métodos da subclasse:
+    //Metodo construtor:
     public AmbienteLagoRio(String nomeAmbiente, String descricaoAmbiente, double dificuldadeAmbiente,
                            String recursosAmbiente, double probabilidadeEventos, String climaDominante, String aguaAbundante,
                            String possibilidadePesca, String terrenoLamacento){
@@ -15,6 +15,7 @@ public class AmbienteLagoRio extends Ambientes{
         this.possibilidadePesca = possibilidadePesca;
         this.terrenoLamacento = terrenoLamacento;
     }
+    //Metodos acessores:
     public void setAguaAbundante(String aguaAbundante){
         this.aguaAbundante = aguaAbundante;
     }

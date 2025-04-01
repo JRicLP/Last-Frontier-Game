@@ -5,7 +5,7 @@ public class AmbienteCaverna extends Ambientes {
     private String poucaLuz;
     private String criaturasEstranhas;
     private String aguaGotejamento;
-    //Métodos da classe:
+    //Metodo construtor:
     public AmbienteCaverna(String nomeAmbiente, String descricaoAmbiente, double dificuldadeAmbiente,
                            String recursosAmbiente, double probabilidadeEventos, String climaDominante,
                            String poucaLuz, String criaturasEstranhas, String aguaGotejamento){
@@ -15,6 +15,7 @@ public class AmbienteCaverna extends Ambientes {
         this.criaturasEstranhas = criaturasEstranhas;
         this.aguaGotejamento = aguaGotejamento;
     }
+    //Metodos acessores:
     public void setPoucaLuz(String poucaLuz){
         this.poucaLuz = poucaLuz;
     }

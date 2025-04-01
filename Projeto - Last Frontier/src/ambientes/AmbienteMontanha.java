@@ -5,6 +5,7 @@ public class AmbienteMontanha extends Ambientes {
     private String terrenoAcidentado;
     private String climaInstavel;
     private String baixaVegetacao;
+    //Metodo construtor:
     public AmbienteMontanha(String nomeAmbiente, String descricaoAmbiente, double dificuldadeAmbiente,
                             String recursosAmbiente, double probabilidadeEventos, String climaDominante,
                             String terrenoAcidentado, String climaInstavel, String baixaVegetacao){
@@ -14,6 +15,7 @@ public class AmbienteMontanha extends Ambientes {
         this.climaInstavel = climaInstavel;
         this.baixaVegetacao = baixaVegetacao;
     }
+    //Metodos acessores:
     public void setTerrenoAcidentado(String terrenoAcidentado){
         this.terrenoAcidentado = terrenoAcidentado;
     }
