@@ -1,6 +1,6 @@
 package ambientes;
 
-public class AmbienteLagoRio extends Ambientes{
+public class AmbienteLagoRio extends Ambientes{ //Falta a adição dos recursos disponíveis e ligação com os eventos
     //Atributos da subclasse:
     private String aguaAbundante;
     private String possibilidadePesca;

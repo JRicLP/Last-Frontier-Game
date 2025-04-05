@@ -1,9 +1,11 @@
 package eventos;
 
 public class EventoSobreviventes extends Eventos {
+
     private String tipoSobreviventes;
     private double nivelPerigo;
     private String opcaoAcao;
+
     public EventoSobreviventes(String nomeEvento, String descricaoEvento, double probabilidadeEvento, String impactoEvento, String condicaoEvento, String tipoSobreviventes,
                                double nivelPerigo, String opcaoAcao) {
         super(nomeEvento, descricaoEvento, probabilidadeEvento, impactoEvento, condicaoEvento);
@@ -23,9 +25,7 @@ public class EventoSobreviventes extends Eventos {
     public void criarSobreviventeDinamico(String nomeEvento, String descricaoEvento, double probabilidadeEvento,
                                           String impactoEvento, String condicaoEvento, String tipoSobreviventes,
                                           double nivelPerigo, String opcaoAcao) {
-        EventoSobreviventes sobreviventes = new EventoSobreviventes(nomeEvento, descricaoEvento, probabilidadeEvento,
-                impactoEvento, condicaoEvento, tipoSobreviventes, nivelPerigo, opcaoAcao);
-
+        EventoSobreviventes sobreviventes = new EventoSobreviventes(nomeEvento, descricaoEvento, probabilidadeEvento, impactoEvento, condicaoEvento, tipoSobreviventes, nivelPerigo, opcaoAcao);
         sobreviventes.exibirSobreviventes();
     }
 

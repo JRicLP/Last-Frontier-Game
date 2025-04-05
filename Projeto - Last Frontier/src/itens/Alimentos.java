@@ -31,7 +31,7 @@ public class Alimentos extends Item {
         return prazoValidade;
     }
     //Metodo sobrescrito
-    public void consumirAlimento(String nomeItem) {
+    public void consumirAlimento(String nomeItem) { //Recebe um outro parâmetro (Personagem que irá consumir)
 
     }
 }

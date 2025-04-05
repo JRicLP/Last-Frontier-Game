@@ -2,7 +2,7 @@ package ambientes;
 
 import interfaces.AmbientActions;
 
-public abstract class Ambientes implements AmbientActions { //Essa classe será abstrata
+public abstract class Ambientes implements AmbientActions {
     //Atributos da superclasse:
     private String nomeAmbiente;
     private String descricaoAmbiente;

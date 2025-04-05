@@ -1,6 +1,6 @@
 package ambientes;
 
-public class AmbienteMontanha extends Ambientes {
+public class AmbienteMontanha extends Ambientes { //Falta a adição dos recursos disponíveis e ligação com os eventos
     //Atributos da subclasse:
     private String terrenoAcidentado;
     private String climaInstavel;

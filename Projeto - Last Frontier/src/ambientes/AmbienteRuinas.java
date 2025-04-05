@@ -1,6 +1,6 @@
 package ambientes;
 
-public class AmbienteRuinas extends Ambientes{
+public class AmbienteRuinas extends Ambientes{ //Falta a adição dos recursos disponíveis e ligação com os eventos
     //Atributos da subclasse:
     private String estruturasInstaveis;
     private String presencaSobreviventes;
