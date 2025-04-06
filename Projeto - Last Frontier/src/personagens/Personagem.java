@@ -77,7 +77,7 @@ public  abstract class Personagem implements CharacterActions { //Será uma clas
     @Override
     public void statusPersonagem() {
         System.out.println("Nome: " + getNomePersonagem());
-        System.out.println("Vida: " + getNomePersonagem());
+        System.out.println("Vida: " + getVidaPersonagem());
         System.out.println("Fome: " + getFomePersonagem());
         System.out.println("Sede: " + getSedePersonagem());
         System.out.println("Energia: " + getEnergiaPersonagem());

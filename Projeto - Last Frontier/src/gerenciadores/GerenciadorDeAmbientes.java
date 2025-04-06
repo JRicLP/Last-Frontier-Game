@@ -2,6 +2,7 @@ package gerenciadores;
 
 import ambientes.Ambientes;
 import interfaces.ManagerAmbientActions;
+import personagens.Personagem;
 
 public class GerenciadorDeAmbientes implements ManagerAmbientActions {
     //Atributos da classe:
@@ -35,8 +36,10 @@ public class GerenciadorDeAmbientes implements ManagerAmbientActions {
     }
     //Metodos implementados:
     @Override
-    public void mudarAmbiente() {
-
+    public void mudarAmbiente(Personagem personagemAtual, Ambientes novoAmbiente) {
+        System.out.println("Após uma longa jornada com obstáculos e desafios pelo caminho, " + personagemAtual.getNomePersonagem()
+        + " chegou ao seu destino: " + novoAmbiente.getNomeAmbiente() +"!");
+        personagemAtual.setLocalizacaoPersonagem(novoAmbiente.getNomeAmbiente());
     }
 
     @Override
