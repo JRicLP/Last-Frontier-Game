@@ -8,7 +8,7 @@ public class Infiltrador extends Personagem {
                        double sanidadePersonagem, String inventarioPersonagem, String localizacaoPersonagem, String habilidadeInfiltrador) {
         super(nomePersonagem, vidaPersonagem, fomePersonagem, sedePersonagem, energiaPersonagem,
                 sanidadePersonagem, inventarioPersonagem, localizacaoPersonagem);
-        this.setNomePersonagem("Malik Ghost");
+        this.setNomePersonagem("Malik Gohst");
         this.setVidaPersonagem(85);
         this.setFomePersonagem(65);
         this.setSedePersonagem(85);

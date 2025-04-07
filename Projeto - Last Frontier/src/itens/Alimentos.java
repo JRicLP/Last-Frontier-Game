@@ -1,6 +1,8 @@
 package itens;
 
-public class Alimentos extends Item {
+import interfaces.ItensActions;
+
+public class Alimentos extends Item  {
     //Atributos da subclasse
     private double valorNutricional;
     private String tipoAlimento;
@@ -31,7 +33,7 @@ public class Alimentos extends Item {
         return prazoValidade;
     }
     //Metodo sobrescrito
-    public void consumirAlimento(String nomeItem) { //Recebe um outro parâmetro (Personagem que irá consumir)
+    public void usar(String nomeItem) { //Recebe um outro parâmetro (Personagem que irá consumir)
 
     }
 }
