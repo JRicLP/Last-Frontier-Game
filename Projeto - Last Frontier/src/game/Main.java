@@ -49,6 +49,13 @@ public class Main {
             System.out.println("Destino final:Praia dos Piratas");
         } else if (escolha.equals("Caçador")) {
             System.out.println("Destino final: Floresta Habitada");
+        } else if (escolha.equals("Explorador")){
+            System.out.println("Destino final: Deserto Habitado");
+        }
+        else if(escolha.equals("Cientista")){
+            System.out.println("Destino Final: Caverna Científica");
+        } else if (escolha.equals("Infiltrador")) {
+            System.out.println("Destino Final: Montanha Habitada");
         }
 
         GerenciadorDePersonagens gerenciador= new GerenciadorDePersonagens(escolha, "");
