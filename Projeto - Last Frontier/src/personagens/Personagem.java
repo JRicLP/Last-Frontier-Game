@@ -2,7 +2,7 @@ package personagens;
 
 import interfaces.CharacterActions;
 
-public  abstract class Personagem implements CharacterActions { //Será uma classe abstrata
+public  abstract class Personagem implements CharacterActions,ManagerPersonagens { //Será uma classe abstrata
     //Atributos da superclasse:
     private String nomePersonagem;
     private double vidaPersonagem;
@@ -84,5 +84,10 @@ public  abstract class Personagem implements CharacterActions { //Será uma clas
         System.out.println("Sanidade: " + getSanidadePersonagem());
         System.out.println("Inventário: " + getInventarioPersonagem());
         System.out.println("Localização: " + getLocalizacaoPersonagem());
+    }
+      @Override
+    public void escolherPersonagem(){
+        System.out.println("Seu personagem é: "+ getNomePersonagem());
+
     }
 }
