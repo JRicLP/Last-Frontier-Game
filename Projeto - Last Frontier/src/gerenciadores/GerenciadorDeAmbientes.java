@@ -37,8 +37,11 @@ public class GerenciadorDeAmbientes implements ManagerAmbientActions {
     //Metodos implementados:
     @Override
     public void mudarAmbiente(Personagem personagemAtual, Ambientes novoAmbiente) {
+        System.out.println("...........................................................................");
+        System.out.println("                             Passou de Fase!");
+        System.out.println("...........................................................................");
         System.out.println("Após uma longa jornada com obstáculos e desafios pelo caminho, " + personagemAtual.getNomePersonagem()
-        + " chegou ao seu destino: " + novoAmbiente.getNomeAmbiente() +"!");
+                + " chegou ao seu destino: " + novoAmbiente.getNomeAmbiente() +"!");
         personagemAtual.setLocalizacaoPersonagem(novoAmbiente.getNomeAmbiente());
     }
 
