@@ -23,6 +23,6 @@ public class Ferramentas extends Item {
     public double getEficienciaFerramenta(){
         return eficienciaFerramenta;
     }
-    public void usarFerramenta(){ //Metodo que será sobrescrito
+    public void usar(String nomeItem){ //Metodo que será sobrescrito
     }
 }

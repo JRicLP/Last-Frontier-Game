@@ -21,6 +21,6 @@ public class Remedios extends Item {
         this.efeitoRemedio = efeitoRemedio;
     }
     //Metodo sobrescrito:
-    public void usarRemedio(String nomeItem){ //Metodo que será sobrescrito
+    public void usar(String nomeItem){ //Metodo que será sobrescrito
     }
 }

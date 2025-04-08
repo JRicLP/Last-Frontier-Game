@@ -28,7 +28,7 @@ public class Agua extends Item {
         return volumeAgua;
     }
     //Metodo sobrescrito
-    public void beber(String nomeItem) {
+    public void usar(String nomeItem) {
 
     }
 }
