@@ -6,11 +6,9 @@ public class AmbienteFloresta extends Ambientes { //Falta a adição dos recurso
     private String faunaAbundante;
     private String climaUmido;
     //Metodo construtor:
-    public AmbienteFloresta(String nomeAmbiente, String descricaoAmbiente, double dificuldadeAmbiente,
-                            String recursosAmbiente, double probabilidadeEventos, String climaDominante, String vegetacaoDensa,
-                            String faunaAbundante, String climaUmido) {
-        super(nomeAmbiente, descricaoAmbiente, dificuldadeAmbiente, recursosAmbiente,
-                probabilidadeEventos, climaDominante);
+    public AmbienteFloresta(String nomeAmbiente, String descricaoAmbiente, double dificuldadeAmbiente, String recursosAmbiente, double probabilidadeEventos, String climaDominante,
+                            String vegetacaoDensa, String faunaAbundante, String climaUmido) {
+        super(nomeAmbiente, descricaoAmbiente, dificuldadeAmbiente, recursosAmbiente, probabilidadeEventos, climaDominante);
         this.vegetacaoDensa = vegetacaoDensa;
         this.faunaAbundante = faunaAbundante;
         this.climaUmido = climaUmido;

@@ -1,6 +1,7 @@
 package ambientes;
 
 import interfaces.AmbientActions;
+import personagens.Personagem;
 
 public abstract class Ambientes implements AmbientActions {
     //Atributos da superclasse:
@@ -10,7 +11,7 @@ public abstract class Ambientes implements AmbientActions {
     private String recursosAmbiente;
     private double probabilidadeEventos;
     private String climaDominante;
-    //Métodos construtor da superclasse:
+    //Metodo construtor da superclasse:
     public Ambientes(String nomeAmbiente, String descricaoAmbiente, double dificuldadeAmbiente,
                      String recursosAmbiente, double probabilidadeEventos, String climaDominante){
         this.nomeAmbiente = nomeAmbiente;
@@ -59,7 +60,7 @@ public abstract class Ambientes implements AmbientActions {
     }
     //Metodos implementados na superclasse:
     @Override
-    public void exlorar() {
+    public void exlorar(Personagem personagemAtual) {
 
     }
 

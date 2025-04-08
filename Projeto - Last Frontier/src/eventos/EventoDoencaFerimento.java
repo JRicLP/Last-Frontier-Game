@@ -2,23 +2,23 @@ package eventos;
 
 public class EventoDoencaFerimento extends Eventos{
     //Atributos da subclasse:
-    private String tipoCondicao;
+    private String tipoDoenca;
     private String impactoDoencaFerimento;
     private boolean curaDisponivel;
-    //Métodos da subclasse:
-    public EventoDoencaFerimento(String nomeEvento, String descricaoEvento, double probabilidadeEvento,
-                                 String impactoEvento, String condicaoEvento, String tipoCondicao,
-                                 String impactoDoencaFerimento, boolean curaDisponivel) {
+    //Metodo construtor:
+    public EventoDoencaFerimento(String nomeEvento, String descricaoEvento, double probabilidadeEvento, String impactoEvento, String condicaoEvento,
+                                 String tipoDoenca, String impactoDoencaFerimento, boolean curaDisponivel) {
         super(nomeEvento, descricaoEvento, probabilidadeEvento, impactoEvento, condicaoEvento);
-        this.tipoCondicao = tipoCondicao;
+        this.tipoDoenca = tipoDoenca;
         this.impactoDoencaFerimento = impactoDoencaFerimento;
         this.curaDisponivel = curaDisponivel;
     }
-    public void setTipoCondicao(String tipoCondicao){
-        this.tipoCondicao = tipoCondicao;
+    //Metodos acessores:
+    public void setTipoDoenca(String tipoDoenca){
+        this.tipoDoenca = tipoDoenca;
     }
-    public String getTipoCondicao(){
-        return tipoCondicao;
+    public String getTipoDoenca(){
+        return tipoDoenca;
     }
     public void setImpactoDoencaFerimento(String impactoDoencaFerimento){
         this.impactoDoencaFerimento = impactoDoencaFerimento;

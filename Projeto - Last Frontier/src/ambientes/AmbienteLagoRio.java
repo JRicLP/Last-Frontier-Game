@@ -6,11 +6,9 @@ public class AmbienteLagoRio extends Ambientes{ //Falta a adição dos recursos 
     private String possibilidadePesca;
     private String terrenoLamacento;
     //Metodo construtor:
-    public AmbienteLagoRio(String nomeAmbiente, String descricaoAmbiente, double dificuldadeAmbiente,
-                           String recursosAmbiente, double probabilidadeEventos, String climaDominante, String aguaAbundante,
-                           String possibilidadePesca, String terrenoLamacento){
-        super(nomeAmbiente, descricaoAmbiente, dificuldadeAmbiente, recursosAmbiente,
-                probabilidadeEventos, climaDominante);
+    public AmbienteLagoRio(String nomeAmbiente, String descricaoAmbiente, double dificuldadeAmbiente, String recursosAmbiente, double probabilidadeEventos, String climaDominante,
+                           String aguaAbundante, String possibilidadePesca, String terrenoLamacento){
+        super(nomeAmbiente, descricaoAmbiente, dificuldadeAmbiente, recursosAmbiente, probabilidadeEventos, climaDominante);
         this.aguaAbundante = aguaAbundante;
         this.possibilidadePesca = possibilidadePesca;
         this.terrenoLamacento = terrenoLamacento;

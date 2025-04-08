@@ -1,17 +1,16 @@
 package itens;
 
-import interfaces.ItensActions;
-
 public class Alimentos extends Item  {
     //Atributos da subclasse
     private double valorNutricional;
     private String tipoAlimento;
     private int prazoValidade;
     //Metodo construtor:
-    public Alimentos(String nomeItem, double pesoItem, double durabilidadeItem, double valorNutricional, String tipoAlimento){
+    public Alimentos(String nomeItem, double pesoItem, double durabilidadeItem, double valorNutricional, String tipoAlimento, int prazoValidade) {
         super(nomeItem, pesoItem, durabilidadeItem);
         this.valorNutricional = valorNutricional;
         this.tipoAlimento = tipoAlimento;
+        this.prazoValidade = prazoValidade;
     }
     //Metodos acessores:
     public void setValorNutricional(double valorNutricional){
@@ -33,7 +32,7 @@ public class Alimentos extends Item  {
         return prazoValidade;
     }
     //Metodo sobrescrito
-    public void usar(String nomeItem) { //Recebe um outro parâmetro (Personagem que irá consumir)
+    public void usar(String nomeItem) {
 
     }
 }

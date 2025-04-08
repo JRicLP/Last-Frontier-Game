@@ -8,8 +8,7 @@ public class Armas extends Item implements WeaponsActions {
     private double danoArma;
     private double alcanceArma;
     //Metodo construtor:
-    public Armas(String nomeItem, double pesoItem, double durabilidadeItem, String tipoArma, double danoArma,
-                 double alcanceArma){
+    public Armas(String nomeItem, double pesoItem, double durabilidadeItem, String tipoArma, double danoArma, double alcanceArma) {
         super(nomeItem, pesoItem, durabilidadeItem);
         this.tipoArma = tipoArma;
         this.danoArma = danoArma;
@@ -33,8 +32,6 @@ public class Armas extends Item implements WeaponsActions {
     }
     public double getAlcanceArma(){
         return alcanceArma;
-    }
-    public void atacar(){ //Metodo que será sobrescrito
     }
     //Metodos implementados:
     @Override

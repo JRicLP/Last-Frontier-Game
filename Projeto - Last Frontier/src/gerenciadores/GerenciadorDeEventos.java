@@ -3,6 +3,7 @@ package gerenciadores;
 import ambientes.Ambientes;
 import eventos.Eventos;
 import interfaces.ManagerEventsActions;
+import personagens.Personagem;
 
 public class GerenciadorDeEventos implements ManagerEventsActions {
     //Atributos da classe:
@@ -39,12 +40,10 @@ public class GerenciadorDeEventos implements ManagerEventsActions {
     public void sortearEvento(Ambientes ambienteAtual) {
 
     }
-
     @Override
-    public void aplicarEvento() {
+    public void aplicarEvento(Personagem personagemAtual) {
 
     }
-
     @Override
     public void removerEvento(Eventos eventoAtual) {
 

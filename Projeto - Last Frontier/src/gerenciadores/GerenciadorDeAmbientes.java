@@ -8,7 +8,7 @@ public class GerenciadorDeAmbientes implements ManagerAmbientActions {
     //Atributos da classe:
     private String[] listaAmbientesDisponiveis;
     private String climaGlobal;
-    private String[] historicoMovimentacao;
+    private String[] historicoMovimentacao; //Esse atributo será um Arraylist, posteriormente será modificado
     //Metodo construtor da classe:
     public GerenciadorDeAmbientes(String[] listaAmbientesDisponiveis, String climaGlobal, String[] historicoMovimentacao) {
         this.listaAmbientesDisponiveis = listaAmbientesDisponiveis;
@@ -41,12 +41,10 @@ public class GerenciadorDeAmbientes implements ManagerAmbientActions {
         + " chegou ao seu destino: " + novoAmbiente.getNomeAmbiente() +"!");
         personagemAtual.setLocalizacaoPersonagem(novoAmbiente.getNomeAmbiente());
     }
-
     @Override
     public void gerarEvento(Ambientes ambienteAtual) {
 
     }
-
     @Override
     public void modificarRecursos(Ambientes ambienteAtual) {
 

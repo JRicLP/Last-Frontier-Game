@@ -6,11 +6,9 @@ public class AmbienteRuinas extends Ambientes{ //Falta a adição dos recursos d
     private String presencaSobreviventes;
     private String baixoRiscoClimatico;
     //Metodo construtor:
-    public AmbienteRuinas(String nomeAmbiente, String descricaoAmbiente, float dificuldadeAmbiente,
-                          String recursosAmbiente, float probabilidadeEventos, String climaDominante,
+    public AmbienteRuinas(String nomeAmbiente, String descricaoAmbiente, float dificuldadeAmbiente, String recursosAmbiente, float probabilidadeEventos, String climaDominante,
                           String estruturasInstaveis, String presencaSobreviventes, String baixoRiscoClimatico){
-        super(nomeAmbiente, descricaoAmbiente, dificuldadeAmbiente, recursosAmbiente,
-                probabilidadeEventos, climaDominante);
+        super(nomeAmbiente, descricaoAmbiente, dificuldadeAmbiente, recursosAmbiente, probabilidadeEventos, climaDominante);
         this.estruturasInstaveis = estruturasInstaveis;
         this.presencaSobreviventes = presencaSobreviventes;
         this.baixoRiscoClimatico = baixoRiscoClimatico;

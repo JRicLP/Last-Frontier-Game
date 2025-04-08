@@ -1,8 +1,10 @@
 package eventos;
 
+import ambientes.Ambientes;
 import interfaces.EventsActions;
+import personagens.Personagem;
 
-public abstract class Eventos implements EventsActions { //Essa classe será abstrata
+public abstract class Eventos implements EventsActions {
     //Atributos da superclasse:
     private String nomeEvento;
     private String descricaoEvento;
@@ -10,8 +12,7 @@ public abstract class Eventos implements EventsActions { //Essa classe será abs
     private String impactoEvento;
     private String condicaoEvento;
     //Metodo construtor:
-    public Eventos(String nomeEvento, String descricaoEvento, double probabilidadeEvento,
-                  String impactoEvento, String condicaoEvento){
+    public Eventos(String nomeEvento, String descricaoEvento, double probabilidadeEvento, String impactoEvento, String condicaoEvento){
         this.nomeEvento = nomeEvento;
         this.descricaoEvento = descricaoEvento;
         this.probabilidadeEvento = probabilidadeEvento;
@@ -51,7 +52,7 @@ public abstract class Eventos implements EventsActions { //Essa classe será abs
     }
     //Metodos implementados:
     @Override
-    public void executar() {
+    public void executar(Personagem personagemAtual, Ambientes ambienteAtual) {
 
     }
 }

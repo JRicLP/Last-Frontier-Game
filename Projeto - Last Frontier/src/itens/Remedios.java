@@ -20,7 +20,11 @@ public class Remedios extends Item {
     public void setEfeitoRemedio(String efeitoRemedio){
         this.efeitoRemedio = efeitoRemedio;
     }
+    public String getEfeitoRemedio() {
+        return efeitoRemedio;
+    }
     //Metodo sobrescrito:
-    public void usar(String nomeItem){ //Metodo que será sobrescrito
+    public void usar(String nomeItem){
+
     }
 }

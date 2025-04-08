@@ -6,15 +6,14 @@ public class Explorador extends Personagem {
     //Metodo construtor
     public Explorador(String nomePersonagem, double vidaPersonagem, double fomePersonagem, double sedePersonagem, double energiaPersonagem,
                       double sanidadePersonagem, String inventarioPersonagem, String localizacaoPersonagem, String habilidadeExplorador) {
-        super(nomePersonagem, vidaPersonagem, fomePersonagem, sedePersonagem, energiaPersonagem,
-                sanidadePersonagem, inventarioPersonagem, localizacaoPersonagem);
-        //Falta modificar os atributos do explorador!!
-        this.setNomePersonagem("");
-        this.setVidaPersonagem(0);
-        this.setFomePersonagem(0);
-        this.setSedePersonagem(0);
-        this.setEnergiaPersonagem(0);
-        this.setSanidadePersonagem(0);
+
+        super(nomePersonagem, vidaPersonagem, fomePersonagem, sedePersonagem, energiaPersonagem, sanidadePersonagem, inventarioPersonagem, localizacaoPersonagem);
+        this.setNomePersonagem("Virgil Explorer");
+        this.setVidaPersonagem(90);
+        this.setFomePersonagem(100);
+        this.setSedePersonagem(100);
+        this.setEnergiaPersonagem(70);
+        this.setSanidadePersonagem(75);
         this.setInventarioPersonagem(" ");
         this.setLocalizacaoPersonagem(" ");
         this.habilidadeExplorador = habilidadeExplorador;

@@ -2,7 +2,7 @@ package personagens;
 
 import interfaces.CharacterActions;
 
-public  abstract class Personagem implements CharacterActions { //Será uma classe abstrata
+public  abstract class Personagem implements CharacterActions {
     //Atributos da superclasse:
     private String nomePersonagem;
     private double vidaPersonagem;

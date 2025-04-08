@@ -6,11 +6,9 @@ public class AmbienteCaverna extends Ambientes { //Falta a adição dos recursos
     private String criaturasEstranhas;
     private String aguaGotejamento;
     //Metodo construtor:
-    public AmbienteCaverna(String nomeAmbiente, String descricaoAmbiente, double dificuldadeAmbiente,
-                           String recursosAmbiente, double probabilidadeEventos, String climaDominante,
+    public AmbienteCaverna(String nomeAmbiente, String descricaoAmbiente, double dificuldadeAmbiente, String recursosAmbiente, double probabilidadeEventos, String climaDominante,
                            String poucaLuz, String criaturasEstranhas, String aguaGotejamento){
-        super(nomeAmbiente, descricaoAmbiente, dificuldadeAmbiente, recursosAmbiente,
-                probabilidadeEventos, climaDominante);
+        super(nomeAmbiente, descricaoAmbiente, dificuldadeAmbiente, recursosAmbiente, probabilidadeEventos, climaDominante);
         this.poucaLuz = poucaLuz;
         this.criaturasEstranhas = criaturasEstranhas;
         this.aguaGotejamento = aguaGotejamento;

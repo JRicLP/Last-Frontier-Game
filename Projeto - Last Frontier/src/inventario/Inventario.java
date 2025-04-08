@@ -5,7 +5,7 @@ import itens.Item;
 
 public class Inventario implements InventoryActions {
     //Atributos da classe:
-    private String[] listaItens; //Esse membro será um Array, posteriormente será modificado
+    private String[] listaItens; //Esse membro será um Arraylist, posteriormente será modificado
     private double pesoInventario;
     private double capacidadeInventario;
     //Metodo construtor:
@@ -32,12 +32,6 @@ public class Inventario implements InventoryActions {
     }
     public double getCapacidadeInventario(){
         return capacidadeInventario;
-    }
-    public void adicionarItem(){ //Metodo geral
-    }
-    public void removerItem(){ //Metodo geral
-    }
-    public void usarItem(){ //Metodo geral
     }
     //Metodos implementados:
     @Override

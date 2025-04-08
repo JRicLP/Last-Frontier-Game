@@ -6,8 +6,8 @@ public class Infiltrador extends Personagem {
     //Metodo construtor:
     public Infiltrador(String nomePersonagem, double vidaPersonagem, double fomePersonagem, double sedePersonagem, double energiaPersonagem,
                        double sanidadePersonagem, String inventarioPersonagem, String localizacaoPersonagem, String habilidadeInfiltrador) {
-        super(nomePersonagem, vidaPersonagem, fomePersonagem, sedePersonagem, energiaPersonagem,
-                sanidadePersonagem, inventarioPersonagem, localizacaoPersonagem);
+
+        super(nomePersonagem, vidaPersonagem, fomePersonagem, sedePersonagem, energiaPersonagem, sanidadePersonagem, inventarioPersonagem, localizacaoPersonagem);
         this.setNomePersonagem("Malik Gohst");
         this.setVidaPersonagem(85);
         this.setFomePersonagem(65);

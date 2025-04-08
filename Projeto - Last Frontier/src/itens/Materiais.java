@@ -7,25 +7,23 @@ public class Materiais extends Item implements MaterialsActions {
     private String tipoMaterial;
     private double resistenciaMaterial;
     //Metodo construtor:
-    public Materiais(String nomeItem, double pesoItem, double durabilidadeItem, String tipoMaterial, double resistenciaMaterial){
+    public Materiais(String nomeItem, double pesoItem, double durabilidadeItem, String tipoMaterial, double resistenciaMaterial) {
         super(nomeItem, pesoItem, durabilidadeItem);
         this.tipoMaterial = tipoMaterial;
         this.resistenciaMaterial = resistenciaMaterial;
     }
     //Metodos acessores:
-    public void setTipoMaterial(String tipoMaterial){
+    public void setTipoMaterial(String tipoMaterial) {
         this.tipoMaterial = tipoMaterial;
     }
-    public String getTipoMaterial(){
+    public String getTipoMaterial() {
         return tipoMaterial;
     }
-    public void setResistenciaMaterial(double resistenciaMaterial){
+    public void setResistenciaMaterial(double resistenciaMaterial) {
         this.resistenciaMaterial = resistenciaMaterial;
     }
-    public double getResistenciaMaterial(){
+    public double getResistenciaMaterial() {
         return resistenciaMaterial;
-    }
-    public void combinarMaterial(){ //Metodo que será sobrescrito
     }
     //Metodo implementado:
     @Override

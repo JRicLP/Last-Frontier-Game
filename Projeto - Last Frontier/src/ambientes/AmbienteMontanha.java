@@ -6,11 +6,9 @@ public class AmbienteMontanha extends Ambientes { //Falta a adição dos recurso
     private String climaInstavel;
     private String baixaVegetacao;
     //Metodo construtor:
-    public AmbienteMontanha(String nomeAmbiente, String descricaoAmbiente, double dificuldadeAmbiente,
-                            String recursosAmbiente, double probabilidadeEventos, String climaDominante,
+    public AmbienteMontanha(String nomeAmbiente, String descricaoAmbiente, double dificuldadeAmbiente, String recursosAmbiente, double probabilidadeEventos, String climaDominante,
                             String terrenoAcidentado, String climaInstavel, String baixaVegetacao){
-        super(nomeAmbiente, descricaoAmbiente, dificuldadeAmbiente, recursosAmbiente,
-                probabilidadeEventos, climaDominante);
+        super(nomeAmbiente, descricaoAmbiente, dificuldadeAmbiente, recursosAmbiente, probabilidadeEventos, climaDominante);
         this.terrenoAcidentado = terrenoAcidentado;
         this.climaInstavel = climaInstavel;
         this.baixaVegetacao = baixaVegetacao;

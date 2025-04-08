@@ -3,13 +3,11 @@ package eventos;
 public class EventoClimatico extends Eventos {
     //Atributos da subclasse:
     private String tipoClima;
-    private double duracaoClima;
+    private int duracaoClima;
     private String efeitoClima;
-
     //Métodos da subclasse:
-    public EventoClimatico(String nomeEvento, String descricaoEvento, double probabilidadeEvento,
-                           String impactoEvento, String condicaoEvento, String tipoClima, double duracaoClima,
-                           String efeitoClima) {
+    public EventoClimatico(String nomeEvento, String descricaoEvento, double probabilidadeEvento, String impactoEvento, String condicaoEvento,
+                           String tipoClima, int duracaoClima, String efeitoClima) {
         super(nomeEvento, descricaoEvento, probabilidadeEvento, impactoEvento, condicaoEvento);
         this.tipoClima = tipoClima;
         this.duracaoClima = duracaoClima;
@@ -21,10 +19,10 @@ public class EventoClimatico extends Eventos {
     public String getTipoClima() {
         return tipoClima;
     }
-    public void setDuracaoClima(double duracaoClima){
+    public void setDuracaoClima(int duracaoClima){
         this.duracaoClima = duracaoClima;
     }
-    public double getDuracaoClima(){
+    public int getDuracaoClima(){
         return duracaoClima;
     }
     public void setEfeitoClima(String efeitoClima){
