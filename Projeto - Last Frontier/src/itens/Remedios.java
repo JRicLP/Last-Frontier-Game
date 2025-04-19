@@ -4,7 +4,7 @@ public class Remedios extends Item {
     //Atributos da subclasse:
     private String tipoRemedio;
     private String efeitoRemedio;
-    private boolean usado;
+    private boolean usado=false;
     //Metodo construtor:
     public Remedios(String nomeItem, double pesoItem, double durabilidadeItem, String tipoRemedio, String efeitoRemedio, boolean usado){
         super(nomeItem, pesoItem, durabilidadeItem);
