@@ -5,9 +5,9 @@ public class Nomade extends Personagem {
     private String habilidadeNomade;
     //Metodo construtor:
     public Nomade(String nomePersonagem, double vidaPersonagem, double fomePersonagem, double sedePersonagem, double energiaPersonagem,
-                  double sanidadePersonagem, String inventarioPersonagem, String localizacaoPersonagem, String habilidadeNomade){
+                  double sanidadePersonagem, String inventarioPersonagem, String localizacaoPersonagem,boolean contaminacaoPersonagem,int sedeInicialPersonagem,int fomInicialPersonagem, String habilidadeNomade){
 
-        super(nomePersonagem, vidaPersonagem, fomePersonagem, sedePersonagem, energiaPersonagem, sanidadePersonagem, inventarioPersonagem, localizacaoPersonagem);
+        super(nomePersonagem, vidaPersonagem, fomePersonagem, sedePersonagem, energiaPersonagem, sanidadePersonagem, inventarioPersonagem, localizacaoPersonagem, contaminacaoPersonagem, sedeInicialPersonagem,fomInicialPersonagem);
         this.setNomePersonagem("Jack Nomad");
         this.setVidaPersonagem(100);
         this.setFomePersonagem(100);

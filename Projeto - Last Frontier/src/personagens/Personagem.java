@@ -12,17 +12,23 @@ public  abstract class Personagem implements CharacterActions {
     private double sanidadePersonagem;
     private String inventarioPersonagem;
     private String localizacaoPersonagem;
+    private boolean contaminacaoPersonagem=false;
+    private int sedeInicialPersonagem;
+    private int fomeInicialPersonagem;
     //Metodo construtor:
     public Personagem(String nomePersonagem, double vidaPersonagem, double fomePersonagem, double sedePersonagem, double energiaPersonagem, double sanidadePersonagem,
-                      String inventarioPersonagem, String localizacaoPersonagem){
+                      String inventarioPersonagem, String localizacaoPersonagem, boolean contaminacaoPersonagem, int sedeInicialPersonagem, int fomeInicialPersonagem){
         this.nomePersonagem = nomePersonagem;
         this.vidaPersonagem = vidaPersonagem;
-        this.fomePersonagem = fomePersonagem;
-        this.sedePersonagem = sedePersonagem;
+        this.fomeInicialPersonagem=fomeInicialPersonagem;
+        this.fomePersonagem = fomeInicialPersonagem;
+        this.sedeInicialPersonagem=sedeInicialPersonagem;
+        this.sedePersonagem = sedeInicialPersonagem;
         this.energiaPersonagem = energiaPersonagem;
         this.sanidadePersonagem = sanidadePersonagem;
         this.inventarioPersonagem = inventarioPersonagem;
         this.localizacaoPersonagem = localizacaoPersonagem;
+        this.contaminacaoPersonagem=contaminacaoPersonagem;
     }
     //Metodos acessores:
     public void setNomePersonagem(String nomePersonagem) {
@@ -73,6 +79,28 @@ public  abstract class Personagem implements CharacterActions {
     public String getLocalizacaoPersonagem() {
         return localizacaoPersonagem;
     }
+    public void setContaminacaoPersonagem(boolean contaminacaoPersonagem){
+        this.contaminacaoPersonagem=contaminacaoPersonagem;
+    }
+    public boolean getContaminacaoPersonagem(){
+        return contaminacaoPersonagem;
+    }
+    public int getSedeInicialPersonagem() {
+        return sedeInicialPersonagem;
+    }
+
+    public void setSedeInicialPersonagem(int sedeInicial) {
+        this.sedeInicialPersonagem = sedeInicial;
+    }
+
+    public int getFomeInicialPersonagem() {
+        return fomeInicialPersonagem;
+    }
+
+    public void setFomeInicialPersonagem(int fomeInicialPersonagem) {
+        this.fomeInicialPersonagem = fomeInicialPersonagem;
+    }
+
     //Metodo implementados:
     @Override
     public void statusPersonagem() {

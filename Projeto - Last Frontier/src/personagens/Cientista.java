@@ -5,9 +5,9 @@ public class Cientista extends Personagem {
     private String habilidadeCientista;
     //Metodo construtor:
     public Cientista(String nomePersonagem, double vidaPersonagem, double fomePersonagem, double sedePersonagem, double energiaPersonagem,
-                     double sanidadePersonagem, String inventarioPersonagem, String localizacaoPersonagem, String habilidadeCientista) {
+                     double sanidadePersonagem, String inventarioPersonagem, String localizacaoPersonagem, boolean contaminacaoPersonagem,int sedeInicialPersonagem,int fomeInicialPersonagem, String habilidadeCientista) {
 
-        super(nomePersonagem, vidaPersonagem, fomePersonagem, sedePersonagem, energiaPersonagem, sanidadePersonagem, inventarioPersonagem, localizacaoPersonagem);
+        super(nomePersonagem, vidaPersonagem, fomePersonagem, sedePersonagem, energiaPersonagem, sanidadePersonagem, inventarioPersonagem, localizacaoPersonagem, contaminacaoPersonagem,sedeInicialPersonagem,fomeInicialPersonagem);
         this.setNomePersonagem("Gearhead Martinez");
         this.setVidaPersonagem(85);
         this.setFomePersonagem(85);

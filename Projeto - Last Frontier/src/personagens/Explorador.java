@@ -5,9 +5,9 @@ public class Explorador extends Personagem {
     private String habilidadeExplorador;
     //Metodo construtor
     public Explorador(String nomePersonagem, double vidaPersonagem, double fomePersonagem, double sedePersonagem, double energiaPersonagem,
-                      double sanidadePersonagem, String inventarioPersonagem, String localizacaoPersonagem, String habilidadeExplorador) {
+                      double sanidadePersonagem, String inventarioPersonagem, String localizacaoPersonagem,boolean contaminacaoPersonagem, int sedeInicialPersonagem, int fomeInicialPersonagem,String habilidadeExplorador) {
 
-        super(nomePersonagem, vidaPersonagem, fomePersonagem, sedePersonagem, energiaPersonagem, sanidadePersonagem, inventarioPersonagem, localizacaoPersonagem);
+        super(nomePersonagem, vidaPersonagem, fomePersonagem, sedePersonagem, energiaPersonagem, sanidadePersonagem, inventarioPersonagem, localizacaoPersonagem, contaminacaoPersonagem,sedeInicialPersonagem,fomeInicialPersonagem);
         this.setNomePersonagem("Virgil Explorer");
         this.setVidaPersonagem(90);
         this.setFomePersonagem(100);
