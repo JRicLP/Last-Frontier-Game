@@ -3,13 +3,17 @@ package eventos;
 public class EventoCriatura extends Eventos{
     //Atributos da subclasse:
     private String tipoCriatura;
-    private double nivelPerigo;
-    private String opcaoAcao; //Revisar o tipo desse atributo
+    private int vidaCriatura;//Novo atributo adicionado para utilizar o metodo atacar() em Armas
+    private int distanciaCriatura;//Novo atributo adicionado para utilizar o metodo atacar() em Armas, deverá ser revisado
+    private int nivelPerigo;
+    private String opcaoAcao; //Revisar a necessidade desse atributo
     //Métodos da subclasse:
     public EventoCriatura(String nomeEvento, String descricaoEvento, double probabilidadeEvento, String impactoEvento, String condicaoEvento,
-                          String tipoCriatura, double nivelPerigo, String opcaoAcao) {
+                          String tipoCriatura, int vidaCriatura, int distanciaCriatura, int nivelPerigo, String opcaoAcao) {
         super(nomeEvento, descricaoEvento, probabilidadeEvento, impactoEvento, condicaoEvento);
         this.tipoCriatura = tipoCriatura;
+        this.vidaCriatura = vidaCriatura;
+        this.distanciaCriatura = distanciaCriatura;
         this.nivelPerigo = nivelPerigo;
         this.opcaoAcao = opcaoAcao;
     }
@@ -19,10 +23,22 @@ public class EventoCriatura extends Eventos{
     public String getTipoCriatura(){
         return tipoCriatura;
     }
-    public void setNivelPerigo(double nivelPerigo){
+    public void setVidaCriatura(int vidaCriatura) {
+        this.vidaCriatura = vidaCriatura;
+    }
+    public int getVidaCriatura() {
+        return vidaCriatura;
+    }
+    public void setDistanciaCriatura(int distanciaCriatura) {
+        this.distanciaCriatura = distanciaCriatura;
+    }
+    public int getDistanciaCriatura() {
+        return distanciaCriatura;
+    }
+    public void setNivelPerigo(int nivelPerigo){
         this.nivelPerigo = nivelPerigo;
     }
-    public double getNivelPerigo(){
+    public int getNivelPerigo(){
         return nivelPerigo;
     }
     public void setOpcaoAcao(String opcaoAcao){

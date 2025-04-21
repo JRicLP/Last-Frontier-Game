@@ -52,7 +52,10 @@ public abstract class Eventos implements EventsActions {
     }
     //Metodos implementados:
     @Override
-    public void executar(Personagem personagemAtual, Ambientes ambienteAtual) {
-
+    public void executar(Personagem personagemAtual, Ambientes ambienteAtual, Eventos eventoAplicado) {
+        System.out.println("O evento " + eventoAplicado.getNomeEvento() + " funciona da seguinte forma: " +
+                eventoAplicado.getDescricaoEvento());
+        System.out.println("Impacto: " + eventoAplicado.getImpactoEvento());
+        //Futuramente será adicionado um verificador da condição necessária para o evento ocorrer!!
     }
 }
