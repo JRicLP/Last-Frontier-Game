@@ -1,14 +1,15 @@
 package itens;
 
+import eventos.EventoCriatura;
 import interfaces.WeaponsActions;
 
 public class Armas extends Item implements WeaponsActions {
     //Atributos da subclasse:
     private String tipoArma;
-    private double danoArma;
-    private double alcanceArma;
+    private int danoArma;
+    private int alcanceArma;
     //Metodo construtor:
-    public Armas(String nomeItem, double pesoItem, double durabilidadeItem, String tipoArma, double danoArma, double alcanceArma) {
+    public Armas(String nomeItem, double pesoItem, double durabilidadeItem, String tipoArma, int danoArma, int alcanceArma) {
         super(nomeItem, pesoItem, durabilidadeItem);
         this.tipoArma = tipoArma;
         this.danoArma = danoArma;
@@ -21,21 +22,32 @@ public class Armas extends Item implements WeaponsActions {
     public String getTipoArma(){
         return tipoArma;
     }
-    public void setDanoArma(double danoArma){
-        this.danoArma =  danoArma;
+    public void setDanoArma( int danoArma){
+        this.danoArma = danoArma;
     }
-    public double getDanoArma(){
+    public int getDanoArma(){
         return danoArma;
     }
-    public void setAlcanceArma(double alcanceArma){
+    public void setAlcanceArma(int alcanceArma){
         this.alcanceArma = alcanceArma;
     }
-    public double getAlcanceArma(){
+    public int getAlcanceArma(){
         return alcanceArma;
     }
     //Metodos implementados:
     @Override
-    public void atacar(String alvo) {
-
+    public void atacar(EventoCriatura criaturaAtacada) {
+        System.out.println("Atacar um alvo consome Energia e utiliza pontos de Fome e Sede");
+        //Esse mecanismo de diminuição de pontos será adicionado futuramente
+        if (criaturaAtacada.getDistanciaCriatura() > this.getAlcanceArma()) {
+            System.out.println("Este alvo está muito do longe do seu alcance!");
+        } else {
+            System.out.println("Você está atacando " + criaturaAtacada.getTipoCriatura() + "!");
+            while (criaturaAtacada.getVidaCriatura() > 0 ) {
+                System.out.println("Você desferiu um ataque certeiro em " + criaturaAtacada.getTipoCriatura() + " e seu sangue jorrou!");
+                criaturaAtacada.setVidaCriatura(criaturaAtacada.getVidaCriatura() - this.getDanoArma());
+                System.out.println(criaturaAtacada.getVidaCriatura());
+            }
+        }
     }
 }

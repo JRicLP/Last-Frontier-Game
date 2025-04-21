@@ -1,28 +1,36 @@
 package itens;
 
-public class Ferramentas extends Item {
+import ambientes.Ambientes;
+import interfaces.ToolsActions;
+
+public class Ferramentas extends Item implements ToolsActions {
     //Atributos da subclasse:
     private String tipoFerramenta;
-    private double eficienciaFerramenta;
-    //Metodos da subclasse:
-    public Ferramentas(String nomeItem, double pesoItem, double durabilidadeItem, String tipoFerramenta, double eficienciaFerramenta) {
+    private int eficienciaFerramenta;
+    //Metodo construtor:
+    public Ferramentas(String nomeItem, double pesoItem, double durabilidadeItem, String tipoFerramenta, int eficienciaFerramenta) {
         super(nomeItem, pesoItem, durabilidadeItem);
         this.tipoFerramenta = tipoFerramenta;
         this.eficienciaFerramenta = eficienciaFerramenta;
     }
+    //Metodos acessores:
     public void setTipoFerramenta(String tipoFerramenta) {
         this.tipoFerramenta = tipoFerramenta;
     }
     public String getTipoFerramenta() {
         return tipoFerramenta;
     }
-    public void setEficienciaFerramenta(double eficienciaFerramenta) {
+    public void setEficienciaFerramenta(int eficienciaFerramenta) {
         this.eficienciaFerramenta = eficienciaFerramenta;
     }
-    public double getEficienciaFerramenta() {
+    public int getEficienciaFerramenta() {
         return eficienciaFerramenta;
     }
-    public void usar(String nomeItem) { //Esse metodo funcionará de forma diferente
-
+    //Metodos especiais:
+    @Override
+    public void utilizar(Ambientes recursosAlvo) {
+        System.out.println("A ferramenta selecionada " + this.getNomeItem() + " foi utilizada para extrair recursos de "
+        + recursosAlvo.getRecursosAmbiente());
+        //Futuramente esse metodo também deve exibir os itens extraídos.
     }
 }
