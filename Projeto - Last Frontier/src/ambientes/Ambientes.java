@@ -1,5 +1,6 @@
 package ambientes;
 
+import eventos.EventoClimatico;
 import interfaces.AmbientActions;
 import personagens.Personagem;
 
@@ -61,15 +62,18 @@ public abstract class Ambientes implements AmbientActions {
     //Metodos implementados na superclasse:
     @Override
     public void exlorar(Personagem personagemAtual) {
-
+        System.out.println("Explorar o ambiente consome pontos de Energia, Fome e Sede");
+        System.out.println(personagemAtual.getNomePersonagem() + " explorou o ambiente de forma incansável e encontrou alguns recursos!");
+        //Futuramente esse metodo irá mostrar os recursos encontrados no ambiente que foi explorado!
     }
-
     @Override
     public void gerarEvento() {
-
+        //Esse metodo utiliza algumas questões probabilísticas que serão alteradas no futuro!
     }
     @Override
-    public void modificarClima() {
-
+    public void modificarClima(Ambientes ambienteAtual, EventoClimatico novoClima) {
+        System.out.println("Com o passar do tempo, algumas mudanças foram notadas no ar e horizonte do ambiente " +
+                ambienteAtual.getNomeAmbiente() + "...");
+        System.out.println("Um novo clima foi definido: " + novoClima.getNomeEvento() + " prepare-se da melhor forma!!");
     }
 }
