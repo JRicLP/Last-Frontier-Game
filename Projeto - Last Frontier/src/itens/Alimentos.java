@@ -1,7 +1,8 @@
 package itens;
+import interfaces.ItensActions;
 import personagens.Personagem;
 
-public class Alimentos extends Item  {
+public class Alimentos extends Item implements ItensActions {
     //Atributos da subclasse
     private double valorNutricional;
     private String tipoAlimento;
@@ -34,7 +35,14 @@ public class Alimentos extends Item  {
     }
 
     //Metodo sobrescrito
-    public void consumir(Personagem personagem) {
+    @Override
+    public void usar (Item item,Personagem personagem) {
+        if(!(item instanceof Alimentos)){
+            System.out.println("ERRO");
+            System.out.println("Este item não é um Alimento!");
+            return;
+        }
+        Alimentos alimento = (Alimentos) item;
         double fomeAtual= personagem.getFomePersonagem();
         double novaFome= fomeAtual- (int) this.getValorNutricional();
 
@@ -77,22 +85,14 @@ public class Alimentos extends Item  {
     }
 
     private void danoPorContaminacao(Personagem personagem){
-        while (personagem.getVidaPersonagem() > 0 && personagem.getContaminacaoPersonagem()) {
-            System.out.println("Seus pontos de vida estão baixando...: " + personagem.getVidaPersonagem());
-            personagem.setVidaPersonagem(personagem.getVidaPersonagem() - 2);
-
+        System.out.println("Você está contaminado!");
+        System.out.println("Você perderá 15 pontos de vida se não tomar um antídoto");
+        if(personagem.getContaminacaoPersonagem()) {
+            personagem.setVidaPersonagem(personagem.getVidaPersonagem() - 15);
             if (personagem.getVidaPersonagem() <= 0) {
-                System.out.println("Você morreu por Intoxicação Alimentar!");
-                break;
+                System.out.println("Você morreu por Intoxicação!");
             }
-            try {
-                Thread.sleep(2000); // espera 2 segundos antes de continuar o dano
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-
-        if (!personagem.getContaminacaoPersonagem()) {
+        }else{
             System.out.println("Você foi curado! O dano foi interrompido.");
         }
 

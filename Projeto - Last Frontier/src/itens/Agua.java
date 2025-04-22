@@ -1,8 +1,9 @@
 package itens;
 
+import interfaces.ItensActions;
 import personagens.Personagem;
 
-public class Agua extends Item {
+public class Agua extends Item implements ItensActions {
     //Atributos da subclasse:
     private double purezaAgua;
     private double volumeAgua;
@@ -26,7 +27,14 @@ public class Agua extends Item {
         return volumeAgua;
     }
     //Metodo sobrescrito:
-    public void beber(Personagem personagem) {
+    @Override
+    public void usar(Item item,Personagem personagem) {
+        if(!(item instanceof Agua)) {
+            System.out.println("ERRO");
+            System.out.println("Este item não é nenhuma bebida!");
+            return;
+        }
+        Agua agua=(Agua) item;
         // Cálculo da hidratação proporcional ao volume da água
         double sedeAtual = personagem.getSedePersonagem();
         double novaSede = sedeAtual - (int) this.getVolumeAgua();
@@ -46,25 +54,16 @@ public class Agua extends Item {
         }
     }
     private void danoPorContaminacao(Personagem personagem) {
-        while (personagem.getVidaPersonagem() > 0 && personagem.getContaminacaoPersonagem()) {
-            System.out.println("Seus pontos de vida estão baixando...: " + personagem.getVidaPersonagem());
-            personagem.setVidaPersonagem(personagem.getVidaPersonagem() - 2);
-
+        System.out.println("Você está contaminado!");
+        System.out.println("Você perderá 15 pontos de vida se não tomar um antídoto");
+        if (personagem.getContaminacaoPersonagem()) {
+            personagem.setVidaPersonagem(personagem.getVidaPersonagem() - 15);
             if (personagem.getVidaPersonagem() <= 0) {
                 System.out.println("Você morreu por causa da água contaminada!");
-                break;
             }
-            try {
-                Thread.sleep(2000); // espera 2 segundos antes de continuar o dano
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-
-        if (!personagem.getContaminacaoPersonagem()) {
+        } else {
             System.out.println("Você foi curado! O dano foi interrompido.");
         }
 
-        }
-
+    }
 }

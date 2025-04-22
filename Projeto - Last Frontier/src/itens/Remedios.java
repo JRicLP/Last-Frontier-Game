@@ -1,69 +1,76 @@
 package itens;
 
+import interfaces.ItensActions;
 import personagens.Personagem;
 
-public class Remedios extends Item {
+public class Remedios extends Item  implements ItensActions {
     //Atributos da subclasse:
     private String tipoRemedio;
     private String efeitoRemedio;
+
     //Metodo construtor:
-    public Remedios(String nomeItem, double pesoItem, double durabilidadeItem, String tipoRemedio, String efeitoRemedio){
+    public Remedios(String nomeItem, double pesoItem, double durabilidadeItem, String tipoRemedio, String efeitoRemedio) {
         super(nomeItem, pesoItem, durabilidadeItem);
         this.tipoRemedio = tipoRemedio;
         this.efeitoRemedio = efeitoRemedio;
     }
+
     //Metodos acessores:
-    public void setTipoRemedio(String tipoRemedio){
+    public void setTipoRemedio(String tipoRemedio) {
         this.tipoRemedio = tipoRemedio;
     }
-    public String getTipoRemedio(){
+
+    public String getTipoRemedio() {
         return tipoRemedio;
     }
-    public void setEfeitoRemedio(String efeitoRemedio){
+
+    public void setEfeitoRemedio(String efeitoRemedio) {
         this.efeitoRemedio = efeitoRemedio;
     }
+
     public String getEfeitoRemedio() {
         return efeitoRemedio;
     }
 
     //Metodo sobrescrito:
-    public boolean usar(Personagem personagem) {
-        if (personagem.getContaminacaoPersonagem()) {// implementar os pontos acrescentados em cada cura, e retornar esse valor pra vida do personagem
-            personagem.setContaminacaoPersonagem(false); //cura a contaminação
+    @Override
+    public void usar(Item item, Personagem personagem) {
+        if (!(item instanceof Remedios)){
+            System.out.println("ERRO");
+            System.out.println("Este item não é um remédio!");
+            return;
+        }
+
+        Remedios remedio = (Remedios) item;
+        if (personagem.getContaminacaoPersonagem()) {
+            personagem.setContaminacaoPersonagem(false); // Cura a contaminação
 
             switch (tipoRemedio) {
                 case "Antibiótico":
-                    personagem.setVidaPersonagem(personagem.getVidaPersonagem()+10);
-                    System.out.println("Você usou o antibiótico! Sua infecção foi curada!Você ganhou 10 pontos de vida");
-                    System.out.println("Continue sua jornada...");
+                    personagem.setVidaPersonagem(personagem.getVidaPersonagem() + 10);
+                    System.out.println("Você usou o antibiótico! Sua infecção foi curada. Você ganhou 10 pontos de vida.");
                     break;
                 case "Analgésico":
-                    personagem.setVidaPersonagem(personagem.getVidaPersonagem()+10);
-                    System.out.println("Você usou o Analgésico! Agora suas dores irão sanar! Você ganhou 10 pontos de vida");
-                    System.out.println("Sua vida atual :"+ personagem.getVidaPersonagem());
-                    System.out.println("Continue sua jornada...");
+                    personagem.setVidaPersonagem(personagem.getVidaPersonagem() + 10);
+                    System.out.println("Você usou o analgésico! Agora suas dores irão passar. Você ganhou 10 pontos de vida.");
                     break;
                 case "Bandagem":
-                    personagem.setVidaPersonagem(personagem.getVidaPersonagem()+10);
-                    System.out.println("Você usou a Bandagem! Seus ferimentos irão cicatrizar, você ganhou 10 pontos de vida");
-                    System.out.println("Sua vida atual: "+personagem.getVidaPersonagem());
-                    System.out.println("Continue sua jornada...");
+                    personagem.setVidaPersonagem(personagem.getVidaPersonagem() + 10);
+                    System.out.println("Você usou a bandagem! Seus ferimentos começaram a cicatrizar. Você ganhou 10 pontos de vida.");
                     break;
                 case "Antídoto":
-                    personagem.setVidaPersonagem(personagem.getVidaPersonagem()+10);
-                    System.out.println(" Você usou o Antídoto! Você foi curado!");
-                    System.out.println("Sua vida atual: "+ personagem.getVidaPersonagem());
-                    System.out.println("Continue sua jornada...");
+                    personagem.setVidaPersonagem(personagem.getVidaPersonagem() + 10);
+                    System.out.println("Você usou o antídoto! Você foi curado e ganhou 10 pontos de vida.");
                     break;
                 default:
-                    System.out.println("Ainda está perdendo vida!!!");
-                    return false;
+                    System.out.println("Tipo de remédio desconhecido. Nenhum efeito ocorreu.");
+                    return;
             }
-            return true;
 
-        }else{
-            System.out.println("Você não está contaminado, não precisa usar os remédios!");
-            return false;
+            System.out.println("Sua vida atual: " + personagem.getVidaPersonagem());
+            System.out.println("Continue sua jornada...");
+        } else {
+            System.out.println("Você não está contaminado. Não há necessidade de usar remédios agora.");
         }
-    }
+}
 }

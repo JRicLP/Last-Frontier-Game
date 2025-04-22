@@ -1,6 +1,7 @@
 package itens;
 
 import interfaces.ItensActions;
+import personagens.Personagem;
 
 public abstract class Item implements ItensActions {
     //Atributos da superclasse:
@@ -34,7 +35,7 @@ public abstract class Item implements ItensActions {
     }
     //Metodos implementados:
     @Override
-    public void usar(String nomeItem) {
+    public void usar(Item item, Personagem personagem) {
 
     }
 }
