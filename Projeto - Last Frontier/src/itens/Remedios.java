@@ -41,7 +41,6 @@ public class Remedios extends Item  implements ItensActions {
             return;
         }
 
-        Remedios remedio = (Remedios) item;
         if (personagem.getContaminacaoPersonagem()) {
             personagem.setContaminacaoPersonagem(false); // Cura a contaminação
 
