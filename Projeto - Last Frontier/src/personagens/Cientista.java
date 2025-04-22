@@ -16,6 +16,9 @@ public class Cientista extends Personagem {
         this.setSanidadePersonagem(85);
         this.setInventarioPersonagem(" ");
         this.setLocalizacaoPersonagem(" ");
+        this.setContaminacaoPersonagem(false);
+        this.setSedeInicialPersonagem(100);
+        this.setFomeInicialPersonagem(85);
         this.habilidadeCientista = habilidadeCientista;
     }
     //Metodos acessores:

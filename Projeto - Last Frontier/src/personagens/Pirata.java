@@ -5,7 +5,7 @@ public class Pirata extends Personagem {
     private String habilidadePirata;
     //Metodo construtor:
     public Pirata(String nomePersonagem, double vidaPersonagem, double fomePersonagem, double sedePersonagem, double energiaPersonagem,
-                  double sanidadePersonagem, String inventarioPersonagem, String localizacaoPersonagem, boolean contaminacaoPersonagem, int sedeInicialPersonagem, int fomeInicialPersonagem,String habilidadePirata) {
+                  double sanidadePersonagem, String inventarioPersonagem, String localizacaoPersonagem, boolean contaminacaoPersonagem, double sedeInicialPersonagem, double fomeInicialPersonagem,String habilidadePirata) {
 
         super(nomePersonagem, vidaPersonagem, fomePersonagem, sedePersonagem, energiaPersonagem, sanidadePersonagem, inventarioPersonagem, localizacaoPersonagem, contaminacaoPersonagem, sedeInicialPersonagem,fomeInicialPersonagem);
         this.setNomePersonagem("Scarlet Tempest");
@@ -16,6 +16,9 @@ public class Pirata extends Personagem {
         this.setSanidadePersonagem(85);
         this.setInventarioPersonagem(" ");
         this.setLocalizacaoPersonagem(" ");
+        this.setContaminacaoPersonagem(false);
+        this.setSedeInicialPersonagem(100);
+        this.setFomeInicialPersonagem(100);
         this.habilidadePirata = habilidadePirata;
     }
     //Metodos acessores:

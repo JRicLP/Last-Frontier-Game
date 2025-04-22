@@ -16,6 +16,9 @@ public class Cacador extends Personagem {
         this.setSanidadePersonagem(85);
         this.setInventarioPersonagem(" ");
         this.setLocalizacaoPersonagem(" ");
+        this.setContaminacaoPersonagem(false);
+        this.setSedeInicialPersonagem(65);
+        this.setFomeInicialPersonagem(100);
         this.habilidadeCacador = habilidadeCacador;
     }
     //Metodos acessores:

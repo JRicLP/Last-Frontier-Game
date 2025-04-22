@@ -16,6 +16,9 @@ public class Explorador extends Personagem {
         this.setSanidadePersonagem(75);
         this.setInventarioPersonagem(" ");
         this.setLocalizacaoPersonagem(" ");
+        this.setContaminacaoPersonagem(false);
+        this.setSedeInicialPersonagem(100);
+        this.setFomeInicialPersonagem(100);
         this.habilidadeExplorador = habilidadeExplorador;
     }
     //Metodos acessores:

@@ -13,11 +13,11 @@ public  abstract class Personagem implements CharacterActions {
     private String inventarioPersonagem;
     private String localizacaoPersonagem;
     private boolean contaminacaoPersonagem=false;
-    private int sedeInicialPersonagem;
-    private int fomeInicialPersonagem;
+    private double sedeInicialPersonagem;
+    private double fomeInicialPersonagem;
     //Metodo construtor:
     public Personagem(String nomePersonagem, double vidaPersonagem, double fomePersonagem, double sedePersonagem, double energiaPersonagem, double sanidadePersonagem,
-                      String inventarioPersonagem, String localizacaoPersonagem, boolean contaminacaoPersonagem, int sedeInicialPersonagem, int fomeInicialPersonagem){
+                      String inventarioPersonagem, String localizacaoPersonagem, boolean contaminacaoPersonagem, double sedeInicialPersonagem, double fomeInicialPersonagem){
         this.nomePersonagem = nomePersonagem;
         this.vidaPersonagem = vidaPersonagem;
         this.fomeInicialPersonagem=fomeInicialPersonagem;
@@ -85,19 +85,19 @@ public  abstract class Personagem implements CharacterActions {
     public boolean getContaminacaoPersonagem(){
         return contaminacaoPersonagem;
     }
-    public int getSedeInicialPersonagem() {
+    public double getSedeInicialPersonagem() {
         return sedeInicialPersonagem;
     }
 
-    public void setSedeInicialPersonagem(int sedeInicial) {
+    public void setSedeInicialPersonagem(double sedeInicial) {
         this.sedeInicialPersonagem = sedeInicial;
     }
 
-    public int getFomeInicialPersonagem() {
+    public double getFomeInicialPersonagem() {
         return fomeInicialPersonagem;
     }
 
-    public void setFomeInicialPersonagem(int fomeInicialPersonagem) {
+    public void setFomeInicialPersonagem(double fomeInicialPersonagem) {
         this.fomeInicialPersonagem = fomeInicialPersonagem;
     }
 
