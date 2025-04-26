@@ -34,7 +34,7 @@ public class Agua extends Item implements ItensActions {
             System.out.println("Este item não é nenhuma bebida!");
             return;
         }
-    
+
         // Cálculo da hidratação proporcional ao volume da água
         double sedeAtual = personagem.getSedePersonagem();
         double novaSede = sedeAtual - (int) this.getVolumeAgua();

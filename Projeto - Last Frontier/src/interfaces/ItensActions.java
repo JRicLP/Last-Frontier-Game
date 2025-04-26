@@ -1,4 +1,5 @@
 package interfaces;
+
 import itens.Item;
 import personagens.Personagem;
 

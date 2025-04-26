@@ -1,8 +1,12 @@
 package inventario;
 
 import java.util.ArrayList;
+
+import gerenciadores.GerenciadorDePersonagens;
 import interfaces.InventoryActions;
 import itens.*;
+import personagens.*;
+
 
 public class Inventario implements InventoryActions {
     //Atributos da classe:
@@ -58,8 +62,9 @@ public class Inventario implements InventoryActions {
     @Override
     public void selecionarItem(int posicaoItem) { //Esse metodo ainda irá evoluir
         Item itemSelecionado = this.getListaItens().get(posicaoItem);
+        Personagem personagemSelecionado = null; //Organizar isso de modo que o personagem seja selecionado para receber os buff's/debuff's
         if (itemSelecionado instanceof Agua || itemSelecionado instanceof Alimentos || itemSelecionado instanceof Remedios) {
-            itemSelecionado.usar(itemSelecionado.getNomeItem());
+            itemSelecionado.usar(itemSelecionado, personagemSelecionado);
             System.out.println("O item " + itemSelecionado.getNomeItem() + " foi consumido!");
             this.getListaItens().remove(posicaoItem);
         } else if (itemSelecionado instanceof Materiais) {

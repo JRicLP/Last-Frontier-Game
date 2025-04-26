@@ -42,7 +42,7 @@ public class Alimentos extends Item implements ItensActions {
             System.out.println("Este item não é um Alimento!");
             return;
         }
-     
+
         double fomeAtual= personagem.getFomePersonagem();
         double novaFome= fomeAtual- (int) this.getValorNutricional();
 

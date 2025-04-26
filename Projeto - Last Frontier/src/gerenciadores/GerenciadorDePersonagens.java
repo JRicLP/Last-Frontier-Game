@@ -55,7 +55,7 @@ public class GerenciadorDePersonagens implements ManagerPersonagens {
                 System.out.println("Personagem não reconhecido, tente novamente");
                 this.personagem=null;
 
-            }
-
         }
+
+    }
 }

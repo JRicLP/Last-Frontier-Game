@@ -71,5 +71,5 @@ public class Remedios extends Item  implements ItensActions {
         } else {
             System.out.println("Você não está contaminado. Não há necessidade de usar remédios agora.");
         }
-}
+    }
 }
