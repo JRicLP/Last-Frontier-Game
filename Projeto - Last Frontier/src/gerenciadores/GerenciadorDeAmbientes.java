@@ -16,7 +16,7 @@ public class GerenciadorDeAmbientes implements ManagerAmbientActions {
     public GerenciadorDeAmbientes(String[] listaAmbientesDisponiveis, String climaGlobal, ArrayList<Ambientes> historicoMovimentacao) {
         this.listaAmbientesDisponiveis = listaAmbientesDisponiveis;
         this.climaGlobal = climaGlobal;
-        this.historicoMovimentacao = new ArrayList<>(5);
+        this.historicoMovimentacao = new ArrayList<>(listaAmbientesDisponiveis.length);
     }
     //Metodos acessores:
     public void setListaAmbientesDisponiveis(String[] listaAmbientesDisponiveis) {

@@ -1,23 +1,20 @@
 package inventario;
 
 import java.util.ArrayList;
-
-import gerenciadores.GerenciadorDePersonagens;
 import interfaces.InventoryActions;
 import itens.*;
 import personagens.*;
 
-
 public class Inventario implements InventoryActions {
     //Atributos da classe:
     private ArrayList<Item> listaItens;
-    private int pesoInventario;
+    private int pesoSuportado;
     private int capacidadeInventario;
 
     //Metodo construtor:
-    public Inventario(ArrayList<Item> listaItens, int pesoInventario, int capacidadeInventario) {
-        this.listaItens = new ArrayList<>(capacidadeInventario);
-        this.pesoInventario = pesoInventario;
+    public Inventario(ArrayList<Item> listaItens, int pesoSuportado, int capacidadeInventario) {
+        this.listaItens = new ArrayList<>(capacidadeInventario); //Inicializamos o ArrayList e definimos sua capacidade inicial
+        this.pesoSuportado = pesoSuportado;
         this.capacidadeInventario = capacidadeInventario;
     }
 
@@ -26,60 +23,62 @@ public class Inventario implements InventoryActions {
         this.listaItens = listaItens;
     }
 
-    public ArrayList<Item> getListaItens() {
+    public ArrayList<Item> getListaItens() { //Esse metodo tem que ser privado?
         return listaItens;
     }
 
-    public void setPesoInventario(int pesoInventario) {
-        this.pesoInventario = pesoInventario;
+    public void setPesoSuportado(int pesoSuportado) {
+        this.pesoSuportado = pesoSuportado;
     }
 
-    public int getPesoInventario() {
-        return pesoInventario;
+    public int getPesoSuportado() { //Precisamos fazer uma verificação em relação ao peso do Inventário/Itens
+        return pesoSuportado;
     }
 
     public void setCapacidadeInventario(int capacidadeInventario) {
         this.capacidadeInventario = capacidadeInventario;
     }
 
-    public int getCapacidadeInventario() {
+    public int getCapacidadeInventario() { //Se refere ao número de itens
         return capacidadeInventario;
     }
 
     //Metodos implementados:
     @Override
-    public void adicionarItem(Item itemAdicionado) {
+    public void adicionarItem(Item itemAdicionado) { //Metodo testado e funcionando!! (Ainda vai evoluir) - Relação de Pesos
         this.getListaItens().add(itemAdicionado);
-        System.out.println("O item " + itemAdicionado + " foi adicionado!");
+        System.out.println("O item " + itemAdicionado.getNomeItem() + " foi adicionado!");
     }
 
     @Override
-    public void descartarItem(Item itemDescartado) {
+    public void descartarItem(Item itemDescartado) { //Metodo testado e funcionando!! (Ainda vai evoluir) - Relação de Pesos
         this.getListaItens().remove(itemDescartado);
-        System.out.println("O item " + itemDescartado + " foi descartado!");
+        System.out.println("O item " + itemDescartado.getNomeItem() + " foi descartado!");
     }
 
     @Override
-    public void selecionarItem(int posicaoItem) { //Esse metodo ainda irá evoluir
-        Item itemSelecionado = this.getListaItens().get(posicaoItem);
-        Personagem personagemSelecionado = null; //Organizar isso de modo que o personagem seja selecionado para receber os buff's/debuff's
-        if (itemSelecionado instanceof Agua || itemSelecionado instanceof Alimentos || itemSelecionado instanceof Remedios) {
-            itemSelecionado.usar(itemSelecionado, personagemSelecionado);
+    public void selecionarItem(int posicaoItemSelecionado, Personagem personagemEscolhido) { //Esse metodo ainda irá evoluir
+        Item itemSelecionado = this.getListaItens().get(posicaoItemSelecionado);
+        //Verificando o Tipo do Item:
+        if (itemSelecionado instanceof Agua || itemSelecionado instanceof Alimentos || itemSelecionado instanceof Remedios) { //Consumíveis
+            itemSelecionado.usar(itemSelecionado, personagemEscolhido);
             System.out.println("O item " + itemSelecionado.getNomeItem() + " foi consumido!");
-            this.getListaItens().remove(posicaoItem);
-        } else if (itemSelecionado instanceof Materiais) {
+            this.getListaItens().remove(itemSelecionado);
+        } else if (itemSelecionado instanceof Materiais) { //Irá se desenvolver com o sistema de Craft - Combináveis
             System.out.println("Material selecionado, escolha outro para poder combinar!");
             this.mostrarInventario();
-        } else if (itemSelecionado instanceof Armas) {
+        } else if (itemSelecionado instanceof Armas) { //Temos que desenvolver um slot especial do inventário para Armas - Equipáveis
             System.out.println("Arma selecionada!");
-        } else if (itemSelecionado instanceof  Ferramentas) {
+        } else if (itemSelecionado instanceof  Ferramentas) { //Temos que desenvolver um slot especial do inventário para Ferramentas - Equipáveis
             System.out.println("Ferramenta pronta para uso!");
         }
     }
-        @Override
-        public void mostrarInventario () {
-            for (int contador = 0; contador < listaItens.size(); contador++) {
-                System.out.println(contador + "- " + listaItens.get(contador));
-            }
+
+    @Override
+    public void mostrarInventario () { //Metodo testado e funcionando!! (Ainda vai evoluir)
+        System.out.println("Inventário:");
+        for (int contador = 0; contador < listaItens.size(); contador++) {
+            System.out.println(contador + " - " + listaItens.get(contador).getNomeItem());
         }
+    }
 }
