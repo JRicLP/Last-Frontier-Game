@@ -6,7 +6,7 @@ public class EventoDoencaFerimento extends Eventos{
     private String impactoDoencaFerimento;
     private boolean curaDisponivel;
     //Metodo construtor:
-    public EventoDoencaFerimento(String nomeEvento, String descricaoEvento, double probabilidadeEvento, String impactoEvento, String condicaoEvento,
+    public EventoDoencaFerimento(String nomeEvento, String descricaoEvento, int probabilidadeEvento, String impactoEvento, String condicaoEvento,
                                  String tipoDoenca, String impactoDoencaFerimento, boolean curaDisponivel) {
         super(nomeEvento, descricaoEvento, probabilidadeEvento, impactoEvento, condicaoEvento);
         this.tipoDoenca = tipoDoenca;

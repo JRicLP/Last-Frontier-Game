@@ -8,7 +8,7 @@ public class Ferramentas extends Item implements ToolsActions {
     private String tipoFerramenta;
     private int eficienciaFerramenta;
     //Metodo construtor:
-    public Ferramentas(String nomeItem, double pesoItem, double durabilidadeItem, String tipoFerramenta, int eficienciaFerramenta) {
+    public Ferramentas(String nomeItem, int pesoItem, int durabilidadeItem, String tipoFerramenta, int eficienciaFerramenta) {
         super(nomeItem, pesoItem, durabilidadeItem);
         this.tipoFerramenta = tipoFerramenta;
         this.eficienciaFerramenta = eficienciaFerramenta;

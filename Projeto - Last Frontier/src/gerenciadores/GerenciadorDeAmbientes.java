@@ -11,7 +11,7 @@ public class GerenciadorDeAmbientes implements ManagerAmbientActions {
     //Atributos da classe:
     private String[] listaAmbientesDisponiveis;
     private String climaGlobal;
-    private ArrayList<Ambientes> historicoMovimentacao; //Esse atributo será um Arraylist, posteriormente será modificado
+    private ArrayList<Ambientes> historicoMovimentacao;
     //Metodo construtor da classe:
     public GerenciadorDeAmbientes(String[] listaAmbientesDisponiveis, String climaGlobal, ArrayList<Ambientes> historicoMovimentacao) {
         this.listaAmbientesDisponiveis = listaAmbientesDisponiveis;

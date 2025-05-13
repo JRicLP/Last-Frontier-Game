@@ -7,7 +7,7 @@ public class Materiais extends Item implements MaterialsActions {
     private String tipoMaterial;
     private int resistenciaMaterial;
     //Metodo construtor:
-    public Materiais(String nomeItem, double pesoItem, double durabilidadeItem, String tipoMaterial, int resistenciaMaterial) {
+    public Materiais(String nomeItem, int pesoItem, int durabilidadeItem, String tipoMaterial, int resistenciaMaterial) {
         super(nomeItem, pesoItem, durabilidadeItem);
         this.tipoMaterial = tipoMaterial;
         this.resistenciaMaterial = resistenciaMaterial;

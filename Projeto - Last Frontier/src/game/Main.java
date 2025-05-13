@@ -1,39 +1,56 @@
 package game;
 
-import gerenciadores.GerenciadorDePersonagens;
+import ambientes.AmbienteCaverna;
+import ambientes.AmbienteFloresta;
+import ambientes.Ambientes;
+import eventos.EventoDescoberta;
+import gerenciadores.GerenciadorDeAmbientes;
 import inventario.Inventario;
 import itens.Agua;
 import itens.Alimentos;
-import itens.Armas;
-import itens.Ferramentas;
-import personagens.Personagem;
-
+import personagens.Cacador;
 import java.util.ArrayList;
+import java.util.Random;
+
 
 public class Main {
     public static void main(String[] args) {
 
-        Alimentos melancia = new Alimentos("Melancia", 3, 10, 3, "Fruta",10);
-        Agua garrafaAgua = new Agua("Garrafa de Agua", 2,10, 0.9, 1);
-        Ferramentas picaretaFerro = new Ferramentas("Picareta de Ferro", 2, 10, "Picareta", 8);
-        Armas espadaAfiada = new Armas("Espada Afiada", 10, 10, "Espada", 5, 5 );
+        Inventario inventarioTeste = new Inventario(new ArrayList<>(), 10, 10);
 
-        Inventario inventarioTest = new Inventario(new ArrayList<>(), 10, 10);
+        Alimentos melancia = new Alimentos("Melancia Grande", 5, 10, 10, "Fruta", 10);
+        Agua garrafaAgua = new Agua("Garrafa de Água", 2, 10, 100, 100 );
 
-        GerenciadorDePersonagens gerenciador= new GerenciadorDePersonagens("Nômade", "");
-        gerenciador.escolherPersonagem();
-        Personagem nomadePerdido = gerenciador.getPersonagem();
+        Cacador hunterBoss = new Cacador("Flynn Tracker", 100, 100, 65, 85, 85, " ", " ",
+                false, 65, 100, " ");
 
-        inventarioTest.adicionarItem(melancia);
-        inventarioTest.adicionarItem(garrafaAgua);
-        inventarioTest.adicionarItem(picaretaFerro);
-        inventarioTest.mostrarInventario();
-        inventarioTest.descartarItem(garrafaAgua);
-        inventarioTest.mostrarInventario();
-        inventarioTest.adicionarItem(espadaAfiada);
-        inventarioTest.mostrarInventario();
-        inventarioTest.selecionarItem(1, nomadePerdido);
-        inventarioTest.mostrarInventario();
+        AmbienteCaverna cavernaProfunda = new AmbienteCaverna("Caverna Profunda", "Uma caverna escura, perigosa e cheia de desafios", 10, "Itens perdidos, Água, Monstros para Combate",
+                3, "Clima de Caverna", "Ambiente pouco luminoso","Criaturas estranhas aparecem por aqui, tome cuidado!" ,"Gotas de água pingam e formam poças na caverna, é uma fonte de água");
+        AmbienteFloresta floresta = new AmbienteFloresta("Amazônia", "Uma floresta densa e perigosa", 5, "Água, Alimentos e Animais para Combate",
+                4, "Clima Chuvoso", "A vegetação é muito densa", "Há vários animais por aqui", "Aqui chove bastante");
+
+        EventoDescoberta bauPerdido = new EventoDescoberta("Bau Perdido", "Um antigo baú esquecido pelos corajosos exploradores de uma era passada",3,
+                "Descobertas recuperam o folego do personagem, um pouco de energia e sede serão regenerados", "Estar na Caverna", "Tesouro Antigo","Materiais", false);
+        EventoDescoberta caixaDeSuprimentos = new EventoDescoberta("Caixa de Suprimentos", "Uma caixa de suprimentos deixada pelos antigos exploradores, parece até um milagre!", 4,
+                "Caixas de Suprimentos recuperam Sede, Fome e um pouco de Sanidade!","Estar na caverna", "Consumíveis","Alimentos, Agua",false);
+        EventoDescoberta kitMedico = new EventoDescoberta("Kit Médico", "Parece que algum médico passou por aqui. O que ele estava fazendo?", 3,
+                "Kit's Médicos recuperam a Saúde do personagem e dão um pouco de esperança, recuperando a Sanidade", "Estar na caverna", "Consumíveis", "Remédios", false);
+
+        EventoDescoberta[] listaEventosDescobertas = {bauPerdido, bauPerdido, bauPerdido, caixaDeSuprimentos, caixaDeSuprimentos, caixaDeSuprimentos, caixaDeSuprimentos, kitMedico, kitMedico, kitMedico};
+
+        String[] listaAmbientes = new String[2];
+        GerenciadorDeAmbientes gerenciadorDeAmbientes = new GerenciadorDeAmbientes(listaAmbientes," ",new ArrayList<Ambientes>(5));
+
+        gerenciadorDeAmbientes.mudarAmbiente(hunterBoss, cavernaProfunda);
+        System.out.println(gerenciadorDeAmbientes.getHistoricoMovimentacao().getFirst().getNomeAmbiente());
+        gerenciadorDeAmbientes.mudarAmbiente(hunterBoss, floresta);
+        System.out.println(gerenciadorDeAmbientes.getHistoricoMovimentacao().get(1).getNomeAmbiente());
+
+
+        //Random escolhaEventoDescoberta = new Random();
+        //int eventoEscolhido = escolhaEventoDescoberta.nextInt(10);
+        //System.out.println(listaEventosDescobertas[eventoEscolhido].getNomeEvento());
+        //listaEventosDescobertas[eventoEscolhido].executar(hunterBoss, cavernaProfunda, listaEventosDescobertas[eventoEscolhido]);
 
     }
 }

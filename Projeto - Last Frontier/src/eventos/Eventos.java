@@ -8,11 +8,11 @@ public abstract class Eventos implements EventsActions {
     //Atributos da superclasse:
     private String nomeEvento;
     private String descricaoEvento;
-    private double probabilidadeEvento;
+    private int probabilidadeEvento;
     private String impactoEvento;
     private String condicaoEvento;
     //Metodo construtor:
-    public Eventos(String nomeEvento, String descricaoEvento, double probabilidadeEvento, String impactoEvento, String condicaoEvento){
+    public Eventos(String nomeEvento, String descricaoEvento, int probabilidadeEvento, String impactoEvento, String condicaoEvento){
         this.nomeEvento = nomeEvento;
         this.descricaoEvento = descricaoEvento;
         this.probabilidadeEvento = probabilidadeEvento;
@@ -32,10 +32,10 @@ public abstract class Eventos implements EventsActions {
     public String getDescricaoEvento(){
         return descricaoEvento;
     }
-    public void setProbabilidadeEvento(double probabilidadeEvento){
+    public void setProbabilidadeEvento(int probabilidadeEvento){ //Vamos definir uma probabilidade de 0 a 10
         this.probabilidadeEvento = probabilidadeEvento;
     }
-    public double getProbabilidadeEvento(){
+    public int getProbabilidadeEvento(){
         return probabilidadeEvento;
     }
     public void setImpactoEvento(String impactoEvento){
@@ -53,7 +53,7 @@ public abstract class Eventos implements EventsActions {
     //Metodos implementados:
     @Override
     public void executar(Personagem personagemAtual, Ambientes ambienteAtual, Eventos eventoAplicado) {
-        System.out.println("O evento " + eventoAplicado.getNomeEvento() + " funciona da seguinte forma: " +
+        System.out.println("Evento " + eventoAplicado.getNomeEvento() + " aconteceu: " +
                 eventoAplicado.getDescricaoEvento());
         System.out.println("Impacto: " + eventoAplicado.getImpactoEvento());
         //Futuramente será adicionado um verificador da condição necessária para o evento ocorrer!!

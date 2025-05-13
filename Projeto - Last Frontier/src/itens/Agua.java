@@ -5,25 +5,25 @@ import personagens.Personagem;
 
 public class Agua extends Item implements ItensActions {
     //Atributos da subclasse:
-    private double purezaAgua;
-    private double volumeAgua;
+    private int purezaAgua;
+    private int volumeAgua;
     //Métodos construtor::
-    public Agua(String nomeItem, double pesoItem, double durabilidadeItem, double purezaAgua, double volumeAgua) {
+    public Agua(String nomeItem, int pesoItem, int durabilidadeItem, int purezaAgua, int volumeAgua) {
         super(nomeItem, pesoItem, durabilidadeItem);
         this.purezaAgua = purezaAgua;
         this.volumeAgua = volumeAgua;
     }
     //Metodos acessores:
-    public void setPurezaAgua(double purezaAgua) {
+    public void setPurezaAgua(int purezaAgua) {
         this.purezaAgua = purezaAgua;
     }
-    public double getPurezaAgua() {
+    public int getPurezaAgua() {
         return purezaAgua;
     }
-    public void setVolumeAgua(double volumeAgua) {
+    public void setVolumeAgua(int volumeAgua) {
         this.volumeAgua = volumeAgua;
     }
-    public double getVolumeAgua() {
+    public int getVolumeAgua() {
         return volumeAgua;
     }
     //Metodo sobrescrito:

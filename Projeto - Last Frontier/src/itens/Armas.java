@@ -9,7 +9,7 @@ public class Armas extends Item implements WeaponsActions {
     private int danoArma;
     private int alcanceArma;
     //Metodo construtor:
-    public Armas(String nomeItem, double pesoItem, double durabilidadeItem, String tipoArma, int danoArma, int alcanceArma) {
+    public Armas(String nomeItem, int pesoItem, int durabilidadeItem, String tipoArma, int danoArma, int alcanceArma) {
         super(nomeItem, pesoItem, durabilidadeItem);
         this.tipoArma = tipoArma;
         this.danoArma = danoArma;

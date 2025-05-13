@@ -45,13 +45,19 @@ public class Inventario implements InventoryActions {
 
     //Metodos implementados:
     @Override
-    public void adicionarItem(Item itemAdicionado) { //Metodo testado e funcionando!! (Ainda vai evoluir) - Relação de Pesos
-        this.getListaItens().add(itemAdicionado);
-        System.out.println("O item " + itemAdicionado.getNomeItem() + " foi adicionado!");
+    public void adicionarItem(Item itemAdicionado) { //Adicionar um verificador para limitar a quantidade de itens com relação à capacidade do inventário
+        if (this.getPesoSuportado() >= itemAdicionado.getPesoItem()) {
+                this.setPesoSuportado(this.getPesoSuportado() - itemAdicionado.getPesoItem());
+                this.getListaItens().add(itemAdicionado);
+                System.out.println("O item " + itemAdicionado.getNomeItem() + " foi adicionado!");
+            } else {
+            System.out.println(" Não foi possível adicionar o item, seu inventário está muito pesado!!");
+        }
     }
 
     @Override
-    public void descartarItem(Item itemDescartado) { //Metodo testado e funcionando!! (Ainda vai evoluir) - Relação de Pesos
+    public void descartarItem(Item itemDescartado) { //Adicionar um verificador para limitar a quantidade de itens com relação à capacidade do inventário
+        this.setPesoSuportado(this.getPesoSuportado() + itemDescartado.getPesoItem());
         this.getListaItens().remove(itemDescartado);
         System.out.println("O item " + itemDescartado.getNomeItem() + " foi descartado!");
     }
@@ -75,7 +81,7 @@ public class Inventario implements InventoryActions {
     }
 
     @Override
-    public void mostrarInventario () { //Metodo testado e funcionando!! (Ainda vai evoluir)
+    public void mostrarInventario () { //Metodo testado e funcionando!!
         System.out.println("Inventário:");
         for (int contador = 0; contador < listaItens.size(); contador++) {
             System.out.println(contador + " - " + listaItens.get(contador).getNomeItem());

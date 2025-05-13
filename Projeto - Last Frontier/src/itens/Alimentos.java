@@ -4,21 +4,21 @@ import personagens.Personagem;
 
 public class Alimentos extends Item implements ItensActions {
     //Atributos da subclasse
-    private double valorNutricional;
+    private int valorNutricional;
     private String tipoAlimento;
     private int prazoValidade;
     //Metodo construtor:
-    public Alimentos(String nomeItem, double pesoItem, double durabilidadeItem, double valorNutricional, String tipoAlimento, int prazoValidade) {
+    public Alimentos(String nomeItem, int pesoItem, int durabilidadeItem, int valorNutricional, String tipoAlimento, int prazoValidade) {
         super(nomeItem, pesoItem, durabilidadeItem);
         this.valorNutricional = valorNutricional;
         this.tipoAlimento = tipoAlimento;
         this.prazoValidade = prazoValidade;
     }
     //Metodos acessores:
-    public void setValorNutricional(double valorNutricional){
+    public void setValorNutricional(int valorNutricional){
         this.valorNutricional = valorNutricional;
     }
-    public double getValorNutricional(){
+    public int getValorNutricional(){
         return valorNutricional;
     }
     public void setTipoAlimento(String tipoAlimento){

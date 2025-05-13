@@ -9,7 +9,7 @@ public class Remedios extends Item  implements ItensActions {
     private String efeitoRemedio;
 
     //Metodo construtor:
-    public Remedios(String nomeItem, double pesoItem, double durabilidadeItem, String tipoRemedio, String efeitoRemedio) {
+    public Remedios(String nomeItem, int pesoItem, int durabilidadeItem, String tipoRemedio, String efeitoRemedio) {
         super(nomeItem, pesoItem, durabilidadeItem);
         this.tipoRemedio = tipoRemedio;
         this.efeitoRemedio = efeitoRemedio;
