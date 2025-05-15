@@ -9,9 +9,9 @@ public abstract class Ambientes implements AmbientActions {
     private String nomeAmbiente;
     private String descricaoAmbiente;
     private int dificuldadeAmbiente;
-    private String recursosAmbiente;
-    private int probabilidadeEventos;
-    private String climaDominante;
+    private String recursosAmbiente; //Precisamos verificar como esse atributo irá se relacionar com a classe
+    private int probabilidadeEventos; //Precisamos verificar como esse atributo irá se relacionar com a classe
+    private String climaDominante; //Precisamos verificar como esse atributo irá se relacionar com a classe
     //Metodo construtor da superclasse:
     public Ambientes(String nomeAmbiente, String descricaoAmbiente, int dificuldadeAmbiente,
                      String recursosAmbiente, int probabilidadeEventos, String climaDominante){
