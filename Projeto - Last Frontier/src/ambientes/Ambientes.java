@@ -8,13 +8,13 @@ public abstract class Ambientes implements AmbientActions {
     //Atributos da superclasse:
     private String nomeAmbiente;
     private String descricaoAmbiente;
-    private double dificuldadeAmbiente;
+    private int dificuldadeAmbiente;
     private String recursosAmbiente;
-    private double probabilidadeEventos;
+    private int probabilidadeEventos;
     private String climaDominante;
     //Metodo construtor da superclasse:
-    public Ambientes(String nomeAmbiente, String descricaoAmbiente, double dificuldadeAmbiente,
-                     String recursosAmbiente, double probabilidadeEventos, String climaDominante){
+    public Ambientes(String nomeAmbiente, String descricaoAmbiente, int dificuldadeAmbiente,
+                     String recursosAmbiente, int probabilidadeEventos, String climaDominante){
         this.nomeAmbiente = nomeAmbiente;
         this.descricaoAmbiente = descricaoAmbiente;
         this.dificuldadeAmbiente = dificuldadeAmbiente;
@@ -35,10 +35,10 @@ public abstract class Ambientes implements AmbientActions {
     public String getDescricaoAmbiente(){
         return descricaoAmbiente;
     }
-    public void setDificuldadeAmbiente(double dificuldadeAmbiente){
+    public void setDificuldadeAmbiente(int dificuldadeAmbiente){
         this.dificuldadeAmbiente =  dificuldadeAmbiente;
     }
-    public double getDificuldadeAmbiente(){
+    public int getDificuldadeAmbiente(){
         return dificuldadeAmbiente;
     }
     public void setRecursosAmbiente(String recursosAmbiente){
@@ -47,10 +47,10 @@ public abstract class Ambientes implements AmbientActions {
     public String getRecursosAmbiente(){
         return recursosAmbiente;
     }
-    public void setProbabilidadeEventos(double probabilidadeEventos){
+    public void setProbabilidadeEventos(int probabilidadeEventos){
         this.probabilidadeEventos =  probabilidadeEventos;
     }
-    public double getProbabilidadeEventos(){
+    public int getProbabilidadeEventos(){
         return probabilidadeEventos;
     }
     public void setClimaDominante(String climaDominante){
@@ -74,6 +74,6 @@ public abstract class Ambientes implements AmbientActions {
     public void modificarClima(Ambientes ambienteAtual, EventoClimatico novoClima) {
         System.out.println("Com o passar do tempo, algumas mudanças foram notadas no ar e horizonte do ambiente " +
                 ambienteAtual.getNomeAmbiente() + "...");
-        System.out.println("Um novo clima foi definido: " + novoClima.getNomeEvento() + " prepare-se da melhor forma!!");
+        System.out.println("Um novo clima foi definido: " + novoClima.getNomeEvento() + " , prepare-se da melhor forma!!");
     }
 }

@@ -10,9 +10,9 @@ public abstract class Eventos implements EventsActions {
     private String descricaoEvento;
     private int probabilidadeEvento;
     private String impactoEvento;
-    private String condicaoEvento;
+    private boolean condicaoEvento; //Como esse atributo é uma condição, iremos torná-lo boolean para verificar e atribuir um evento
     //Metodo construtor:
-    public Eventos(String nomeEvento, String descricaoEvento, int probabilidadeEvento, String impactoEvento, String condicaoEvento){
+    public Eventos(String nomeEvento, String descricaoEvento, int probabilidadeEvento, String impactoEvento, boolean condicaoEvento){
         this.nomeEvento = nomeEvento;
         this.descricaoEvento = descricaoEvento;
         this.probabilidadeEvento = probabilidadeEvento;
@@ -44,18 +44,20 @@ public abstract class Eventos implements EventsActions {
     public String getImpactoEvento(){
         return impactoEvento;
     }
-    public void setCondicaoEvento(String condicaoEvento){
+    public void setCondicaoEvento(boolean condicaoEvento){
         this.condicaoEvento = condicaoEvento;
     }
-    public String getCondicaoEvento(){
+    public boolean isCondicaoEvento() {
         return condicaoEvento;
     }
     //Metodos implementados:
     @Override
     public void executar(Personagem personagemAtual, Ambientes ambienteAtual, Eventos eventoAplicado) {
-        System.out.println("Evento " + eventoAplicado.getNomeEvento() + " aconteceu: " +
-                eventoAplicado.getDescricaoEvento());
-        System.out.println("Impacto: " + eventoAplicado.getImpactoEvento());
-        //Futuramente será adicionado um verificador da condição necessária para o evento ocorrer!!
+        if (condicaoEvento) {
+            System.out.println("Evento " + eventoAplicado.getNomeEvento() + " aconteceu: " +
+                    eventoAplicado.getDescricaoEvento());
+            System.out.println("Impacto: " + eventoAplicado.getImpactoEvento());
+            //Futuramente será adicionado um verificador da condição necessária para o evento ocorrer!! - Exception
+        }
     }
 }

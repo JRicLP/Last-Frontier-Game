@@ -10,10 +10,10 @@ import java.util.ArrayList;
 public class GerenciadorDeEventos implements ManagerEventsActions {
     //Atributos da classe:
     private String[] listaEventosPossiveis;
-    private float[] probabilidadeOcorrencia;
+    private int[] probabilidadeOcorrencia;
     private ArrayList<Eventos> historicoEventos;
     //Metodo construtor:
-    public GerenciadorDeEventos(String[] listaEventosPossiveis, float[] probabilidadeOcorrencia, ArrayList<Eventos> historicoEventos) {
+    public GerenciadorDeEventos(String[] listaEventosPossiveis, int[] probabilidadeOcorrencia, ArrayList<Eventos> historicoEventos) {
         this.listaEventosPossiveis = listaEventosPossiveis;
         this.probabilidadeOcorrencia = probabilidadeOcorrencia;
         this.historicoEventos = new ArrayList<>(20);
@@ -25,10 +25,10 @@ public class GerenciadorDeEventos implements ManagerEventsActions {
     public String[] getListaEventosPossiveis() {
         return listaEventosPossiveis;
     }
-    public void setProbabilidadeOcorrencia(float[] probabilidadeOcorrencia) {
+    public void setProbabilidadeOcorrencia(int[] probabilidadeOcorrencia) {
         this.probabilidadeOcorrencia = probabilidadeOcorrencia;
     }
-    public float[] getProbabilidadeOcorrencia() {
+    public int[] getProbabilidadeOcorrencia() {
         return probabilidadeOcorrencia;
     }
     public void setHistoricoEventos(ArrayList<Eventos> historicoEventos) {
@@ -44,8 +44,10 @@ public class GerenciadorDeEventos implements ManagerEventsActions {
     }
     @Override
     public void aplicarEvento(Personagem personagemAtual, Eventos eventoAplicado) {
-        System.out.println("O personagem " + personagemAtual.getNomePersonagem() + " está sofrendo as consequências de: " +
-                eventoAplicado.getNomeEvento());
+        if (eventoAplicado.isCondicaoEvento()) { //Verifica se a condição necessária para o evento está ativa
+            System.out.println("O personagem " + personagemAtual.getNomePersonagem() + " está sofrendo as consequências de: " +
+                    eventoAplicado.getNomeEvento());
+        }
     }
     @Override
     public void removerEvento(Eventos eventoAtual) {

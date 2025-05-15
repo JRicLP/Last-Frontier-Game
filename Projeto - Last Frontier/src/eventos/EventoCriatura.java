@@ -8,7 +8,7 @@ public class EventoCriatura extends Eventos{
     private int nivelPerigo;
     private String opcaoAcao; //Revisar a necessidade desse atributo
     //Métodos da subclasse:
-    public EventoCriatura(String nomeEvento, String descricaoEvento, int probabilidadeEvento, String impactoEvento, String condicaoEvento,
+    public EventoCriatura(String nomeEvento, String descricaoEvento, int probabilidadeEvento, String impactoEvento, boolean condicaoEvento,
                           String tipoCriatura, int vidaCriatura, int distanciaCriatura, int nivelPerigo, String opcaoAcao) {
         super(nomeEvento, descricaoEvento, probabilidadeEvento, impactoEvento, condicaoEvento);
         this.tipoCriatura = tipoCriatura;

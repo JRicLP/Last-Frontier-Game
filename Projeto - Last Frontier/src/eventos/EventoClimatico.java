@@ -6,7 +6,7 @@ public class EventoClimatico extends Eventos {
     private int duracaoClima;
     private String efeitoClima;
     //Métodos da subclasse:
-    public EventoClimatico(String nomeEvento, String descricaoEvento, int probabilidadeEvento, String impactoEvento, String condicaoEvento,
+    public EventoClimatico(String nomeEvento, String descricaoEvento, int probabilidadeEvento, String impactoEvento, boolean condicaoEvento,
                            String tipoClima, int duracaoClima, String efeitoClima) {
         super(nomeEvento, descricaoEvento, probabilidadeEvento, impactoEvento, condicaoEvento);
         this.tipoClima = tipoClima;

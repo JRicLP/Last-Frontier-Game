@@ -25,16 +25,16 @@ public class Main {
                 false, 65, 100, " ");
 
         AmbienteCaverna cavernaProfunda = new AmbienteCaverna("Caverna Profunda", "Uma caverna escura, perigosa e cheia de desafios", 10, "Itens perdidos, Água, Monstros para Combate",
-                3, "Clima de Caverna", "Ambiente pouco luminoso","Criaturas estranhas aparecem por aqui, tome cuidado!" ,"Gotas de água pingam e formam poças na caverna, é uma fonte de água");
+                3, "Clima de Caverna", false,false ,false);
         AmbienteFloresta floresta = new AmbienteFloresta("Amazônia", "Uma floresta densa e perigosa", 5, "Água, Alimentos e Animais para Combate",
-                4, "Clima Chuvoso", "A vegetação é muito densa", "Há vários animais por aqui", "Aqui chove bastante");
+                4, "Clima Chuvoso", false, false, false);
 
         EventoDescoberta bauPerdido = new EventoDescoberta("Bau Perdido", "Um antigo baú esquecido pelos corajosos exploradores de uma era passada",3,
-                "Descobertas recuperam o folego do personagem, um pouco de energia e sede serão regenerados", "Estar na Caverna", "Tesouro Antigo","Materiais", false);
+                "Descobertas recuperam o folego do personagem, um pouco de energia e sede serão regenerados", true, "Tesouro Antigo","Materiais", false);
         EventoDescoberta caixaDeSuprimentos = new EventoDescoberta("Caixa de Suprimentos", "Uma caixa de suprimentos deixada pelos antigos exploradores, parece até um milagre!", 4,
-                "Caixas de Suprimentos recuperam Sede, Fome e um pouco de Sanidade!","Estar na caverna", "Consumíveis","Alimentos, Agua",false);
+                "Caixas de Suprimentos recuperam Sede, Fome e um pouco de Sanidade!",true, "Consumíveis","Alimentos, Agua",false);
         EventoDescoberta kitMedico = new EventoDescoberta("Kit Médico", "Parece que algum médico passou por aqui. O que ele estava fazendo?", 3,
-                "Kit's Médicos recuperam a Saúde do personagem e dão um pouco de esperança, recuperando a Sanidade", "Estar na caverna", "Consumíveis", "Remédios", false);
+                "Kit's Médicos recuperam a Saúde do personagem e dão um pouco de esperança, recuperando a Sanidade", true, "Consumíveis", "Remédios", false);
 
         EventoDescoberta[] listaEventosDescobertas = {bauPerdido, bauPerdido, bauPerdido, caixaDeSuprimentos, caixaDeSuprimentos, caixaDeSuprimentos, caixaDeSuprimentos, kitMedico, kitMedico, kitMedico};
 
