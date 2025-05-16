@@ -47,6 +47,8 @@ public class Main {
 
         //Eventos Climáticos:
 
+        //Falta fazer o Array de Eventos junto com os gerenciadores, para forçar uma probabilidade!
+
         //Clima padrão - Floresta:
         EventoClimatico climaFloresta = new EventoClimatico("Skógrgufa", "Um clima úmido e perenemente enevoado. A luz do sol raramente atravessa o véu de névoa azulada que dança entre as copas." +
                 " Chuva fina e sussurros no vento são constantes — alguns dizem que são vozes de espíritos.", 2, " ", false, " ", 3, " ");
@@ -70,6 +72,8 @@ public class Main {
 
         //Eventos Descobertas:
 
+        //Falta fazer o Array de Eventos junto com os gerenciadores, para forçar uma probabilidade!
+
         EventoDescoberta bauPerdido = new EventoDescoberta("Bau Perdido", "Um antigo baú esquecido pelos corajosos exploradores de uma era passada",3,
                 "Descobertas recuperam o folego do personagem, um pouco de energia e sede serão regenerados", true, "Combináveis e Equipáveis","Materiais, Ferramentas ou Armas", false);
         EventoDescoberta caixaDeSuprimentos = new EventoDescoberta("Caixa de Suprimentos", "Uma caixa de suprimentos deixada para trás, parece que era parte de um antigo vilarejo da região", 4,
@@ -83,6 +87,8 @@ public class Main {
 
         //Eventos Criaturas:
 
+        //Falta fazer o Array de Eventos junto com os gerenciadores, para forçar uma probabilidade!
+
         EventoCriatura cervo = new EventoCriatura("Hjarnhyrndr", "Um cervo de pelagem prateada e chifres de cristal gélido. Dizem que ele aparece apenas sob a luz da lua cheia em florestas sagradas. É símbolo de equilíbrio, e caçá-lo é considerado blasfêmia.",
                 2, "O encontro com criaturas possibilita a obtenção de recursos",false, "Animal mágico (neutro)", 25, 5, 0, " ");
         EventoCriatura serpente = new EventoCriatura("Niðkrága", "Uma serpente subterrânea que se move por vibrações no solo. Ela cospe uma névoa negra que cega e sufoca. Suas escamas são procuradas para rituais de invisibilidade",
@@ -95,23 +101,43 @@ public class Main {
                 2, "O encontro com criaturas possibilita a obtenção de recursos",false, "Animal mágico (pacífico)", 10, 5, 0, " ");
         EventoCriatura lobo = new EventoCriatura("Draugrulfr", "Lobo espectral que aparece onde o véu entre mundos se rompe. Seus olhos ardem com chamas verdes e seu uivo atrai os mortos inquietos. Imune a armas normais, só teme fogo.",
                 2, "O encontro com criaturas possibilita a obtenção de recursos",false, "Criatura hostil", 20, 5, 5, " ");
+        EventoCriatura cabra = new EventoCriatura("Tindgeit", "Cabra das montanhas com patas afiadas como ganchos e pelo que muda de cor com o clima. É usada por caçadores e clérigos como guia em regiões traiçoeiras.",
+                2, "O encontro com criaturas possibilita a obtenção de recursos",false, "Animal selvagem (neutro)", 15, 5, 0, " ");
+        EventoCriatura aranha = new EventoCriatura("Skuggadraugr", "Uma criatura que vive entre as sombras de ruínas e cavernas profundas. Não tem forma definida — apenas olhos vermelhos pairando na escuridão. Alimenta-se de medo. Matar uma exige luz.",
+                2, "O encontro com criaturas possibilita a obtenção de recursos",false, "Animal selvagem (neutro)", 15, 10, 10, " ");
+        EventoCriatura guerreiroCorrompido = new EventoCriatura("Skarnvaldr", "Um antigo guerreiro-sacerdote banido pelos próprios deuses após desafiar os Pactos do Céu. Usa uma armadura corroída por raios e carrega uma lança de obsidiana viva chamada Mjarkfjaldr." +
+                " Ele percorre as montanhas e ruínas em busca de relíquias perdidas, amaldiçoando qualquer um que cruze seu caminho com visões de agonia eterna.", 2, "O encontro com entidades humanas permite a obtenção de recursos ou batalhas", false,
+                "Humano hostil", 60, 25, 20, "");
+        EventoCriatura guardiaDoLago = new EventoCriatura("Yndra Sædis", "Uma mulher idosa que vive isolada às margens do lago Mjarnvatn. É uma vidente silenciosa, conhecida por ouvir os sussurros da névoa. Acredita-se que Yndra seja filha de um deus e uma mortal," +
+                " com sangue de tempo em suas veias. Aqueles que buscam respostas em seus sonhos costumam procurá-la — mas ela só fala em enigmas.", 2, "O encontro com entidades humanas permite a obtenção de recursos ou batalhas", false,
+                "Humano pacífico", 80, 0, 0, "");
 
+        //Eventos Doença e Ferimento:
 
+        //Falta fazer o Array de Eventos junto com os gerenciadores, para forçar uma probabilidade!
 
+        //Mordida da Cobra:
+        EventoDoencaFerimento mordida = new EventoDoencaFerimento("Sotnblár", "A mordida da serpente Niðkrága deixa veias azul-escuras ao redor da ferida. A vítima perde a visão por algumas horas e sente uma dormência crescente nos membros.",2,
+                " ", false,"Envenenamento", "Cegueira, Perca de Energia", true );
+        //Chifrada do Javali:
+        EventoDoencaFerimento chifrada = new EventoDoencaFerimento("Dróttarskör", "Um ferimento profundo e irregular causado por seus chifres ósseos. Nunca cicatriza completamente, e a dor retorna em noites de lua cheia.",2,
+                " ", false,"Corte", "Hemorragia", true );
+        //Contato com a Aranha:
+        EventoDoencaFerimento contato = new EventoDoencaFerimento("Skuggbrandr", "Um frio que se espalha pela pele e nunca aquece. Quem carrega a marca ouve sussurros constantes e tem dificuldade para dormir. Pode evoluir para loucura se não for purificada.",2,
+                " ", false,"Feitiço", "Ilusão", true );
+        //Arranhão do Lobo:
+        EventoDoencaFerimento arranhao = new EventoDoencaFerimento("Húndraugr", "Um arranhão quase imperceptível que infecciona com rapidez sobrenatural. Após três dias, o ferido começa a sonhar com terras mortas e ouvir uivos em pleno dia.",2,
+                " ", false,"Corte", "Ilusão e Hemorragia", true );
+        //Olhar do Pássaro:
+        EventoDoencaFerimento olhar = new EventoDoencaFerimento("Aldrgáta", "Dizem que quem cruza o olhar direto de um Veðrhrafn recebe visões do seu próprio fim. A mente enfraquece, e testes de coragem ou sabedoria tornam-se mais difíceis por um tempo.",2,
+                " ", false,"Feitiço", "Ilusão", true );
+        //Toque do Cervo:
+        EventoDoencaFerimento toque = new EventoDoencaFerimento("Frostseidr", "O toque gelado de seus chifres pode causar um entorpecimento místico. A pele perde cor e a pessoa sente emoções com menos intensidade, como se estivesse congelando por dentro.",2,
+                " ", false,"Corte e Feitiço", "Ilusão e Hemorragia", true );
 
+        //Inventário:
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+        //Instanciando o inventário: A Capacidade inicial do ArrayList é a mesma da Capacidade do Inventário
+        Inventario inventarioPrincipal = new Inventario(new ArrayList<Item>(25), 30,25);
     }
 }
