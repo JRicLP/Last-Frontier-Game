@@ -6,11 +6,11 @@ public class GerenciadorDePersonagens implements ManagerPersonagens {
     String escolha;
     private Personagem personagem;
     public GerenciadorDePersonagens(String escolha, String personagem){
-        this.escolha = escolha;
+        this.escolha=escolha;
     }
     //Métodos acessores
     public void setEscolha(String escolha){
-        this.escolha = escolha;
+        this.escolha=escolha;
     }
     public String getEscolha(){
         return escolha;
@@ -55,7 +55,7 @@ public class GerenciadorDePersonagens implements ManagerPersonagens {
                 System.out.println("Personagem não reconhecido, tente novamente");
                 this.personagem=null;
 
-        }
+            }
 
-    }
+        }
 }
