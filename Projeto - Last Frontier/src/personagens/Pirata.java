@@ -4,8 +4,7 @@ public class Pirata extends Personagem {
     //Atributos da classe:
     private String habilidadePirata;
     //Metodo construtor:
-    public Pirata(String nomePersonagem, double vidaPersonagem, double fomePersonagem, double sedePersonagem, double energiaPersonagem,
-                  double sanidadePersonagem, String inventarioPersonagem, String localizacaoPersonagem, boolean contaminacaoPersonagem, double sedeInicialPersonagem, double fomeInicialPersonagem,String habilidadePirata) {
+    public Pirata(String habilidadePirata) {
 
         this.setNomePersonagem("Scarlet Tempest");
         this.setVidaPersonagem(100);

@@ -12,7 +12,7 @@ public  abstract class Personagem implements CharacterActions {
     private double sanidadePersonagem;
     private String inventarioPersonagem;
     private String localizacaoPersonagem;
-    private boolean contaminacaoPersonagem=false;
+    private boolean contaminacaoPersonagem = false;
     private double sedeInicialPersonagem;
     private double fomeInicialPersonagem;
     //Metodo construtor:

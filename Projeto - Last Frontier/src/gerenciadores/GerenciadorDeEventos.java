@@ -80,7 +80,7 @@ public class GerenciadorDeEventos implements ManagerEventsActions {
                 " com sangue de tempo em suas veias. Aqueles que buscam respostas em seus sonhos costumam procurá-la — mas ela só fala em enigmas.", 2, "O encontro com entidades humanas permite a obtenção de recursos ou batalhas", false,
                 "Humano pacífico", 80, 0, 0, "");
     }
-        //Gerando eventos descoberta
+    //Gerando eventos descoberta
     public void gerarEventosDescoberta() {
         EventoDescoberta bauPerdido = new EventoDescoberta("Bau Perdido", "Um antigo baú esquecido pelos corajosos exploradores de uma era passada", 3,
                 "Descobertas recuperam o folego do personagem, um pouco de energia e sede serão regenerados", true, "Combináveis e Equipáveis", "Materiais, Ferramentas ou Armas", false);
@@ -93,7 +93,7 @@ public class GerenciadorDeEventos implements ManagerEventsActions {
         EventoDescoberta jarrosConserva = new EventoDescoberta("Jarros de Conserva", "Os antigos Jarros de Conserva eram utilizados para armazenar diversos recursos por décadas, talvez ainda tenha algo útil",
                 2, "Jarros de Conserva são uma ótima fonte de recursos, se encontrar um deles não irá passar necessidades", true, "Consumíveis", "Alimentos, Água, Remédios", false);
     }
-        //Gerando eventos de doença e ferimento
+    //Gerando eventos de doença e ferimento
     public void gerarEventoDoencaFerimento() {
         //Mordida da Cobra:
         EventoDoencaFerimento mordida = new EventoDoencaFerimento("Sotnblár", "A mordida da serpente Niðkrága deixa veias azul-escuras ao redor da ferida. A vítima perde a visão por algumas horas e sente uma dormência crescente nos membros.", 2,
@@ -114,7 +114,7 @@ public class GerenciadorDeEventos implements ManagerEventsActions {
         EventoDoencaFerimento toque = new EventoDoencaFerimento("Frostseidr", "O toque gelado de seus chifres pode causar um entorpecimento místico. A pele perde cor e a pessoa sente emoções com menos intensidade, como se estivesse congelando por dentro.", 2,
                 " ", false, "Corte e Feitiço", "Ilusão e Hemorragia", true);
     }
-        //Gerando eventos climáticos
+    //Gerando eventos climáticos
     public void gerarEventosClimaticos() {
         //Clima padrão - Floresta:
         EventoClimatico climaFloresta = new EventoClimatico("Skógrgufa", "Um clima úmido e perenemente enevoado. A luz do sol raramente atravessa o véu de névoa azulada que dança entre as copas." +
@@ -138,13 +138,4 @@ public class GerenciadorDeEventos implements ManagerEventsActions {
                 " É dito que esse clima ocorre onde antigos deuses travaram batalhas e seus gritos ainda ecoam nos céus.", 2, " ", false, " ", 3, " ");
 
     }
-        //Gerando sobreviventes
-    public void gerarEventoSobrevivente(){
-        EventoSobreviventes aliados = new EventoSobreviventes("Aparição de sobreviventes aliados", "O aliados ajudam dando suprimentos e armas", 5,
-                "Aumento de suprimentos", true,
-                "Sobreviventes Aliados", 0, "Aumenta estoque de comida e encontra local seguro para descansar");
-        EventoSobreviventes hostis= new EventoSobreviventes("Aparição de sobreviventes hostis"," Os hostis atacam o personagem e roubam seus suprimentos",5,
-                "Redução de vida",true,"Sobreviventes Hostis", 6,"Redução de 2 pontos de vida a cada ataque");
-        }
 }
-

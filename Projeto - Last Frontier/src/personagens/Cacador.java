@@ -4,8 +4,7 @@ public class Cacador extends Personagem {
     //Atributos da classe:
     private String habilidadeCacador;
     //Metodo construtor:
-    public Cacador(String nomePersonagem, double vidaPersonagem, double fomePersonagem, double sedePersonagem, double energiaPersonagem,
-                   double sanidadePersonagem, String inventarioPersonagem ,String localizacaoPersonagem, boolean contaminacaoPersonagem, int sedeInicialPersonagem, int fomeInicialPersonagem,String habilidadeCacador) {
+    public Cacador(String habilidadeCacador) {
         this.setNomePersonagem("Flynn Tracker");
         this.setVidaPersonagem(100);
         this.setFomePersonagem(100);

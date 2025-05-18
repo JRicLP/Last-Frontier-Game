@@ -4,8 +4,7 @@ public class Cientista extends Personagem {
     //Atributos da classe:
     private String habilidadeCientista;
     //Metodo construtor:
-    public Cientista(String nomePersonagem, double vidaPersonagem, double fomePersonagem, double sedePersonagem, double energiaPersonagem,
-                     double sanidadePersonagem, String inventarioPersonagem, String localizacaoPersonagem, boolean contaminacaoPersonagem,int sedeInicialPersonagem,int fomeInicialPersonagem, String habilidadeCientista) {
+    public Cientista(String habilidadeCientista) {
 
         this.setNomePersonagem("Gearhead Martinez");
         this.setVidaPersonagem(85);

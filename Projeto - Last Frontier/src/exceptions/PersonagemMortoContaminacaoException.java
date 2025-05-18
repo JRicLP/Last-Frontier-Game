@@ -1,7 +1,7 @@
 package exceptions;
 
 public class PersonagemMortoContaminacaoException extends Exception {
-    public PersonagemMortoContaminacaoException(String mensagem) {
-        super(mensagem);
-    }
+  public PersonagemMortoContaminacaoException(String mensagem) {
+    super(mensagem);
+  }
 }

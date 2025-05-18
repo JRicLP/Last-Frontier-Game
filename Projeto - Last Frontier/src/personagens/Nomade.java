@@ -4,8 +4,7 @@ public class Nomade extends Personagem {
     //Atributos da classe:
     private String habilidadeNomade;
     //Metodo construtor:
-    public Nomade(String nomePersonagem, double vidaPersonagem, double fomePersonagem, double sedePersonagem, double energiaPersonagem,
-                  double sanidadePersonagem, String inventarioPersonagem, String localizacaoPersonagem,boolean contaminacaoPersonagem,double sedeInicialPersonagem,double fomeInicialPersonagem, String habilidadeNomade){
+    public Nomade(String habilidadeNomade){
 
         this.setNomePersonagem("Jack Nomad");
         this.setVidaPersonagem(100);

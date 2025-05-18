@@ -4,8 +4,7 @@ public class Infiltrador extends Personagem {
     //Atributos da classe:
     private String habilidadeInfiltrador;
     //Metodo construtor:
-    public Infiltrador(String nomePersonagem, double vidaPersonagem, double fomePersonagem, double sedePersonagem, double energiaPersonagem,
-                       double sanidadePersonagem, String inventarioPersonagem, String localizacaoPersonagem, boolean contaminacaoPersonagem,double sedeInicialPersonagem,double fomeInicialPersonagem,String habilidadeInfiltrador) {
+    public Infiltrador(String habilidadeInfiltrador) {
 
         this.setNomePersonagem("Malik Gohst");
         this.setVidaPersonagem(85);

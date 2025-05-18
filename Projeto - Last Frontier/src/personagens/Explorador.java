@@ -4,8 +4,7 @@ public class Explorador extends Personagem {
     //Atributos da classe:
     private String habilidadeExplorador;
     //Metodo construtor
-    public Explorador(String nomePersonagem, double vidaPersonagem, double fomePersonagem, double sedePersonagem, double energiaPersonagem,
-                      double sanidadePersonagem, String inventarioPersonagem, String localizacaoPersonagem,boolean contaminacaoPersonagem, int sedeInicialPersonagem, int fomeInicialPersonagem,String habilidadeExplorador) {
+    public Explorador(String habilidadeExplorador) {
 
         this.setNomePersonagem("Virgil Explorer");
         this.setVidaPersonagem(90);

@@ -30,7 +30,7 @@ public class Ferramentas extends Item implements ToolsActions {
     @Override
     public void utilizar(Ambientes recursosAlvo) {
         System.out.println("A ferramenta selecionada " + this.getNomeItem() + " foi utilizada para extrair recursos de "
-        + recursosAlvo.getRecursosAmbiente());
+                + recursosAlvo.getRecursosAmbiente());
         //Futuramente esse metodo também deve exibir os itens extraídos.
     }
 }

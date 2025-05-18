@@ -48,7 +48,7 @@ public class GerenciadorDeAmbientes implements ManagerAmbientActions {
             System.out.println("                     Continue seu destino!");
             System.out.println("-------------------------------------------------------------------");
         }
-            personagemAtual.setLocalizacaoPersonagem(novoAmbiente.getNomeAmbiente());
+        personagemAtual.setLocalizacaoPersonagem(novoAmbiente.getNomeAmbiente());
         getHistoricoMovimentacao().add(novoAmbiente);
         //Temos que ver uma forma de registrar também o antigo ambiente!!
         //Precisamos modificar o atributo, para poder utilizar a classe e seus métodos na classe Personagem

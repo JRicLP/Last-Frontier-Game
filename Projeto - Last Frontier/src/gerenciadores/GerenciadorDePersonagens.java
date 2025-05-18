@@ -1,11 +1,11 @@
 package gerenciadores;
-import interfaces.ManagerPersonagens;
+import interfaces.ManagerCharacters;
 import personagens.*;
 
-public class GerenciadorDePersonagens implements ManagerPersonagens {
+public class GerenciadorDePersonagens implements ManagerCharacters {
     String escolha;
     private Personagem personagem;
-    public GerenciadorDePersonagens(String escolha, String personagem){
+    public GerenciadorDePersonagens(){ //String escolha, String personagem
         this.escolha=escolha;
     }
     //Métodos acessores
@@ -28,34 +28,54 @@ public class GerenciadorDePersonagens implements ManagerPersonagens {
         Personagem personagemEscolhido;
         switch(this.getEscolha()){
             case "Nômade" :
-                this.setPersonagem((new Nomade("Jack Nomad", 100, 100,65,
-                        100, 100, "Vazio", "",false,65,100 ,"Possui grande resistência, conhecimento médico e adaptabilidade à mudanças climáticas")));
+                this.setPersonagem((new Nomade("Possui grande resistência, conhecimento médico e adaptabilidade à mudanças climáticas")));
                 break;
             case "Pirata":
-                this.setPersonagem((new Pirata("Scarlet Tempest ", 100, 100, 100, 85,
-                        85, "Vazio ", " ",false,100,100, " Sobrevivente Nato e apto para pescaria ")));
+                this.setPersonagem((new Pirata("Sobrevivente Nato e apto para pescaria ")));
                 break;
             case "Infiltrador":
-                this.setPersonagem((new Infiltrador( "Malik Ghost", 85, 65, 85,100,100,
-                        " Vazio", " ", false, 85,65," Camuflagem, consegue invadir e conseguir comida e armas sem ser pego")));
+                this.setPersonagem((new Infiltrador( "Camuflagem, consegue invadir e conseguir comida e armas sem ser pego")));
                 break;
             case "Explorador":
-                this.setPersonagem((new Explorador("Logan Pathfinder", 85, 85, 65, 100, 85,
-                        " Vazio", " ", false,65,85,"Rastreador, consegue achar comida e água mais rápido")));
+                this.setPersonagem((new Explorador("Rastreador, consegue achar comida e água mais rápido")));
                 break;
             case "Cientista":
-                this.setPersonagem((new Cientista(" Gearhead Martinez", 85, 85,100,100,85,
-                        "Vazio", " ", false,100,85,"Mecânico, consegue consertar coisas e construir")));
+                this.setPersonagem((new Cientista("Mecânico, consegue consertar coisas e construir")));
                 break;
             case "Caçador":
-                this.setPersonagem((new Cacador(" Flynn Tracker", 100,100,65,85,85,
-                        " Vazio", " ", false,65,100,"Lutador, consegue se defender muito bem")));
+                this.setPersonagem((new Cacador("Lutador, consegue se defender muito bem")));
                 break;
             default:
                 System.out.println("Personagem não reconhecido, tente novamente");
                 this.personagem=null;
 
-            }
-
         }
+    }
+
+    @Override
+    public void mostrarPersonagem() {
+        System.out.println("Escolha um Personagem:");
+        Nomade nomade = new Nomade("Possui grande resistência, conhecimento médico e adaptabilidade à mudanças climáticas");
+        Pirata pirata = new Pirata("Sobrevivente Nato e apto para pescaria");
+        Infiltrador infiltrador = new Infiltrador("Camuflagem, consegue invadir e conseguir comida e armas sem ser pego");
+        Explorador explorador = new Explorador("Rastreador, consegue achar comida e água mais rápido");
+        Cientista cientista = new Cientista("Mecânico, consegue consertar coisas e construir");
+        Cacador cacador = new Cacador("Lutador, consegue se defender muito bem");
+
+        Personagem[] listaPersonagens = {nomade, pirata, infiltrador,explorador, cientista, cacador};
+
+        System.out.println("-----------------------------------------------------------------------------");
+        for (int contador = 0; contador < listaPersonagens.length; contador++) {
+            System.out.println(listaPersonagens[contador].getNomePersonagem());
+        }
+        System.out.println("-----------------------------------------------------------------------------");
+        System.out.println("Habilidades:");
+        System.out.println("Nômade: " + nomade.getHabilidadeNomade());
+        System.out.println("Pirata: " + pirata.getHabilidadePirata());
+        System.out.println("Infiltrador: " + infiltrador.getHabilidadeInfiltrador());
+        System.out.println("Explorador: " + explorador.getHabilidadeExplorador());
+        System.out.println("Cientista: " + cientista.getHabilidadeCientista());
+        System.out.println("Caçador: " + cacador.getHabilidadeCacador());
+        System.out.println("-----------------------------------------------------------------------------");
+    }
 }
