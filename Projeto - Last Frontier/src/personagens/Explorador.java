@@ -7,7 +7,6 @@ public class Explorador extends Personagem {
     public Explorador(String nomePersonagem, double vidaPersonagem, double fomePersonagem, double sedePersonagem, double energiaPersonagem,
                       double sanidadePersonagem, String inventarioPersonagem, String localizacaoPersonagem,boolean contaminacaoPersonagem, int sedeInicialPersonagem, int fomeInicialPersonagem,String habilidadeExplorador) {
 
-        super(nomePersonagem, vidaPersonagem, fomePersonagem, sedePersonagem, energiaPersonagem, sanidadePersonagem, inventarioPersonagem, localizacaoPersonagem, contaminacaoPersonagem,sedeInicialPersonagem,fomeInicialPersonagem);
         this.setNomePersonagem("Virgil Explorer");
         this.setVidaPersonagem(90);
         this.setFomePersonagem(100);

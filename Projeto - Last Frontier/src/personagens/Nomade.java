@@ -7,7 +7,6 @@ public class Nomade extends Personagem {
     public Nomade(String nomePersonagem, double vidaPersonagem, double fomePersonagem, double sedePersonagem, double energiaPersonagem,
                   double sanidadePersonagem, String inventarioPersonagem, String localizacaoPersonagem,boolean contaminacaoPersonagem,double sedeInicialPersonagem,double fomeInicialPersonagem, String habilidadeNomade){
 
-        super(nomePersonagem, vidaPersonagem, fomePersonagem, sedePersonagem, energiaPersonagem, sanidadePersonagem, inventarioPersonagem, localizacaoPersonagem, contaminacaoPersonagem, sedeInicialPersonagem,fomeInicialPersonagem);
         this.setNomePersonagem("Jack Nomad");
         this.setVidaPersonagem(100);
         this.setFomePersonagem(100);

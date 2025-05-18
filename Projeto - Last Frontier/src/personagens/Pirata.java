@@ -7,7 +7,6 @@ public class Pirata extends Personagem {
     public Pirata(String nomePersonagem, double vidaPersonagem, double fomePersonagem, double sedePersonagem, double energiaPersonagem,
                   double sanidadePersonagem, String inventarioPersonagem, String localizacaoPersonagem, boolean contaminacaoPersonagem, double sedeInicialPersonagem, double fomeInicialPersonagem,String habilidadePirata) {
 
-        super(nomePersonagem, vidaPersonagem, fomePersonagem, sedePersonagem, energiaPersonagem, sanidadePersonagem, inventarioPersonagem, localizacaoPersonagem, contaminacaoPersonagem, sedeInicialPersonagem,fomeInicialPersonagem);
         this.setNomePersonagem("Scarlet Tempest");
         this.setVidaPersonagem(100);
         this.setFomePersonagem(100);

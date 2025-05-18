@@ -1,8 +1,6 @@
 package personagens;
 
-import ambientes.Ambientes;
 import interfaces.CharacterActions;
-import gerenciadores.GerenciadorDeAmbientes;
 
 public  abstract class Personagem implements CharacterActions {
     //Atributos da superclasse:
@@ -13,13 +11,12 @@ public  abstract class Personagem implements CharacterActions {
     private double energiaPersonagem;
     private double sanidadePersonagem;
     private String inventarioPersonagem;
-    private String localizacaoPersonagem; //Esse atributo será modificado para que seja um Ambiente, desse modo, poderemos fazer as modificações necessárias
+    private String localizacaoPersonagem;
     private boolean contaminacaoPersonagem=false;
     private double sedeInicialPersonagem;
     private double fomeInicialPersonagem;
     //Metodo construtor:
-    public Personagem(String nomePersonagem, double vidaPersonagem, double fomePersonagem, double sedePersonagem, double energiaPersonagem, double sanidadePersonagem,
-                      String inventarioPersonagem, String localizacaoPersonagem, boolean contaminacaoPersonagem, double sedeInicialPersonagem, double fomeInicialPersonagem){
+    public Personagem(){
         this.nomePersonagem = nomePersonagem;
         this.vidaPersonagem = vidaPersonagem;
         this.fomeInicialPersonagem=fomeInicialPersonagem;

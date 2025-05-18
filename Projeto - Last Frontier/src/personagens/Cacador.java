@@ -6,8 +6,6 @@ public class Cacador extends Personagem {
     //Metodo construtor:
     public Cacador(String nomePersonagem, double vidaPersonagem, double fomePersonagem, double sedePersonagem, double energiaPersonagem,
                    double sanidadePersonagem, String inventarioPersonagem ,String localizacaoPersonagem, boolean contaminacaoPersonagem, int sedeInicialPersonagem, int fomeInicialPersonagem,String habilidadeCacador) {
-
-        super(nomePersonagem, vidaPersonagem, fomePersonagem, sedePersonagem, energiaPersonagem, sanidadePersonagem, inventarioPersonagem, localizacaoPersonagem, contaminacaoPersonagem, sedeInicialPersonagem,fomeInicialPersonagem);
         this.setNomePersonagem("Flynn Tracker");
         this.setVidaPersonagem(100);
         this.setFomePersonagem(100);
