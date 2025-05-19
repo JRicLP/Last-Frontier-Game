@@ -6,7 +6,7 @@ public class Pirata extends Personagem {
     //Metodo construtor:
     public Pirata(String habilidadePirata) {
 
-        this.setNomePersonagem("Scarlet Tempest");
+        this.setNomePersonagem("Scarlet Tempest - O Pirata Infame");
         this.setVidaPersonagem(100);
         this.setFomePersonagem(100);
         this.setSedePersonagem(100);

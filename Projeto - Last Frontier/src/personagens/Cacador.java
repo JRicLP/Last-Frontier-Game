@@ -5,7 +5,7 @@ public class Cacador extends Personagem {
     private String habilidadeCacador;
     //Metodo construtor:
     public Cacador(String habilidadeCacador) {
-        this.setNomePersonagem("Flynn Tracker");
+        this.setNomePersonagem("Flynn Tracker - O Caçador Destemido");
         this.setVidaPersonagem(100);
         this.setFomePersonagem(100);
         this.setSedePersonagem(65);

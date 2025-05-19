@@ -6,7 +6,7 @@ public class Cientista extends Personagem {
     //Metodo construtor:
     public Cientista(String habilidadeCientista) {
 
-        this.setNomePersonagem("Gearhead Martinez");
+        this.setNomePersonagem("Gearhead Martinez - O Cientista Criativo");
         this.setVidaPersonagem(85);
         this.setFomePersonagem(85);
         this.setSedePersonagem(100);

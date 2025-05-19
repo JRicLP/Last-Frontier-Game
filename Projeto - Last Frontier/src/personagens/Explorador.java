@@ -6,7 +6,7 @@ public class Explorador extends Personagem {
     //Metodo construtor
     public Explorador(String habilidadeExplorador) {
 
-        this.setNomePersonagem("Virgil Explorer");
+        this.setNomePersonagem("Virgil Explorer - O Explorador Corajoso");
         this.setVidaPersonagem(90);
         this.setFomePersonagem(100);
         this.setSedePersonagem(100);

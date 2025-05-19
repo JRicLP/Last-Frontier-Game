@@ -6,7 +6,7 @@ public class Nomade extends Personagem {
     //Metodo construtor:
     public Nomade(String habilidadeNomade){
 
-        this.setNomePersonagem("Jack Nomad");
+        this.setNomePersonagem("Jack Nomad - O Nômade Rústico");
         this.setVidaPersonagem(100);
         this.setFomePersonagem(100);
         this.setSedePersonagem(65);

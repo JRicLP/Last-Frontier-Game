@@ -2,71 +2,88 @@ package gerenciadores;
 import interfaces.ManagerCharacters;
 import personagens.*;
 
+import java.util.Scanner;
+
 public class GerenciadorDePersonagens implements ManagerCharacters {
     String escolha;
     private Personagem personagem;
-    public GerenciadorDePersonagens(){ //String escolha, String personagem
-        this.escolha=escolha;
+
+    public GerenciadorDePersonagens() { //‘String’ escolha, ‘String’ personagem - Não entendi o porquê de iniciar o gerenciador com esses atributos
     }
+
     //Métodos acessores
-    public void setEscolha(String escolha){
-        this.escolha=escolha;
+    public void setEscolha(String escolha) {
+        this.escolha = escolha;
     }
-    public String getEscolha(){
+
+    public String getEscolha() {
         return escolha;
     }
 
-    public void setPersonagem(Personagem personagem) {
-        this.personagem = personagem;
+    public void setPersonagem(Personagem personagemSelecionado) {
+        this.personagem = personagemSelecionado;
     }
-    public Personagem getPersonagem(){
+
+    public Personagem getPersonagem() {
         return personagem;
     }
 
     @Override
-    public void escolherPersonagem() {
-        Personagem personagemEscolhido;
-        switch(this.getEscolha()){
-            case "Nômade" :
-                this.setPersonagem((new Nomade("Possui grande resistência, conhecimento médico e adaptabilidade à mudanças climáticas")));
-                break;
-            case "Pirata":
-                this.setPersonagem((new Pirata("Sobrevivente Nato e apto para pescaria ")));
-                break;
-            case "Infiltrador":
-                this.setPersonagem((new Infiltrador( "Camuflagem, consegue invadir e conseguir comida e armas sem ser pego")));
-                break;
-            case "Explorador":
-                this.setPersonagem((new Explorador("Rastreador, consegue achar comida e água mais rápido")));
-                break;
-            case "Cientista":
-                this.setPersonagem((new Cientista("Mecânico, consegue consertar coisas e construir")));
-                break;
-            case "Caçador":
-                this.setPersonagem((new Cacador("Lutador, consegue se defender muito bem")));
-                break;
-            default:
-                System.out.println("Personagem não reconhecido, tente novamente");
-                this.personagem=null;
+    public void escolherPersonagens() {
 
+        Scanner entradaUsuario = new Scanner(System.in);
+
+        while (true) {
+            System.out.println("Digite a classe de Personagem escolhida:");
+            String escolha = entradaUsuario.nextLine().trim();
+            setEscolha(escolha);
+
+            switch (escolha) {
+                case "Nômade":
+                    this.setPersonagem(new Nomade("Adaptativo, possui grande resistência, conhecimento médico e adaptabilidade à mudanças climáticas"));
+                    break;
+                case "Pirata":
+                    this.setPersonagem(new Pirata("Navegador, conhecedor das águas e apto para pescaria"));
+                    break;
+                case "Infiltrador":
+                    this.setPersonagem(new Infiltrador("Camuflador, consegue passar despercebido conseguir comida e armas sem ser pego"));
+                    break;
+                case "Explorador":
+                    this.setPersonagem(new Explorador("Rastreador, consegue achar comida e água mais facilmente"));
+                    break;
+                case "Cientista":
+                    this.setPersonagem(new Cientista("Criativo, consegue consertar coisas e construir"));
+                    break;
+                case "Caçador":
+                    this.setPersonagem(new Cacador("Lutador, consegue atacar e se defender muito bem"));
+                    break;
+                default:
+                    System.out.println("Classe de personagem não reconhecida. Tente novamente.\n");
+                    continue;
+            }
+
+            System.out.println("Você escolheu " + escolha);
+            System.out.println("Boa sorte em sua jornada!");
+            break;
         }
     }
 
     @Override
-    public void mostrarPersonagem() {
+    public void mostrarPersonagens() {
         System.out.println("Escolha um Personagem:");
-        Nomade nomade = new Nomade("Possui grande resistência, conhecimento médico e adaptabilidade à mudanças climáticas");
-        Pirata pirata = new Pirata("Sobrevivente Nato e apto para pescaria");
-        Infiltrador infiltrador = new Infiltrador("Camuflagem, consegue invadir e conseguir comida e armas sem ser pego");
-        Explorador explorador = new Explorador("Rastreador, consegue achar comida e água mais rápido");
-        Cientista cientista = new Cientista("Mecânico, consegue consertar coisas e construir");
-        Cacador cacador = new Cacador("Lutador, consegue se defender muito bem");
+
+        Nomade nomade = new Nomade("Adaptativo, possui grande resistência, conhecimento médico e adaptabilidade à mudanças climáticas");
+        Pirata pirata = new Pirata("Navegador, conhecedor das águas e apto para pescaria");
+        Infiltrador infiltrador = new Infiltrador("Camuflador, consegue passar despercebido conseguir comida e armas sem ser pego");
+        Explorador explorador = new Explorador("Rastreador, consegue achar comida e água mais facilmente");
+        Cientista cientista = new Cientista("Criativo, consegue consertar coisas e construir");
+        Cacador cacador = new Cacador("Lutador, consegue atacar e se defender muito bem");
 
         Personagem[] listaPersonagens = {nomade, pirata, infiltrador,explorador, cientista, cacador};
 
         System.out.println("-----------------------------------------------------------------------------");
-        for (int contador = 0; contador < listaPersonagens.length; contador++) {
-            System.out.println(listaPersonagens[contador].getNomePersonagem());
+        for (Personagem listaPersonagen : listaPersonagens) {
+            System.out.println(listaPersonagen.getNomePersonagem());
         }
         System.out.println("-----------------------------------------------------------------------------");
         System.out.println("Habilidades:");
@@ -79,3 +96,4 @@ public class GerenciadorDePersonagens implements ManagerCharacters {
         System.out.println("-----------------------------------------------------------------------------");
     }
 }
+
