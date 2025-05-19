@@ -1,8 +1,10 @@
 package personagens;
 
 public class Explorador extends Personagem {
+
     //Atributos da classe:
     private String habilidadeExplorador;
+
     //Metodo construtor
     public Explorador(String habilidadeExplorador) {
 
@@ -12,8 +14,8 @@ public class Explorador extends Personagem {
         this.setSedePersonagem(100);
         this.setEnergiaPersonagem(70);
         this.setSanidadePersonagem(75);
-        this.setInventarioPersonagem(" ");
-        this.setLocalizacaoPersonagem(" ");
+        this.setInventarioPersonagem(getInventarioPersonagem());
+        this.setLocalizacaoPersonagem("");
         this.setContaminacaoPersonagem(false);
         this.setSedeInicialPersonagem(100);
         this.setFomeInicialPersonagem(100);

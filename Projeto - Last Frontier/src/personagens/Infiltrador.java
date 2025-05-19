@@ -1,8 +1,10 @@
 package personagens;
 
 public class Infiltrador extends Personagem {
+
     //Atributos da classe:
     private String habilidadeInfiltrador;
+
     //Metodo construtor:
     public Infiltrador(String habilidadeInfiltrador) {
 
@@ -12,8 +14,8 @@ public class Infiltrador extends Personagem {
         this.setSedePersonagem(85);
         this.setEnergiaPersonagem(100);
         this.setSanidadePersonagem(100);
-        this.setInventarioPersonagem(" ");
-        this.setLocalizacaoPersonagem(" ");
+        this.setInventarioPersonagem(getInventarioPersonagem());
+        this.setLocalizacaoPersonagem("");
         this.setContaminacaoPersonagem(false);
         this.setSedeInicialPersonagem(85);
         this.setFomeInicialPersonagem(65);

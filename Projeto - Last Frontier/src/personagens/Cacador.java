@@ -1,8 +1,10 @@
 package personagens;
 
 public class Cacador extends Personagem {
+
     //Atributos da classe:
     private String habilidadeCacador;
+
     //Metodo construtor:
     public Cacador(String habilidadeCacador) {
         this.setNomePersonagem("Flynn Tracker - O Caçador Destemido");
@@ -11,8 +13,8 @@ public class Cacador extends Personagem {
         this.setSedePersonagem(65);
         this.setEnergiaPersonagem(85);
         this.setSanidadePersonagem(85);
-        this.setInventarioPersonagem(" ");
-        this.setLocalizacaoPersonagem(" ");
+        this.setInventarioPersonagem(getInventarioPersonagem());
+        this.setLocalizacaoPersonagem("");
         this.setContaminacaoPersonagem(false);
         this.setSedeInicialPersonagem(65);
         this.setFomeInicialPersonagem(100);

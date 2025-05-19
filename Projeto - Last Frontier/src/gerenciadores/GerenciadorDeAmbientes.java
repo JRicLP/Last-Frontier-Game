@@ -51,7 +51,7 @@ public class GerenciadorDeAmbientes implements ManagerAmbientActions {
         personagemAtual.setLocalizacaoPersonagem(novoAmbiente.getNomeAmbiente());
         getHistoricoMovimentacao().add(novoAmbiente);
         //Temos que ver uma forma de registrar também o antigo ambiente!!
-        //Precisamos modificar o atributo, para poder utilizar a classe e seus métodos na classe Personagem
+        //Precisamos modificar o atributo, para poder utilizar a classe e os seus métodos na classe Personagem
     }
     @Override
     public void gerarEvento(Ambientes ambienteAtual, Eventos eventoGerado) {

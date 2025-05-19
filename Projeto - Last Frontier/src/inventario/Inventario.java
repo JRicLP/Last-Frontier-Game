@@ -3,11 +3,13 @@ package inventario;
 import java.util.ArrayList;
 
 import exceptions.InventarioCheioException;
+import exceptions.InventarioPesadoException;
 import interfaces.InventoryActions;
 import itens.*;
 import personagens.*;
 
 public class Inventario implements InventoryActions {
+
     //Atributos da classe:
     private ArrayList<Item> listaItens;
     private int pesoSuportado;
@@ -57,7 +59,7 @@ public class Inventario implements InventoryActions {
                 this.getListaItens().add(itemAdicionado);
                 System.out.println("O item " + itemAdicionado.getNomeItem() + " foi adicionado!");
             } else {
-                System.out.println(" Não foi possível adicionar o item, seu inventário está muito pesado!!");
+                throw new InventarioPesadoException("Não foi possível adicionar o Item, pois seu inventário está muito pesado!");
             }
         }
     }

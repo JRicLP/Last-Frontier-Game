@@ -12,8 +12,8 @@ public class Pirata extends Personagem {
         this.setSedePersonagem(100);
         this.setEnergiaPersonagem(85);
         this.setSanidadePersonagem(85);
-        this.setInventarioPersonagem(" ");
-        this.setLocalizacaoPersonagem(" ");
+        this.setInventarioPersonagem(getInventarioPersonagem());
+        this.setLocalizacaoPersonagem("");
         this.setContaminacaoPersonagem(false);
         this.setSedeInicialPersonagem(100);
         this.setFomeInicialPersonagem(100);

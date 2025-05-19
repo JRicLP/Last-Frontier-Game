@@ -43,8 +43,8 @@ public class Alimentos extends Item implements ItensActions {
             return;
         }
 
-        double fomeAtual= personagem.getFomePersonagem();
-        double novaFome= fomeAtual- (int) this.getValorNutricional();
+        int fomeAtual= personagem.getFomePersonagem();
+        int novaFome= fomeAtual- (int) this.getValorNutricional();
 
         if(novaFome<0){
             novaFome=0; // Não vai ultrapassar o limite de fome de cada personagem
@@ -85,8 +85,10 @@ public class Alimentos extends Item implements ItensActions {
     }
 
     private void danoPorContaminacao(Personagem personagem){
+
         System.out.println("Você está contaminado!");
         System.out.println("Você perderá 15 pontos de vida se não tomar um antídoto");
+
         if(personagem.getContaminacaoPersonagem()) {
             personagem.setVidaPersonagem(personagem.getVidaPersonagem() - 15);
             if (personagem.getVidaPersonagem() <= 0) {

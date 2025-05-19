@@ -1,8 +1,10 @@
 package personagens;
 
 public class Cientista extends Personagem {
+
     //Atributos da classe:
     private String habilidadeCientista;
+
     //Metodo construtor:
     public Cientista(String habilidadeCientista) {
 
@@ -12,8 +14,8 @@ public class Cientista extends Personagem {
         this.setSedePersonagem(100);
         this.setEnergiaPersonagem(100);
         this.setSanidadePersonagem(85);
-        this.setInventarioPersonagem(" ");
-        this.setLocalizacaoPersonagem(" ");
+        this.setInventarioPersonagem(getInventarioPersonagem());
+        this.setLocalizacaoPersonagem("");
         this.setContaminacaoPersonagem(false);
         this.setSedeInicialPersonagem(100);
         this.setFomeInicialPersonagem(85);

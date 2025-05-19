@@ -12,8 +12,8 @@ public class Nomade extends Personagem {
         this.setSedePersonagem(65);
         this.setEnergiaPersonagem(65);
         this.setSanidadePersonagem(100);
-        this.setInventarioPersonagem(" ");
-        this.setLocalizacaoPersonagem(" ");
+        this.setInventarioPersonagem(getInventarioPersonagem());
+        this.setLocalizacaoPersonagem("");
         this.setContaminacaoPersonagem(false);
         this.setSedeInicialPersonagem(65);
         this.setFomeInicialPersonagem(100);

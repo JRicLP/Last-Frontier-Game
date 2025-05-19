@@ -1,34 +1,27 @@
 package personagens;
 
 import interfaces.CharacterActions;
+import inventario.Inventario;
 
 public  abstract class Personagem implements CharacterActions {
+
     //Atributos da superclasse:
     private String nomePersonagem;
-    private double vidaPersonagem;
-    private double fomePersonagem;
-    private double sedePersonagem;
-    private double energiaPersonagem;
-    private double sanidadePersonagem;
-    private String inventarioPersonagem;
+    private int vidaPersonagem;
+    private int fomePersonagem;
+    private int sedePersonagem;
+    private int energiaPersonagem;
+    private int sanidadePersonagem;
+    private Inventario inventarioPersonagem;
     private String localizacaoPersonagem;
     private boolean contaminacaoPersonagem = false;
-    private double sedeInicialPersonagem;
-    private double fomeInicialPersonagem;
+    private int sedeInicialPersonagem;
+    private int fomeInicialPersonagem;
+
     //Metodo construtor:
     public Personagem(){
-        this.nomePersonagem = nomePersonagem;
-        this.vidaPersonagem = vidaPersonagem;
-        this.fomeInicialPersonagem=fomeInicialPersonagem;
-        this.fomePersonagem = fomeInicialPersonagem;
-        this.sedeInicialPersonagem=sedeInicialPersonagem;
-        this.sedePersonagem = sedeInicialPersonagem;
-        this.energiaPersonagem = energiaPersonagem;
-        this.sanidadePersonagem = sanidadePersonagem;
-        this.inventarioPersonagem = inventarioPersonagem;
-        this.localizacaoPersonagem = localizacaoPersonagem;
-        this.contaminacaoPersonagem=contaminacaoPersonagem;
     }
+
     //Metodos acessores:
     public void setNomePersonagem(String nomePersonagem) {
         this.nomePersonagem = nomePersonagem;
@@ -36,40 +29,40 @@ public  abstract class Personagem implements CharacterActions {
     public String getNomePersonagem() {
         return nomePersonagem;
     }
-    public void setVidaPersonagem(double vidaPersonagem) {
+    public void setVidaPersonagem(int vidaPersonagem) {
         this.vidaPersonagem = vidaPersonagem;
     }
-    public double getVidaPersonagem() {
+    public int getVidaPersonagem() {
         return vidaPersonagem;
     }
-    public void setFomePersonagem(double fomePersonagem) {
+    public void setFomePersonagem(int fomePersonagem) {
         this.fomePersonagem = fomePersonagem;
     }
-    public double getFomePersonagem(){
+    public int getFomePersonagem(){
         return fomePersonagem;
     }
-    public void setSedePersonagem(double sedePersonagem) {
+    public void setSedePersonagem(int sedePersonagem) {
         this.sedePersonagem = sedePersonagem;
     }
-    public double getSedePersonagem() {
+    public int getSedePersonagem() {
         return sedePersonagem;
     }
-    public void setEnergiaPersonagem(double energiaPersonagem) {
+    public void setEnergiaPersonagem(int energiaPersonagem) {
         this.energiaPersonagem = energiaPersonagem;
     }
-    public double getEnergiaPersonagem() {
+    public int getEnergiaPersonagem() {
         return energiaPersonagem;
     }
-    public void setSanidadePersonagem(double sanidadePersonagem) {
+    public void setSanidadePersonagem(int sanidadePersonagem) {
         this.sanidadePersonagem = sanidadePersonagem;
     }
     public double getSanidadePersonagem() {
         return sanidadePersonagem;
     }
-    public void setInventarioPersonagem(String inventarioPersonagem) {
+    public void setInventarioPersonagem(Inventario inventarioPersonagem) {
         this.inventarioPersonagem = inventarioPersonagem;
     }
-    public String getInventarioPersonagem() {
+    public Inventario getInventarioPersonagem() {
         return inventarioPersonagem;
     }
     public void setLocalizacaoPersonagem(String localizacaoPersonagem) {
@@ -84,19 +77,19 @@ public  abstract class Personagem implements CharacterActions {
     public boolean getContaminacaoPersonagem(){
         return contaminacaoPersonagem;
     }
-    public double getSedeInicialPersonagem() {
+    public int getSedeInicialPersonagem() {
         return sedeInicialPersonagem;
     }
 
-    public void setSedeInicialPersonagem(double sedeInicial) {
+    public void setSedeInicialPersonagem(int sedeInicial) {
         this.sedeInicialPersonagem = sedeInicial;
     }
 
-    public double getFomeInicialPersonagem() {
+    public int getFomeInicialPersonagem() {
         return fomeInicialPersonagem;
     }
 
-    public void setFomeInicialPersonagem(double fomeInicialPersonagem) {
+    public void setFomeInicialPersonagem(int fomeInicialPersonagem) {
         this.fomeInicialPersonagem = fomeInicialPersonagem;
     }
 

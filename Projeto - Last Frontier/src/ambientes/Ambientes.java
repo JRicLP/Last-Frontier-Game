@@ -23,6 +23,7 @@ public abstract class Ambientes implements AmbientActions {
         this.climaDominante = climaDominante;
     }
     //Metodos acessores da superclasse:
+
     public void setNomeAmbiente(String nomeAmbiente){
         this.nomeAmbiente = nomeAmbiente;
     }
