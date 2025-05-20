@@ -81,11 +81,11 @@ public class GerenciadorDePersonagens implements ManagerCharacters {
 
         Personagem[] listaPersonagens = {nomade, pirata, infiltrador,explorador, cientista, cacador};
 
-        System.out.println("-----------------------------------------------------------------------------");
+        System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
         for (Personagem listaPersonagen : listaPersonagens) {
             System.out.println(listaPersonagen.getNomePersonagem());
         }
-        System.out.println("-----------------------------------------------------------------------------");
+        System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
         System.out.println("Habilidades:");
         System.out.println("Nômade: " + nomade.getHabilidadeNomade());
         System.out.println("Pirata: " + pirata.getHabilidadePirata());
@@ -93,7 +93,7 @@ public class GerenciadorDePersonagens implements ManagerCharacters {
         System.out.println("Explorador: " + explorador.getHabilidadeExplorador());
         System.out.println("Cientista: " + cientista.getHabilidadeCientista());
         System.out.println("Caçador: " + cacador.getHabilidadeCacador());
-        System.out.println("-----------------------------------------------------------------------------");
+        System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
     }
 }
 

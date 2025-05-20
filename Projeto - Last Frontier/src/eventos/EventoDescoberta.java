@@ -1,13 +1,12 @@
 package eventos;
 
-import personagens.Cacador;
-import personagens.Personagem;
-
 public class EventoDescoberta extends Eventos{
+
     //Atributos da subclasse:
     private String tipoDescoberta;
     private String recursoEncontrado;
     private boolean condicaoEspecial;
+
     //Métodos da subclasse:
     public EventoDescoberta(String nomeEvento, String descricaoEvento, int probabilidadeEvento, String impactoEvento, boolean condicaoEvento,
                             String tipoDescoberta, String recursoEncontrado, boolean condicaoEspecial){

@@ -57,7 +57,7 @@ public class MensagensIniciais {
 
         System.out.println();
         System.out.println();
-        System.out.println("         Pressione ENTER para continuar...");
+        System.out.println("Pressione ENTER para continuar...");
     }
 
     public void sleep(long millis) {

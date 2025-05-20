@@ -1,10 +1,12 @@
 package eventos;
 
 public class EventoClimatico extends Eventos {
+
     //Atributos da subclasse:
     private String tipoClima; //É necessário revisar a utilidade desse atributo
     private int duracaoClima; //Baseado no número de turnos
     private String efeitoClima; //É necessário revisar como esse atributo irá funcionar
+
     //Métodos da subclasse:
     public EventoClimatico(String nomeEvento, String descricaoEvento, int probabilidadeEvento, String impactoEvento, boolean condicaoEvento,
                            String tipoClima, int duracaoClima, String efeitoClima) {

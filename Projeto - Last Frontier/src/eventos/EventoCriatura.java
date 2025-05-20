@@ -1,12 +1,14 @@
 package eventos;
 
 public class EventoCriatura extends Eventos{
+
     //Atributos da subclasse:
     private String tipoCriatura;
     private int vidaCriatura;//Novo atributo adicionado para utilizar o metodo atacar() em Armas
-    private int distanciaCriatura;//Novo atributo adicionado para utilizar o metodo atacar() em Armas, deverá ser revisado
+    private int distanciaCriatura;//Novo atributo adicionado para utilizar o metodo atacar() em Armas, deverá ser revisto
     private int nivelPerigo;
-    private String opcaoAcao; //Revisar a necessidade desse atributo
+    private String opcaoAcao; //Revir a necessidade desse atributo
+
     //Métodos da subclasse:
     public EventoCriatura(String nomeEvento, String descricaoEvento, int probabilidadeEvento, String impactoEvento, boolean condicaoEvento,
                           String tipoCriatura, int vidaCriatura, int distanciaCriatura, int nivelPerigo, String opcaoAcao) {

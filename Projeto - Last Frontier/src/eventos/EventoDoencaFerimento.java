@@ -1,10 +1,12 @@
 package eventos;
 
 public class EventoDoencaFerimento extends Eventos{
+
     //Atributos da subclasse:
     private String tipoDoenca;
     private String impactoDoencaFerimento;
     private boolean curaDisponivel;
+
     //Metodo construtor:
     public EventoDoencaFerimento(String nomeEvento, String descricaoEvento, int probabilidadeEvento, String impactoEvento, boolean condicaoEvento,
                                  String tipoDoenca, String impactoDoencaFerimento, boolean curaDisponivel) {
@@ -13,6 +15,7 @@ public class EventoDoencaFerimento extends Eventos{
         this.impactoDoencaFerimento = impactoDoencaFerimento;
         this.curaDisponivel = curaDisponivel;
     }
+
     //Metodos acessores:
     public void setTipoDoenca(String tipoDoenca){
         this.tipoDoenca = tipoDoenca;

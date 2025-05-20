@@ -1,10 +1,12 @@
 package ambientes;
 
 public class AmbienteFloresta extends Ambientes { //Falta a adição dos recursos disponíveis e ligação com os eventos
+
     //Atributos da subclasse:
     private boolean vegetacaoDensa; //Como esse atributo é uma condição, iremos torná-lo boolean para verificar e atribuir um evento
     private boolean faunaAbundante; //Como esse atributo é uma condição, iremos torná-lo boolean para verificar e atribuir um evento
     private boolean climaUmido; //Como esse atributo é uma condição, iremos torná-lo boolean para verificar e atribuir um evento
+
     //Metodo construtor:
     public AmbienteFloresta(String nomeAmbiente, String descricaoAmbiente, int dificuldadeAmbiente, String recursosAmbiente, int probabilidadeEventos, String climaDominante,
                             boolean vegetacaoDensa, boolean faunaAbundante, boolean climaUmido) {
@@ -13,6 +15,7 @@ public class AmbienteFloresta extends Ambientes { //Falta a adição dos recurso
         this.faunaAbundante = faunaAbundante;
         this.climaUmido = climaUmido;
     }
+
     //Metodos acessores:
     public void setVegetacaoDensa(boolean vegetacaoDensa){
         this.vegetacaoDensa = vegetacaoDensa;

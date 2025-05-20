@@ -15,7 +15,7 @@ public class Main {
         MensagensIniciais display = new MensagensIniciais();
         CondicaoDeVitoriaDerrota display2= new CondicaoDeVitoriaDerrota();
 
-        display.displayLoreIntro();
+        display.mensagensLoreIntroducao();
         display.sleep(3000);
         new java.util.Scanner(System.in).nextLine();
 
@@ -23,22 +23,19 @@ public class Main {
         new java.util.Scanner(System.in).nextLine();
 
         GerenciadorDePersonagens gerenciadorDePersonagens = new GerenciadorDePersonagens();
-
         gerenciadorDePersonagens.mostrarPersonagens();
         gerenciadorDePersonagens.escolherPersonagens();
 
         GerenciadorDeAmbientes gerenciadorDeAmbientes= new GerenciadorDeAmbientes(new ArrayList<>(), "Indefinido", new ArrayList<>());
         gerenciadorDeAmbientes.gerarAmbientes();
+
         System.out.println("Ambientes disponíveis:");
+
         for (Ambientes ambiente : gerenciadorDeAmbientes.getListaAmbientesDisponiveis()) {
             System.out.println("- " + ambiente.getNomeAmbiente() + ": " + ambiente.getDescricaoAmbiente());
         }
 
-
         while(true){
-
-
-
             //Verifica se o personagem morreu
             Personagem personagem= gerenciadorDePersonagens.getPersonagem();
             if(personagem.getVidaPersonagem()==0 || personagem.getFomePersonagem()==0 || personagem.getSedePersonagem()==0){

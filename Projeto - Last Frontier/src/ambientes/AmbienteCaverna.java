@@ -1,10 +1,12 @@
 package ambientes;
 
 public class AmbienteCaverna extends Ambientes { //Falta a adição dos recursos disponíveis e ligação com os eventos
+
     //Atributos da subclasse:
     private boolean poucaLuz; //Como esse atributo é uma condição, iremos torná-lo boolean para verificar e atribuir um evento
     private boolean criaturasEstranhas; //Como esse atributo é uma condição, iremos torná-lo boolean para verificar e atribuir um evento
     private boolean aguaGotejamento; //Como esse atributo é uma condição, iremos torná-lo boolean para verificar e atribuir um evento
+
     //Metodo construtor:
     public AmbienteCaverna(String nomeAmbiente, String descricaoAmbiente, int dificuldadeAmbiente, String recursosAmbiente, int probabilidadeEventos, String climaDominante,
                            boolean poucaLuz, boolean criaturasEstranhas, boolean aguaGotejamento){
@@ -13,6 +15,7 @@ public class AmbienteCaverna extends Ambientes { //Falta a adição dos recursos
         this.criaturasEstranhas = criaturasEstranhas;
         this.aguaGotejamento = aguaGotejamento;
     }
+
     //Metodos acessores:
     public void setPoucaLuz(boolean poucaLuz){
         this.poucaLuz = poucaLuz;
