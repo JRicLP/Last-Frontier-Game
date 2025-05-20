@@ -4,11 +4,11 @@ import java.util.ArrayList;
 
 import exceptions.InventarioCheioException;
 import exceptions.InventarioPesadoException;
-import interfaces.InventoryActions;
+import interfaces.AcoesInventario;
 import itens.*;
 import personagens.*;
 
-public class Inventario implements InventoryActions {
+public class Inventario implements AcoesInventario {
 
     //Atributos da classe:
     private ArrayList<Item> listaItens;

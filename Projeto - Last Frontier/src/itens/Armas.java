@@ -1,9 +1,9 @@
 package itens;
 
 import eventos.EventoCriatura;
-import interfaces.WeaponsActions;
+import interfaces.AcoesArmas;
 
-public class Armas extends Item implements WeaponsActions {
+public class Armas extends Item implements AcoesArmas {
     //Atributos da subclasse:
     private String tipoArma;
     private int danoArma;

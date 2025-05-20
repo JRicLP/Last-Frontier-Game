@@ -1,9 +1,9 @@
 package personagens;
 
-import interfaces.CharacterActions;
+import interfaces.AcoesPersonagens;
 import inventario.Inventario;
 
-public  abstract class Personagem implements CharacterActions {
+public  abstract class Personagem implements AcoesPersonagens {
 
     //Atributos da superclasse:
     private String nomePersonagem;

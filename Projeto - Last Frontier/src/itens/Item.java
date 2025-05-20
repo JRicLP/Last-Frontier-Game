@@ -1,9 +1,9 @@
 package itens;
 
-import interfaces.ItensActions;
+import interfaces.AcoesItens;
 import personagens.Personagem;
 
-public abstract class Item implements ItensActions {
+public abstract class Item implements AcoesItens {
     //Atributos da superclasse:
     private String nomeItem;
     private int pesoItem;

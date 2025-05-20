@@ -2,28 +2,49 @@ package gerenciadores;
 
 import itens.*;
 
+import java.util.Random;
+
 public class GerenciadorDeItens {
 
     public void gerarItemAgua(){
 
         //Objetos de Água:
-        Agua garrafaDeAgua = new Agua("Cantil de Água", 3, 5,9,7);
-        Agua aguaPotavelRio = new Agua("Água Potável do Lago",3,6,10,9);
-        Agua aguaPotavelCacto = new Agua("Água de Árvore", 4,5,8,5);
-        Agua aguaContaminadaRio = new Agua("Água de Ruína", 3,3,3,7);
+        Agua cantilDeAgua = new Agua("Cantil de Água", 1, 10,9,4);
+        Agua aguaPotavelDoLago = new Agua("Água Potável do Lago",1,10,10,3);
+        Agua barrilDeAgua = new Agua("Barril de Água", 5,8,8,10);
+        Agua poteSujoDeAgua = new Agua("Pote de Água Suja", 2,2,2,5);
+        //Lista com os Objetos, utilizaremos uma probabilidade forçada:
+        Agua[] listaItensAgua = {cantilDeAgua, aguaPotavelDoLago,barrilDeAgua, poteSujoDeAgua};
+        //Realizador do sorteio:
+        Random sorteador = new Random();
+        int indiceSorteado = sorteador.nextInt(listaItensAgua.length);
+        //Aqui, estaremos obtendo o elemento da lista que foi sorteado, iremos mostrar ao usuário!
+        Agua aguaSorteada = listaItensAgua[indiceSorteado];
+        System.out.println("Você achou " + aguaSorteada.getNomeItem()  + "!");
 
     }
+
     public void gerarItemAlimento(){
 
         //Objetos de Alimentos:
         Alimentos mel = new Alimentos("Ramos Vegetais", 1,2,5,"Ramos Vegetais que ficam na Floresta de Skógrheimr.",8);
-        Alimentos carne = new Alimentos("Carne Animal", 5,6,15,"Carne Animal, tão forte quanto os seus provedores", 5);
+        Alimentos carneAnimal = new Alimentos("Carne Animal", 5,6,15,"Carne Animal, tão forte quanto os seus provedores", 5);
         Alimentos fruta = new Alimentos("Frutas Variadas", 4,7,10,"Frutas Variadas que ficam na Floresta de Skógrheimr",8);
-        Alimentos lata = new Alimentos("Pote de Vaelra",3,6,20,"O Pote de Vaelra é um item muito raro, restaura todas as condições",10);
+        Alimentos poteAlimentos = new Alimentos("Pote de Vaelra",3,6,20,"O Pote de Vaelra é um item muito raro, restaura todas as condições",10);
         Alimentos peixe = new Alimentos("Carne de Peixe",4,8,12,"Carne de Peixe, nutritiva e saborosa, contribuirá na sua jornada",10);
         Alimentos carnePodre = new Alimentos("Carne Apodrecida",5,1,15,"Carne Apodrecida, irá contaminar você", 4);
+        //Lista com os Objetos, utilizaremos uma probabilidade forçada:
+        Alimentos[] listaItensAlimentos = {mel, carneAnimal, fruta, poteAlimentos, peixe, carnePodre};
+        //Realizador do sorteio:
+        Random sorteador = new Random();
+        int indiceSorteado = sorteador.nextInt(listaItensAlimentos.length);
+        //Aqui, estaremos a obter o elemento da lista que foi sorteado, iremos mostrar o seu nome e descrição:
+        Alimentos alimentoSorteado = listaItensAlimentos[indiceSorteado];
+        System.out.println("Você achou: " + alimentoSorteado.getNomeItem() + "!");
+        System.out.println(alimentoSorteado.getTipoAlimento());
 
     }
+
     public void gerarItemRemedio(){
 
         //Objetos de Remedio:
@@ -35,8 +56,18 @@ public class GerenciadorDeItens {
                 " Seu gosto é descrito como “ferro com trovão”");
         Remedios bandagem = new Remedios("Vefrbind",2,4,"Bandagem", "Tiras de linho consagrado embebidas em seiva de árvore antiga. A bandagem acelera a cicatrização e gruda levemente na pele ao toque," +
                 " como se estivesse viva. Quando removida, queima as impurezas da ferida suavemente.");
+        //Lista com os Objetos, utilizaremos uma probabilidade forçada:
+        Remedios[] listaItensRemedios = {antibiotico, analgesico, antidoto, bandagem};
+        //Realizador do sorteio:
+        Random sorteador = new Random();
+        int indiceSorteado = sorteador.nextInt(listaItensRemedios.length);
+        //Aqui, estaremos a obter o elemento da lista que foi sorteado, iremos mostrar o seu nome, tipo e efeito:
+        Remedios remedioSorteado = listaItensRemedios[indiceSorteado];
+        System.out.println("Você achou: " + remedioSorteado.getNomeItem() + "-" + remedioSorteado.getTipoRemedio());
+        System.out.println(remedioSorteado.getEfeitoRemedio());
 
     }
+
     public void gerarItemArmas(){
 
         //Objetos de armas:
@@ -48,7 +79,19 @@ public class GerenciadorDeItens {
         Armas faca = new Armas("Kviðskera",4,9,"Arma corpo a corpo",9,2);
         Armas escudo = new Armas("Vardstein",5, 8, "Arma corpo a corpo", 4, 2);
 
+        //O Randomizador de Armas deve ser tratado posteriormente!!
+
+        //Lista com os Objetos, utilizaremos uma probabilidade forçada:
+        Armas[] listaItensArmas = {cajado, arco, espada, lanca, gancho, faca, escudo};
+        //Realizador do sorteio:
+        Random sorteador = new Random();
+        int indiceSorteado = sorteador.nextInt(listaItensArmas.length);
+        //Aqui, estaremos obtendo o elemento da lista que foi sorteado, iremos mostrar ao usuário!
+        Armas armaSorteada = listaItensArmas[indiceSorteado];
+        System.out.println("Você achou " + armaSorteada.getNomeItem()  + "!");
+
     }
+
     public void gerarItemFerramentas(){
 
         //Objetos de Ferramentas:
@@ -64,7 +107,20 @@ public class GerenciadorDeItens {
                 " Pode quebrar pedra sem eco — ideal para ruínas ou cavernas onde barulho atrairia horrores.",10);
         Ferramentas corda = new Ferramentas("Seidrreip",4,8,"Uma corda trançada com fios de pelo de criatura mágica e seda de aranha espiritual. Estica ou encolhe conforme a vontade do usuário." +
                 " Pode se firmar sozinha em superfícies ou prender inimigos brevemente." ,10);
+
+        //O Randomizador de Ferramentas deve ser tratado posteriormente!!
+
+        //Lista com os Objetos, utilizaremos uma probabilidade forçada:
+        Ferramentas[] listaItensFerramentas = {machado, picareta, lanterna, chave, martelo, corda};
+        //Realizador do sorteio:
+        Random sorteador = new Random();
+        int indiceSorteado = sorteador.nextInt(listaItensFerramentas.length);
+        //Aqui, estaremos a obter o elemento da lista que foi sorteado, iremos mostrar ao usuário nome, eficiência e descrição
+        Ferramentas ferramentaSorteada = listaItensFerramentas[indiceSorteado];
+        System.out.println("Você achou " + ferramentaSorteada.getNomeItem()  + " - Eficiência:" + ferramentaSorteada.getEficienciaFerramenta());
+        System.out.println(ferramentaSorteada.getTipoFerramenta());
     }
+
     public void gerarItemMateriais(){
 
         //Objetos de Materiais:
@@ -74,6 +130,15 @@ public class GerenciadorDeItens {
         Materiais couro = new Materiais("Úlfarskinn",5,7,"Couro espesso tratado com óleos, vindo de lobos da floresta de Skógrheimr.",10);
         Materiais arame = new Materiais("Línvǫrr",3,7,"Fio metálico trançado, usado em armadilhas e mecanismos rúnicos.",9);
         Materiais pilha = new Materiais("Eldgnista",2,9,"Fonte de energia portátil, usada pelos anões para alimentar engenhocas mágicas.",9);
+        //Lista com os Objetos, utilizaremos uma probabilidade forçada:
+        Materiais[] listaItensMateriais = {madeira, ferro, pedra, couro, arame, pilha};
+        //Realizador do sorteio:
+        Random sorteador = new Random();
+        int indiceSorteado = sorteador.nextInt(listaItensMateriais.length);
+        //Aqui, estaremos a obter o elemento da lista que foi sorteado, iremos mostrar o seu nome, tipo e efeito:
+        Materiais materialSorteado = listaItensMateriais[indiceSorteado];
+        System.out.println("Você achou: " + materialSorteado.getNomeItem() + "!");
+        System.out.println(materialSorteado.getTipoMaterial());
     }
 }
 

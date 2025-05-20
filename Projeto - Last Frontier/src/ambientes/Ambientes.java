@@ -1,10 +1,10 @@
 package ambientes;
 
 import eventos.EventoClimatico;
-import interfaces.AmbientActions;
+import interfaces.AcoesAmbientes;
 import personagens.Personagem;
 
-public abstract class Ambientes implements AmbientActions {
+public abstract class Ambientes implements AcoesAmbientes {
 
     //Atributos da superclasse:
     private String nomeAmbiente;

@@ -1,9 +1,9 @@
 package itens;
 
-import interfaces.ItensActions;
+import interfaces.AcoesItens;
 import personagens.Personagem;
 
-public class Agua extends Item implements ItensActions {
+public class Agua extends Item implements AcoesItens {
     //Atributos da subclasse:
     private int purezaAgua;
     private int volumeAgua;

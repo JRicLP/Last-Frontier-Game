@@ -2,8 +2,8 @@ package game;
 
 import ambientes.Ambientes;
 import gerenciadores.GerenciadorDeAmbientes;
-import mensagensDisplay.CondicaoDeVitoriaDerrota;
-import mensagensDisplay.MensagensIniciais;
+import mensagensTela.CondicaoDeVitoriaDerrota;
+import mensagensTela.MensagensIniciais;
 import gerenciadores.GerenciadorDePersonagens;
 import personagens.Personagem;
 

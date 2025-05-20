@@ -2,23 +2,25 @@ package gerenciadores;
 
 import ambientes.*;
 import eventos.*;
-import interfaces.ManagerEventsActions;
+import interfaces.AcoesGerenciadorDeEventos;
 import personagens.Personagem;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-public class GerenciadorDeEventos implements ManagerEventsActions {
+public class GerenciadorDeEventos implements AcoesGerenciadorDeEventos {
+
     //Atributos da classe:
+    //Removi o atributo probabilidadeOcorrencia, pois o mesmo não era utilizado
     private ArrayList<Eventos> listaEventosPossiveis= new ArrayList<>();
-    private int[] probabilidadeOcorrencia;
     private ArrayList<Eventos> historicoEventos;
+
     //Metodo construtor:
-    public GerenciadorDeEventos(ArrayList<Eventos> listaEventosPossiveis, int[] probabilidadeOcorrencia, ArrayList<Eventos> historicoEventos) {
-        this.listaEventosPossiveis = listaEventosPossiveis;
-        this.probabilidadeOcorrencia = probabilidadeOcorrencia;
-        this.historicoEventos = historicoEventos;
+    public GerenciadorDeEventos(ArrayList<Eventos> listaEventosPossiveis, ArrayList<Eventos> historicoEventos) {
+        this.listaEventosPossiveis = new ArrayList<>(); //Inicializamos o ArrayList e definimos sua capacidade inicial
+        this.historicoEventos = new ArrayList<>(); //Inicializamos o ArrayList e definimos sua capacidade inicial
     }
+
     //Metodos acessores:
     public void setListaEventosPossiveis(ArrayList <Eventos>listaEventosPossiveis) {
         this.listaEventosPossiveis = listaEventosPossiveis;
@@ -26,85 +28,85 @@ public class GerenciadorDeEventos implements ManagerEventsActions {
     public ArrayList<Eventos> getListaEventosPossiveis() {
         return listaEventosPossiveis;
     }
-    public void setProbabilidadeOcorrencia(int[] probabilidadeOcorrencia) {
-        this.probabilidadeOcorrencia = probabilidadeOcorrencia;
-    }
-    public int[] getProbabilidadeOcorrencia() {
-        return probabilidadeOcorrencia;
-    }
     public void setHistoricoEventos(ArrayList<Eventos> historicoEventos) {
         this.historicoEventos = historicoEventos;
     }
     public ArrayList<Eventos> getHistoricoEventos() {
         return historicoEventos;
     }
+
     //Metodos implementados:
     @Override
     public void sortearEvento(Ambientes ambienteAtual) {
-        listaEventosPossiveis.clear(); // limpa eventos antigos
 
-        //Gerando os eventos com base nos ambientes
+        //No caso, para eventos sorteados mais de uma vez?
+        listaEventosPossiveis.clear(); // Limpa eventos antigos
+
+        //Gerando os eventos com base nos ambientes:
         if(ambienteAtual instanceof AmbienteFloresta){
             gerarEventosCriatura();
             gerarEventosClimaticos(ambienteAtual);
             gerarEventosDescoberta();
-            gerarEventoDoencaFerimento();
+            //gerarEventoDoencaFerimento(); Esse evento é resultante de um combate, ou desgaste dos status do personagem
         } else if (ambienteAtual instanceof AmbienteCaverna) {
-            gerarEventoDoencaFerimento();
             gerarEventosCriatura();
-            gerarEventosDescoberta();
             gerarEventosClimaticos(ambienteAtual);
-
+            gerarEventosDescoberta();
+            //gerarEventoDoencaFerimento(); Esse evento é resultante de um combate, ou desgaste dos status do personagem
         } else if (ambienteAtual instanceof AmbienteMontanha) {
-            gerarEventosDescoberta();
             gerarEventosCriatura();
-            gerarEventoDoencaFerimento();
             gerarEventosClimaticos(ambienteAtual);
+            gerarEventosDescoberta();
+            //gerarEventoDoencaFerimento(); Esse evento é resultante de um combate, ou desgaste dos status do personagem
         }
         else if(ambienteAtual instanceof AmbienteRuinas){
+            gerarEventosCriatura();
             gerarEventosClimaticos(ambienteAtual);
-            gerarEventosCriatura();
-            gerarEventoDoencaFerimento();
             gerarEventosDescoberta();
+            //gerarEventoDoencaFerimento(); Esse evento é resultante de um combate, ou desgaste dos status do personagem
         } else if (ambienteAtual instanceof AmbienteLagoRio) {
-            gerarEventosDescoberta();
             gerarEventosCriatura();
-            gerarEventoDoencaFerimento();
-            gerarEventosClimaticos(ambienteAtual);//
-
+            gerarEventosClimaticos(ambienteAtual);
+            gerarEventosDescoberta();
+            //gerarEventoDoencaFerimento(); Esse evento é resultante de um combate, ou desgaste dos status do personagem
         }
 
+        //Mas de onde vem essa lista de eventos?
         if (listaEventosPossiveis.isEmpty()) {
             System.out.println("Nenhum evento disponível para sortear.");
             return;
         }
-        // Sorteio do evento
-        Random rand = new Random();
-        int indice = rand.nextInt(listaEventosPossiveis.size());
-        Eventos eventoSorteado = listaEventosPossiveis.get(indice);
 
+        //Sorteio do Evento:
+        Random sorteador = new Random();
+        int indiceSorteado = sorteador.nextInt(listaEventosPossiveis.size());
+        Eventos eventoSorteado = listaEventosPossiveis.get(indiceSorteado);
+        //Mostrando o Evento sorteado:
         System.out.println("Evento sorteado: " + eventoSorteado.getNomeEvento());
         System.out.println("Descrição: " + eventoSorteado.getDescricaoEvento());
-
+        //Adicionando ao Histórico de Eventos:
         historicoEventos.add(eventoSorteado);
 
     }
+
     @Override
     public void aplicarEvento(Personagem personagemAtual, Eventos eventoAplicado) {
         if (eventoAplicado.isCondicaoEvento()) { //Verifica se a condição necessária para o evento está ativa
-            System.out.println("O personagem " + personagemAtual.getNomePersonagem() + " está sofrendo as consequências de: " +
-                    eventoAplicado.getNomeEvento());
+            System.out.println("O personagem " + personagemAtual.getNomePersonagem() + " está sofrendo as consequências de: " + eventoAplicado.getNomeEvento());
         }
-        //tem que aplicar no personagem, será evoluído
+        //Tem que aplicar no personagem, será evoluído
+        //Essa aplicação será relacionada a um atributo dos itens (Eu acho)
     }
+
     @Override
     public void removerEvento(Eventos eventoAtual) {
         System.out.println("O evento " + eventoAtual.getNomeEvento() + "foi removido com sucesso!!");
     }
 
-    //método para gerar os objetos
+    //Metodos para gerar os objetos:
+
+    // Gerando Eventos Criaturas:
     public void gerarEventosCriatura() {
-        // Gerando Criaturas:
         EventoCriatura cervo = new EventoCriatura("Hjarnhyrndr", "Um cervo de pelagem prateada e chifres de cristal gélido. Dizem que ele aparece apenas sob a luz da lua cheia em florestas sagradas. É símbolo de equilíbrio, e caçá-lo é considerado blasfêmia.",
                 2, "O encontro com criaturas possibilita a obtenção de recursos", false, "Animal mágico (neutro)", 25, 5, 0, " ");
         EventoCriatura serpente = new EventoCriatura("Niðkrága", "Uma serpente subterrânea que se move por vibrações no solo. Ela cospe uma névoa negra que cega e sufoca. Suas escamas são procuradas para rituais de invisibilidade",
@@ -127,30 +129,22 @@ public class GerenciadorDeEventos implements ManagerEventsActions {
         EventoCriatura guardiaDoLago = new EventoCriatura("Yndra Sædis", "Uma mulher idosa que vive isolada às margens do lago Mjarnvatn. É uma vidente silenciosa, conhecida por ouvir os sussurros da névoa. Acredita-se que Yndra seja filha de um deus e uma mortal," +
                 " com sangue de tempo em suas veias. Aqueles que buscam respostas em seus sonhos costumam procurá-la — mas ela só fala em enigmas.", 2, "O encontro com entidades humanas permite a obtenção de recursos ou batalhas", false,
                 "Humano pacífico", 80, 0, 0, "");
-        //Adicionando na lista de acordo com as probabilidades de cada evento criatura
-        listaEventosPossiveis.add(cervo);
-        listaEventosPossiveis.add(cervo);
-        listaEventosPossiveis.add(serpente);
-        listaEventosPossiveis.add(serpente);
-        listaEventosPossiveis.add(corvo);
-        listaEventosPossiveis.add(corvo);
-        listaEventosPossiveis.add(javali);
-        listaEventosPossiveis.add(javali);
-        listaEventosPossiveis.add(peixe);
-        listaEventosPossiveis.add(peixe);
-        listaEventosPossiveis.add(lobo);
-        listaEventosPossiveis.add(lobo);
-        listaEventosPossiveis.add(cabra);
-        listaEventosPossiveis.add(cabra);
-        listaEventosPossiveis.add(aranha);
-        listaEventosPossiveis.add(aranha);
-        listaEventosPossiveis.add(guerreiroCorrompido);
-        listaEventosPossiveis.add(guerreiroCorrompido);
-        listaEventosPossiveis.add(guardiaDoLago);
-        listaEventosPossiveis.add(guardiaDoLago);
+        //Adicionando na lista conforme as probabilidades de cada Evento Criatura:
+        //Inicialmente, vou fazer uma Probabilidade Forçada Simples, com a mesma chance para todos os elementos:
+        EventoCriatura[] listaEventosCriatura = {cervo, serpente, corvo, javali, peixe, lobo, cabra, aranha, guardiaDoLago, guerreiroCorrompido};
+        //Sorteio do Evento:
+        Random sorteador = new Random();
+        int indiceSorteado = sorteador.nextInt(listaEventosCriatura.length);
+        EventoCriatura eventoSorteado = listaEventosCriatura[indiceSorteado];
+        //Mostrando o Evento sorteado:
+        System.out.println("Evento sorteado: " + eventoSorteado.getNomeEvento());
+        System.out.println("Descrição: " + eventoSorteado.getDescricaoEvento());
+        //Adicionando ao Histórico de Eventos:
+        listaEventosPossiveis.add(eventoSorteado);
 
     }
-    //Gerando eventos descoberta
+
+    //Gerando Eventos Descoberta:
     public void gerarEventosDescoberta() {
         EventoDescoberta bauPerdido = new EventoDescoberta("Bau Perdido", "Um antigo baú esquecido pelos corajosos exploradores de uma era passada", 3,
                 "Descobertas recuperam o folego do personagem, um pouco de energia e sede serão regenerados", true, "Combináveis e Equipáveis", "Materiais, Ferramentas ou Armas", false);
@@ -163,23 +157,21 @@ public class GerenciadorDeEventos implements ManagerEventsActions {
         EventoDescoberta jarrosConserva = new EventoDescoberta("Jarros de Conserva", "Os antigos Jarros de Conserva eram utilizados para armazenar diversos recursos por décadas, talvez ainda tenha algo útil",
                 2, "Jarros de Conserva são uma ótima fonte de recursos, se encontrar um deles não irá passar necessidades", true, "Consumíveis", "Alimentos, Água, Remédios", false);
 
-        //Adicionando na lista de eventos para o sorteio
-        listaEventosPossiveis.add(bauPerdido);
-        listaEventosPossiveis.add(bauPerdido);
-        listaEventosPossiveis.add(bauPerdido);
-        listaEventosPossiveis.add(caixaDeSuprimentos);
-        listaEventosPossiveis.add(caixaDeSuprimentos);
-        listaEventosPossiveis.add(caixaDeSuprimentos);
-        listaEventosPossiveis.add(caixaDeSuprimentos);
-        listaEventosPossiveis.add(ervasMedicinais);
-        listaEventosPossiveis.add(ervasMedicinais);
-        listaEventosPossiveis.add(ervasMedicinais);
-        listaEventosPossiveis.add(destrocosRuinas);
-        listaEventosPossiveis.add(destrocosRuinas);
-        listaEventosPossiveis.add(jarrosConserva);
-        listaEventosPossiveis.add(jarrosConserva);
+        //Adicionando na lista conforme as probabilidades de cada Evento Descoberta:
+        //Inicialmente, vou fazer uma Probabilidade Forçada Simples, com a mesma chance para todos os elementos:
+        EventoDescoberta[] listaEventosDescoberta = {bauPerdido, caixaDeSuprimentos, ervasMedicinais, destrocosRuinas, jarrosConserva};
+        //Sorteio do Evento:
+        Random sorteador = new Random();
+        int indiceSorteado = sorteador.nextInt(listaEventosDescoberta.length);
+        EventoDescoberta eventoSorteado = listaEventosDescoberta[indiceSorteado];
+        //Mostrando o Evento sorteado:
+        System.out.println("Evento sorteado: " + eventoSorteado.getNomeEvento());
+        System.out.println("Descrição: " + eventoSorteado.getDescricaoEvento());
+        //Adicionando ao Histórico de Eventos:
+        listaEventosPossiveis.add(eventoSorteado);
     }
-    //Gerando eventos de doença e ferimento
+
+    //Gerando Eventos de Doença e Ferimento:
     public void gerarEventoDoencaFerimento() {
         //Mordida da Cobra:
         EventoDoencaFerimento mordida = new EventoDoencaFerimento("Sotnblár", "A mordida da serpente Niðkrága deixa veias azul-escuras ao redor da ferida. A vítima perde a visão por algumas horas e sente uma dormência crescente nos membros.", 2,
@@ -199,52 +191,90 @@ public class GerenciadorDeEventos implements ManagerEventsActions {
         //Toque do Cervo:
         EventoDoencaFerimento toque = new EventoDoencaFerimento("Frostseidr", "O toque gelado de seus chifres pode causar um entorpecimento místico. A pele perde cor e a pessoa sente emoções com menos intensidade, como se estivesse congelando por dentro.", 2,
                 " ", false, "Corte e Feitiço", "Ilusão e Hemorragia", true);
-        listaEventosPossiveis.add(mordida);
-        listaEventosPossiveis.add(mordida);
-        listaEventosPossiveis.add(chifrada);
-        listaEventosPossiveis.add(chifrada);
-        listaEventosPossiveis.add(contato);
-        listaEventosPossiveis.add(contato);
-        listaEventosPossiveis.add(arranhao);
-        listaEventosPossiveis.add(arranhao);
-        listaEventosPossiveis.add(olhar);
-        listaEventosPossiveis.add(olhar);
-        listaEventosPossiveis.add(toque);
-        listaEventosPossiveis.add(toque);
+        //Adicionando na lista conforme as probabilidades de cada Evento Descoberta:
+        //Inicialmente, vou fazer uma Probabilidade Forçada Simples, com a mesma chance para todos os elementos:
+        EventoDoencaFerimento[] listaEventosDoencaFerimento = {mordida, chifrada, contato, arranhao, olhar, toque};
+        //Sorteio do Evento:
+        Random sorteador = new Random();
+        int indiceSorteado = sorteador.nextInt(listaEventosDoencaFerimento.length);
+        EventoDoencaFerimento eventoSorteado = listaEventosDoencaFerimento[indiceSorteado];
+        //Mostrando o Evento sorteado:
+        System.out.println("Evento sorteado: " + eventoSorteado.getNomeEvento());
+        System.out.println("Descrição: " + eventoSorteado.getDescricaoEvento());
+        //Adicionando ao Histórico de Eventos:
+        listaEventosPossiveis.add(eventoSorteado);
+
     }
-    //Os eventos climáticos não serão sorteados
-    //Gerando eventos climáticos
+
+    //Os Eventos Climáticos Não Padrão não serão sorteados
+    //Gerando Eventos Climáticos:
     public void gerarEventosClimaticos(Ambientes ambienteAtual) {
+
         if(ambienteAtual instanceof AmbienteFloresta) {
             //Clima padrão - Floresta:
             EventoClimatico climaFloresta = new EventoClimatico("Skógrgufa", "Um clima úmido e perenemente enevoado. A luz do sol raramente atravessa o véu de névoa azulada que dança entre as copas." +
                     " Chuva fina e sussurros no vento são constantes — alguns dizem que são vozes de espíritos.", 2, " ", false, " ", 3, " ");
-        } else if (ambienteAtual instanceof AmbienteMontanha) {
+            EventoClimatico climaVariadoUm = new EventoClimatico("Vindkaldr", "Correntes de ar gelado uivam pelas encostas, trazendo consigo flocos de neve mesmo fora do inverno." +
+                    " Relâmpagos secos cortam os céus em noites silenciosas, como se os deuses estivessem em guerra.", 2, " ", false, " ", 3, " ");
+            EventoClimatico climaVariadoDois = new EventoClimatico("Stormvǫr", "Céus permanentemente carregados, com nuvens escuras e trovões que rugem como bestas distantes. Ventos fortes e chuvas intensas surgem sem aviso." +
+                    " É dito que esse clima ocorre onde antigos deuses travaram batalhas e seus gritos ainda ecoam nos céus.", 2, " ", false, " ", 3, " ");
+            //Sorteando o microclima:
+            Random sorteador = new Random();
+            EventoClimatico[] listaEventosClimaticos = {climaFloresta, climaVariadoUm, climaVariadoDois};
+            int indiceSorteado = sorteador.nextInt(listaEventosClimaticos.length);
+            EventoClimatico climaSorteado = listaEventosClimaticos[indiceSorteado];
+            ambienteAtual.setClimaDominante(climaSorteado.getNomeEvento()); //Inicialmente, vamos tratar como String, mas mudaremos o atributo de Ambientes, posteriormente.
+        }
+        else if (ambienteAtual instanceof AmbienteMontanha) {
             //Clima padrão - Montanha:
             EventoClimatico climaMontanha = new EventoClimatico("Hrímblóð", "Frio penetrante com ventos cortantes que parecem vivenciar uma vontade própria. Nevascas repentinas tomam tudo de surpresa," +
                     " e os flocos de neve caem como cinzas pálidas. Em algumas noites, formas espectrais são vistas caminhando pela neve.", 2, " ", false, " ", 3, " ");
-        } else if (ambienteAtual instanceof AmbienteCaverna) {
+            EventoClimatico climaVariadoUm = new EventoClimatico("Vindkaldr", "Correntes de ar gelado uivam pelas encostas, trazendo consigo flocos de neve mesmo fora do inverno." +
+                    " Relâmpagos secos cortam os céus em noites silenciosas, como se os deuses estivessem em guerra.", 2, " ", false, " ", 3, " ");
+            EventoClimatico climaVariadoDois = new EventoClimatico("Stormvǫr", "Céus permanentemente carregados, com nuvens escuras e trovões que rugem como bestas distantes. Ventos fortes e chuvas intensas surgem sem aviso." +
+                    " É dito que esse clima ocorre onde antigos deuses travaram batalhas e seus gritos ainda ecoam nos céus.", 2, " ", false, " ", 3, " ");
+            //Sorteando o microclima:
+            Random sorteador = new Random();
+            EventoClimatico[] listaEventosClimaticos = {climaMontanha, climaVariadoUm, climaVariadoDois};
+            int indiceSorteado = sorteador.nextInt(listaEventosClimaticos.length);
+            EventoClimatico climaSorteado = listaEventosClimaticos[indiceSorteado];
+            ambienteAtual.setClimaDominante(climaSorteado.getNomeEvento()); //Inicialmente, vamos tratar como String, mas mudaremos o atributo de Ambientes, posteriormente.
+        }
+        else if (ambienteAtual instanceof AmbienteCaverna) {
             //Clima padrão - Caverna:
             EventoClimatico climaCaverna = new EventoClimatico("Myrrkuldi", "Nenhuma luz penetra a atmosfera opressiva. O ar é frio e úmido, com neblinas subterrâneas que condensam em gotas escuras." +
                     " Em seu interior, forma-se um microclima gélido e sufocante, como o hálito de um dragão adormecido.", 2, " ", false, " ", 3, " ");
-        } else if (ambienteAtual instanceof AmbienteRuinas) {
+            ambienteAtual.setClimaDominante(climaCaverna.getNomeEvento()); //Inicialmente, vamos tratar como String, mas mudaremos o atributo de Ambientes, posteriormente.
+        }
+        else if (ambienteAtual instanceof AmbienteRuinas) {
             //Clima padrão - Ruinas:
             EventoClimatico climaRuinas = new EventoClimatico("Eldrregn", "Um clima seco e instável. Raios solares intensos esquentam o solo enegrecido, e tempestades de cinzas surgem subitamente," +
                     " trazendo faíscas e ventos quentes. À noite, a temperatura despenca como se o próprio tempo congelasse.", 2, " ", false, " ", 3, " ");
-        } else if (ambienteAtual instanceof AmbienteLagoRio) {
+            EventoClimatico climaVariadoUm = new EventoClimatico("Vindkaldr", "Correntes de ar gelado uivam pelas encostas, trazendo consigo flocos de neve mesmo fora do inverno." +
+                    " Relâmpagos secos cortam os céus em noites silenciosas, como se os deuses estivessem em guerra.", 2, " ", false, " ", 3, " ");
+            EventoClimatico climaVariadoDois = new EventoClimatico("Stormvǫr", "Céus permanentemente carregados, com nuvens escuras e trovões que rugem como bestas distantes. Ventos fortes e chuvas intensas surgem sem aviso." +
+                    " É dito que esse clima ocorre onde antigos deuses travaram batalhas e seus gritos ainda ecoam nos céus.", 2, " ", false, " ", 3, " ");
+            //Sorteando o microclima:
+            Random sorteador = new Random();
+            EventoClimatico[] listaEventosClimaticos = {climaRuinas, climaVariadoUm, climaVariadoDois};
+            int indiceSorteado = sorteador.nextInt(listaEventosClimaticos.length);
+            EventoClimatico climaSorteado = listaEventosClimaticos[indiceSorteado];
+            ambienteAtual.setClimaDominante(climaSorteado.getNomeEvento()); //Inicialmente, vamos tratar como String, mas mudaremos o atributo de Ambientes, posteriormente.
+        }
+        else if (ambienteAtual instanceof AmbienteLagoRio) {
             //Clima padrão - Lago:
             EventoClimatico climaLago = new EventoClimatico("Draumslóð", "Clima brando e misterioso, com névoa constante e ar parado. A umidade alta provoca ilusões ópticas, e o clima parece flutuar entre realidade e devaneio." +
                     " A brisa é suave, mas carrega murmúrios vindos do além.", 2, " ", false, " ", 3, " ");
+            EventoClimatico climaVariadoUm = new EventoClimatico("Vindkaldr", "Correntes de ar gelado uivam pelas encostas, trazendo consigo flocos de neve mesmo fora do inverno." +
+                    " Relâmpagos secos cortam os céus em noites silenciosas, como se os deuses estivessem em guerra.", 2, " ", false, " ", 3, " ");
+            EventoClimatico climaVariadoDois = new EventoClimatico("Stormvǫr", "Céus permanentemente carregados, com nuvens escuras e trovões que rugem como bestas distantes. Ventos fortes e chuvas intensas surgem sem aviso." +
+                    " É dito que esse clima ocorre onde antigos deuses travaram batalhas e seus gritos ainda ecoam nos céus.", 2, " ", false, " ", 3, " ");
+            //Sorteando o microclima:
+            Random sorteador = new Random();
+            EventoClimatico[] listaEventosClimaticos = {climaLago, climaVariadoUm, climaVariadoDois};
+            int indiceSorteado = sorteador.nextInt(listaEventosClimaticos.length);
+            EventoClimatico climaSorteado = listaEventosClimaticos[indiceSorteado];
+            ambienteAtual.setClimaDominante(climaSorteado.getNomeEvento()); //Inicialmente, vamos tratar como String, mas mudaremos o atributo de Ambientes, posteriormente.
         }
-
-        //Climas variados - Podem ser usados em qualquer ambiente, menos na Caverna:
-        EventoClimatico climaVariadoUm = new EventoClimatico("Vindkaldr", "Correntes de ar gelado uivam pelas encostas, trazendo consigo flocos de neve mesmo fora do inverno." +
-                " Relâmpagos secos cortam os céus em noites silenciosas, como se os deuses estivessem em guerra.", 2, " ", false, " ", 3, " ");
-        EventoClimatico climaVariadoDois = new EventoClimatico("Stormvǫr", "Céus permanentemente carregados, com nuvens escuras e trovões que rugem como bestas distantes. Ventos fortes e chuvas intensas surgem sem aviso." +
-                " É dito que esse clima ocorre onde antigos deuses travaram batalhas e seus gritos ainda ecoam nos céus.", 2, " ", false, " ", 3, " ");
-
-        //Adicionando na lista para sortear
-        listaEventosPossiveis.add(climaVariadoUm);
-        listaEventosPossiveis.add(climaVariadoDois);
     }
 }

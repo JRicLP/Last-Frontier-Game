@@ -1,8 +1,8 @@
 package itens;
 
-import interfaces.MaterialsActions;
+import interfaces.AcoesMateriais;
 
-public class Materiais extends Item implements MaterialsActions {
+public class Materiais extends Item implements AcoesMateriais {
     //Atributos da classe:
     private String tipoMaterial;
     private int resistenciaMaterial;

@@ -1,17 +1,18 @@
 package gerenciadores;
-import interfaces.ManagerCharacters;
+
+import interfaces.AcoesGerenciadorDePersonagens;
 import personagens.*;
 
 import java.util.Scanner;
 
-public class GerenciadorDePersonagens implements ManagerCharacters {
+public class GerenciadorDePersonagens implements AcoesGerenciadorDePersonagens {
     String escolha;
     private Personagem personagem;
 
     public GerenciadorDePersonagens() { //‘String’ escolha, ‘String’ personagem - Não entendi o porquê de iniciar o gerenciador com esses atributos
     }
 
-    //Métodos acessores
+    //Métodos acessores:
     public void setEscolha(String escolha) {
         this.escolha = escolha;
     }
@@ -36,7 +37,7 @@ public class GerenciadorDePersonagens implements ManagerCharacters {
         while (true) {
             System.out.println("Digite a classe de Personagem escolhida:");
             String escolha = entradaUsuario.nextLine().trim();
-            setEscolha(escolha);
+            this.setEscolha(escolha);
 
             switch (escolha) {
                 case "Nômade":
@@ -62,15 +63,16 @@ public class GerenciadorDePersonagens implements ManagerCharacters {
                     continue;
             }
 
-            System.out.println("Você escolheu " + escolha);
+            System.out.println("Você escolheu " + this.getEscolha());
             System.out.println("Boa sorte em sua jornada!");
+            Personagem personagemEscolhido = this.getPersonagem();
             break;
         }
     }
 
     @Override
     public void mostrarPersonagens() {
-        System.out.println("Escolha um Personagem:");
+        System.out.println("Escolha uma classe de Personagem:");
 
         Nomade nomade = new Nomade("Adaptativo, possui grande resistência, conhecimento médico e adaptabilidade à mudanças climáticas");
         Pirata pirata = new Pirata("Navegador, conhecedor das águas e apto para pescaria");

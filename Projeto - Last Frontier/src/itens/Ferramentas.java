@@ -1,9 +1,9 @@
 package itens;
 
 import ambientes.Ambientes;
-import interfaces.ToolsActions;
+import interfaces.AcoesFerramentas;
 
-public class Ferramentas extends Item implements ToolsActions {
+public class Ferramentas extends Item implements AcoesFerramentas {
     //Atributos da subclasse:
     private String tipoFerramenta;
     private int eficienciaFerramenta;

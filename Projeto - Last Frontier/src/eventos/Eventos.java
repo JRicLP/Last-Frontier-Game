@@ -1,10 +1,10 @@
 package eventos;
 
 import ambientes.Ambientes;
-import interfaces.EventsActions;
+import interfaces.AcoesEventos;
 import personagens.Personagem;
 
-public abstract class Eventos implements EventsActions {
+public abstract class Eventos implements AcoesEventos {
 
     //Atributos da superclasse:
     private String nomeEvento;

@@ -1,8 +1,8 @@
 package itens;
-import interfaces.ItensActions;
+import interfaces.AcoesItens;
 import personagens.Personagem;
 
-public class Alimentos extends Item implements ItensActions {
+public class Alimentos extends Item implements AcoesItens {
     //Atributos da subclasse
     private int valorNutricional;
     private String tipoAlimento;

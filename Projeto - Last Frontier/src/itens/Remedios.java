@@ -1,9 +1,9 @@
 package itens;
 
-import interfaces.ItensActions;
+import interfaces.AcoesItens;
 import personagens.Personagem;
 
-public class Remedios extends Item  implements ItensActions {
+public class Remedios extends Item  implements AcoesItens {
     //Atributos da subclasse:
     private String tipoRemedio;
     private String efeitoRemedio;
