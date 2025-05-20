@@ -1,28 +1,29 @@
 package gerenciadores;
 
-import ambientes.Ambientes;
+import ambientes.*;
 import eventos.*;
 import interfaces.ManagerEventsActions;
 import personagens.Personagem;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class GerenciadorDeEventos implements ManagerEventsActions {
     //Atributos da classe:
-    private String[] listaEventosPossiveis;
+    private ArrayList<Eventos> listaEventosPossiveis= new ArrayList<>();
     private int[] probabilidadeOcorrencia;
     private ArrayList<Eventos> historicoEventos;
     //Metodo construtor:
-    public GerenciadorDeEventos(String[] listaEventosPossiveis, int[] probabilidadeOcorrencia, ArrayList<Eventos> historicoEventos) {
+    public GerenciadorDeEventos(ArrayList<Eventos> listaEventosPossiveis, int[] probabilidadeOcorrencia, ArrayList<Eventos> historicoEventos) {
         this.listaEventosPossiveis = listaEventosPossiveis;
         this.probabilidadeOcorrencia = probabilidadeOcorrencia;
-        this.historicoEventos = new ArrayList<>(20);
+        this.historicoEventos = historicoEventos;
     }
     //Metodos acessores:
-    public void setListaEventosPossiveis(String[] listaEventosPossiveis) {
+    public void setListaEventosPossiveis(ArrayList <Eventos>listaEventosPossiveis) {
         this.listaEventosPossiveis = listaEventosPossiveis;
     }
-    public String[] getListaEventosPossiveis() {
+    public ArrayList<Eventos> getListaEventosPossiveis() {
         return listaEventosPossiveis;
     }
     public void setProbabilidadeOcorrencia(int[] probabilidadeOcorrencia) {
@@ -40,7 +41,53 @@ public class GerenciadorDeEventos implements ManagerEventsActions {
     //Metodos implementados:
     @Override
     public void sortearEvento(Ambientes ambienteAtual) {
-        //Esse metodo será implementado conforme a dinâmica de eventos for aprimorada!
+        listaEventosPossiveis.clear(); // limpa eventos antigos
+
+        //Gerando os eventos com base nos ambientes
+        if(ambienteAtual instanceof AmbienteFloresta){
+            gerarEventosCriatura();
+            gerarEventosClimaticos(ambienteAtual);
+            gerarEventosDescoberta();
+            gerarEventoDoencaFerimento();
+        } else if (ambienteAtual instanceof AmbienteCaverna) {
+            gerarEventoDoencaFerimento();
+            gerarEventosCriatura();
+            gerarEventosDescoberta();
+            gerarEventosClimaticos(ambienteAtual);
+
+        } else if (ambienteAtual instanceof AmbienteMontanha) {
+            gerarEventosDescoberta();
+            gerarEventosCriatura();
+            gerarEventoDoencaFerimento();
+            gerarEventosClimaticos(ambienteAtual);
+        }
+        else if(ambienteAtual instanceof AmbienteRuinas){
+            gerarEventosClimaticos(ambienteAtual);
+            gerarEventosCriatura();
+            gerarEventoDoencaFerimento();
+            gerarEventosDescoberta();
+        } else if (ambienteAtual instanceof AmbienteLagoRio) {
+            gerarEventosDescoberta();
+            gerarEventosCriatura();
+            gerarEventoDoencaFerimento();
+            gerarEventosClimaticos(ambienteAtual);//
+
+        }
+
+        if (listaEventosPossiveis.isEmpty()) {
+            System.out.println("Nenhum evento disponível para sortear.");
+            return;
+        }
+        // Sorteio do evento
+        Random rand = new Random();
+        int indice = rand.nextInt(listaEventosPossiveis.size());
+        Eventos eventoSorteado = listaEventosPossiveis.get(indice);
+
+        System.out.println("Evento sorteado: " + eventoSorteado.getNomeEvento());
+        System.out.println("Descrição: " + eventoSorteado.getDescricaoEvento());
+
+        historicoEventos.add(eventoSorteado);
+
     }
     @Override
     public void aplicarEvento(Personagem personagemAtual, Eventos eventoAplicado) {
@@ -48,6 +95,7 @@ public class GerenciadorDeEventos implements ManagerEventsActions {
             System.out.println("O personagem " + personagemAtual.getNomePersonagem() + " está sofrendo as consequências de: " +
                     eventoAplicado.getNomeEvento());
         }
+        //tem que aplicar no personagem, será evoluído
     }
     @Override
     public void removerEvento(Eventos eventoAtual) {
@@ -65,7 +113,7 @@ public class GerenciadorDeEventos implements ManagerEventsActions {
                 2, "O encontro com criaturas possibilita a obtenção de recursos", false, "Animal mágico (neutro)", 40, 10, 0, " ");
         EventoCriatura javali = new EventoCriatura("Grimsvártr", "Um javali titânico coberto de espinhos ósseos. Habita vales escuros e ruínas esquecidas. Quando furioso, seu grito ecoa por quilômetros e provoca avalanches.",
                 2, "O encontro com criaturas possibilita a obtenção de recursos", false, "Criatura hostil", 40, 15, 10, " ");
-        EventoCriatura peixe1 = new EventoCriatura("Silfurskyn", "Um peixe raro que brilha com luz própria em lagos encantados como Mjarnvatn. Quem o captura e o liberta pode receber sonhos proféticos. Comer sua carne, no entanto, causa loucura.",
+        EventoCriatura peixe = new EventoCriatura("Silfurskyn", "Um peixe raro que brilha com luz própria em lagos encantados como Mjarnvatn. Quem o captura e o liberta pode receber sonhos proféticos. Comer sua carne, no entanto, causa loucura.",
                 2, "O encontro com criaturas possibilita a obtenção de recursos", false, "Animal mágico (pacífico)", 10, 5, 0, " ");
         EventoCriatura lobo = new EventoCriatura("Draugrulfr", "Lobo espectral que aparece onde o véu entre mundos se rompe. Seus olhos ardem com chamas verdes e seu uivo atrai os mortos inquietos. Imune a armas normais, só teme fogo.",
                 2, "O encontro com criaturas possibilita a obtenção de recursos", false, "Criatura hostil", 20, 5, 5, " ");
@@ -79,6 +127,28 @@ public class GerenciadorDeEventos implements ManagerEventsActions {
         EventoCriatura guardiaDoLago = new EventoCriatura("Yndra Sædis", "Uma mulher idosa que vive isolada às margens do lago Mjarnvatn. É uma vidente silenciosa, conhecida por ouvir os sussurros da névoa. Acredita-se que Yndra seja filha de um deus e uma mortal," +
                 " com sangue de tempo em suas veias. Aqueles que buscam respostas em seus sonhos costumam procurá-la — mas ela só fala em enigmas.", 2, "O encontro com entidades humanas permite a obtenção de recursos ou batalhas", false,
                 "Humano pacífico", 80, 0, 0, "");
+        //Adicionando na lista de acordo com as probabilidades de cada evento criatura
+        listaEventosPossiveis.add(cervo);
+        listaEventosPossiveis.add(cervo);
+        listaEventosPossiveis.add(serpente);
+        listaEventosPossiveis.add(serpente);
+        listaEventosPossiveis.add(corvo);
+        listaEventosPossiveis.add(corvo);
+        listaEventosPossiveis.add(javali);
+        listaEventosPossiveis.add(javali);
+        listaEventosPossiveis.add(peixe);
+        listaEventosPossiveis.add(peixe);
+        listaEventosPossiveis.add(lobo);
+        listaEventosPossiveis.add(lobo);
+        listaEventosPossiveis.add(cabra);
+        listaEventosPossiveis.add(cabra);
+        listaEventosPossiveis.add(aranha);
+        listaEventosPossiveis.add(aranha);
+        listaEventosPossiveis.add(guerreiroCorrompido);
+        listaEventosPossiveis.add(guerreiroCorrompido);
+        listaEventosPossiveis.add(guardiaDoLago);
+        listaEventosPossiveis.add(guardiaDoLago);
+
     }
     //Gerando eventos descoberta
     public void gerarEventosDescoberta() {
@@ -92,6 +162,22 @@ public class GerenciadorDeEventos implements ManagerEventsActions {
                 "Destroços são importantes fontes de materiais, quem sabe até ferramentas ou armas!", true, "Combináveis e Equipáveis", "Materiais, Ferramentas ou Armas", false);
         EventoDescoberta jarrosConserva = new EventoDescoberta("Jarros de Conserva", "Os antigos Jarros de Conserva eram utilizados para armazenar diversos recursos por décadas, talvez ainda tenha algo útil",
                 2, "Jarros de Conserva são uma ótima fonte de recursos, se encontrar um deles não irá passar necessidades", true, "Consumíveis", "Alimentos, Água, Remédios", false);
+
+        //Adicionando na lista de eventos para o sorteio
+        listaEventosPossiveis.add(bauPerdido);
+        listaEventosPossiveis.add(bauPerdido);
+        listaEventosPossiveis.add(bauPerdido);
+        listaEventosPossiveis.add(caixaDeSuprimentos);
+        listaEventosPossiveis.add(caixaDeSuprimentos);
+        listaEventosPossiveis.add(caixaDeSuprimentos);
+        listaEventosPossiveis.add(caixaDeSuprimentos);
+        listaEventosPossiveis.add(ervasMedicinais);
+        listaEventosPossiveis.add(ervasMedicinais);
+        listaEventosPossiveis.add(ervasMedicinais);
+        listaEventosPossiveis.add(destrocosRuinas);
+        listaEventosPossiveis.add(destrocosRuinas);
+        listaEventosPossiveis.add(jarrosConserva);
+        listaEventosPossiveis.add(jarrosConserva);
     }
     //Gerando eventos de doença e ferimento
     public void gerarEventoDoencaFerimento() {
@@ -113,29 +199,52 @@ public class GerenciadorDeEventos implements ManagerEventsActions {
         //Toque do Cervo:
         EventoDoencaFerimento toque = new EventoDoencaFerimento("Frostseidr", "O toque gelado de seus chifres pode causar um entorpecimento místico. A pele perde cor e a pessoa sente emoções com menos intensidade, como se estivesse congelando por dentro.", 2,
                 " ", false, "Corte e Feitiço", "Ilusão e Hemorragia", true);
+        listaEventosPossiveis.add(mordida);
+        listaEventosPossiveis.add(mordida);
+        listaEventosPossiveis.add(chifrada);
+        listaEventosPossiveis.add(chifrada);
+        listaEventosPossiveis.add(contato);
+        listaEventosPossiveis.add(contato);
+        listaEventosPossiveis.add(arranhao);
+        listaEventosPossiveis.add(arranhao);
+        listaEventosPossiveis.add(olhar);
+        listaEventosPossiveis.add(olhar);
+        listaEventosPossiveis.add(toque);
+        listaEventosPossiveis.add(toque);
     }
+    //Os eventos climáticos não serão sorteados
     //Gerando eventos climáticos
-    public void gerarEventosClimaticos() {
-        //Clima padrão - Floresta:
-        EventoClimatico climaFloresta = new EventoClimatico("Skógrgufa", "Um clima úmido e perenemente enevoado. A luz do sol raramente atravessa o véu de névoa azulada que dança entre as copas." +
-                " Chuva fina e sussurros no vento são constantes — alguns dizem que são vozes de espíritos.", 2, " ", false, " ", 3, " ");
-        //Clima padrão - Montanha:
-        EventoClimatico climaMontanha = new EventoClimatico("Hrímblóð", "Frio penetrante com ventos cortantes que parecem vivenciar uma vontade própria. Nevascas repentinas tomam tudo de surpresa," +
-                " e os flocos de neve caem como cinzas pálidas. Em algumas noites, formas espectrais são vistas caminhando pela neve.", 2, " ", false, " ", 3, " ");
-        //Clima padrão - Caverna:
-        EventoClimatico climaCaverna = new EventoClimatico("Myrrkuldi", "Nenhuma luz penetra a atmosfera opressiva. O ar é frio e úmido, com neblinas subterrâneas que condensam em gotas escuras." +
-                " Em seu interior, forma-se um microclima gélido e sufocante, como o hálito de um dragão adormecido.", 2, " ", false, " ", 3, " ");
-        //Clima padrão - Ruinas:
-        EventoClimatico climaRuinas = new EventoClimatico("Eldrregn", "Um clima seco e instável. Raios solares intensos esquentam o solo enegrecido, e tempestades de cinzas surgem subitamente," +
-                " trazendo faíscas e ventos quentes. À noite, a temperatura despenca como se o próprio tempo congelasse.", 2, " ", false, " ", 3, " ");
-        //Clima padrão - Lago:
-        EventoClimatico climaLago = new EventoClimatico("Draumslóð", "Clima brando e misterioso, com névoa constante e ar parado. A umidade alta provoca ilusões ópticas, e o clima parece flutuar entre realidade e devaneio." +
-                " A brisa é suave, mas carrega murmúrios vindos do além.", 2, " ", false, " ", 3, " ");
+    public void gerarEventosClimaticos(Ambientes ambienteAtual) {
+        if(ambienteAtual instanceof AmbienteFloresta) {
+            //Clima padrão - Floresta:
+            EventoClimatico climaFloresta = new EventoClimatico("Skógrgufa", "Um clima úmido e perenemente enevoado. A luz do sol raramente atravessa o véu de névoa azulada que dança entre as copas." +
+                    " Chuva fina e sussurros no vento são constantes — alguns dizem que são vozes de espíritos.", 2, " ", false, " ", 3, " ");
+        } else if (ambienteAtual instanceof AmbienteMontanha) {
+            //Clima padrão - Montanha:
+            EventoClimatico climaMontanha = new EventoClimatico("Hrímblóð", "Frio penetrante com ventos cortantes que parecem vivenciar uma vontade própria. Nevascas repentinas tomam tudo de surpresa," +
+                    " e os flocos de neve caem como cinzas pálidas. Em algumas noites, formas espectrais são vistas caminhando pela neve.", 2, " ", false, " ", 3, " ");
+        } else if (ambienteAtual instanceof AmbienteCaverna) {
+            //Clima padrão - Caverna:
+            EventoClimatico climaCaverna = new EventoClimatico("Myrrkuldi", "Nenhuma luz penetra a atmosfera opressiva. O ar é frio e úmido, com neblinas subterrâneas que condensam em gotas escuras." +
+                    " Em seu interior, forma-se um microclima gélido e sufocante, como o hálito de um dragão adormecido.", 2, " ", false, " ", 3, " ");
+        } else if (ambienteAtual instanceof AmbienteRuinas) {
+            //Clima padrão - Ruinas:
+            EventoClimatico climaRuinas = new EventoClimatico("Eldrregn", "Um clima seco e instável. Raios solares intensos esquentam o solo enegrecido, e tempestades de cinzas surgem subitamente," +
+                    " trazendo faíscas e ventos quentes. À noite, a temperatura despenca como se o próprio tempo congelasse.", 2, " ", false, " ", 3, " ");
+        } else if (ambienteAtual instanceof AmbienteLagoRio) {
+            //Clima padrão - Lago:
+            EventoClimatico climaLago = new EventoClimatico("Draumslóð", "Clima brando e misterioso, com névoa constante e ar parado. A umidade alta provoca ilusões ópticas, e o clima parece flutuar entre realidade e devaneio." +
+                    " A brisa é suave, mas carrega murmúrios vindos do além.", 2, " ", false, " ", 3, " ");
+        }
+
         //Climas variados - Podem ser usados em qualquer ambiente, menos na Caverna:
         EventoClimatico climaVariadoUm = new EventoClimatico("Vindkaldr", "Correntes de ar gelado uivam pelas encostas, trazendo consigo flocos de neve mesmo fora do inverno." +
                 " Relâmpagos secos cortam os céus em noites silenciosas, como se os deuses estivessem em guerra.", 2, " ", false, " ", 3, " ");
         EventoClimatico climaVariadoDois = new EventoClimatico("Stormvǫr", "Céus permanentemente carregados, com nuvens escuras e trovões que rugem como bestas distantes. Ventos fortes e chuvas intensas surgem sem aviso." +
                 " É dito que esse clima ocorre onde antigos deuses travaram batalhas e seus gritos ainda ecoam nos céus.", 2, " ", false, " ", 3, " ");
 
+        //Adicionando na lista para sortear
+        listaEventosPossiveis.add(climaVariadoUm);
+        listaEventosPossiveis.add(climaVariadoDois);
     }
 }

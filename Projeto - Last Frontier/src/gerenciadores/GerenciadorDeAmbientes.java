@@ -6,12 +6,14 @@ import interfaces.ManagerAmbientActions;
 import personagens.Personagem;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class GerenciadorDeAmbientes implements ManagerAmbientActions {
     //Atributos da classe:
     private ArrayList<Ambientes> listaAmbientesDisponiveis;
     private String climaGlobal;
     private ArrayList<Ambientes> historicoMovimentacao;
+    private Random random = new Random();
     //Metodo construtor da classe:
     public GerenciadorDeAmbientes(ArrayList<Ambientes> listaAmbientesDisponiveis, String climaGlobal, ArrayList<Ambientes> historicoMovimentacao) {
         this.listaAmbientesDisponiveis = listaAmbientesDisponiveis;
@@ -59,6 +61,20 @@ public class GerenciadorDeAmbientes implements ManagerAmbientActions {
         if (eventoGerado.isCondicaoEvento()) { //Verifica se a condição do evento está ativa
             System.out.println("No ambiente " + ambienteAtual.getNomeAmbiente() + " foi aplicado: " + eventoGerado.getNomeEvento());
         }
+        Ambientes ambienteEscolhido=listaAmbientesDisponiveis;
+        // é para Pegar os eventos do ambiente
+        ArrayList<Eventos> listaEventosPossiveis = ambienteAtual.getListaEventosPossiveis();
+
+        if (listaEventosPossiveis.isEmpty()) {
+            System.out.println("Nada aconteceu no ambiente " + ambienteAtual.getNomeAmbiente() + ".");
+            return;
+        }
+
+        // Sorteia evento
+        Eventos eventoSorteado = listaEventosPossiveis.get(random.nextInt(ListaEventosPossiveis.size()));
+
+
+
     }
     @Override
     public void modificarRecursos(Ambientes ambienteAtual) {
