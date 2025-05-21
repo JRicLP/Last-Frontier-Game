@@ -56,7 +56,7 @@ public  abstract class Personagem implements AcoesPersonagens {
     public void setSanidadePersonagem(int sanidadePersonagem) {
         this.sanidadePersonagem = sanidadePersonagem;
     }
-    public double getSanidadePersonagem() {
+    public int getSanidadePersonagem() {
         return sanidadePersonagem;
     }
     public void setInventarioPersonagem(Inventario inventarioPersonagem) {

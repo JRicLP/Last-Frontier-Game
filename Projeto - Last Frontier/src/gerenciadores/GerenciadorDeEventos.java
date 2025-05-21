@@ -11,14 +11,14 @@ import java.util.Random;
 public class GerenciadorDeEventos implements AcoesGerenciadorDeEventos {
 
     //Atributos da classe:
-    //Removi o atributo probabilidadeOcorrencia, pois o mesmo não era utilizado
-    private ArrayList<Eventos> listaEventosPossiveis= new ArrayList<>();
+    //Removi o atributo int probabilidadeOcorrencia[], pois o mesmo não era utilizado
+    private ArrayList<Eventos> listaEventosPossiveis;
     private ArrayList<Eventos> historicoEventos;
 
     //Metodo construtor:
     public GerenciadorDeEventos(ArrayList<Eventos> listaEventosPossiveis, ArrayList<Eventos> historicoEventos) {
-        this.listaEventosPossiveis = new ArrayList<>(); //Inicializamos o ArrayList e definimos sua capacidade inicial
-        this.historicoEventos = new ArrayList<>(); //Inicializamos o ArrayList e definimos sua capacidade inicial
+        this.listaEventosPossiveis = listaEventosPossiveis; //O atributo no construtor deve estar dessa forma!!
+        this.historicoEventos = listaEventosPossiveis; //O atributo no construtor deve estar dessa forma!!
     }
 
     //Metodos acessores:
@@ -137,7 +137,7 @@ public class GerenciadorDeEventos implements AcoesGerenciadorDeEventos {
         int indiceSorteado = sorteador.nextInt(listaEventosCriatura.length);
         EventoCriatura eventoSorteado = listaEventosCriatura[indiceSorteado];
         //Mostrando o Evento sorteado:
-        System.out.println("Evento sorteado: " + eventoSorteado.getNomeEvento());
+        System.out.println("Uma criatura apareceu: " + eventoSorteado.getNomeEvento());
         System.out.println("Descrição: " + eventoSorteado.getDescricaoEvento());
         //Adicionando ao Histórico de Eventos:
         listaEventosPossiveis.add(eventoSorteado);
@@ -165,7 +165,7 @@ public class GerenciadorDeEventos implements AcoesGerenciadorDeEventos {
         int indiceSorteado = sorteador.nextInt(listaEventosDescoberta.length);
         EventoDescoberta eventoSorteado = listaEventosDescoberta[indiceSorteado];
         //Mostrando o Evento sorteado:
-        System.out.println("Evento sorteado: " + eventoSorteado.getNomeEvento());
+        System.out.println("Você encontrou um tesouro: " + eventoSorteado.getNomeEvento());
         System.out.println("Descrição: " + eventoSorteado.getDescricaoEvento());
         //Adicionando ao Histórico de Eventos:
         listaEventosPossiveis.add(eventoSorteado);
@@ -199,7 +199,7 @@ public class GerenciadorDeEventos implements AcoesGerenciadorDeEventos {
         int indiceSorteado = sorteador.nextInt(listaEventosDoencaFerimento.length);
         EventoDoencaFerimento eventoSorteado = listaEventosDoencaFerimento[indiceSorteado];
         //Mostrando o Evento sorteado:
-        System.out.println("Evento sorteado: " + eventoSorteado.getNomeEvento());
+        System.out.println("Você está se sentindo mal: " + eventoSorteado.getNomeEvento() + " atingiu-o!");
         System.out.println("Descrição: " + eventoSorteado.getDescricaoEvento());
         //Adicionando ao Histórico de Eventos:
         listaEventosPossiveis.add(eventoSorteado);
@@ -224,6 +224,8 @@ public class GerenciadorDeEventos implements AcoesGerenciadorDeEventos {
             int indiceSorteado = sorteador.nextInt(listaEventosClimaticos.length);
             EventoClimatico climaSorteado = listaEventosClimaticos[indiceSorteado];
             ambienteAtual.setClimaDominante(climaSorteado.getNomeEvento()); //Inicialmente, vamos tratar como String, mas mudaremos o atributo de Ambientes, posteriormente.
+            System.out.println(climaSorteado.getNomeEvento() + "está acontecendo");
+            System.out.println(climaSorteado.getDescricaoEvento());
         }
         else if (ambienteAtual instanceof AmbienteMontanha) {
             //Clima padrão - Montanha:
@@ -238,7 +240,9 @@ public class GerenciadorDeEventos implements AcoesGerenciadorDeEventos {
             EventoClimatico[] listaEventosClimaticos = {climaMontanha, climaVariadoUm, climaVariadoDois};
             int indiceSorteado = sorteador.nextInt(listaEventosClimaticos.length);
             EventoClimatico climaSorteado = listaEventosClimaticos[indiceSorteado];
-            ambienteAtual.setClimaDominante(climaSorteado.getNomeEvento()); //Inicialmente, vamos tratar como String, mas mudaremos o atributo de Ambientes, posteriormente.
+            ambienteAtual.setClimaDominante(climaSorteado.getNomeEvento());//Inicialmente, vamos tratar como String, mas mudaremos o atributo de Ambientes, posteriormente.
+            System.out.println(climaSorteado.getNomeEvento() + "está acontecendo");
+            System.out.println(climaSorteado.getDescricaoEvento());
         }
         else if (ambienteAtual instanceof AmbienteCaverna) {
             //Clima padrão - Caverna:
@@ -260,6 +264,8 @@ public class GerenciadorDeEventos implements AcoesGerenciadorDeEventos {
             int indiceSorteado = sorteador.nextInt(listaEventosClimaticos.length);
             EventoClimatico climaSorteado = listaEventosClimaticos[indiceSorteado];
             ambienteAtual.setClimaDominante(climaSorteado.getNomeEvento()); //Inicialmente, vamos tratar como String, mas mudaremos o atributo de Ambientes, posteriormente.
+            System.out.println(climaSorteado.getNomeEvento() + "está acontecendo");
+            System.out.println(climaSorteado.getDescricaoEvento());
         }
         else if (ambienteAtual instanceof AmbienteLagoRio) {
             //Clima padrão - Lago:
@@ -275,6 +281,8 @@ public class GerenciadorDeEventos implements AcoesGerenciadorDeEventos {
             int indiceSorteado = sorteador.nextInt(listaEventosClimaticos.length);
             EventoClimatico climaSorteado = listaEventosClimaticos[indiceSorteado];
             ambienteAtual.setClimaDominante(climaSorteado.getNomeEvento()); //Inicialmente, vamos tratar como String, mas mudaremos o atributo de Ambientes, posteriormente.
+            System.out.println("Clima " + climaSorteado.getNomeEvento() + "está acontecendo:");
+            System.out.println(climaSorteado.getDescricaoEvento());
         }
     }
 }

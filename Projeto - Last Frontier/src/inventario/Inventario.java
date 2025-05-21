@@ -17,7 +17,7 @@ public class Inventario implements AcoesInventario {
 
     //Metodo construtor:
     public Inventario(ArrayList<Item> listaItens, int pesoSuportado, int capacidadeInventario) {
-        this.listaItens = new ArrayList<>(); //Inicializamos o ArrayList e definimos sua capacidade inicial
+        this.listaItens = listaItens; //O atributo no construtor deve estar dessa forma!!
         this.pesoSuportado = pesoSuportado;
         this.capacidadeInventario = capacidadeInventario;
 
@@ -51,7 +51,7 @@ public class Inventario implements AcoesInventario {
     //Metodos implementados:
     @Override
     public void adicionarItem(Item itemAdicionado) { //Adicionar um verificador para limitar a quantidade de itens com relação à capacidade do inventário
-        if (getCapacidadeInventario() >= listaItens.size()) {
+        if (getCapacidadeInventario() <= listaItens.size()) { //Rever essa condição para não disparar a Exception
             throw new InventarioCheioException("Não foi possível adicionar o Item, pois seu inventário está cheio!!");
         } else {
             if (this.getPesoSuportado() >= itemAdicionado.getPesoItem()) {
@@ -95,5 +95,11 @@ public class Inventario implements AcoesInventario {
         for (int contador = 0; contador < listaItens.size(); contador++) {
             System.out.println(contador + " - " + listaItens.get(contador).getNomeItem());
         }
+    }
+
+    @Override
+    public void mostraItem(Item itemSelecionado) { //Metodo adicionado para o utilizador administrar o inventário!
+        System.out.println("Nome do Item: " + itemSelecionado.getNomeItem());
+        System.out.println("Peso do Item: " + itemSelecionado.getPesoItem());
     }
 }
