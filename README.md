@@ -1,80 +1,135 @@
-Last Frontier: A Canção de Dravnir
+# Last Frontier: A Canção de Dravnir
 
+<div align="center">
 
-🌳 Sinopse
+![Game](https://i.imgur.com/SMaQdgz.png)
 
-Last Frontier é um jogo de aventura e sobrevivência ambientado no mundo místico de Dravnir, onde deuses adormecidos, criaturas ancestrais e uma praga misteriosa moldam um universo à beira do colapso.
+*"Num mundo onde até o vento pode mentir, cada passo é um sussurro de um deus adormecido..."*
 
-Você acorda às margens do lago Mjarnvatn sem lembranças, apenas com uma Vefrbind no braço e uma dor no peito. Como um Vandrer — um forasteiro sonhado pela própria Árvore Primordial — você foi chamado para restaurar o equilíbrio em um mundo onde até mesmo o clima tem vontade própria.
+</div>
 
-🌍 O Mundo de Dravnir
+---
 
-Explore as cinco regiões das Terras Partidas, cada uma com ecossistemas únicos, criaturas distintas e segredos antigos:
+## 🌳 Sinopse
 
-Skógrheimr: Floresta de neblina perpétua onde memórias tomam forma
+**Last Frontier** é um jogo de aventura e sobrevivência ambientado no mundo místico de **Dravnir**, onde deuses adormecidos, criaturas ancestrais e uma praga misteriosa moldam um universo à beira do colapso.
 
-Hrafntindr: Montanhas de pedras mortas e trovões silenciosos
+Você acorda às margens do lago **Mjarnvatn** sem lembranças, apenas com uma **Vefrbind** no braço e uma dor no peito. Como um **Vandrer** — um forasteiro sonhado pela própria Árvore Primordial — você foi chamado para restaurar o equilíbrio em um mundo onde até mesmo o clima tem vontade própria.
 
-Djúpgandr: Cavernas que pulsam como um coração antigo
+---
 
-Eldthórr: Vale de ruínas que cantam em línguas esquecidas
+## 🌍 O Mundo de Dravnir
 
-Mjarnvatn: Lago encantado que reflete o futuro dos que sacrificam lembranças
+<div align="center">
 
-⚔️ Características do Jogo
+![Mapa de Dravnir](https://i.imgur.com/awY0ACx.png)
 
-Sistema de Sobrevivência
+</div>
 
-Enfrente climas vivos como Vindkaldr e Skógrgufa
+Explore as cinco regiões das **Terras Partidas**, cada uma com ecossistemas únicos, criaturas distintas e segredos antigos:
 
-Resista à Morte Silenciosa, uma praga que corrói memórias e identidade
+### 🌲 **Skógrheimr** 
+Floresta de neblina perpétua onde memórias tomam forma
 
-Crie remédios como o Myrsillblóð para combater as doenças mágicas
+### ⛰️ **Hrafntindr** 
+Montanhas de pedras mortas e trovões silenciosos
 
-Combate Tático
+### 🕳️ **Djúpgandr** 
+Cavernas que pulsam como um coração antigo
 
-Utilize armas como Deyðrblóð, a lâmina que suga a alma
+### 🏛️ **Eldthórr** 
+Vale de ruínas que cantam em línguas esquecidas
 
-Enfrente criaturas como os Grimsvártr, javalis titânicos cobertos de espinhos ósseos
+### 🌊 **Mjarnvatn** 
+Lago encantado que reflete o futuro dos que sacrificam lembranças
 
-Desenvolva estratégias contra inimigos que evoluem com o ambiente
+---
 
-Exploração Profunda
+## 👥 Personagens
 
-Descubra os segredos dos cinco territórios das Terras Partidas
+Escolha entre diferentes classes, cada uma com habilidades e histórias únicas:
 
-Interaja com os últimos guardiões do equilíbrio, como a Yndra Sædis
+<div align="center">
 
-Desvende a história do panteão antigo: Varrundr, Eldjarn, Skarnir, Niðrys e Vaelra
+| **Cientista** | **Caçador** | **Explorador** |
+|:---:|:---:|:---:|
+| ![Scientist](https://i.imgur.com/8HEdhrh.png) | ![Hunter](https://i.imgur.com/3VISqHX.png) | ![Explorer](https://i.imgur.com/EXLAi8S.png) |
 
-Sistema de Memórias
+| **Pirata** | **Nômade** | **Infiltrador** |
+|:---:|:---:|:---:|
+| ![Pirate](https://i.imgur.com/dbYPmBO.png) | ![Nomadic](https://i.imgur.com/jYCZL6c.png) | ![Infiltrator](https://i.imgur.com/zjfAf1R.png) |
 
-Recupere suas lembranças para desbloquear habilidades
+</div>
 
-Sacrifique memórias para obter visões do futuro
+---
 
-Desvende seu propósito como um Vandrer sonhado por Dravnir
+## ⚔️ Características do Jogo
 
-🎮 Como Jogar
+### 🌡️ **Sistema de Sobrevivência**
+- Enfrente climas vivos como **Vindkaldr** e **Skógrgufa**
+- Resista à **Morte Silenciosa**, uma praga que corrói memórias e identidade
+- Crie remédios como o **Myrsillblóð** para combater as doenças mágicas
 
-Detalhes sobre instalação e controles serão adicionados em breve.
+### ⚔️ **Combate Tático**
+- Utilize armas como **Deyðrblóð**, a lâmina que suga a alma
+- Enfrente criaturas como os **Grimsvártr**, javalis titânicos cobertos de espinhos ósseos
+- Desenvolva estratégias contra inimigos que evoluem com o ambiente
 
-🛠️ Tecnologias Utilizadas
+### 🗺️ **Exploração Profunda**
+- Descubra os segredos dos cinco territórios das Terras Partidas
+- Interaja com os últimos guardiões do equilíbrio, como a **Yndra Sædis**
+- Desvende a história do panteão antigo: **Varrundr**, **Eldjarn**, **Skarnir**, **Niðrys** e **Vaelra**
 
-Detalhes sobre o motor do jogo e tecnologias utilizadas serão adicionados em breve.
+### 🧠 **Sistema de Memórias**
+- Recupere suas lembranças para desbloquear habilidades
+- Sacrifique memórias para obter visões do futuro
+- Desvende seu propósito como um **Vandrer** sonhado por Dravnir
 
-📝 Status do Desenvolvimento
+---
 
-O jogo está atualmente em fase de desenvolvimento ativo. Acompanhe as atualizações através das releases e do Trello do projeto.
+## 🎮 Como Jogar
 
-👥 Equipe
-Informações sobre a equipe serão adicionadas em breve.
+> Detalhes sobre instalação e controles serão adicionados em breve.
 
-📧 Contato
+---
+
+## 🛠️ Tecnologias Utilizadas
+
+> Detalhes sobre o motor do jogo e tecnologias utilizadas serão adicionados em breve.
+
+---
+
+## 📝 Status do Desenvolvimento
+
+O jogo está atualmente em **fase de desenvolvimento ativo**. Acompanhe as atualizações através das releases e do Trello do projeto.
+
+---
+
+## 👥 Equipe
+
+> Informações sobre a equipe serão adicionadas em breve.
+
+---
+
+## 📧 Contato
+
 Para perguntas, sugestões ou feedback, entre em contato através de:
 
-📜 Licença
-© 2025 Last Frontier. Todos os direitos reservados.
+> *Informações de contato serão adicionadas em breve.*
 
-"Num mundo onde até o vento pode mentir, cada passo é um sussurro de um deus adormecido..."
+---
 
+## 📜 Licença
+
+**© 2025 Last Frontier. Todos os direitos reservados.**
+
+---
+
+<div align="center">
+
+*Em Dravnir, cada escolha ecoa através das eras...*
+
+[![Status](https://img.shields.io/badge/Status-Em%20Desenvolvimento-orange)](https://github.com/seu-usuario/last-frontier)
+[![License](https://img.shields.io/badge/License-Todos%20os%20direitos%20reservados-red)](LICENSE)
+
+</div>
