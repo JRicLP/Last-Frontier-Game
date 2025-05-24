@@ -9,6 +9,8 @@ Você acorda às margens do lago Mjarnvatn sem lembranças, apenas com uma Vefrb
 
 🌍 O Mundo de Dravnir
 
+![Mapa de Dravnir](https://i.imgur.com/a/EtG19Wk.png)
+
 Explore as cinco regiões das Terras Partidas, cada uma com ecossistemas únicos, criaturas distintas e segredos antigos:
 
 Skógrheimr: Floresta de neblina perpétua onde memórias tomam forma
