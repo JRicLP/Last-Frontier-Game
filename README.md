@@ -1,5 +1,5 @@
 Last Frontier: A Canção de Dravnir
-
+![Imagem](https://i.imgur.com/SMaQdgz.png)
 
 🌳 Sinopse
 
@@ -9,7 +9,7 @@ Você acorda às margens do lago Mjarnvatn sem lembranças, apenas com uma Vefrb
 
 🌍 O Mundo de Dravnir
 
-![Mapa de Dravnir](https://i.imgur.com/a/EtG19Wk.png)
+![Mapa de Dravnir](https://i.imgur.com/awY0ACx.png)
 
 Explore as cinco regiões das Terras Partidas, cada uma com ecossistemas únicos, criaturas distintas e segredos antigos:
 
