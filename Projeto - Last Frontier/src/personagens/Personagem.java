@@ -96,13 +96,13 @@ public  abstract class Personagem implements AcoesPersonagens {
     //Metodo implementados:
     @Override
     public void statusPersonagem() {
+        //Removi a opção de mostrar o inventário do Personagem, dado que existe uma forma melhor de fazer isso
         System.out.println("Nome: " + getNomePersonagem());
         System.out.println("Vida: " + getVidaPersonagem());
         System.out.println("Fome: " + getFomePersonagem());
         System.out.println("Sede: " + getSedePersonagem());
         System.out.println("Energia: " + getEnergiaPersonagem());
         System.out.println("Sanidade: " + getSanidadePersonagem());
-        System.out.println("Inventário: " + getInventarioPersonagem());
         System.out.println("Localização: " + getLocalizacaoPersonagem());
     }
 }

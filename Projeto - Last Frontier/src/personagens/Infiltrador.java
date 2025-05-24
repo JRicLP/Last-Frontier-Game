@@ -8,7 +8,7 @@ public class Infiltrador extends Personagem {
     //Metodo construtor:
     public Infiltrador(String habilidadeInfiltrador) {
 
-        this.setNomePersonagem("Malik Gohst - O Infiltrador Fantasma");
+        this.setNomePersonagem("Malik Ghost - O Infiltrador Fantasma");
         this.setVidaPersonagem(85);
         this.setFomePersonagem(65);
         this.setSedePersonagem(85);

@@ -9,5 +9,5 @@ public interface AcoesInventario {
     public abstract void descartarItem(Item itemDescartado);
     public abstract void selecionarItem(int posicaoItemSelecionado, Personagem personagemEscolhido);
     public abstract void mostrarInventario();
-    public abstract void mostraItem(Item itemSelecionado); //Metodo adicionado para o utilizador administrar o inventário!
+    public abstract void mostrarItem(Item itemSelecionado); //Metodo adicionado para o utilizador administrar o inventário!
 }
