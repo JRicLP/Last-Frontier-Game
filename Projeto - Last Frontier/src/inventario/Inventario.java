@@ -98,7 +98,7 @@ public class Inventario implements AcoesInventario {
     }
 
     @Override
-    public void mostraItem(Item itemSelecionado) { //Metodo adicionado para o utilizador administrar o inventário!
+    public void mostrarItem(Item itemSelecionado) { //Metodo adicionado para o utilizador administrar o inventário!
         System.out.println("Nome do Item: " + itemSelecionado.getNomeItem());
         System.out.println("Peso do Item: " + itemSelecionado.getPesoItem());
     }

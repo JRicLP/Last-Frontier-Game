@@ -82,10 +82,10 @@ public class GerenciadorDeAmbientes implements AcoesGerenciadorDeAmbientes {
                 2, "", false, false, false);
 
         //Adicionando os Ambientes:
-        this.getListaAmbientesDisponiveis().add(floresta); //Posição 0
-        this.getListaAmbientesDisponiveis().add(montanha); //Posição 1
-        this.getListaAmbientesDisponiveis().add(caverna);  //Posição 2
-        this.getListaAmbientesDisponiveis().add(lagoRio);  //Posição 3
+        this.getListaAmbientesDisponiveis().add(lagoRio); //Posição 0
+        this.getListaAmbientesDisponiveis().add(floresta); //Posição 1
+        this.getListaAmbientesDisponiveis().add(montanha);  //Posição 2
+        this.getListaAmbientesDisponiveis().add(caverna);  //Posição 3
         this.getListaAmbientesDisponiveis().add(ruinas);   //Posição 4
     }
 }
