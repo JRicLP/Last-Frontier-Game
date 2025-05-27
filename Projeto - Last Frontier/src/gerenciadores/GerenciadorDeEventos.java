@@ -108,27 +108,27 @@ public class GerenciadorDeEventos implements AcoesGerenciadorDeEventos {
     // Gerando Eventos Criaturas:
     public void gerarEventosCriatura() {
         EventoCriatura cervo = new EventoCriatura("Hjarnhyrndr", "Um cervo de pelagem prateada e chifres de cristal gélido. Dizem que ele aparece apenas sob a luz da lua cheia em florestas sagradas. É símbolo de equilíbrio, e caçá-lo é considerado blasfêmia.",
-                2, "O encontro com criaturas possibilita a obtenção de recursos", false, "Animal mágico (neutro)", 25, 5, 0, " ");
+                2, "O encontro com criaturas possibilita a obtenção de recursos", false, "Animal mágico (neutro)", 25, 5, 0, 2);
         EventoCriatura serpente = new EventoCriatura("Niðkrága", "Uma serpente subterrânea que se move por vibrações no solo. Ela cospe uma névoa negra que cega e sufoca. Suas escamas são procuradas para rituais de invisibilidade",
-                2, "O encontro com criaturas possibilita a obtenção de recursos", false, "Criatura hostil", 35, 10, 5, " ");
+                2, "O encontro com criaturas possibilita a obtenção de recursos", false, "Criatura hostil", 35, 10, 5, 5);
         EventoCriatura corvo = new EventoCriatura("Veðrhrafn", "Um corvo colossal com penas de trovão e olhos de relâmpago. Anuncia grandes mudanças ou batalhas. A presença de um Veðrhrafn pode significar bênção divina... ou desgraça inevitável.",
-                2, "O encontro com criaturas possibilita a obtenção de recursos", false, "Animal mágico (neutro)", 40, 10, 0, " ");
+                2, "O encontro com criaturas possibilita a obtenção de recursos", false, "Animal mágico (neutro)", 40, 10, 0, 2);
         EventoCriatura javali = new EventoCriatura("Grimsvártr", "Um javali titânico coberto de espinhos ósseos. Habita vales escuros e ruínas esquecidas. Quando furioso, seu grito ecoa por quilômetros e provoca avalanches.",
-                2, "O encontro com criaturas possibilita a obtenção de recursos", false, "Criatura hostil", 40, 15, 10, " ");
+                2, "O encontro com criaturas possibilita a obtenção de recursos", false, "Criatura hostil", 40, 15, 10, 10);
         EventoCriatura peixe = new EventoCriatura("Silfurskyn", "Um peixe raro que brilha com luz própria em lagos encantados como Mjarnvatn. Quem o captura e o liberta pode receber sonhos proféticos. Comer sua carne, no entanto, causa loucura.",
-                2, "O encontro com criaturas possibilita a obtenção de recursos", false, "Animal mágico (pacífico)", 10, 5, 0, " ");
+                2, "O encontro com criaturas possibilita a obtenção de recursos", false, "Animal mágico (pacífico)", 10, 5, 0, 2);
         EventoCriatura lobo = new EventoCriatura("Draugrulfr", "Lobo espectral que aparece onde o véu entre mundos se rompe. Seus olhos ardem com chamas verdes e seu uivo atrai os mortos inquietos. Imune a armas normais, só teme fogo.",
-                2, "O encontro com criaturas possibilita a obtenção de recursos", false, "Criatura hostil", 20, 5, 5, " ");
+                2, "O encontro com criaturas possibilita a obtenção de recursos", false, "Criatura hostil", 20, 5, 5, 5);
         EventoCriatura cabra = new EventoCriatura("Tindgeit", "Cabra das montanhas com patas afiadas como ganchos e pelo que muda de cor com o clima. É usada por caçadores e clérigos como guia em regiões traiçoeiras.",
-                2, "O encontro com criaturas possibilita a obtenção de recursos", false, "Animal selvagem (neutro)", 15, 5, 0, " ");
+                2, "O encontro com criaturas possibilita a obtenção de recursos", false, "Animal selvagem (neutro)", 15, 5, 0, 2);
         EventoCriatura aranha = new EventoCriatura("Skuggadraugr", "Uma criatura que vive entre as sombras de ruínas e cavernas profundas. Não tem forma definida — apenas olhos vermelhos pairando na escuridão. Alimenta-se de medo. Matar uma exige luz.",
-                2, "O encontro com criaturas possibilita a obtenção de recursos", false, "Animal selvagem (neutro)", 15, 10, 10, " ");
+                2, "O encontro com criaturas possibilita a obtenção de recursos", false, "Animal selvagem (neutro)", 15, 10, 10, 10);
         EventoCriatura guerreiroCorrompido = new EventoCriatura("Skarnvaldr", "Um antigo guerreiro-sacerdote banido pelos próprios deuses após desafiar os Pactos do Céu. Usa uma armadura corroída por raios e carrega uma lança de obsidiana viva chamada Mjarkfjaldr." +
                 " Ele percorre as montanhas e ruínas em busca de relíquias perdidas, amaldiçoando qualquer um que cruze seu caminho com visões de agonia eterna.", 2, "O encontro com entidades humanas permite a obtenção de recursos ou batalhas", false,
-                "Humano hostil", 60, 25, 20, "");
+                "Humano hostil", 60, 25, 20, 20);
         EventoCriatura guardiaDoLago = new EventoCriatura("Yndra Sædis", "Uma mulher idosa que vive isolada às margens do lago Mjarnvatn. É uma vidente silenciosa, conhecida por ouvir os sussurros da névoa. Acredita-se que Yndra seja filha de um deus e uma mortal," +
                 " com sangue de tempo em suas veias. Aqueles que buscam respostas em seus sonhos costumam procurá-la — mas ela só fala em enigmas.", 2, "O encontro com entidades humanas permite a obtenção de recursos ou batalhas", false,
-                "Humano pacífico", 80, 0, 0, "");
+                "Humano pacífico", 80, 0, 0, 40);
         //Adicionando na lista conforme as probabilidades de cada Evento Criatura:
         //Inicialmente, vou fazer uma Probabilidade Forçada Simples, com a mesma chance para todos os elementos:
         EventoCriatura[] listaEventosCriatura = {cervo, serpente, corvo, javali, peixe, lobo, cabra, aranha, guardiaDoLago, guerreiroCorrompido};
