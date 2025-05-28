@@ -9,7 +9,8 @@ public class GerenciadorDePersonagens implements AcoesGerenciadorDePersonagens {
     String escolha;
     private Personagem personagem;
 
-    public GerenciadorDePersonagens() { //‘String’ escolha, ‘String’ personagem - Não entendi o porquê de iniciar o gerenciador com esses atributos
+    public GerenciadorDePersonagens() {
+
     }
 
     //Métodos acessores:
@@ -65,7 +66,7 @@ public class GerenciadorDePersonagens implements AcoesGerenciadorDePersonagens {
 
             System.out.println("Você escolheu " + this.getEscolha());
             System.out.println("Boa sorte em sua jornada!");
-            Personagem personagemEscolhido = this.getPersonagem();
+            //Personagem personagemEscolhido = this.getPersonagem();
             break;
         }
     }
