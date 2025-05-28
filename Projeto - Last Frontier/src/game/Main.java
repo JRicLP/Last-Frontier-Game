@@ -1,6 +1,9 @@
 package game;
 
 import ambientes.Ambientes;
+import eventos.EventoClimatico;
+import eventos.EventoCriatura;
+import eventos.EventoDescoberta;
 import eventos.Eventos;
 import gerenciadores.GerenciadorDeAmbientes;
 import gerenciadores.GerenciadorDeEventos;
@@ -19,16 +22,19 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
 
+        // Aqui é que irá funcionar a entrada do usuário para cada ação que for tomada:
+        Scanner usuario = new Scanner(System.in);
+
         //Mensagens - Lore do Jogo:
         MensagensIniciais display = new MensagensIniciais();
         display.mensagensLoreIntroducao();
         display.sleep(3000);
-        new java.util.Scanner(System.in).nextLine();
+        usuario.nextLine();
 
         //Mensagens - Regras do Jogo:
         CondicaoDeVitoriaDerrota display2 = new CondicaoDeVitoriaDerrota();
         display2.condicaoDisplay();
-        new java.util.Scanner(System.in).nextLine();
+        usuario.nextLine();
 
         //Escolhendo o Personagem:
 
@@ -98,15 +104,21 @@ public class Main {
         int contadorTurnos = 0; // Este será o contador principal de ações/turnos
         boolean personagemVivo = true;// Coloquei essa flag para validar melhor a sobrevivência do personagem
 
+        //Elementos Dinâmicos do Jogo:
+
+        //Clima:
+        EventoClimatico eventoClimaticoAtual = null;
+        //Criatura:
+        EventoCriatura eventoCriaturaAtual = null;
+        int turnosDesdeEncontroCriatura = -1;
+        //Descoberta
+        EventoDescoberta eventoDescobertaAtual = null;
+
         // Sistema de Eventos: Aqui estamos a definir os atributos do Gerenciador de Eventos
         ArrayList<Eventos> listaEventosPossiveis = new ArrayList<Eventos>(20);
         ArrayList<Eventos> historicoEventos = new ArrayList<Eventos>(25);
         // Instanciando o Gerenciador de Eventos:
         GerenciadorDeEventos gerenciadorDeEventos = new GerenciadorDeEventos(listaEventosPossiveis, historicoEventos);
-
-        // Aqui é que irá funcionar a entrada do usuário para cada ação que for tomada:
-        Scanner usuario = new Scanner(System.in);
-
         // ‘Loop’ principal do jogo:
         while (contadorTurnos < turnosMaximos && personagemVivo) {
 
@@ -131,12 +143,16 @@ public class Main {
             //Nessa parte, estamos a fazer aquela mudança linear que combinamos, conforme a trajetória do personagem:
             if (contadorTurnos == 5) {
                 gerenciadorDeAmbientes.mudarAmbiente(personagemEscolhido, listaAmbientesDisponiveis.get(1));
+                ambienteAtual = listaAmbientesDisponiveis.get(1);
             } else if (contadorTurnos == 10) {
                 gerenciadorDeAmbientes.mudarAmbiente(personagemEscolhido, listaAmbientesDisponiveis.get(2));
+                ambienteAtual = listaAmbientesDisponiveis.get(2);
             } else if (contadorTurnos == 15) {
                 gerenciadorDeAmbientes.mudarAmbiente(personagemEscolhido, listaAmbientesDisponiveis.get(3));
+                ambienteAtual = listaAmbientesDisponiveis.get(3);
             } else if (contadorTurnos == 20) {
                 gerenciadorDeAmbientes.mudarAmbiente(personagemEscolhido, listaAmbientesDisponiveis.get(4));
+                ambienteAtual = listaAmbientesDisponiveis.get(4);
             }
 
             //Coloquei o contador de Turnos:
@@ -165,23 +181,111 @@ public class Main {
 
                     //Eventos gerados turno a turno:
                     System.out.println("Eventos ocorrem durante a exploração:");
-                    gerenciadorDeEventos.gerarEventosClimaticos(ambienteAtual);
-                    gerenciadorDeEventos.gerarEventosCriatura();
-                    gerenciadorDeEventos.gerarEventosDescoberta();
+
+                    //Clima do Turno:
+                    eventoClimaticoAtual = gerenciadorDeEventos.gerarEventosClimaticos(ambienteAtual);
+
+                    //Criatura do Turno:
+                    if (eventoCriaturaAtual == null || eventoCriaturaAtual.getVidaCriatura() <= 0) {
+                        EventoCriatura criaturaRecemGerada = gerenciadorDeEventos.gerarEventosCriatura();
+                        if (criaturaRecemGerada != null) {
+                            //Verificando se é Hostil:
+                            if (criaturaRecemGerada.getTipoCriatura().contains("Hostil")) {
+                                eventoCriaturaAtual = criaturaRecemGerada; // ATRIBUI À VARIÁVEL PERSISTENTE
+                                turnosDesdeEncontroCriatura = 0; //Atualizando a variável para iniciar a contagem de Turnos
+                                System.out.println(">> ALERTA! Um(a) " + eventoCriaturaAtual.getNomeEvento() + " (" + eventoCriaturaAtual.getTipoCriatura() + ") apareceu e parece hostil! <<");
+                            } else {
+                                System.out.println("Um(a) " + criaturaRecemGerada.getNomeEvento() + " (" + criaturaRecemGerada.getTipoCriatura() + ") foi visto(a) por perto, mas não parece agressivo(a).");
+                                eventoCriaturaAtual = criaturaRecemGerada; //Quero que seja possível atacar criaturas, independente da sua hostilidade.
+                                turnosDesdeEncontroCriatura = 0; //Atualizando a variável para iniciar a contagem de Turnos
+                              }
+                        }
+                    } else {
+                        // Já existe uma criatura ativa e viva
+                        System.out.println(">> " + eventoCriaturaAtual.getNomeEvento() + " (" + eventoCriaturaAtual.getTipoCriatura() + ") ainda está por perto e te encara... <<");
+                    }
+
+                    //Descoberta do Turno:
+                    eventoDescobertaAtual =  gerenciadorDeEventos.gerarEventosDescoberta(); //Vou aprimorar para se relacionar com a geração de Itens
 
                     System.out.println("----------------------------------------------------------------------------");
                     personagemEscolhido.statusPersonagem(); //Mostrando o Status pós ação
 
                     //Verificando a morte após ações que afetam os Status do Personagem:
-                    if (personagemEscolhido.getVidaPersonagem() <= 0) {
+                    if (personagemEscolhido.getVidaPersonagem() <= 0 || personagemEscolhido.getSedePersonagem() <=0 || personagemEscolhido.getFomePersonagem() <= 0
+                    || personagemEscolhido.getSanidadePersonagem() <= 0) {
                         personagemVivo = false;
                     }
 
                     break;
 
                 case "2": // Atacar Criatura
-                    //Aqui, iremos evoluir o metodo conforme a lógica de combate!
-                    System.out.println("Você se prepara para atacar uma criatura!");
+
+                    //Verificando se há uma criatura:
+                    if (eventoCriaturaAtual == null || eventoCriaturaAtual.getVidaCriatura() <= 0) {
+                        System.out.println("Não há nenhuma criatura para atacar no momento.");
+                        continue;
+                    }
+
+                    //Criatura existindo:
+                    System.out.println("Você se prepara para enfrentar: " + eventoCriaturaAtual.getNomeEvento() + " (Vida: " + eventoCriaturaAtual.getVidaCriatura() + ")");
+                    System.out.println("Antes de atacar, selecione uma Arma do seu inventário!");
+                    inventarioPersonagem.mostrarInventario();
+                    System.out.print("Digite o índice da Arma (começando em 0) ou -1 para reconsiderar: ");
+
+                    int indiceArmaSelecionada;
+                    if (usuario.hasNextInt()) {
+                        indiceArmaSelecionada = usuario.nextInt();
+                        usuario.nextLine();
+                    } else {
+                        System.out.println("Entrada de índice inválida. Ação cancelada.");
+                        usuario.nextLine();
+                        continue;
+                    }
+
+                    if (indiceArmaSelecionada == -1) {
+                        System.out.println("Você decide não atacar desta vez.");
+                        continue;
+                    }
+
+                    Item itemEscolhido = null;
+                    // Validação do índice e obtenção do Item:
+                    if (indiceArmaSelecionada >= 0 && indiceArmaSelecionada < inventarioPersonagem.getListaItens().size()) {
+                        // Acesso direto à lista. Ideal: inventarioPersonagem.getItemPeloIndice(indiceArmaSelecionada);
+                        itemEscolhido = listaItens.get(indiceArmaSelecionada);
+                    }
+
+                    if (itemEscolhido instanceof Armas) {
+                        Armas armaRealSelecionada = (Armas) itemEscolhido;
+                        System.out.println("Você empunha sua " + armaRealSelecionada.getNomeItem() + ".");
+                        System.out.println("----------------------------------------------------------------------------");
+
+                        //Iniciando a dinâmica de combatE:
+                        armaRealSelecionada.atacar(personagemEscolhido, eventoCriaturaAtual, usuario);
+
+                        //Pós-combate:
+                        if (eventoCriaturaAtual.getVidaCriatura() <= 0) {
+                            // Aqui podemos adicionar consequências ou informações extras no contexto do 'main'.
+                            System.out.println("\n>> O corpo de " + eventoCriaturaAtual.getNomeEvento() + " jaz imóvel. O perigo passou, por ora. <<");
+                            // TODO: Adicionar lógica para recompensas (XP, itens dropados).
+                            eventoCriaturaAtual = null;
+                            turnosDesdeEncontroCriatura = -1;
+                        }
+                        //Verificando a morte do Personagem:
+                        if (personagemEscolhido.getVidaPersonagem() <= 0) {
+                            personagemVivo = false;
+                        }
+                        //Verificando a Durabilidade:
+                        if (armaRealSelecionada.getDurabilidadeItem() <= 0) {
+                            System.out.println("Sua arma " + armaRealSelecionada.getNomeItem() + " quebrou com o esforço da batalha!");
+                            //Arma Quebrou:
+                            inventarioPersonagem.descartarItem(armaRealSelecionada);
+                        }
+
+                    } else {
+                        System.out.println("O item no índice " + indiceArmaSelecionada + " não é uma Arma ou o índice é inválido!");
+                        // Turno é consumido porque o jogador tentou uma ação.
+                    }
                     System.out.println("----------------------------------------------------------------------------");
                     personagemEscolhido.statusPersonagem();
                     break;
@@ -207,6 +311,7 @@ public class Main {
                             case "2": // Usar-Selecionar Item do Inventário
                                 System.out.println("Digite a posição do Item que você deseja usar/selecionar:");
                                 int indiceDoItemUsado = usuario.nextInt();
+                                usuario.nextLine();
                                 //A depender da classe do Item, uma ação já é tomada
                                 inventarioPersonagem.selecionarItem(indiceDoItemUsado, personagemEscolhido);
                                 break;
@@ -214,23 +319,25 @@ public class Main {
                             case "3": // Descartar
                                 System.out.println("Digite a posição do Item que você deseja descartar:");
                                 int indiceDoItemDescartado = usuario.nextInt();
+                                usuario.nextLine();
                                 inventarioPersonagem.descartarItem(listaItens.get(indiceDoItemDescartado));
                                 break;
 
                             case "4": // Ver detalhes dos Itens
-                            System.out.println("Digite a posição do Item que você quer ver:");
-                            int indiceDoItemMostrado = usuario.nextInt();
-                            System.out.println("Mostrando características do Item Selecionado:");
-                            inventarioPersonagem.mostrarItem(listaItens.get(indiceDoItemMostrado));
-                            break;
+                                System.out.println("Digite a posição do Item que você quer ver:");
+                                int indiceDoItemMostrado = usuario.nextInt();
+                                usuario.nextLine();
+                                System.out.println("Mostrando características do Item Selecionado:");
+                                inventarioPersonagem.mostrarItem(listaItens.get(indiceDoItemMostrado));
+                                break;
 
                             case "0":
-                            System.out.println("Fechando inventário.");
-                            break;
+                                System.out.println("Fechando inventário.");
+                                break;
 
-                        default:
-                            System.out.println("Opção inválida para o inventário.");
-                            break;
+                            default:
+                                System.out.println("Opção inválida para o inventário.");
+                                continue;
                     }
                     // Após uma ação de inventário, é bom mostrar o status atualizado.
                     System.out.println("----------------------------------------------------------------------------");
@@ -239,12 +346,15 @@ public class Main {
 
                 case "4": // Ver status
                     personagemEscolhido.statusPersonagem();
-                    break;
+                    continue;
 
                 case "5": // Descansar
-                    System.out.println("Você escolheu descansar e repor energias...");
+                    System.out.println("Você escolheu descansar, repor energias e acalmar a mente...");
+                    System.out.println("Seu corpo não parou de funcionar, você consumiu pontos de Fome e Sede");
                     personagemEscolhido.setEnergiaPersonagem(personagemEscolhido.getEnergiaPersonagem() + 20);
                     personagemEscolhido.setSanidadePersonagem(personagemEscolhido.getSanidadePersonagem() + 10);
+                    personagemEscolhido.setSedePersonagem(personagemEscolhido.getSedePersonagem() - 8);
+                    personagemEscolhido.setFomePersonagem(personagemEscolhido.getFomePersonagem() - 8);
                     System.out.println("----------------------------------------------------------------------------");
                     personagemEscolhido.statusPersonagem();
                     break;
@@ -253,13 +363,23 @@ public class Main {
                     System.out.println("Comando inválido. Tente novamente.");
                     continue; //Usamos continue não modificar o turno
             }
-
-            if (personagemVivo) { // Só incrementa turno se o personagem ainda estiver vivo após a ação
+            // --- LÓGICA DE FIM DE TURNO PARA CRIATURA ENCONTRADA ---
+            if (eventoCriaturaAtual != null && eventoCriaturaAtual.getVidaCriatura() > 0 && personagemVivo) {
+                // Apenas incrementa se a criatura não foi derrotada neste turno e o jogador está vivo
+                turnosDesdeEncontroCriatura++;
+                // A criatura desaparece APÓS 2 turnos DEPOIS do turno do encontro.
+                if (turnosDesdeEncontroCriatura >= 3) {
+                    System.out.println(">> " + eventoCriaturaAtual.getNomeEvento() + " se cansa de esperar e desaparece nas sombras... <<");
+                    eventoCriaturaAtual = null;
+                    turnosDesdeEncontroCriatura = -1; //Resetando o contador
+                }
+            }
+            if (personagemVivo) { //Só incrementa turno se o personagem ainda estiver vivo após a ação
                 contadorTurnos++;
             }
-            // Aqui, marcamos o final do turno
+            //Aqui, marcamos o final do turno
         }
-        // Aqui marcamos o final do Jogo para 2 casos: Morte ou Sobrevivência Máxima:
+        //Aqui marcamos o final do Jogo para 2 casos: Morte ou Sobrevivência Máxima
         if (!personagemVivo) {
             System.out.println("\nFim de jogo. O personagem não sobreviveu.");
         } else {

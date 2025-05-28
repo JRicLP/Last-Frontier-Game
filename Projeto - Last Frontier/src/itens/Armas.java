@@ -43,7 +43,7 @@ public class Armas extends Item implements AcoesArmas {
 
     //Metodos implementados:
     @Override
-    public void atacar(Personagem personagemEscolhido, EventoCriatura criaturaAtacada) { // Scanner passado como parâmetro
+    public void atacar(Personagem personagemEscolhido, EventoCriatura criaturaAtacada, Scanner entradaUsuario) { // Scanner passado como parâmetro
 
         System.out.println("Atacar um alvo consome Energia e utiliza pontos de Fome e Sede, além disso sua arma será desgastada!");
         System.out.println("Dano da sua arma ("+ this.getNomeItem() +"):" + this.getDanoArma());
@@ -69,7 +69,6 @@ public class Armas extends Item implements AcoesArmas {
             System.out.println("2 - Fugir");
             System.out.print("Opção: ");
 
-            Scanner entradaUsuario = new Scanner(System.in);
             String opcaoUsuario = entradaUsuario.nextLine().trim();
 
             switch (opcaoUsuario) {
