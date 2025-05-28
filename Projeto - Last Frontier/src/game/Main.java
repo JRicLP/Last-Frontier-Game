@@ -170,10 +170,13 @@ public class Main {
                     gerenciadorDeEventos.gerarEventosDescoberta();
 
                     System.out.println("----------------------------------------------------------------------------");
-                    personagemEscolhido.statusPersonagem(); // Mostrar status após a ação
+                    personagemEscolhido.statusPersonagem(); //Mostrando o Status pós ação
 
-                    // IMPORTANTE: Verificar morte após ações que afetam status vitais
-                    // if (verificarCondicaoDeMorteEProcessar(personagemEscolhido)) { personagemVivo = false; }
+                    //Verificando a morte após ações que afetam os Status do Personagem:
+                    if (personagemEscolhido.getVidaPersonagem() <= 0) {
+                        personagemVivo = false;
+                    }
+
                     break;
 
                 case "2": // Atacar Criatura
