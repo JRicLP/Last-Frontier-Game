@@ -102,4 +102,10 @@ public class Inventario implements AcoesInventario {
         System.out.println("Nome do Item: " + itemSelecionado.getNomeItem());
         System.out.println("Peso do Item: " + itemSelecionado.getPesoItem());
     }
+    private final int pesoMaximo = 45; // ou o valor que você definiu
+
+    public int getPesoMaximo() {
+        return pesoMaximo;
+    }
+
 }
