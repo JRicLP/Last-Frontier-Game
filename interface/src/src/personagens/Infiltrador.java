@@ -20,6 +20,7 @@ public class Infiltrador extends Personagem {
         this.setSedeInicialPersonagem(85);
         this.setFomeInicialPersonagem(65);
         this.habilidadeInfiltrador = habilidadeInfiltrador;
+        this.setImagemPersonagemNoAmbiente("infiltrador");
     }
     //Metodos acessores:
     public void setHabilidadeInfiltrador(String habilidadeInfiltrador) {

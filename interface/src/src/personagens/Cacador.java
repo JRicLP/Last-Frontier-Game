@@ -19,6 +19,7 @@ public class Cacador extends Personagem {
         this.setSedeInicialPersonagem(65);
         this.setFomeInicialPersonagem(100);
         this.habilidadeCacador = habilidadeCacador;
+        this.setImagemPersonagemNoAmbiente("cacador");
     }
     //Metodos acessores:
     public void setHabilidadeCacador(String habilidadeCacador) {

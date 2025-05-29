@@ -20,6 +20,10 @@ public class Explorador extends Personagem {
         this.setSedeInicialPersonagem(100);
         this.setFomeInicialPersonagem(100);
         this.habilidadeExplorador = habilidadeExplorador;
+        this.setEnergiaMaximaPersonagem(70);
+        this.setSanidadeMaximaPersonagem(75);
+        this.setVidaMaximaPersonagem(90);
+        this.setImagemPersonagemNoAmbiente("explorador");
     }
     //Metodos acessores:
     public void setHabilidadeExplorador(String habilidadeExplorador) {

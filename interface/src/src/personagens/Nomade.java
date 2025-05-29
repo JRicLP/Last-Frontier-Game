@@ -18,6 +18,7 @@ public class Nomade extends Personagem {
         this.setSedeInicialPersonagem(65);
         this.setFomeInicialPersonagem(100);
         this.habilidadeNomade = habilidadeNomade;
+        this.setImagemPersonagemNoAmbiente("nomade");
     }
     //Metodos acessores:
     public void setHabilidadeNomade(String habilidadeNomade) {
