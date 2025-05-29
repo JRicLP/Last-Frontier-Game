@@ -55,9 +55,14 @@ public class TelaLagoRio extends JPanel {
         avancar.setPreferredSize(new Dimension(120, 40));
 
         avancar.addActionListener(e -> {
-            // Aqui você pode levar para a próxima tela (ex: floresta, montanha etc.)
-            JOptionPane.showMessageDialog(this, "Próxima etapa em construção!");
+            JFrame janela = (JFrame) SwingUtilities.getWindowAncestor(this);
+            janela.getContentPane().removeAll();
+            janela.setContentPane(new TelaPrincipalJogo(personagem).getContentPane());
+            janela.revalidate();
+            janela.repaint();
+
         });
+
 
         JPanel painelBotao = new JPanel();
         painelBotao.setOpaque(false);
