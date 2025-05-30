@@ -163,5 +163,39 @@ public class GerenciadorDeItens {
         System.out.println(materialSorteado.getTipoMaterial());
         return materialSorteado;
     }
+
+    public Item gerarItemAleatorioGlobal() {
+        Random sorteadorCategoria = new Random();
+        int categoriaSorteada = sorteadorCategoria.nextInt(6); // 0 a 5, para 6 categorias
+
+        Item itemGerado = null;
+
+        System.out.println("Você vasculha os arredores em busca de algo útil..."); // Mensagem genérica
+
+        switch (categoriaSorteada) {
+            case 0:
+                itemGerado = gerarItemAgua(); // gerarItemAgua() já imprime "Você achou..."
+                break;
+            case 1:
+                itemGerado = gerarItemAlimento(); // gerarItemAlimento() já imprime "Você achou..."
+                break;
+            case 2:
+                itemGerado = gerarItemRemedio(); // gerarItemRemedio() já imprime "Você achou..."
+                break;
+            case 3:
+                itemGerado = gerarItemArmas(); // gerarItemArmas() já imprime "Você achou..."
+                break;
+            case 4:
+                itemGerado = gerarItemFerramentas(); // gerarItemFerramentas() já imprime "Você achou..."
+                break;
+            case 5:
+                itemGerado = gerarItemMateriais(); // gerarItemMateriais() já imprime "Você achou..."
+                break;
+            default:
+                System.out.println("Estranhamente, você não encontrou nada desta vez.");
+                return null; // Caso algo dê errado com o sorteio de categoria
+        }
+        return itemGerado;
+    }
 }
 
