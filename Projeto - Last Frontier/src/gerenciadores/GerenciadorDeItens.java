@@ -9,8 +9,8 @@ public class GerenciadorDeItens {
     public Agua gerarItemAgua(){
 
         //Objetos de Água:
-        Agua cantilDeAgua = new Agua("Cantil de Água", 1, 10,9,4);
-        Agua aguaPotavelDoLago = new Agua("Água Potável do Lago",1,10,10,3);
+        Agua cantilDeAgua = new Agua("Cantil de Água", 1, 10,9,5);
+        Agua aguaPotavelDoLago = new Agua("Água Potável do Lago",1,10,10,10);
         Agua barrilDeAgua = new Agua("Barril de Água", 5,8,8,10);
         Agua poteSujoDeAgua = new Agua("Pote de Água Suja", 2,2,2,5);
 
