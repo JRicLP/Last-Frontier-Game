@@ -1,6 +1,6 @@
 package eventos;
 
-public class EventoDoencaFerimento extends Eventos{
+public class EventoDoencaFerimento extends Evento {
 
     //Atributos da subclasse:
     private String tipoDoenca;

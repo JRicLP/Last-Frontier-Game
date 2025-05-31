@@ -1,6 +1,6 @@
 package eventos;
 
-public class EventoClimatico extends Eventos {
+public class EventoClimatico extends Evento {
 
     //Atributos da subclasse:
     private String tipoClima; //É necessário revisar a utilidade desse atributo

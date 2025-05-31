@@ -1,7 +1,6 @@
 package interfaces;
 
 import eventos.EventoCriatura;
-import itens.Armas;
 import personagens.Personagem;
 
 import java.util.Scanner;

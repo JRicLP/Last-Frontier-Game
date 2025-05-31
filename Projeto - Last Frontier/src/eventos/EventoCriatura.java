@@ -1,6 +1,6 @@
 package eventos;
 
-public class EventoCriatura extends Eventos{
+public class EventoCriatura extends Evento {
 
     //Atributos da subclasse:
     private String tipoCriatura; //Atributo mantido, pois identifica a criatura

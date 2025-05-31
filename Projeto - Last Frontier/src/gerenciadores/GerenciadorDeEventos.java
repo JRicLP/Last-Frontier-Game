@@ -12,26 +12,26 @@ public class GerenciadorDeEventos implements AcoesGerenciadorDeEventos {
 
     //Atributos da classe:
     //Removi o atributo int probabilidadeOcorrencia[], pois o mesmo não era utilizado
-    private ArrayList<Eventos> listaEventosPossiveis;
-    private ArrayList<Eventos> historicoEventos;
+    private ArrayList<Evento> listaEventoPossiveis;
+    private ArrayList<Evento> historicoEventos;
 
     //Metodo construtor:
-    public GerenciadorDeEventos(ArrayList<Eventos> listaEventosPossiveis, ArrayList<Eventos> historicoEventos) {
-        this.listaEventosPossiveis = listaEventosPossiveis;
+    public GerenciadorDeEventos(ArrayList<Evento> listaEventoPossiveis, ArrayList<Evento> historicoEventos) {
+        this.listaEventoPossiveis = listaEventoPossiveis;
         this.historicoEventos = historicoEventos;
     }
 
     //Metodos acessores:
-    public void setListaEventosPossiveis(ArrayList <Eventos>listaEventosPossiveis) {
-        this.listaEventosPossiveis = listaEventosPossiveis;
+    public void setListaEventosPossiveis(ArrayList <Evento> listaEventoPossiveis) {
+        this.listaEventoPossiveis = listaEventoPossiveis;
     }
-    public ArrayList<Eventos> getListaEventosPossiveis() {
-        return listaEventosPossiveis;
+    public ArrayList<Evento> getListaEventosPossiveis() {
+        return listaEventoPossiveis;
     }
-    public void setHistoricoEventos(ArrayList<Eventos> historicoEventos) {
+    public void setHistoricoEventos(ArrayList<Evento> historicoEventos) {
         this.historicoEventos = historicoEventos;
     }
-    public ArrayList<Eventos> getHistoricoEventos() {
+    public ArrayList<Evento> getHistoricoEventos() {
         return historicoEventos;
     }
 
@@ -40,7 +40,7 @@ public class GerenciadorDeEventos implements AcoesGerenciadorDeEventos {
     //Retirei o metodo sortearEvento(); pois o mesmo não estava se encaixando na lógica do jogo
 
     @Override
-    public void aplicarEvento(Personagem personagemAtual, Eventos eventoAplicado) {
+    public void aplicarEvento(Personagem personagemAtual, Evento eventoAplicado) {
         if (eventoAplicado.isCondicaoEvento()) { //Verifica se a condição necessária para o evento está ativa
             System.out.println("O personagem " + personagemAtual.getNomePersonagem() + " está sofrendo as consequências de: " + eventoAplicado.getNomeEvento());
         }
@@ -49,7 +49,7 @@ public class GerenciadorDeEventos implements AcoesGerenciadorDeEventos {
     }
 
     @Override
-    public void removerEvento(Eventos eventoAtual) {
+    public void removerEvento(Evento eventoAtual) {
         System.out.println("O evento " + eventoAtual.getNomeEvento() + "foi removido com sucesso!!");
     }
 
@@ -90,7 +90,7 @@ public class GerenciadorDeEventos implements AcoesGerenciadorDeEventos {
         System.out.println("Uma criatura apareceu: " + eventoSorteado.getNomeEvento());
         System.out.println("Descrição: " + eventoSorteado.getDescricaoEvento());
         //Adicionando ao Histórico de Eventos:
-        this.listaEventosPossiveis.add(eventoSorteado);
+        this.listaEventoPossiveis.add(eventoSorteado);
         this.historicoEventos.add(eventoSorteado);
         //Retornando a Criatura:
         return eventoSorteado;
@@ -99,15 +99,15 @@ public class GerenciadorDeEventos implements AcoesGerenciadorDeEventos {
     //Gerando Eventos Descoberta:
     public EventoDescoberta gerarEventosDescoberta() {
         EventoDescoberta bauPerdido = new EventoDescoberta("Bau Perdido", "Um antigo baú esquecido pelos corajosos exploradores de uma era passada", 3,
-                "Descobertas recuperam o folego do personagem, um pouco de energia e sede serão regenerados", true, "Combináveis e Equipáveis", "Materiais, Ferramentas ou Armas", false);
+                "Descobertas recuperam o folego do personagem, um pouco de energia e sede serão regenerados", true, "Combináveis e Equipáveis", "Material, Ferramenta, Arma", false);
         EventoDescoberta caixaDeSuprimentos = new EventoDescoberta("Caixa de Suprimentos", "Uma caixa de suprimentos deixada para trás, parece que era parte de um antigo vilarejo da região", 4,
-                "Caixas de Suprimentos recuperam Sede, Fome e um pouco de Sanidade!", true, "Consumíveis", "Alimentos, Agua", false);
+                "Caixas de Suprimentos recuperam Sede, Fome e um pouco de Sanidade!", true, "Consumíveis", "Alimento, Agua", false);
         EventoDescoberta ervasMedicinais = new EventoDescoberta("Ervas Medicinais", "Um conjunto de pequenas folhas e ramos com propriedades curativas, fazem parte da natureza do local", 3,
-                "Ervas Medicinais recuperam a Saúde do personagem e dão um pouco de esperança, recuperando a Sanidade", true, "Consumíveis", "Remédios", false);
+                "Ervas Medicinais recuperam a Saúde do personagem e dão um pouco de esperança, recuperando a Sanidade", true, "Consumíveis", "Remedio", false);
         EventoDescoberta destrocosRuinas = new EventoDescoberta("Destroços de Ruínas", "Alguns materiais conseguiram resistir ao tempo e ao intenso fevor dessa ruína, pode haver algo de útil nesse meio", 2,
-                "Destroços são importantes fontes de materiais, quem sabe até ferramentas ou armas!", true, "Combináveis e Equipáveis", "Materiais, Ferramentas ou Armas", false);
+                "Destroços são importantes fontes de materiais, quem sabe até ferramentas ou armas!", true, "Combináveis e Equipáveis", "Material, Ferramenta, Arma", false);
         EventoDescoberta jarrosConserva = new EventoDescoberta("Jarros de Conserva", "Os antigos Jarros de Conserva eram utilizados para armazenar diversos recursos por décadas, talvez ainda tenha algo útil",
-                2, "Jarros de Conserva são uma ótima fonte de recursos, se encontrar um deles não irá passar necessidades", true, "Consumíveis", "Alimentos, Água, Remédios", false);
+                2, "Jarros de Conserva são uma ótima fonte de recursos, se encontrar um deles não irá passar necessidades", true, "Consumíveis", "Alimento, Agua, Remedio", false);
         //Adicionando na lista conforme as probabilidades de cada Evento Descoberta:
         //Inicialmente, vou fazer uma Probabilidade Forçada Simples, com a mesma chance para todos os elementos:
         EventoDescoberta[] listaEventosDescoberta = {bauPerdido, caixaDeSuprimentos, ervasMedicinais, destrocosRuinas, jarrosConserva};
@@ -119,7 +119,7 @@ public class GerenciadorDeEventos implements AcoesGerenciadorDeEventos {
         System.out.println("Você encontrou um tesouro: " + eventoSorteado.getNomeEvento());
         System.out.println("Descrição: " + eventoSorteado.getDescricaoEvento());
         //Adicionando ao Histórico de Eventos:
-        this.listaEventosPossiveis.add(eventoSorteado);
+        this.listaEventoPossiveis.add(eventoSorteado);
         this.historicoEventos.add(eventoSorteado);
         //Retornando a Descoberta
         return eventoSorteado;
@@ -156,7 +156,7 @@ public class GerenciadorDeEventos implements AcoesGerenciadorDeEventos {
         System.out.println("Você está se sentindo mal: " + eventoSorteado.getNomeEvento() + " atingiu-o!");
         System.out.println("Descrição: " + eventoSorteado.getDescricaoEvento());
         //Adicionando ao Histórico de Eventos:
-        this.listaEventosPossiveis.add(eventoSorteado);
+        this.listaEventoPossiveis.add(eventoSorteado);
         this.historicoEventos.add(eventoSorteado);
         //Retornando a Doença/Ferimento:
         return eventoSorteado;
@@ -165,7 +165,7 @@ public class GerenciadorDeEventos implements AcoesGerenciadorDeEventos {
 
     //Os Eventos Climáticos Não Padrão não serão sorteados
     //Gerando Eventos Climáticos:
-    public EventoClimatico gerarEventosClimaticos(Ambientes ambienteAtual) {
+    public EventoClimatico gerarEventosClimaticos(Ambiente ambienteAtual) {
 
         if (ambienteAtual instanceof AmbienteFloresta) {
             //Clima padrão - Floresta:
@@ -183,7 +183,7 @@ public class GerenciadorDeEventos implements AcoesGerenciadorDeEventos {
             ambienteAtual.setClimaDominante(climaSorteado.getNomeEvento()); //Inicialmente, vamos tratar como String, mas mudaremos o atributo de Ambientes, posteriormente.
             System.out.println(climaSorteado.getNomeEvento() + "está acontecendo");
             System.out.println(climaSorteado.getDescricaoEvento());
-            this.listaEventosPossiveis.add(climaSorteado);
+            this.listaEventoPossiveis.add(climaSorteado);
             this.historicoEventos.add(climaSorteado);
             return climaSorteado;
         } else if (ambienteAtual instanceof AmbienteMontanha) {
@@ -202,7 +202,7 @@ public class GerenciadorDeEventos implements AcoesGerenciadorDeEventos {
             ambienteAtual.setClimaDominante(climaSorteado.getNomeEvento());//Inicialmente, vamos tratar como String, mas mudaremos o atributo de Ambientes, posteriormente.
             System.out.println(climaSorteado.getNomeEvento() + "está acontecendo");
             System.out.println(climaSorteado.getDescricaoEvento());
-            this.listaEventosPossiveis.add(climaSorteado);
+            this.listaEventoPossiveis.add(climaSorteado);
             this.historicoEventos.add(climaSorteado);
             return climaSorteado;
         } else if (ambienteAtual instanceof AmbienteCaverna) {
@@ -212,7 +212,7 @@ public class GerenciadorDeEventos implements AcoesGerenciadorDeEventos {
             ambienteAtual.setClimaDominante(climaCaverna.getNomeEvento()); //Inicialmente, vamos tratar como String, mas mudaremos o atributo de Ambientes, posteriormente.
             System.out.println(climaCaverna.getNomeEvento() + "está acontecendo!");
             System.out.println(climaCaverna.getDescricaoEvento());
-            this.listaEventosPossiveis.add(climaCaverna);
+            this.listaEventoPossiveis.add(climaCaverna);
             this.historicoEventos.add(climaCaverna);
             return climaCaverna;
 
@@ -232,7 +232,7 @@ public class GerenciadorDeEventos implements AcoesGerenciadorDeEventos {
             ambienteAtual.setClimaDominante(climaSorteado.getNomeEvento()); //Inicialmente, vamos tratar como String, mas mudaremos o atributo de Ambientes, posteriormente.
             System.out.println(climaSorteado.getNomeEvento() + "está acontecendo");
             System.out.println(climaSorteado.getDescricaoEvento());
-            this.listaEventosPossiveis.add(climaSorteado);
+            this.listaEventoPossiveis.add(climaSorteado);
             this.historicoEventos.add(climaSorteado);
             return climaSorteado;
         } else if (ambienteAtual instanceof AmbienteLagoRio) {
@@ -251,7 +251,7 @@ public class GerenciadorDeEventos implements AcoesGerenciadorDeEventos {
             ambienteAtual.setClimaDominante(climaSorteado.getNomeEvento()); //Inicialmente, vamos tratar como String, mas mudaremos o atributo de Ambientes, posteriormente.
             System.out.println("Clima " + climaSorteado.getNomeEvento() + "está acontecendo:");
             System.out.println(climaSorteado.getDescricaoEvento());
-            this.listaEventosPossiveis.add(climaSorteado);
+            this.listaEventoPossiveis.add(climaSorteado);
             this.historicoEventos.add(climaSorteado);
             return climaSorteado;
         }

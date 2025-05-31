@@ -1,6 +1,6 @@
 package ambientes;
 
-public class AmbienteRuinas extends Ambientes{ //Falta a adição dos recursos disponíveis e ligação com os eventos
+public class AmbienteRuinas extends Ambiente { //Falta a adição dos recursos disponíveis e ligação com os eventos
 
     //Atributos da subclasse:
     private boolean estruturasInstaveis; //Como esse atributo é uma condição, iremos torná-lo boolean para verificar e atribuir um evento

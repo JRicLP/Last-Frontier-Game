@@ -1,6 +1,6 @@
 package ambientes;
 
-public class AmbienteFloresta extends Ambientes { //Falta a adição dos recursos disponíveis e ligação com os eventos
+public class AmbienteFloresta extends Ambiente { //Falta a adição dos recursos disponíveis e ligação com os eventos
 
     //Atributos da subclasse:
     private boolean vegetacaoDensa; //Como esse atributo é uma condição, iremos torná-lo boolean para verificar e atribuir um evento

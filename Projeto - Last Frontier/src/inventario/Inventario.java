@@ -78,17 +78,17 @@ public class Inventario implements AcoesInventario {
         }
         Item itemSelecionado = this.getListaItens().get(posicaoItemSelecionado);
         //Verificando o Tipo do “Item”:
-        if (itemSelecionado instanceof Agua || itemSelecionado instanceof Alimentos || itemSelecionado instanceof Remedios) { //Consumíveis
+        if (itemSelecionado instanceof Agua || itemSelecionado instanceof Alimento || itemSelecionado instanceof Remedio) { //Consumíveis
             itemSelecionado.usar(itemSelecionado, personagemEscolhido);
             System.out.println("O item " + itemSelecionado.getNomeItem() + " foi consumido!");
             this.setPesoSuportado(this.getPesoSuportado() + itemSelecionado.getPesoItem());
             this.getListaItens().remove(itemSelecionado);
-        } else if (itemSelecionado instanceof Materiais) { //Irá se desenvolver com o sistema de Craft - Combináveis
+        } else if (itemSelecionado instanceof Material) { //Irá se desenvolver com o sistema de Craft - Combináveis
             System.out.println("Material selecionado, escolha outro para poder combinar!");
             this.mostrarInventario();
-        } else if (itemSelecionado instanceof Armas) { //Temos que desenvolver um slot especial do inventário para Armas - Equipáveis
+        } else if (itemSelecionado instanceof Arma) { //Temos que desenvolver um slot especial do inventário para Armas - Equipáveis
             System.out.println("Arma selecionada!");
-        } else if (itemSelecionado instanceof Ferramentas) { //Temos que desenvolver um slot especial do inventário para Ferramentas - Equipáveis
+        } else if (itemSelecionado instanceof Ferramenta) { //Temos que desenvolver um slot especial do inventário para Ferramentas - Equipáveis
             System.out.println("Ferramenta pronta para uso!");
         }
     }
