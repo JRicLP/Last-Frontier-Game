@@ -36,10 +36,10 @@ public class Agua extends Item implements AcoesItens {
         }
         // Cálculo da hidratação proporcional ao volume da água
         int sedeAtual = personagem.getSedePersonagem();
-        int novaSede = sedeAtual - (int) this.getVolumeAgua();
+        int novaSede = sedeAtual + (int) this.getVolumeAgua();
 
-        if (novaSede <0) {
-            novaSede = 0; // não ultrapassa o limite máximo de sede
+        if (novaSede > personagem.getSedeInicialPersonagem()) {
+            novaSede = personagem.getSedeInicialPersonagem(); // não ultrapassa o limite máximo de sede
         }
 
         personagem.setSedePersonagem(novaSede);
