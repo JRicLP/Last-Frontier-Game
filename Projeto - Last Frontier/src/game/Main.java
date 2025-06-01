@@ -5,96 +5,97 @@ import eventos.EventoClimatico;
 import eventos.EventoCriatura;
 import eventos.EventoDescoberta;
 import eventos.Evento;
-import gerenciadores.GerenciadorDeAmbientes;
-import gerenciadores.GerenciadorDeEventos;
-import gerenciadores.GerenciadorDeItens; // Certifique-se que esta importação existe
+import gerenciadores.GerenciadorDeAmbiente;
+import gerenciadores.GerenciadorDeEvento;
+import gerenciadores.GerenciadorDeItem;
 import inventario.Inventario;
 import itens.Arma;
 import itens.Item;
 import itens.Remedio;
+import itens.Alimento;
+import itens.Agua;
+import itens.Ferramenta;
+import itens.Material;
 import mensagensTela.CondicaoDeVitoriaDerrota;
 import mensagensTela.MensagensIniciais;
-import gerenciadores.GerenciadorDePersonagens;
+import gerenciadores.GerenciadorDePersonagem;
 import personagens.Personagem;
+import construcao.Receita;
+import construcao.CatalogoDeReceitas;
+import gerenciadores.GerenciadorDeConstrucao;
 
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
 
-        // Aqui é que irá funcionar a entrada do usuário para cada ação que for tomada:
         Scanner usuario = new Scanner(System.in);
 
-        //Mensagens - Lore do Jogo:
         MensagensIniciais display = new MensagensIniciais();
         display.mensagensLoreIntroducao();
         display.sleep(3000);
         usuario.nextLine();
 
-        //Mensagens - Regras do Jogo:
         CondicaoDeVitoriaDerrota display2 = new CondicaoDeVitoriaDerrota();
         display2.condicaoDisplay();
         usuario.nextLine();
 
-        //Escolhendo o Personagem:
-        GerenciadorDePersonagens gerenciadorDePersonagens = new GerenciadorDePersonagens();
-        gerenciadorDePersonagens.mostrarPersonagens();
-        gerenciadorDePersonagens.escolherPersonagens();
-        Personagem personagemEscolhido = gerenciadorDePersonagens.getPersonagem();
+        GerenciadorDePersonagem gerenciadorDePersonagem = new GerenciadorDePersonagem();
+        gerenciadorDePersonagem.mostrarPersonagens();
+        gerenciadorDePersonagem.escolherPersonagens();
+        Personagem personagemEscolhido = gerenciadorDePersonagem.getPersonagem();
         System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
-
-        //Definição do Ambiente:
-        ArrayList<Ambiente> listaAmbienteDisponiveis = new ArrayList<>(5);
-        ArrayList<Ambiente> historicoDeMovimentacao = new ArrayList<>(20);
-        GerenciadorDeAmbientes gerenciadorDeAmbientes = new GerenciadorDeAmbientes(listaAmbienteDisponiveis, historicoDeMovimentacao);
-        gerenciadorDeAmbientes.gerarAmbientes();
-        gerenciadorDeAmbientes.mudarAmbiente(personagemEscolhido, listaAmbienteDisponiveis.getFirst());
+        ArrayList<Ambiente> listaAmbienteDisponiveis = new ArrayList<>(5); // Usando Ambiente (singular)
+        ArrayList<Ambiente> historicoDeMovimentacao = new ArrayList<>(20); // Usando Ambiente (singular)
+        GerenciadorDeAmbiente gerenciadorDeAmbiente = new GerenciadorDeAmbiente(listaAmbienteDisponiveis, historicoDeMovimentacao);
+        gerenciadorDeAmbiente.gerarAmbientes();
+        gerenciadorDeAmbiente.mudarAmbiente(personagemEscolhido, listaAmbienteDisponiveis.getFirst());
         Ambiente ambienteAtual = listaAmbienteDisponiveis.getFirst();
         System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
-
-        //Criando o Inventário e Adicionando os Itens Iniciais:
-        Arma cajado = new Arma("Vetrkvistr", 4, 20, "Arma à distância", 10, 10); // Durabilidade aumentada
+        //Revisar essa parte dos itens iniciais no inventário:
+        Arma cajado = new Arma("Vetrkvistr", 4, 20, "Arma à distância", 10, 10);
         Remedio bandagem = new Remedio("Vefrbind", 2, 4, "Bandagem", "Tiras de linho consagrado...");
-        ArrayList<Item> listaItensParaInventario = new ArrayList<>(20); // Renomeado para clareza, se 'listaItens' for usada em outro lugar
+        ArrayList<Item> listaItensParaInventario = new ArrayList<>(20);
         Inventario inventarioPersonagem = new Inventario(listaItensParaInventario, 45, 22);
         personagemEscolhido.setInventarioPersonagem(inventarioPersonagem);
+
         System.out.println("Você começa sua jornada com os seguintes Itens:");
-        if (!inventarioPersonagem.adicionarItem(cajado)) {
-            System.out.println("Falha ao adicionar item inicial: Cajado (Inventário pode estar mal configurado)");
-        }
-        if (!inventarioPersonagem.adicionarItem(bandagem)) {
-            System.out.println("Falha ao adicionar item inicial: Bandagem (Inventário pode estar mal configurado)");
-        }
+        inventarioPersonagem.adicionarItem(cajado);
+        inventarioPersonagem.adicionarItem(bandagem);
         inventarioPersonagem.mostrarItem(cajado);
         System.out.println(cajado.getTipoArma());
         inventarioPersonagem.mostrarItem(bandagem);
         System.out.println(bandagem.getTipoRemedio() + " - " + bandagem.getEfeitoRemedio());
         System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
+
         inventarioPersonagem.mostrarInventario();
         System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
 
-        //Sistema de Turnos:
         int turnosMaximos = 24;
         int contadorTurnos = 0;
         boolean personagemVivo = true;
 
-        //Elementos Dinâmicos do Jogo:
         EventoClimatico eventoClimaticoAtual = null;
         EventoCriatura eventoCriaturaAtual = null;
         int turnosDesdeEncontroCriatura = -1;
         EventoDescoberta eventoDescobertaAtual = null;
 
-        //Sistema de Itens:
-        GerenciadorDeItens gerenciadorDeItens = new GerenciadorDeItens();
-
-        //Sistema de Eventos:
+        GerenciadorDeItem gerenciadorDeItem = new GerenciadorDeItem();
         ArrayList<Evento> listaEventoPossiveisGE = new ArrayList<>(20);
         ArrayList<Evento> historicoEventoGE = new ArrayList<>(25);
-        GerenciadorDeEventos gerenciadorDeEventos = new GerenciadorDeEventos(listaEventoPossiveisGE, historicoEventoGE);
+        GerenciadorDeEvento gerenciadorDeEvento = new GerenciadorDeEvento(listaEventoPossiveisGE, historicoEventoGE);
 
-        //‘Loop’ principal do jogo:
+        CatalogoDeReceitas catalogoDeReceitas = new CatalogoDeReceitas();
+        ArrayList<Receita> todasAsReceitasDoJogo = catalogoDeReceitas.getTodasAsReceitas();
+        GerenciadorDeConstrucao gerenciadorDeConstrucao = new GerenciadorDeConstrucao(todasAsReceitasDoJogo);
+
+        System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
+        System.out.println("Sistema de construção carregado com " + todasAsReceitasDoJogo.size() + " receita(s) conhecidas.");
+        System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
+
         while (contadorTurnos < turnosMaximos && personagemVivo) {
 
             if (personagemEscolhido.getVidaPersonagem() <= 0 || personagemEscolhido.getFomePersonagem() <= 0 || personagemEscolhido.getSedePersonagem() <= 0 || personagemEscolhido.getSanidadePersonagem() <= 0) {
@@ -109,16 +110,16 @@ public class Main {
 
             if (contadorTurnos == 5) {
                 ambienteAtual = listaAmbienteDisponiveis.get(1);
-                gerenciadorDeAmbientes.mudarAmbiente(personagemEscolhido, ambienteAtual);
+                gerenciadorDeAmbiente.mudarAmbiente(personagemEscolhido, ambienteAtual);
             } else if (contadorTurnos == 10) {
                 ambienteAtual = listaAmbienteDisponiveis.get(2);
-                gerenciadorDeAmbientes.mudarAmbiente(personagemEscolhido, ambienteAtual);
+                gerenciadorDeAmbiente.mudarAmbiente(personagemEscolhido, ambienteAtual);
             } else if (contadorTurnos == 15) {
                 ambienteAtual = listaAmbienteDisponiveis.get(3);
-                gerenciadorDeAmbientes.mudarAmbiente(personagemEscolhido, ambienteAtual);
+                gerenciadorDeAmbiente.mudarAmbiente(personagemEscolhido, ambienteAtual);
             } else if (contadorTurnos == 20) {
                 ambienteAtual = listaAmbienteDisponiveis.get(4);
-                gerenciadorDeAmbientes.mudarAmbiente(personagemEscolhido, ambienteAtual);
+                gerenciadorDeAmbiente.mudarAmbiente(personagemEscolhido, ambienteAtual);
             }
 
             System.out.println("\n--- Turno " + (contadorTurnos + 1) + "/" + turnosMaximos + " ---");
@@ -142,10 +143,10 @@ public class Main {
                     personagemEscolhido.setSanidadePersonagem(personagemEscolhido.getSanidadePersonagem() - 5);
 
                     System.out.println("Eventos ocorrem durante a exploração:");
-                    eventoClimaticoAtual = gerenciadorDeEventos.gerarEventosClimaticos(ambienteAtual);
+                    eventoClimaticoAtual = gerenciadorDeEvento.gerarEventosClimaticos(ambienteAtual);
 
                     if (eventoCriaturaAtual == null || eventoCriaturaAtual.getVidaCriatura() <= 0) {
-                        EventoCriatura criaturaRecemGerada = gerenciadorDeEventos.gerarEventosCriatura();
+                        EventoCriatura criaturaRecemGerada = gerenciadorDeEvento.gerarEventosCriatura();
                         if (criaturaRecemGerada != null) {
                             eventoCriaturaAtual = criaturaRecemGerada;
                             turnosDesdeEncontroCriatura = 0;
@@ -154,54 +155,33 @@ public class Main {
                     } else {
                         System.out.println(">> " + eventoCriaturaAtual.getNomeEvento() + " (" + eventoCriaturaAtual.getTipoCriatura() + ") ainda está por perto e te encara... <<");
                     }
+                    //Geração e Processamento do EventoDescoberta:
+                    eventoDescobertaAtual = null; //Limpa descoberta anterior para não reprocessar
 
-                    eventoDescobertaAtual = gerenciadorDeEventos.gerarEventosDescoberta();
-                    if ((contadorTurnos + 1) % 4 == 0 && contadorTurnos > 0) { //Adicionado contadorTurnos > 0 para não ocorrer no primeiro turno (turno 0)
+                    if ((contadorTurnos + 1) % 4 == 0 && contadorTurnos > 0) {
                         System.out.println("Sua exploração atenta revela algo interessante!");
-                        eventoDescobertaAtual = gerenciadorDeEventos.gerarEventosDescoberta();
+                        eventoDescobertaAtual = gerenciadorDeEvento.gerarEventosDescoberta(); // Gera SOMENTE no turno certo
 
                         if (eventoDescobertaAtual != null) {
-                            System.out.println("Você encontrou: " + eventoDescobertaAtual.getNomeEvento() + " - " + eventoDescobertaAtual.getDescricaoEvento());
                             String recursosString = eventoDescobertaAtual.getRecursoEncontrado();
                             System.out.println("Parece conter: " + recursosString);
 
-                            //Lista para armazenar itens encontrados nesta descoberta:
                             ArrayList<Item> itensDaDescoberta = new ArrayList<>();
-
-                            //Lógica para gerar itens com base na String do atributo recursoEncontrado:
-                            if (recursosString.contains("Alimento")) {
-                                itensDaDescoberta.add(gerenciadorDeItens.gerarItemAlimento());
-                            }
-                            if (recursosString.contains("Agua")) {
-                                itensDaDescoberta.add(gerenciadorDeItens.gerarItemAgua());
-                            }
-                            if (recursosString.contains("Remedio")) {
-                                itensDaDescoberta.add(gerenciadorDeItens.gerarItemRemedio());
-                            }
-
-                            // Para casos como "Materiais, Ferramentas ou Armas", onde é uma escolha
+                            //Drop de acordo com o conteúdo da Descoberta:
+                            if (recursosString.contains("Alimento")) itensDaDescoberta.add(gerenciadorDeItem.gerarItemAlimento());
+                            if (recursosString.contains("Agua")) itensDaDescoberta.add(gerenciadorDeItem.gerarItemAgua());
+                            if (recursosString.contains("Remedio")) itensDaDescoberta.add(gerenciadorDeItem.gerarItemRemedio());
                             if (recursosString.contains("Material") && recursosString.contains("Ferramenta") && recursosString.contains("Arma")) {
-                                Random sorteador = new Random();
-                                int escolha = sorteador.nextInt(3); // 0 para Materiais, 1 para Ferramentas, 2 para Armas
-                                if (escolha == 0) {
-                                    itensDaDescoberta.add(gerenciadorDeItens.gerarItemMateriais());
-                                } else if (escolha == 1) {
-                                    itensDaDescoberta.add(gerenciadorDeItens.gerarItemFerramentas());
-                                } else {
-                                    itensDaDescoberta.add(gerenciadorDeItens.gerarItemArmas());
-                                }
-                            } else { // Casos mais simples de OU (se houver apenas duas opções, etc.) ou "E" para os não cobertos acima
-                                if (recursosString.contains("Materiais") && !recursosString.contains(",")) { // Se for SÓ Materiais
-                                    itensDaDescoberta.add(gerenciadorDeItens.gerarItemMateriais());
-                                }
-                                if (recursosString.contains("Ferramentas") && !recursosString.contains(",")) { // Se for SÓ Ferramentas
-                                    itensDaDescoberta.add(gerenciadorDeItens.gerarItemFerramentas());
-                                }
-                                if (recursosString.contains("Armas") && !recursosString.contains(",")) { // Se for SÓ Armas
-                                    itensDaDescoberta.add(gerenciadorDeItens.gerarItemArmas());
-                                }
+                                Random sorteadorTipoItem = new Random(); // Renomeado para não conflitar com 'sorteador' em GerenciadorDeItem
+                                int escolha = sorteadorTipoItem.nextInt(3);
+                                if (escolha == 0) itensDaDescoberta.add(gerenciadorDeItem.gerarItemMateriais());
+                                else if (escolha == 1) itensDaDescoberta.add(gerenciadorDeItem.gerarItemFerramentas());
+                                else itensDaDescoberta.add(gerenciadorDeItem.gerarItemArmas());
+                            } else {
+                                if (recursosString.contains("Material") && !recursosString.contains(",")) itensDaDescoberta.add(gerenciadorDeItem.gerarItemMateriais());
+                                if (recursosString.contains("Ferramenta") && !recursosString.contains(",")) itensDaDescoberta.add(gerenciadorDeItem.gerarItemFerramentas());
+                                if (recursosString.contains("Arma") && !recursosString.contains(",")) itensDaDescoberta.add(gerenciadorDeItem.gerarItemArmas());
                             }
-                            //Oferecendo cada item encontrado ao jogador:
                             for (Item itemAchado : itensDaDescoberta) {
                                 if (itemAchado != null) {
                                     System.out.println("Especificamente, você vê um(a) " + itemAchado.getNomeItem() + ".");
@@ -218,12 +198,11 @@ public class Main {
                                     }
                                 }
                             }
-                        } else {
+                        } else { // Se gerenciadorDeEvento.gerarEventosDescoberta() retornou null no turno certo
                             System.out.println("Sua exploração não revelou nenhuma descoberta especial desta vez.");
                         }
                     }
-
-                    System.out.println("----------------------------------------------------------------------------");
+                    System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
                     personagemEscolhido.statusPersonagem();
 
                     if (personagemEscolhido.getVidaPersonagem() <= 0 || personagemEscolhido.getSedePersonagem() <= 0 || personagemEscolhido.getFomePersonagem() <= 0 || personagemEscolhido.getSanidadePersonagem() <= 0) {
@@ -262,17 +241,16 @@ public class Main {
                     if (itemEscolhido instanceof Arma) {
                         Arma armaRealSelecionada = (Arma) itemEscolhido;
                         System.out.println("Você empunha sua " + armaRealSelecionada.getNomeItem() + ".");
-                        System.out.println("----------------------------------------------------------------------------");
+                        System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
 
                         armaRealSelecionada.atacar(personagemEscolhido, eventoCriaturaAtual, usuario);
 
-                        //Lógica: Pós-combate e Recompensa
+                        // --- INÍCIO: Lógica Pós-combate e Recompensa ---
                         if (eventoCriaturaAtual != null && eventoCriaturaAtual.getVidaCriatura() <= 0) {
                             System.out.println("\n>> O corpo de " + eventoCriaturaAtual.getNomeEvento() + " jaz imóvel. O perigo passou, por ora. <<");
 
-                            //Recompensa por derrotar criatura:
                             System.out.println("Você vasculha os restos de " + eventoCriaturaAtual.getNomeEvento() + " por algo de valor...");
-                            Item recompensaDropada = gerenciadorDeItens.gerarItemAleatorioGlobal();
+                            Item recompensaDropada = gerenciadorDeItem.gerarItemAleatorioGlobal();
 
                             if (recompensaDropada != null) {
                                 System.out.print("Nos restos da criatura, você encontrou " + recompensaDropada.getNomeItem() + "! Deseja pegar? (s/n): ");
@@ -289,19 +267,16 @@ public class Main {
                             } else {
                                 System.out.println("Não havia nada de útil para recuperar dos restos da criatura.");
                             }
-                            System.out.println("----------------------------------------------------------------------------");
-                            //Fim: Recompensa por derrotar criatura
+                            System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
 
                             eventoCriaturaAtual = null;
                             turnosDesdeEncontroCriatura = -1;
                         }
-                        //Fim: Lógica Pós-combate e Recompensa
+                        // --- FIM: Lógica Pós-combate e Recompensa ---
 
-                        //Verificando a morte do Personagem (após o combate):
                         if (personagemEscolhido.getVidaPersonagem() <= 0) {
-                            personagemVivo = false; // O loop principal tratará da mensagem de morte.
+                            personagemVivo = false;
                         }
-                        //Verificando a Durabilidade (após o combate):
                         if (armaRealSelecionada.getDurabilidadeItem() <= 0) {
                             System.out.println("Sua arma " + armaRealSelecionada.getNomeItem() + " quebrou com o esforço da batalha!");
                             inventarioPersonagem.descartarItem(armaRealSelecionada);
@@ -310,7 +285,7 @@ public class Main {
                     } else {
                         System.out.println("O item no índice " + indiceArmaSelecionada + " não é uma Arma ou o índice é inválido!");
                     }
-                    System.out.println("----------------------------------------------------------------------------");
+                    System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
                     personagemEscolhido.statusPersonagem();
                     break;
 
@@ -321,6 +296,7 @@ public class Main {
                     System.out.println("2 - Usar/Selecionar Item");
                     System.out.println("3 - Descartar Item (pelo índice)");
                     System.out.println("4 - Ver detalhes de um Item (pelo índice)");
+                    System.out.println("5 - Construir Item"); // << OPÇÃO DE CONSTRUIR NO INVENTÁRIO
                     System.out.println("0 - Fechar Inventário");
                     System.out.print("Escolha uma opção do Inventário: ");
                     String opcaoInventario = usuario.nextLine().trim();
@@ -342,16 +318,74 @@ public class Main {
                             int indiceDoItemMostrado = usuario.nextInt(); usuario.nextLine();
                             Item itemParaMostrar = inventarioPersonagem.getItemPeloIndice(indiceDoItemMostrado);
                             if (itemParaMostrar != null) {
-                                System.out.println("Mostrando características do Item Selecionado:");
-                                inventarioPersonagem.mostrarItem(itemParaMostrar); // mostrarItem recebe o objeto Item
+                                inventarioPersonagem.mostrarItem(itemParaMostrar);
                             }
                             break;
+                        case "5": // Construir Item
+                            System.out.println("\n--- Oficina de Construção ---");
+                            ArrayList<Receita> receitasDisponiveis = gerenciadorDeConstrucao.getReceitasDisponiveis(inventarioPersonagem, personagemEscolhido);
+
+                            if (receitasDisponiveis.isEmpty()) {
+                                System.out.println("Você não tem materiais (ou ferramentas) suficientes para construir nada no momento.");
+                                //Aqui, 'break;' apenas sairia do switch do inventário. O jogador permaneceria no inventário.
+                                break;
+                            }
+
+                            System.out.println("Receitas que você pode construir agora:");
+                            for (int i = 0; i < receitasDisponiveis.size(); i++) {
+                                Receita r = receitasDisponiveis.get(i);
+                                System.out.println("\n[" + i + "] " + r.getNomeItemResultado());
+                                System.out.print("    Requer: ");
+                                boolean primeiroIngrediente = true;
+                                for (Map.Entry<String, Integer> ingrediente : r.getIngredientesNecessarios().entrySet()) {
+                                    if (!primeiroIngrediente) System.out.print(", ");
+                                    System.out.print(ingrediente.getValue() + "x " + ingrediente.getKey());
+                                    primeiroIngrediente = false;
+                                }
+                                if (r.getFerramentaNecessaria() != null && !r.getFerramentaNecessaria().isEmpty()) {
+                                    System.out.print(" (Ferramenta: " + r.getFerramentaNecessaria() + ")");
+                                }
+                                System.out.println();
+                            }
+
+                            System.out.print("Digite o número da receita que deseja construir (ou -1 para cancelar): ");
+                            int escolhaReceita;
+                            if (usuario.hasNextInt()) {
+                                escolhaReceita = usuario.nextInt();
+                                usuario.nextLine();
+                            } else {
+                                System.out.println("Entrada inválida.");
+                                usuario.nextLine();
+                                break; //Sai da opção de construção, volta para o menu do inventário/principal
+                            }
+
+                            if (escolhaReceita == -1) {
+                                System.out.println("Construção cancelada.");
+                            } else if (escolhaReceita >= 0 && escolhaReceita < receitasDisponiveis.size()) {
+                                Receita receitaSelecionada = receitasDisponiveis.get(escolhaReceita);
+                                System.out.println("Você selecionou para construir: " + receitaSelecionada.getNomeItemResultado());
+                                System.out.print("Confirmar construção? (s/n): ");
+                                if (usuario.nextLine().trim().equalsIgnoreCase("s")) {
+                                    Item itemConstruido = gerenciadorDeConstrucao.construirItem(receitaSelecionada, inventarioPersonagem, personagemEscolhido);
+                                    if (itemConstruido != null) {
+                                        System.out.println("Construção bem-sucedida!");
+                                    } else {
+                                        System.out.println("A construção não pôde ser concluída.");
+                                    }
+                                } else {
+                                    System.out.println("Construção cancelada.");
+                                }
+                            } else {
+                                System.out.println("Opção de receita inválida.");
+                            }
+                            break; // Sai da opção de construção (case "5" do inventário)
                         case "0":
                             System.out.println("Fechando inventário."); break;
                         default:
-                            System.out.println("Opção inválida para o inventário."); continue; // Pula para o próximo turno sem consumir ação principal
+                            System.out.println("Opção inválida para o inventário.");
+                            break;
                     }
-                    System.out.println("----------------------------------------------------------------------------");
+                    System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
                     personagemEscolhido.statusPersonagem();
                     break;
 
@@ -364,9 +398,9 @@ public class Main {
                     System.out.println("Seu corpo não parou de funcionar, você consumiu pontos de Fome e Sede");
                     personagemEscolhido.setEnergiaPersonagem(personagemEscolhido.getEnergiaPersonagem() + 20);
                     personagemEscolhido.setSanidadePersonagem(personagemEscolhido.getSanidadePersonagem() + 10);
-                    personagemEscolhido.setSedePersonagem(personagemEscolhido.getSedePersonagem() - 8);
-                    personagemEscolhido.setFomePersonagem(personagemEscolhido.getFomePersonagem() - 8);
-                    System.out.println("----------------------------------------------------------------------------");
+                    personagemEscolhido.setSedePersonagem(personagemEscolhido.getSedePersonagem() - 8); // Assumindo que descansar consome um pouco
+                    personagemEscolhido.setFomePersonagem(personagemEscolhido.getFomePersonagem() - 8);  // Assumindo que descansar consome um pouco
+                    System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
                     personagemEscolhido.statusPersonagem();
                     break;
 
@@ -375,7 +409,7 @@ public class Main {
                     continue;
             } //Fim do Switch(comando)
 
-            //Lógica: Fim de Turno para Criatura Encntrada:
+            //Lógica: Fim de Turno para Criatura Encontrada:
             if (eventoCriaturaAtual != null && eventoCriaturaAtual.getVidaCriatura() > 0 && personagemVivo) {
                 turnosDesdeEncontroCriatura++;
                 if (turnosDesdeEncontroCriatura >= 3) {
@@ -385,18 +419,18 @@ public class Main {
                 }
             }
 
-            //Lógica: Iteem Aleatório por Turno
+            //Lógica: Item Aleatório por Turno
             if (personagemVivo) {
-                System.out.println("\n----------------------------------------------------------------------------");
+                System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
                 System.out.println("Ao final do turno, você faz uma busca rápida por recursos...");
-                Item itemEncontradoTurno = gerenciadorDeItens.gerarItemAleatorioGlobal();
+                Item itemEncontradoTurno = gerenciadorDeItem.gerarItemAleatorioGlobal();
 
                 if (itemEncontradoTurno != null) {
                     System.out.println("Você encontrou um(a) " + itemEncontradoTurno.getNomeItem() + ".");
                     System.out.print("Deseja pegar este item? (S/N): ");
                     String decisaoPegarItem = usuario.nextLine().trim();
                     if (decisaoPegarItem.equalsIgnoreCase("s")) {
-                        if (inventarioPersonagem.adicionarItem(itemEncontradoTurno)) { // CORRIGIDO: Sem ';' extra
+                        if (inventarioPersonagem.adicionarItem(itemEncontradoTurno)) {
                             System.out.println(itemEncontradoTurno.getNomeItem() + " foi adicionado ao seu inventário.");
                         } else {
                             System.out.println("Você não conseguiu adicionar " + itemEncontradoTurno.getNomeItem() + " ao inventário (talvez esteja cheio ou muito pesado).");
@@ -407,9 +441,9 @@ public class Main {
                 } else {
                     System.out.println("Sua busca não revelou nada de útil desta vez.");
                 }
-                System.out.println("\n----------------------------------------------------------------------------");
+                System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
             }
-            //Fim da Lógicaa - Item aleatório por turno
+            //Fim da Lógica - Item aleatório por turno
 
             if (personagemVivo) {
                 contadorTurnos++;

@@ -1,6 +1,9 @@
 package inventario;
 
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.Iterator;
+
 
 import interfaces.AcoesInventario;
 import itens.*;
@@ -8,25 +11,24 @@ import personagens.*;
 
 public class Inventario implements AcoesInventario {
 
-    //Atributos da classe:
+    //Atributos da Classe:
     private ArrayList<Item> listaItens;
     private int pesoSuportado;
     private int capacidadeInventario;
 
-    //Metodo construtor:
+    //Metodo Construtor da Classe::
     public Inventario(ArrayList<Item> listaItens, int pesoSuportado, int capacidadeInventario) {
-        this.listaItens = listaItens; //O atributo no construtor deve estar dessa forma!!
+        this.listaItens = listaItens;
         this.pesoSuportado = pesoSuportado;
         this.capacidadeInventario = capacidadeInventario;
-
     }
 
-    //Metodos acessores:
+    //Metodos Acessores:
     public void setListaItens(ArrayList<Item> listaItens) {
         this.listaItens = listaItens;
     }
 
-    private ArrayList<Item> getListaItens() { //Esse metodo tem que ser privado?
+    private ArrayList<Item> getListaItens() {
         return listaItens;
     }
 
@@ -34,7 +36,7 @@ public class Inventario implements AcoesInventario {
         this.pesoSuportado = pesoSuportado;
     }
 
-    public int getPesoSuportado() { //Precisamos fazer uma verificação relativamente ao peso do Inventário/Itens
+    public int getPesoSuportado() {
         return pesoSuportado;
     }
 
@@ -42,65 +44,69 @@ public class Inventario implements AcoesInventario {
         this.capacidadeInventario = capacidadeInventario;
     }
 
-    public int getCapacidadeInventario() { //Se refere ao número de itens
+    public int getCapacidadeInventario() {
         return capacidadeInventario;
     }
 
-    //Metodos implementados:
+    //Metodos Implementados:
     @Override
     public boolean adicionarItem(Item itemAdicionado) {
-        if (listaItens.size() >= getCapacidadeInventario()) {
-            System.out.println("Não foi possível adicionar o Item, pois seu inventário está cheio!!");
+        if (this.listaItens.size() >= getCapacidadeInventario()) {
+            System.out.println("Não foi possível adicionar o Item '" + itemAdicionado.getNomeItem() + "', pois seu inventário está cheio!!");
             return false;
         }
-        if (itemAdicionado.getPesoItem() > this.getPesoSuportado()) { // this.getPesoSuportado() é o peso restante
-            System.out.println("Não foi possível adicionar o Item, pois seu inventário está muito pesado!");
+        if (itemAdicionado.getPesoItem() > this.getPesoSuportado()) {
+            System.out.println("Não foi possível adicionar o Item '" + itemAdicionado.getNomeItem() + "', pois seu inventário está muito pesado!");
             return false;
         }
         this.listaItens.add(itemAdicionado);
         this.setPesoSuportado(this.getPesoSuportado() - itemAdicionado.getPesoItem());
-        System.out.println("O item " + itemAdicionado.getNomeItem() + " foi adicionado!"); //Quero deixar aqui!
+        System.out.println("O item " + itemAdicionado.getNomeItem() + " foi adicionado!");
         return true;
     }
 
     @Override
-    public void descartarItem(Item itemDescartado) { //Adicionar um verificador para limitar a quantidade de itens com relação à capacidade do inventário
-        this.setPesoSuportado(this.getPesoSuportado() + itemDescartado.getPesoItem());
-        this.getListaItens().remove(itemDescartado);
-        System.out.println("O item " + itemDescartado.getNomeItem() + " foi descartado!");
+    public void descartarItem(Item itemDescartado) {
+        if (this.listaItens.contains(itemDescartado)) {
+            this.setPesoSuportado(this.getPesoSuportado() + itemDescartado.getPesoItem());
+            this.listaItens.remove(itemDescartado);
+            System.out.println("O item " + itemDescartado.getNomeItem() + " foi descartado!");
+        } else {
+            System.out.println("Item " + itemDescartado.getNomeItem() + " não encontrado para descarte.");
+        }
     }
 
     @Override
     public void selecionarItem(int posicaoItemSelecionado, Personagem personagemEscolhido) {
-        if (posicaoItemSelecionado < 0 || posicaoItemSelecionado >= listaItens.size()) {
+        if (posicaoItemSelecionado < 0 || posicaoItemSelecionado >= this.listaItens.size()) {
             System.out.println("Posição inválida no inventário.");
-            return; //Sai do metodo se o índice for inválido
+            return;
         }
         Item itemSelecionado = this.getListaItens().get(posicaoItemSelecionado);
-        //Verificando o Tipo do “Item”:
-        if (itemSelecionado instanceof Agua || itemSelecionado instanceof Alimento || itemSelecionado instanceof Remedio) { //Consumíveis
+
+        if (itemSelecionado instanceof Agua || itemSelecionado instanceof Alimento || itemSelecionado instanceof Remedio) {
             itemSelecionado.usar(itemSelecionado, personagemEscolhido);
             System.out.println("O item " + itemSelecionado.getNomeItem() + " foi consumido!");
             this.setPesoSuportado(this.getPesoSuportado() + itemSelecionado.getPesoItem());
             this.getListaItens().remove(itemSelecionado);
-        } else if (itemSelecionado instanceof Material) { //Irá se desenvolver com o sistema de Craft - Combináveis
-            System.out.println("Material selecionado, escolha outro para poder combinar!");
+        } else if (itemSelecionado instanceof Material) {
+            System.out.println("Material selecionado: " + itemSelecionado.getNomeItem() + ". Escolha outro para poder combinar!");
             this.mostrarInventario();
-        } else if (itemSelecionado instanceof Arma) { //Temos que desenvolver um slot especial do inventário para Armas - Equipáveis
-            System.out.println("Arma selecionada!");
-        } else if (itemSelecionado instanceof Ferramenta) { //Temos que desenvolver um slot especial do inventário para Ferramentas - Equipáveis
-            System.out.println("Ferramenta pronta para uso!");
+        } else if (itemSelecionado instanceof Arma) {
+            System.out.println("Arma selecionada: " + itemSelecionado.getNomeItem() + "!");
+        } else if (itemSelecionado instanceof Ferramenta) {
+            System.out.println("Ferramenta selecionada: " + itemSelecionado.getNomeItem() + "!");
         }
     }
 
     @Override
     public void mostrarInventario() {
         System.out.println("\n--- Inventário ---");
-        if (listaItens.isEmpty()) {
+        if (this.listaItens.isEmpty()) {
             System.out.println("Seu inventário está vazio.");
         } else {
-            for (int contador = 0; contador < listaItens.size(); contador++) {
-                Item itemAtual = listaItens.get(contador);
+            for (int contador = 0; contador < this.listaItens.size(); contador++) {
+                Item itemAtual = this.listaItens.get(contador);
                 System.out.println(contador + " - " + itemAtual.getNomeItem() + " (Peso: " + itemAtual.getPesoItem() + ")");
             }
         }
@@ -110,12 +116,15 @@ public class Inventario implements AcoesInventario {
     }
 
     @Override
-    public void mostrarItem(Item itemSelecionado) { //Metodo adicionado para o utilizador administrar o inventário!
-        System.out.println("Nome do Item: " + itemSelecionado.getNomeItem());
-        System.out.println("Peso do Item: " + itemSelecionado.getPesoItem());
+    public void mostrarItem(Item itemSelecionado) {
+        if (itemSelecionado != null) {
+            System.out.println("\n--- Detalhes do Item ---");
+            System.out.println("Nome do Item: " + itemSelecionado.getNomeItem());
+            System.out.println("Peso do Item: " + itemSelecionado.getPesoItem());
+            System.out.println("Durabilidade do Item: " + itemSelecionado.getDurabilidadeItem());
+        }
     }
-
-    //Metodos especiais para melhor tratamento no Main:
+    //Metodos Especiais para melhor tratamento do Inventário no Main:
     public int getNumeroItensAtual() {
         return this.listaItens.size();
     }
@@ -125,20 +134,95 @@ public class Inventario implements AcoesInventario {
             return this.listaItens.get(indice);
         } else {
             System.out.println("Erro: Tentativa de acessar um item em um índice inválido (" + indice + ") do inventário.");
-            return null; // Retorna null para indicar que o item não foi encontrado ou o índice é inválido
+            return null;
         }
     }
 
-    public boolean descartarItemPeloIndice(int indice) {
+    public boolean descartarItemPeloIndice(int indice) { //Paola, estou usando boolean para melhorar o retorno das validações
         if (indice >= 0 && indice < this.listaItens.size()) {
             Item itemParaDescartar = this.listaItens.get(indice);
-            this.setPesoSuportado(this.getPesoSuportado() + itemParaDescartar.getPesoItem()); // Aumenta o peso restante suportado
-            this.listaItens.remove(indice); // Remove pelo índice, que é eficiente para ArrayList
+            this.setPesoSuportado(this.getPesoSuportado() + itemParaDescartar.getPesoItem());
+            this.listaItens.remove(indice);
             System.out.println("O item '" + itemParaDescartar.getNomeItem() + "' foi descartado do inventário.");
             return true;
         } else {
             System.out.println("Índice inválido (" + indice + "). Nenhum item foi descartado.");
             return false;
         }
+    }
+
+    //Métodos para o Sistema de Craft:
+    public boolean temItem(String nomeItem, int quantidadeNecessaria) { //Paola, estou usando boolean para melhorar o retorno das validações
+        if (nomeItem == null || quantidadeNecessaria <= 0) {
+            return false; // Não faz sentido procurar por quantidade nula/negativa ou nome nulo
+        }
+        int contador = 0;
+        for (Item item : this.listaItens) {
+            if (item.getNomeItem().equals(nomeItem)) {
+                contador++;
+            }
+        }
+        return contador >= quantidadeNecessaria;
+    }
+
+    public boolean removerItemPorNomeEQuantidade(String nomeItem, int quantidadeParaRemover) {
+        if (nomeItem == null || quantidadeParaRemover <= 0) {
+            return false;
+        }
+
+        // Primeiro, verificamos se realmente temos o suficiente (dupla checagem é segura)
+        if (!temItem(nomeItem, quantidadeParaRemover)) {
+            System.out.println("DEBUG: Tentativa de remover " + nomeItem + " falhou na verificação interna de quantidade."); // Para debug
+            return false;
+        }
+
+        int removidos = 0;
+        // Usar um Iterator é mais seguro para remover enquanto itera sobre uma ArrayList
+        Iterator<Item> iterador = this.listaItens.iterator();
+        while (iterador.hasNext()) {
+            if (removidos >= quantidadeParaRemover) {
+                break; // Já removemos o suficiente
+            }
+            Item itemAtual = iterador.next();
+            if (itemAtual.getNomeItem().equals(nomeItem)) {
+                this.setPesoSuportado(this.getPesoSuportado() + itemAtual.getPesoItem()); // Ajusta o peso
+                iterador.remove(); // Remove o item de forma segura
+                removidos++;
+            }
+        }
+
+        // Confirma se o número correto foi removido. Deveria ser sempre true se temItem() passou.
+        return removidos == quantidadeParaRemover;
+    }
+
+    public boolean removerIngredientes(Map<String, Integer> ingredientesNecessarios) {
+        if (ingredientesNecessarios == null || ingredientesNecessarios.isEmpty()) {
+            return true; // Nenhum ingrediente para remover, considera sucesso
+        }
+
+        // Passo 1: Verificar se TODOS os ingredientes estão disponíveis nas quantidades necessárias
+        for (Map.Entry<String, Integer> entrada : ingredientesNecessarios.entrySet()) {
+            String nomeIngrediente = entrada.getKey();
+            int quantidadeRequerida = entrada.getValue();
+            if (!temItem(nomeIngrediente, quantidadeRequerida)) {
+                System.out.println("DEBUG: Falta ingrediente para construção: " + nomeIngrediente + ", necessário: " + quantidadeRequerida); // Para debug
+                return false; // Se um único ingrediente faltar, a operação inteira falha
+            }
+        }
+
+        // Passo 2: Se todos os ingredientes foram verificados, proceder com a remoção
+        for (Map.Entry<String, Integer> entrada : ingredientesNecessarios.entrySet()) {
+            String nomeIngrediente = entrada.getKey();
+            int quantidadeRequerida = entrada.getValue();
+            // Aqui, esperamos que removerItemPorNomeEQuantidade retorne true,
+            // pois já verificamos com temItem.
+            if (!removerItemPorNomeEQuantidade(nomeIngrediente, quantidadeRequerida)) {
+                // Isso indicaria um problema de lógica ou estado inconsistente se chegarmos aqui.
+                // Por simplicidade, se isso acontecer, a construção falhou parcialmente.
+                System.err.println("ERRO CRÍTICO: Falha ao remover '" + nomeIngrediente + "' após verificação. Inventário pode estar inconsistente.");
+                return false; // Indica falha
+            }
+        }
+        return true; // Todos os ingredientes foram removidos com sucesso
     }
 }
