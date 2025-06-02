@@ -11,11 +11,6 @@ import gerenciadores.GerenciadorDeItem;
 import inventario.Inventario;
 import itens.Arma;
 import itens.Item;
-import itens.Remedio;
-import itens.Alimento;
-import itens.Agua;
-import itens.Ferramenta;
-import itens.Material;
 import mensagensTela.CondicaoDeVitoriaDerrota;
 import mensagensTela.MensagensIniciais;
 import gerenciadores.GerenciadorDePersonagem;
@@ -55,20 +50,14 @@ public class Main {
         gerenciadorDeAmbiente.mudarAmbiente(personagemEscolhido, listaAmbienteDisponiveis.getFirst());
         Ambiente ambienteAtual = listaAmbienteDisponiveis.getFirst();
         System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
-        //Revisar essa parte dos itens iniciais no inventário:
-        Arma cajado = new Arma("Vetrkvistr", 4, 20, "Arma à distância", 10, 10);
-        Remedio bandagem = new Remedio("Vefrbind", 2, 4, "Bandagem", "Tiras de linho consagrado...");
         ArrayList<Item> listaItensParaInventario = new ArrayList<>(20);
         Inventario inventarioPersonagem = new Inventario(listaItensParaInventario, 45, 22);
         personagemEscolhido.setInventarioPersonagem(inventarioPersonagem);
-
-        System.out.println("Você começa sua jornada com os seguintes Itens:");
-        inventarioPersonagem.adicionarItem(cajado);
-        inventarioPersonagem.adicionarItem(bandagem);
-        inventarioPersonagem.mostrarItem(cajado);
-        System.out.println(cajado.getTipoArma());
-        inventarioPersonagem.mostrarItem(bandagem);
-        System.out.println(bandagem.getTipoRemedio() + " - " + bandagem.getEfeitoRemedio());
+        System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
+        System.out.println("Preparando equipamentos iniciais...");
+        gerenciadorDePersonagem.configurarInventarioInicial(personagemEscolhido);
+        System.out.println("Verificando seu inventário após receber os itens iniciais:");
+        inventarioPersonagem.mostrarInventario();
         System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
 
         inventarioPersonagem.mostrarInventario();
@@ -131,6 +120,7 @@ public class Main {
             System.out.println("3 - Abrir o Inventário");
             System.out.println("4 - Ver status do personagem");
             System.out.println("5 - Descansar");
+            System.out.println("6 - Usar Habilidade Especial");
 
             String comando = usuario.nextLine().trim();
 
@@ -238,15 +228,14 @@ public class Main {
 
                     Item itemEscolhido = inventarioPersonagem.getItemPeloIndice(indiceArmaSelecionada);
 
-                    if (itemEscolhido instanceof Arma) {
-                        Arma armaRealSelecionada = (Arma) itemEscolhido;
+                    if (itemEscolhido instanceof Arma armaRealSelecionada) {
+                        // Dentro deste bloco, armaRealSelecionada JÁ É DO TIPO Arma
                         System.out.println("Você empunha sua " + armaRealSelecionada.getNomeItem() + ".");
                         System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
-
                         armaRealSelecionada.atacar(personagemEscolhido, eventoCriaturaAtual, usuario);
 
                         // --- INÍCIO: Lógica Pós-combate e Recompensa ---
-                        if (eventoCriaturaAtual != null && eventoCriaturaAtual.getVidaCriatura() <= 0) {
+                        if (eventoCriaturaAtual != null && eventoCriaturaAtual.getVidaCriatura() <= 0) { //Vou deixar essa segunda verificação por segurança
                             System.out.println("\n>> O corpo de " + eventoCriaturaAtual.getNomeEvento() + " jaz imóvel. O perigo passou, por ora. <<");
 
                             System.out.println("Você vasculha os restos de " + eventoCriaturaAtual.getNomeEvento() + " por algo de valor...");
@@ -404,10 +393,50 @@ public class Main {
                     personagemEscolhido.statusPersonagem();
                     break;
 
+                case "6": // Usar Habilidade Especial
+                    if (personagemEscolhido.isHabilidadeEspecialJaUsada()) {
+                        System.out.println("Você já utilizou sua poderosa habilidade especial nesta jornada!");
+                        System.out.println("Ela é um trunfo de uso único.");
+                        continue;
+                    } else {
+                        System.out.println("\n--- ATIVAR HABILIDADE ESPECIAL ---");
+                        System.out.println("Sua Habilidade Especial: " + personagemEscolhido.getNomeHabilidadeEspecial());
+                        System.out.println("Descrição: " + personagemEscolhido.getDescricaoHabilidadeEspecial());
+                        System.out.println("\nLembre-se: Esta habilidade só pode ser usada UMA VEZ durante toda a sua jornada!");
+                        System.out.print("Deseja realmente ativar sua habilidade especial agora? (s/n): ");
+                        String confirmarHabilidade = usuario.nextLine().trim();
+
+                        if (confirmarHabilidade.equalsIgnoreCase("s")) {
+                            //Chamando o metodo da subclasse específica de Personagem
+                            boolean sucessoAoAtivar = personagemEscolhido.ativarHabilidadeEspecial(eventoCriaturaAtual,ambienteAtual,gerenciadorDeItem,inventarioPersonagem);
+
+                            if (sucessoAoAtivar) {
+                                System.out.println("'" + personagemEscolhido.getNomeHabilidadeEspecial() + "' foi ativada com sucesso!");
+                                personagemEscolhido.marcarHabilidadeEspecialComoUsada(); //Marca como usada
+                                //Se a habilidade do Infiltrador ("Manto Etéreo") foi usada para escapar
+                                if (personagemEscolhido instanceof personagens.Infiltrador && eventoCriaturaAtual != null) {
+                                    System.out.println(">> Graças ao " + personagemEscolhido.getNomeHabilidadeEspecial() + ", o perigo de " + eventoCriaturaAtual.getNomeEvento() + " foi evitado! <<");
+                                    eventoCriaturaAtual = null; // Finaliza o encontro com a criatura
+                                    turnosDesdeEncontroCriatura = -1; // Reseta o timer
+                                }
+                            } else {
+                                System.out.println("Não foi possível ativar a habilidade especial nas condições atuais ou a tentativa falhou.");
+                            }
+                        } else {
+                            System.out.println("Você decidiu guardar sua habilidade especial para outra ocasião.");
+                            System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
+                            personagemEscolhido.statusPersonagem();
+                            continue;
+                        }
+                    }
+                    System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
+                    personagemEscolhido.statusPersonagem();
+                    break;
+
                 default:
                     System.out.println("Comando inválido. Tente novamente.");
                     continue;
-            } //Fim do Switch(comando)
+            } //Fim do Switch
 
             //Lógica: Fim de Turno para Criatura Encontrada:
             if (eventoCriaturaAtual != null && eventoCriaturaAtual.getVidaCriatura() > 0 && personagemVivo) {
@@ -442,13 +471,13 @@ public class Main {
                     System.out.println("Sua busca não revelou nada de útil desta vez.");
                 }
                 System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
-            }
-            //Fim da Lógica - Item aleatório por turno
+            }//Fim da Lógica - Item aleatório por turno
 
             if (personagemVivo) {
                 contadorTurnos++;
             }
-        } //Fim do While (Loop Principal)
+
+        }//Fim do While (Loop Principal)
 
         if (!personagemVivo) {
             System.out.println("\nFim de jogo. O personagem não sobreviveu.");

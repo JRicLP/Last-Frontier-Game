@@ -1,29 +1,59 @@
 package personagens;
 
-public class Nomade extends Personagem {
-    //Atributos da classe:
-    private String habilidadeNomade;
-    //Metodo construtor:
-    public Nomade(String habilidadeNomade){
+import inventario.Inventario;
+import ambientes.Ambiente;
+import eventos.EventoCriatura;
+import gerenciadores.GerenciadorDeItem;
 
-        this.setNomePersonagem("Jack Nomad - O Nômade Rústico");
-        this.setVidaPersonagem(100);
-        this.setFomePersonagem(100);
-        this.setSedePersonagem(65);
-        this.setEnergiaPersonagem(65);
-        this.setSanidadePersonagem(100);
-        this.setInventarioPersonagem(getInventarioPersonagem());
-        this.setLocalizacaoPersonagem("");
-        this.setContaminacaoPersonagem(false);
-        this.setSedeInicialPersonagem(65);
-        this.setFomeInicialPersonagem(100);
-        this.habilidadeNomade = habilidadeNomade;
+public class Nomade extends Personagem {
+
+    //Atributos da classe:
+    private String descricaoHabilidadeClasse;
+
+    //Metodo construtor:
+    public Nomade(String descricaoHabilidadeClasseEntrada) {
+        super("Jack Nomad - O Nômade Rústico", 100,100,100,80,80);
+        this.descricaoHabilidadeClasse = descricaoHabilidadeClasseEntrada;
     }
-    //Metodos acessores:
-    public void setHabilidadeNomade(String habilidadeNomade) {
-        this.habilidadeNomade = habilidadeNomade;
+
+    //Metodos acessores para a descrição da habilidade da classe:
+    public String getDescricaoHabilidadeClasse() {
+        return descricaoHabilidadeClasse;
+    }
+
+    public void setDescricaoHabilidadeClasse(String descricaoHabilidadeClasse) {
+        this.descricaoHabilidadeClasse = descricaoHabilidadeClasse;
+    }
+
+    // --- Implementação dos Métodos Abstratos da Habilidade Especial ---
+    @Override
+    public String getNomeHabilidadeEspecial() {
+        return "Bênção da Resiliência";
+    }
+
+    @Override
+    public String getDescricaoHabilidadeEspecial() {
+        return "O Nômade canaliza sua profunda conexão com a sobrevivência, restaurando completamente sua Vida, Fome, Sede e Sanidade, e purificando seu corpo de contaminações.";
+    }
+
+    @Override
+    public boolean ativarHabilidadeEspecial(EventoCriatura criaturaAlvo, Ambiente ambienteAtual, GerenciadorDeItem gerenciadorDeItem, Inventario inventarioPersonagem) {
+        System.out.println(this.getNomePersonagem() + " invoca a " + getNomeHabilidadeEspecial() + "!");
+        System.out.println("Uma onda de energia vital percorre seu corpo, vinda da sua incrível adaptabilidade...");
+        //Restaura todos os status para o máximo:
+        this.setVidaPersonagem(this.getVidaInicialPersonagem());
+        this.setFomePersonagem(this.getFomeInicialPersonagem());
+        this.setSedePersonagem(this.getSedeInicialPersonagem());
+        this.setSanidadePersonagem(this.getSanidadeInicialPersonagem());
+        this.setEnergiaPersonagem(this.getEnergiaInicialPersonagem());
+        System.out.println("Vida, Fome, Sede, Sanidade e Energia completamente restauradas!");
+        if (this.getContaminacaoPersonagem()) {
+            this.setContaminacaoPersonagem(false);
+            System.out.println("Qualquer traço de contaminação em seu corpo desaparece.");
+        }
+        return true;
     }
     public String getHabilidadeNomade() {
-        return habilidadeNomade;
+        return descricaoHabilidadeClasse;
     }
 }
