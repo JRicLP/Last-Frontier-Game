@@ -19,7 +19,7 @@ public class CatalogoDeReceitas {
         // Template para o Abrigo Seguro:
         Ferramenta templateAbrigoSeguro = new Ferramenta("Abrigo Seguro", 15, 10, "Estrutura de Proteção Definitiva", 0);
         // Template para a Panaceia Rúnica:
-        Remedio templatePanaceiaRunica = new Remedio("Panaceia Rúnica", 1, 1, "Panaceia", "Uma poção mística que restaura grandemente a vitalidade e purifica o corpo.");
+        Remedio templatePanaceiaRunica = new Remedio("Panaceia Rúnica", 1, 1, "Panaceia", "Uma poção mística que restaura grandemente a vitalidade e purifica o corpo.",50);
         // 1. Receita para o Abrigo Seguro
         Receita receitaAbrigo = new Receita("Abrigo Seguro", templateAbrigoSeguro, "Dundrhamarr - Martelo");
         // Adicionar ingredientes (nomes exatos dos seus itens Material)
