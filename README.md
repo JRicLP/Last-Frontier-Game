@@ -115,7 +115,9 @@ O jogo está atualmente em **fase de desenvolvimento ativo**. Acompanhe as atual
 
 Para perguntas, sugestões ou feedback, entre em contato através de:
 
-> *Informações de contato serão adicionadas em breve.*
+Email - João Ricardo: jrls1@poli.br
+
+Email - Paola Hannah: 
 
 ---
 
