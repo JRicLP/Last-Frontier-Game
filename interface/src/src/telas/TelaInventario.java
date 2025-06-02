@@ -7,14 +7,15 @@ import java.awt.*;
 import java.util.List;
 
 public class TelaInventario extends JDialog {
-
+    private TelaPrincipalJogo telaPrincipal;
     private Personagem personagem;
     private DefaultListModel<Item> modeloLista;
     private JList<Item> listaItens;
 
     // Construtor do painel de inventário
-    public TelaInventario(JFrame janelaPai, Personagem personagem) {
+    public TelaInventario(JFrame janelaPai,TelaPrincipalJogo telaPrincipal, Personagem personagem) {
         super(janelaPai, "Inventário", true); // Janela modal
+        this.telaPrincipal =  telaPrincipal; // cast seguro
         this.personagem = personagem;
 
         setSize(400, 400);
@@ -53,6 +54,9 @@ public class TelaInventario extends JDialog {
             personagem.getInventarioPersonagem().descartarItem(itemSelecionado); // Remove do inventário
             atualizarListaItens(); // Atualiza a exibição
             JOptionPane.showMessageDialog(this, "Você usou: " + itemSelecionado.getNomeItem());
+            if (telaPrincipal != null) {
+                telaPrincipal.atualizarTela(); // Atualiza a HUD
+            }
         } else {
             JOptionPane.showMessageDialog(this, "Selecione um item para usar.");
         }

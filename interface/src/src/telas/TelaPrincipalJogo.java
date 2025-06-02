@@ -7,6 +7,8 @@ import util.DescricaoItemUtils;
 import telas.PainelAmbientePersonagem;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 
 public class TelaPrincipalJogo extends JFrame {
@@ -15,9 +17,10 @@ public class TelaPrincipalJogo extends JFrame {
     private JLabel labelAmbiente;
     private JLabel labelTurno;
     private JLabel labelStatus;
-    private JButton btnExplorar, btnAtacar, btnInventario, btnStatus, btnDescansar;
-    private GerenciadorDeItens gerenciadorDeItens = new GerenciadorDeItens();
+    private JButton btnExplorar, btnAtacar, btnInventario, btnStatus, btnDescansar, btnVerificarVitoria;
     private Personagem personagem;
+    private GerenciadorDeItens gerenciadorDeItens = new GerenciadorDeItens(personagem);
+    private TelaPrincipalJogo telaPrincipal;
     private int contadorTurnos = 0;
     private final int turnosMaximos = 25;
     private DescricaoItemUtils descricaoUtils;
@@ -65,12 +68,33 @@ public class TelaPrincipalJogo extends JFrame {
         btnInventario = new JButton("Inventário");
         btnStatus = new JButton("Ver Status");
         btnDescansar = new JButton("Descansar");
+        btnVerificarVitoria=new JButton("Verificar construção do lar");
+        this.gerenciadorDeItens = new GerenciadorDeItens(personagem);
+
+        gerenciadorDeItens.setPersonagem(personagem);//aqui modifiquei
+
+        btnVerificarVitoria.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (gerenciadorDeItens.verificarVitoria()) {
+                    JOptionPane.showMessageDialog(null, "Parabéns! Você construiu um lar seguro e venceu o jogo!");
+                  // Aqui você pode encerrar o jogo ou fazer algo como:
+                  // System.exit(0);
+                 } else {
+                    List<String> faltando = gerenciadorDeItens.itensFaltandoParaVitoria();
+                    JOptionPane.showMessageDialog(null,
+                            "Você ainda precisa dos seguintes itens para vencer:\n- " + String.join("\n- ", faltando),
+                            "Itens Faltando", JOptionPane.INFORMATION_MESSAGE);
+              }
+          }
+                                              });
 
         painelBotoes.add(btnExplorar);
         painelBotoes.add(btnAtacar);
         painelBotoes.add(btnInventario);
         painelBotoes.add(btnStatus);
         painelBotoes.add(btnDescansar);
+        painelBotoes.add(btnVerificarVitoria);
 
         JPanel painelInferior = new JPanel(new BorderLayout());
         painelInferior.add(painelBotoes, BorderLayout.NORTH);
@@ -83,7 +107,7 @@ public class TelaPrincipalJogo extends JFrame {
     private void configurarAcoes() {
         btnExplorar.addActionListener(e -> realizarExploracao());
         btnAtacar.addActionListener(e -> JOptionPane.showMessageDialog(this, "Você se prepara para atacar uma criatura!"));
-        btnInventario.addActionListener(e -> new TelaInventario(this, personagem).setVisible(true));
+        btnInventario.addActionListener(e -> new TelaInventario(this,telaPrincipal,personagem).setVisible(true));
         btnStatus.addActionListener(e -> mostrarStatus());
         btnDescansar.addActionListener(e -> realizarDescanso());
     }
@@ -198,7 +222,7 @@ public class TelaPrincipalJogo extends JFrame {
         JOptionPane.showMessageDialog(this, personagem.statusFormatado());
     }
 
-    private void atualizarTela() {
+    public void atualizarTela() {
         labelTurno.setText("Turno: " + (contadorTurnos + 1) + " / " + turnosMaximos);
 
         int indexAmbiente = contadorTurnos / 5;
@@ -234,7 +258,7 @@ public class TelaPrincipalJogo extends JFrame {
         if (item instanceof Armas) caminho += "armas/";
         else if (item instanceof Ferramentas) caminho += "ferramentas/";
         else if (item instanceof Remedios) caminho += "remedios/";
-        else if (item instanceof Alimentos) caminho += "alimentos/";
+        else if (item instanceof Alimento) caminho += "alimentos/";
         else if (item instanceof Agua) caminho += "agua/";
         else if (item instanceof Materiais) caminho += "materiais/";
 
