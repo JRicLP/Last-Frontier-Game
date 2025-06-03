@@ -1,7 +1,7 @@
 package gerenciadores;
 
 import ambientes.*;
-import eventos.Eventos;
+import eventos.Evento;
 import interfaces.AcoesGerenciadorDeAmbientes;
 import personagens.Personagem;
 
@@ -11,33 +11,33 @@ public class GerenciadorDeAmbientes implements AcoesGerenciadorDeAmbientes {
 
     //Atributos da classe:
     //Removi o atributo ‘String’ climaGlobal, pois não era utilizado!
-    private ArrayList<Ambientes> listaAmbientesDisponiveis;
-    private ArrayList<Ambientes> historicoMovimentacao;
+    private ArrayList<Ambiente> listaAmbienteDisponiveis;
+    private ArrayList<Ambiente> historicoMovimentacao;
     //Eu não sei se declarar um atributo random é a melhor forma de fazer isso!!
 
     //Metodo construtor da classe:
-    public GerenciadorDeAmbientes(ArrayList<Ambientes> listaAmbientesDisponiveis, ArrayList<Ambientes> historicoMovimentacao) {
-        this.listaAmbientesDisponiveis = listaAmbientesDisponiveis; //O atributo no construtor deve estar dessa forma!!
+    public GerenciadorDeAmbientes(ArrayList<Ambiente> listaAmbienteDisponiveis, ArrayList<Ambiente> historicoMovimentacao) {
+        this.listaAmbienteDisponiveis = listaAmbienteDisponiveis; //O atributo no construtor deve estar dessa forma!!
         this.historicoMovimentacao = historicoMovimentacao;
     }
 
     //Metodos acessores:
-    public void setListaAmbientesDisponiveis(ArrayList<Ambientes> listaAmbientesDisponiveis) {
-        this.listaAmbientesDisponiveis = listaAmbientesDisponiveis;
+    public void setListaAmbientesDisponiveis(ArrayList<Ambiente> listaAmbienteDisponiveis) {
+        this.listaAmbienteDisponiveis = listaAmbienteDisponiveis;
     }
-    public ArrayList<Ambientes> getListaAmbientesDisponiveis()  {
-        return listaAmbientesDisponiveis;
+    public ArrayList<Ambiente> getListaAmbientesDisponiveis()  {
+        return listaAmbienteDisponiveis;
     }
-    public void setHistoricoMovimentacao(ArrayList<Ambientes> historicoMovimentacao) {
+    public void setHistoricoMovimentacao(ArrayList<Ambiente> historicoMovimentacao) {
         this.historicoMovimentacao = historicoMovimentacao;
     }
-    public ArrayList<Ambientes> getHistoricoMovimentacao() {
+    public ArrayList<Ambiente> getHistoricoMovimentacao() {
         return historicoMovimentacao;
     }
 
     //Metodos implementados:
     @Override
-    public void mudarAmbiente(Personagem personagemAtual, Ambientes novoAmbiente) {
+    public void mudarAmbiente(Personagem personagemAtual, Ambiente novoAmbiente) {
         System.out.println("Após uma longa jornada com obstáculos e desafios pelo caminho, " + personagemAtual.getNomePersonagem()
                 + " chegou ao seu destino: " + novoAmbiente.getNomeAmbiente() +"!");
         personagemAtual.setLocalizacaoPersonagem(novoAmbiente.getNomeAmbiente());
@@ -47,12 +47,12 @@ public class GerenciadorDeAmbientes implements AcoesGerenciadorDeAmbientes {
     }
 
     @Override
-    public void gerarEvento(Ambientes ambienteAtual, Eventos eventoGerado) { //Metodo modificado!!
+    public void gerarEvento(Ambiente ambienteAtual, Evento eventoGerado) { //Metodo modificado!!
         //Esse metodo deverá ser revisto antes da sua implementação!!
     }
 
     @Override
-    public void modificarRecursos(Ambientes ambienteAtual) {
+    public void modificarRecursos(Ambiente ambienteAtual) {
         //Esse metodo será aprimorado a partir do desenvolvimento dos recursos e as suas relações com o ambiente
     }
 
@@ -88,3 +88,4 @@ public class GerenciadorDeAmbientes implements AcoesGerenciadorDeAmbientes {
         this.getListaAmbientesDisponiveis().add(caverna);  //Posição 3
         this.getListaAmbientesDisponiveis().add(ruinas);   //Posição 4
     }
+}

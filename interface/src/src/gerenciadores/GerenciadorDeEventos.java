@@ -3,94 +3,89 @@ package gerenciadores;
 import ambientes.*;
 import eventos.*;
 import interfaces.AcoesGerenciadorDeEventos;
+import itens.Arma;
 import personagens.Personagem;
+import telas.TelaPrincipalJogo;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class GerenciadorDeEventos implements AcoesGerenciadorDeEventos {
 
     //Atributos da classe:
     //Removi o atributo int probabilidadeOcorrencia[], pois o mesmo não era utilizado
-    private ArrayList<Eventos> listaEventosPossiveis;
-    private ArrayList<Eventos> historicoEventos;
+    private ArrayList<Evento> listaEventoPossiveis;
+    private ArrayList<Evento> historicoEventos;
+    private Personagem personagem;
+    private int danoBase = 5;
+    private List<EventoCriatura> listaCriaturas = new ArrayList<>();
+    private List<EventoDescoberta> listaDescobertas = new ArrayList<>();
+    private List<EventoDoencaFerimento> listaDoencasFerimentos = new ArrayList<>();
+    private List<EventoClimatico> listaClimaticos = new ArrayList<>();
+    private TelaPrincipalJogo tela;
 
     //Metodo construtor:
-    public GerenciadorDeEventos(ArrayList<Eventos> listaEventosPossiveis, ArrayList<Eventos> historicoEventos) {
-        this.listaEventosPossiveis = listaEventosPossiveis; //O atributo no construtor deve estar dessa forma!!
-        this.historicoEventos = listaEventosPossiveis; //O atributo no construtor deve estar dessa forma!!
+    public GerenciadorDeEventos(TelaPrincipalJogo tela, ArrayList<Evento> listaEventoPossiveis, ArrayList<Evento> historicoEventos) {
+        this.tela=tela;
+        this.listaEventoPossiveis = listaEventoPossiveis; //O atributo no construtor deve estar dessa forma!!
+        this.historicoEventos = historicoEventos; //O atributo no construtor deve estar dessa forma!!
+        gerarEventosCriatura();
+        gerarEventosDescoberta();
+        //gerarEventoDoencaFerimento();
+        //gerarEventosClimaticos();
     }
 
     //Metodos acessores:
-    public void setListaEventosPossiveis(ArrayList <Eventos>listaEventosPossiveis) {
-        this.listaEventosPossiveis = listaEventosPossiveis;
+    public void setListaEventosPossiveis(ArrayList <Evento> listaEventoPossiveis) {
+        this.listaEventoPossiveis = listaEventoPossiveis;
     }
-    public ArrayList<Eventos> getListaEventosPossiveis() {
-        return listaEventosPossiveis;
+    public ArrayList<Evento> getListaEventosPossiveis() {
+        return listaEventoPossiveis;
     }
-    public void setHistoricoEventos(ArrayList<Eventos> historicoEventos) {
+    public void setHistoricoEventos(ArrayList<Evento> historicoEventos) {
         this.historicoEventos = historicoEventos;
     }
-    public ArrayList<Eventos> getHistoricoEventos() {
+    public ArrayList<Evento> getHistoricoEventos() {
         return historicoEventos;
     }
 
     //Metodos implementados:
+
     @Override
-    public void sortearEvento(Ambientes ambienteAtual) {
+    public Evento sortearEvento(Ambiente ambienteAtual, Personagem personagem) {
+        if (personagem == null || ambienteAtual == null) return null;
 
-        //No caso, para eventos sorteados mais de uma vez?
-        listaEventosPossiveis.clear(); // Limpa eventos antigos
+        Arma arma = personagem.getArmaEquipada();
+        int dano = (arma != null) ? arma.getDanoArma() : danoBase;
 
-        //Gerando os eventos com base nos ambientes:
-        if(ambienteAtual instanceof AmbienteFloresta){
-            gerarEventosCriatura();
-            gerarEventosClimaticos(ambienteAtual);
-            gerarEventosDescoberta();
-            //gerarEventoDoencaFerimento(); Esse evento é resultante de um combate, ou desgaste dos status do personagem
-        } else if (ambienteAtual instanceof AmbienteCaverna) {
-            gerarEventosCriatura();
-            gerarEventosClimaticos(ambienteAtual);
-            gerarEventosDescoberta();
-            //gerarEventoDoencaFerimento(); Esse evento é resultante de um combate, ou desgaste dos status do personagem
-        } else if (ambienteAtual instanceof AmbienteMontanha) {
-            gerarEventosCriatura();
-            gerarEventosClimaticos(ambienteAtual);
-            gerarEventosDescoberta();
-            //gerarEventoDoencaFerimento(); Esse evento é resultante de um combate, ou desgaste dos status do personagem
-        }
-        else if(ambienteAtual instanceof AmbienteRuinas){
-            gerarEventosCriatura();
-            gerarEventosClimaticos(ambienteAtual);
-            gerarEventosDescoberta();
-            //gerarEventoDoencaFerimento(); Esse evento é resultante de um combate, ou desgaste dos status do personagem
-        } else if (ambienteAtual instanceof AmbienteLagoRio) {
-            gerarEventosCriatura();
-            gerarEventosClimaticos(ambienteAtual);
-            gerarEventosDescoberta();
-            //gerarEventoDoencaFerimento(); Esse evento é resultante de um combate, ou desgaste dos status do personagem
+        listaEventoPossiveis.clear(); // Limpa eventos anteriores
+
+        // Gerar eventos com base no tipo de ambiente
+        Random random = new Random();
+
+        // Lista com todas as listas de eventos
+        List<List<? extends Evento>> todasAsListas = List.of(
+                listaCriaturas,
+                listaClimaticos,
+                listaDescobertas,
+                listaDoencasFerimentos
+        );
+
+        // Sorteia uma das listas
+        List<? extends Evento> listaEscolhida = todasAsListas.get(random.nextInt(todasAsListas.size()));
+
+        // Sorteia um Evento dentro da lista escolhida
+        if (!listaEscolhida.isEmpty()) {
+            return listaEscolhida.get(random.nextInt(listaEscolhida.size()));
         }
 
-        //Mas de onde vem essa lista de eventos?
-        if (listaEventosPossiveis.isEmpty()) {
-            System.out.println("Nenhum evento disponível para sortear.");
-            return;
-        }
-
-        //Sorteio do Evento:
-        Random sorteador = new Random();
-        int indiceSorteado = sorteador.nextInt(listaEventosPossiveis.size());
-        Eventos eventoSorteado = listaEventosPossiveis.get(indiceSorteado);
-        //Mostrando o Evento sorteado:
-        System.out.println("Evento sorteado: " + eventoSorteado.getNomeEvento());
-        System.out.println("Descrição: " + eventoSorteado.getDescricaoEvento());
-        //Adicionando ao Histórico de Eventos:
-        historicoEventos.add(eventoSorteado);
+        return null; // caso algo dê errado
 
     }
 
     @Override
-    public void aplicarEvento(Personagem personagemAtual, Eventos eventoAplicado) {
+    public void aplicarEvento(Personagem personagemAtual, Evento eventoAplicado) {
         if (eventoAplicado.isCondicaoEvento()) { //Verifica se a condição necessária para o evento está ativa
             System.out.println("O personagem " + personagemAtual.getNomePersonagem() + " está sofrendo as consequências de: " + eventoAplicado.getNomeEvento());
         }
@@ -99,7 +94,7 @@ public class GerenciadorDeEventos implements AcoesGerenciadorDeEventos {
     }
 
     @Override
-    public void removerEvento(Eventos eventoAtual) {
+    public void removerEvento(Evento eventoAtual) {
         System.out.println("O evento " + eventoAtual.getNomeEvento() + "foi removido com sucesso!!");
     }
 
@@ -108,27 +103,28 @@ public class GerenciadorDeEventos implements AcoesGerenciadorDeEventos {
     // Gerando Eventos Criaturas:
     public void gerarEventosCriatura() {
         EventoCriatura cervo = new EventoCriatura("Hjarnhyrndr", "Um cervo de pelagem prateada e chifres de cristal gélido. Dizem que ele aparece apenas sob a luz da lua cheia em florestas sagradas. É símbolo de equilíbrio, e caçá-lo é considerado blasfêmia.",
-                2, "O encontro com criaturas possibilita a obtenção de recursos", false, "Animal mágico (neutro)", 25, 5, 0, " ");
+                2, "O encontro com criaturas possibilita a obtenção de recursos", false, "Animal mágico (neutro)", 25, 5, 0,2 );
         EventoCriatura serpente = new EventoCriatura("Niðkrága", "Uma serpente subterrânea que se move por vibrações no solo. Ela cospe uma névoa negra que cega e sufoca. Suas escamas são procuradas para rituais de invisibilidade",
-                2, "O encontro com criaturas possibilita a obtenção de recursos", false, "Criatura hostil", 35, 10, 5, " ");
+                2, "O encontro com criaturas possibilita a obtenção de recursos", false, "Criatura hostil", 35, 10, 5, 5);
         EventoCriatura corvo = new EventoCriatura("Veðrhrafn", "Um corvo colossal com penas de trovão e olhos de relâmpago. Anuncia grandes mudanças ou batalhas. A presença de um Veðrhrafn pode significar bênção divina... ou desgraça inevitável.",
-                2, "O encontro com criaturas possibilita a obtenção de recursos", false, "Animal mágico (neutro)", 40, 10, 0, " ");
+                2, "O encontro com criaturas possibilita a obtenção de recursos", false, "Animal mágico (neutro)", 40, 10, 0, 2);
         EventoCriatura javali = new EventoCriatura("Grimsvártr", "Um javali titânico coberto de espinhos ósseos. Habita vales escuros e ruínas esquecidas. Quando furioso, seu grito ecoa por quilômetros e provoca avalanches.",
-                2, "O encontro com criaturas possibilita a obtenção de recursos", false, "Criatura hostil", 40, 15, 10, " ");
+                2, "O encontro com criaturas possibilita a obtenção de recursos", false, "Criatura hostil", 40, 15, 10, 10);
         EventoCriatura peixe = new EventoCriatura("Silfurskyn", "Um peixe raro que brilha com luz própria em lagos encantados como Mjarnvatn. Quem o captura e o liberta pode receber sonhos proféticos. Comer sua carne, no entanto, causa loucura.",
-                2, "O encontro com criaturas possibilita a obtenção de recursos", false, "Animal mágico (pacífico)", 10, 5, 0, " ");
-        EventoCriatura lobo = new EventoCriatura("Draugrulfr", "Lobo espectral que aparece onde o véu entre mundos se rompe. Seus olhos ardem com chamas verdes e seu uivo atrai os mortos inquietos. Imune a armas normais, só teme fogo.",
-                2, "O encontro com criaturas possibilita a obtenção de recursos", false, "Criatura hostil", 20, 5, 5, " ");
+                2, "O encontro com criaturas possibilita a obtenção de recursos", false, "Animal mágico (pacífico)", 10, 5, 0, 2);
+        EventoCriatura lobo = new EventoCriatura("Draugrulfr",
+                "Lobo espectral que aparece onde o véu entre mundos se rompe. Seus olhos ardem com chamas verdes e seu uivo atrai os mortos inquietos. Imune a armas normais, só teme fogo.",
+                2, "O encontro com criaturas possibilita a obtenção de recursos", false, "Criatura hostil", 20, 5, 5, 5);
         EventoCriatura cabra = new EventoCriatura("Tindgeit", "Cabra das montanhas com patas afiadas como ganchos e pelo que muda de cor com o clima. É usada por caçadores e clérigos como guia em regiões traiçoeiras.",
-                2, "O encontro com criaturas possibilita a obtenção de recursos", false, "Animal selvagem (neutro)", 15, 5, 0, " ");
+                2, "O encontro com criaturas possibilita a obtenção de recursos", false, "Animal selvagem (neutro)", 15, 5, 0, 2);
         EventoCriatura aranha = new EventoCriatura("Skuggadraugr", "Uma criatura que vive entre as sombras de ruínas e cavernas profundas. Não tem forma definida — apenas olhos vermelhos pairando na escuridão. Alimenta-se de medo. Matar uma exige luz.",
-                2, "O encontro com criaturas possibilita a obtenção de recursos", false, "Animal selvagem (neutro)", 15, 10, 10, " ");
+                2, "O encontro com criaturas possibilita a obtenção de recursos", false, "Animal selvagem (neutro)", 15, 10, 10, 10);
         EventoCriatura guerreiroCorrompido = new EventoCriatura("Skarnvaldr", "Um antigo guerreiro-sacerdote banido pelos próprios deuses após desafiar os Pactos do Céu. Usa uma armadura corroída por raios e carrega uma lança de obsidiana viva chamada Mjarkfjaldr." +
                 " Ele percorre as montanhas e ruínas em busca de relíquias perdidas, amaldiçoando qualquer um que cruze seu caminho com visões de agonia eterna.", 2, "O encontro com entidades humanas permite a obtenção de recursos ou batalhas", false,
-                "Humano hostil", 60, 25, 20, "");
+                "Humano hostil", 60, 25, 20, 20);
         EventoCriatura guardiaDoLago = new EventoCriatura("Yndra Sædis", "Uma mulher idosa que vive isolada às margens do lago Mjarnvatn. É uma vidente silenciosa, conhecida por ouvir os sussurros da névoa. Acredita-se que Yndra seja filha de um deus e uma mortal," +
                 " com sangue de tempo em suas veias. Aqueles que buscam respostas em seus sonhos costumam procurá-la — mas ela só fala em enigmas.", 2, "O encontro com entidades humanas permite a obtenção de recursos ou batalhas", false,
-                "Humano pacífico", 80, 0, 0, "");
+                "Humano pacífico", 80, 0, 0, 40);
         //Adicionando na lista conforme as probabilidades de cada Evento Criatura:
         //Inicialmente, vou fazer uma Probabilidade Forçada Simples, com a mesma chance para todos os elementos:
         EventoCriatura[] listaEventosCriatura = {cervo, serpente, corvo, javali, peixe, lobo, cabra, aranha, guardiaDoLago, guerreiroCorrompido};
@@ -140,8 +136,18 @@ public class GerenciadorDeEventos implements AcoesGerenciadorDeEventos {
         System.out.println("Uma criatura apareceu: " + eventoSorteado.getNomeEvento());
         System.out.println("Descrição: " + eventoSorteado.getDescricaoEvento());
         //Adicionando ao Histórico de Eventos:
-        listaEventosPossiveis.add(eventoSorteado);
+        listaEventoPossiveis.add(eventoSorteado);
 
+        listaCriaturas.add(cervo);
+        listaCriaturas.add(serpente);
+        listaCriaturas.add(corvo);
+        listaCriaturas.add(javali);
+        listaCriaturas.add(peixe);
+        listaCriaturas.add(lobo);
+        listaCriaturas.add(cabra);
+        listaCriaturas.add(aranha);
+        listaCriaturas.add(guerreiroCorrompido);
+        listaCriaturas.add(guardiaDoLago);
     }
 
     //Gerando Eventos Descoberta:
@@ -168,7 +174,13 @@ public class GerenciadorDeEventos implements AcoesGerenciadorDeEventos {
         System.out.println("Você encontrou um tesouro: " + eventoSorteado.getNomeEvento());
         System.out.println("Descrição: " + eventoSorteado.getDescricaoEvento());
         //Adicionando ao Histórico de Eventos:
-        listaEventosPossiveis.add(eventoSorteado);
+        listaEventoPossiveis.add(eventoSorteado);
+
+        listaDescobertas.add(bauPerdido);
+        listaDescobertas.add(caixaDeSuprimentos);
+        listaDescobertas.add(ervasMedicinais);
+        listaDescobertas.add(destrocosRuinas);
+        listaDescobertas.add(jarrosConserva);
     }
 
     //Gerando Eventos de Doença e Ferimento:
@@ -201,14 +213,22 @@ public class GerenciadorDeEventos implements AcoesGerenciadorDeEventos {
         //Mostrando o Evento sorteado:
         System.out.println("Você está se sentindo mal: " + eventoSorteado.getNomeEvento() + " atingiu-o!");
         System.out.println("Descrição: " + eventoSorteado.getDescricaoEvento());
-        //Adicionando ao Histórico de Eventos:
-        listaEventosPossiveis.add(eventoSorteado);
 
+
+        //Adicionando ao Histórico de Eventos:
+        listaEventoPossiveis.add(eventoSorteado);
+
+        listaDoencasFerimentos.add(mordida);
+        listaDoencasFerimentos.add(chifrada);
+        listaDoencasFerimentos.add(contato);
+        listaDoencasFerimentos.add(arranhao);
+        listaDoencasFerimentos.add(olhar);
+        listaDoencasFerimentos.add(toque);
     }
 
     //Os Eventos Climáticos Não Padrão não serão sorteados
     //Gerando Eventos Climáticos:
-    public void gerarEventosClimaticos(Ambientes ambienteAtual) {
+    public void gerarEventosClimaticos(Ambiente ambienteAtual) {
 
         if(ambienteAtual instanceof AmbienteFloresta) {
             //Clima padrão - Floresta:
@@ -226,6 +246,10 @@ public class GerenciadorDeEventos implements AcoesGerenciadorDeEventos {
             ambienteAtual.setClimaDominante(climaSorteado.getNomeEvento()); //Inicialmente, vamos tratar como String, mas mudaremos o atributo de Ambientes, posteriormente.
             System.out.println(climaSorteado.getNomeEvento() + "está acontecendo");
             System.out.println(climaSorteado.getDescricaoEvento());
+
+            listaClimaticos.add(climaFloresta);
+            listaClimaticos.add(climaVariadoUm);
+            listaClimaticos.add(climaVariadoDois);
         }
         else if (ambienteAtual instanceof AmbienteMontanha) {
             //Clima padrão - Montanha:
@@ -243,12 +267,17 @@ public class GerenciadorDeEventos implements AcoesGerenciadorDeEventos {
             ambienteAtual.setClimaDominante(climaSorteado.getNomeEvento());//Inicialmente, vamos tratar como String, mas mudaremos o atributo de Ambientes, posteriormente.
             System.out.println(climaSorteado.getNomeEvento() + "está acontecendo");
             System.out.println(climaSorteado.getDescricaoEvento());
+
+            listaClimaticos.add(climaMontanha);
+            listaClimaticos.add(climaVariadoUm);
+            listaClimaticos.add(climaVariadoDois);
         }
         else if (ambienteAtual instanceof AmbienteCaverna) {
             //Clima padrão - Caverna:
             EventoClimatico climaCaverna = new EventoClimatico("Myrrkuldi", "Nenhuma luz penetra a atmosfera opressiva. O ar é frio e úmido, com neblinas subterrâneas que condensam em gotas escuras." +
                     " Em seu interior, forma-se um microclima gélido e sufocante, como o hálito de um dragão adormecido.", 2, " ", false, " ", 3, " ");
             ambienteAtual.setClimaDominante(climaCaverna.getNomeEvento()); //Inicialmente, vamos tratar como String, mas mudaremos o atributo de Ambientes, posteriormente.
+            listaClimaticos.add(climaCaverna);
         }
         else if (ambienteAtual instanceof AmbienteRuinas) {
             //Clima padrão - Ruinas:
@@ -266,6 +295,10 @@ public class GerenciadorDeEventos implements AcoesGerenciadorDeEventos {
             ambienteAtual.setClimaDominante(climaSorteado.getNomeEvento()); //Inicialmente, vamos tratar como String, mas mudaremos o atributo de Ambientes, posteriormente.
             System.out.println(climaSorteado.getNomeEvento() + "está acontecendo");
             System.out.println(climaSorteado.getDescricaoEvento());
+
+            listaClimaticos.add(climaRuinas);
+            listaClimaticos.add(climaVariadoUm);
+            listaClimaticos.add(climaVariadoDois);
         }
         else if (ambienteAtual instanceof AmbienteLagoRio) {
             //Clima padrão - Lago:
@@ -283,6 +316,12 @@ public class GerenciadorDeEventos implements AcoesGerenciadorDeEventos {
             ambienteAtual.setClimaDominante(climaSorteado.getNomeEvento()); //Inicialmente, vamos tratar como String, mas mudaremos o atributo de Ambientes, posteriormente.
             System.out.println("Clima " + climaSorteado.getNomeEvento() + "está acontecendo:");
             System.out.println(climaSorteado.getDescricaoEvento());
+
+            listaClimaticos.add(climaLago);
+            listaClimaticos.add(climaVariadoUm);
+            listaClimaticos.add(climaVariadoDois);
         }
     }
+
+
 }
