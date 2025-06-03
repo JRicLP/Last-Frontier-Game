@@ -8,6 +8,8 @@ public abstract class Item implements AcoesItens {
     private String nomeItem;
     private int pesoItem;
     private int durabilidadeItem;
+    private String imagem;
+    private String caminhoImagem;
     //Metodo construtor da superclasse:
     public Item(String nomeItem, int pesoItem, int durabilidadeItem) {
         this.nomeItem = nomeItem;
@@ -15,6 +17,15 @@ public abstract class Item implements AcoesItens {
         this.durabilidadeItem = durabilidadeItem;
     }
     //Metodos acessores da superclasse:
+
+    public String getCaminhoImagem() {
+        return caminhoImagem;
+    }
+
+    public void setCaminhoImagem(String caminhoImagem) {
+        this.caminhoImagem = caminhoImagem;
+    }
+
     public void setNomeItem(String nomeItem) {
         this.nomeItem = nomeItem;
     }
@@ -33,9 +44,20 @@ public abstract class Item implements AcoesItens {
     public int getDurabilidadeItem() {
         return durabilidadeItem;
     }
+    public void setImagem(String imagem){
+        this.imagem=imagem;
+    }
+    public String getImagem(){
+        return imagem;
+    }
     //Metodos implementados:
     @Override
     public void usar(Item item, Personagem personagem) {
 
     }
+    @Override
+    public String toString() {
+        return getNomeItem() + " | Tipo: " + this.getClass().getSimpleName() + " | Peso: " + getPesoItem();
+    }
+
 }
