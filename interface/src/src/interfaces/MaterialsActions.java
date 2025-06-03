@@ -1,8 +1,8 @@
 package interfaces;
 
-import itens.Materiais;
+import itens.Material;
 
 public interface MaterialsActions {
     //Nessa interface está a assinatura do metodo utilizado na subclasse Materiais:
-    public abstract void combinarMateriais(Materiais material1, Materiais material2);
+    public abstract void combinarMateriais(Material material1, Material material2);
 }

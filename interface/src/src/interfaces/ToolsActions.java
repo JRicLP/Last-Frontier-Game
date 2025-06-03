@@ -1,7 +1,7 @@
 package interfaces;
 
-import ambientes.Ambientes;
+import ambientes.Ambiente;
 
 public interface ToolsActions {
-    public abstract void utilizar(Ambientes recursosAlvo);
+    public abstract void utilizar(Ambiente recursosAlvo);
 }
