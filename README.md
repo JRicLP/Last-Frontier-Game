@@ -93,6 +93,11 @@ Escolha entre diferentes classes, cada uma com habilidades e histórias únicas:
 
 ---
 
+## Gameplay Screenshots:
+
+
+---
+
 ## 🛠️ Tecnologias Utilizadas
 
 > Detalhes sobre o motor do jogo e tecnologias utilizadas serão adicionados em breve.
@@ -107,7 +112,9 @@ O jogo está atualmente em **fase de desenvolvimento ativo**. Acompanhe as atual
 
 ## 👥 Equipe
 
-> Informações sobre a equipe serão adicionadas em breve.
+João Ricardo: https://github.com/JRicLP
+
+Paola Hannah: https://github.com/hann1105
 
 ---
 
@@ -117,7 +124,7 @@ Para perguntas, sugestões ou feedback, entre em contato através de:
 
 Email - João Ricardo: jrls1@poli.br
 
-Email - Paola Hannah: 
+Email - Paola Hannah: phmc@poli.br
 
 ---
 
