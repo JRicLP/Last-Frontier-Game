@@ -19,6 +19,9 @@ public class Pirata extends Personagem {
         this.setFomeInicialPersonagem(100);
         this.habilidadePirata = habilidadePirata;
         this.setImagemPersonagemNoAmbiente("pirata");
+        this.setEnergiaMaximaPersonagem(85);
+        this.setSanidadeMaximaPersonagem(85);
+        this.setVidaMaximaPersonagem(100);
     }
     //Metodos acessores:
     public void setHabilidadePirata(String habilidadePirata) {

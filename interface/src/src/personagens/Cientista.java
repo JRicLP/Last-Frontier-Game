@@ -21,6 +21,9 @@ public class Cientista extends Personagem {
         this.setFomeInicialPersonagem(85);
         this.habilidadeCientista = habilidadeCientista;
         this.setImagemPersonagemNoAmbiente("cientista");
+        this.setEnergiaMaximaPersonagem(100);
+        this.setSanidadeMaximaPersonagem(85);
+        this.setVidaMaximaPersonagem(85);
     }
     //Metodos acessores:
     public void setHabilidadeCientista(String habilidadeCientista) {

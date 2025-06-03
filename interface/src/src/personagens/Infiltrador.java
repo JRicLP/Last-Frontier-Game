@@ -21,6 +21,9 @@ public class Infiltrador extends Personagem {
         this.setFomeInicialPersonagem(65);
         this.habilidadeInfiltrador = habilidadeInfiltrador;
         this.setImagemPersonagemNoAmbiente("infiltrador");
+        this.setEnergiaMaximaPersonagem(100);
+        this.setVidaMaximaPersonagem(85);
+        this.setSanidadeMaximaPersonagem(100);
     }
     //Metodos acessores:
     public void setHabilidadeInfiltrador(String habilidadeInfiltrador) {

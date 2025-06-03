@@ -2,25 +2,13 @@ package personagens;
 
 import interfaces.AcoesPersonagens;
 import inventario.Inventario;
-import itens.Armas;
+import itens.Arma;
 import itens.Item;
-import itens.Remedios;
+import itens.Remedio;
 
 import java.util.ArrayList;
 
 public  abstract class Personagem implements AcoesPersonagens {
-    public Personagem() {
-        // Cria os itens iniciais
-        Remedios vefr = new Remedios("Vefrbind",2,4,"Bandagem", "Tiras de linho consagrado embebidas em seiva de árvore antiga. A bandagem acelera a cicatrização e gruda levemente na pele ao toque," +
-                " como se estivesse viva. Quando removida, queima as impurezas da ferida suavemente.");
-        Armas kv = new Armas("Kviðskera", 4, 9, "Arma corpo a corpo", 9, 2);//faca
-        ArrayList<Item> listaItens = new ArrayList<>(20);
-        this.inventarioPersonagem = new Inventario(listaItens, 45,22);
-        this.inventarioPersonagem.adicionarItem(vefr);
-        this.inventarioPersonagem.adicionarItem(kv);
-    }
-
-
     //Atributos da superclasse:
     private String nomePersonagem;
     private int vidaPersonagem;
@@ -37,8 +25,52 @@ public  abstract class Personagem implements AcoesPersonagens {
     private int vidaMaximaPersonagem;
     private int energiaMaximaPersonagem;
     private int sanidadeMaximaPersonagem;
+    private Arma armaEquipada;
+    public Personagem() {
+        // Cria os itens iniciais
+        Remedio vefr = new Remedio("Vefrbind",2,4,"Bandagem", "Tiras de linho consagrado embebidas em seiva de árvore antiga. A bandagem acelera a cicatrização e gruda levemente na pele ao toque," +
+                " como se estivesse viva. Quando removida, queima as impurezas da ferida suavemente.");
+        Arma kv = new Arma("Kviðskera", 4, 9, "Arma corpo a corpo", 9, 2);//faca
+        ArrayList<Item> listaItens = new ArrayList<>(20);
+        this.inventarioPersonagem = new Inventario(listaItens, 45,22);
+        this.inventarioPersonagem.adicionarItem(vefr);
+        this.inventarioPersonagem.adicionarItem(kv);
 
+
+    }
+
+
+
+
+//tirei FomeMaxima, para utilizar a fome e sede inicial
     //Metodos acessores:
+
+
+
+    public void adicionarItem(Item item) {
+        inventarioPersonagem.adicionarItem(item);
+    }
+
+    public boolean temItem(String nomeItem) {
+        for (Item item : inventarioPersonagem.getListaItens()) {
+            if (item.getNomeItem().equalsIgnoreCase(nomeItem)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public Arma getArmaEquipada() {
+        return armaEquipada;
+    }
+
+    public void setArmaEquipada(Arma armaEquipada) {
+        this.armaEquipada = armaEquipada;
+    }
+
+    public boolean isContaminacaoPersonagem() {
+        return contaminacaoPersonagem;
+    }
 
     public int getVidaMaximaPersonagem() {
         return vidaMaximaPersonagem;
@@ -174,6 +206,13 @@ public  abstract class Personagem implements AcoesPersonagens {
         setFomePersonagem(getFomePersonagem() - 8); // penalidade por passar tempo sem comer
         setSedePersonagem(getSedePersonagem() - 8); // penalidade por passar tempo sem beber
     }
+    public void perderVida(int dano) {
+        this.vidaPersonagem -= dano;
+        if (this.vidaPersonagem < 0) {
+            this.vidaPersonagem = 0;
+        }
+    }
+
 
 
 

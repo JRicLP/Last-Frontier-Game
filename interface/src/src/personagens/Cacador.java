@@ -20,6 +20,9 @@ public class Cacador extends Personagem {
         this.setFomeInicialPersonagem(100);
         this.habilidadeCacador = habilidadeCacador;
         this.setImagemPersonagemNoAmbiente("cacador");
+        this.setEnergiaMaximaPersonagem(85);
+        this.setSanidadeMaximaPersonagem(85);
+        this.setVidaMaximaPersonagem(100);
     }
     //Metodos acessores:
     public void setHabilidadeCacador(String habilidadeCacador) {
