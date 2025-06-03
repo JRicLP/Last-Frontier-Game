@@ -1,7 +1,6 @@
 package gerenciadores;
 
 import ambientes.*;
-import eventos.Evento;
 import interfaces.AcoesGerenciadorDeAmbientes;
 import personagens.Personagem;
 
@@ -13,7 +12,6 @@ public class GerenciadorDeAmbiente implements AcoesGerenciadorDeAmbientes {
     //Removi o atributo ‘String’ climaGlobal, pois não era utilizado!
     private ArrayList<Ambiente> listaAmbienteDisponiveis;
     private ArrayList<Ambiente> historicoMovimentacao;
-    //Eu não sei se declarar um atributo random é a melhor forma de fazer isso!!
 
     //Metodo construtor da classe:
     public GerenciadorDeAmbiente(ArrayList<Ambiente> listaAmbienteDisponiveis, ArrayList<Ambiente> historicoMovimentacao) {
@@ -42,18 +40,6 @@ public class GerenciadorDeAmbiente implements AcoesGerenciadorDeAmbientes {
                 + " chegou ao seu destino: " + novoAmbiente.getNomeAmbiente() +"!");
         personagemAtual.setLocalizacaoPersonagem(novoAmbiente.getNomeAmbiente());
         getHistoricoMovimentacao().add(novoAmbiente);
-        //Temos que ver uma forma de registrar também o antigo ambiente!!
-        //Precisamos modificar o atributo, para poder utilizar a classe e os seus métodos na classe Personagem
-    }
-
-    @Override
-    public void gerarEvento(Ambiente ambienteAtual, Evento eventoGerado) { //Metodo modificado!!
-        //Esse metodo deverá ser revisto antes da sua implementação!!
-    }
-
-    @Override
-    public void modificarRecursos(Ambiente ambienteAtual) {
-        //Esse metodo será aprimorado a partir do desenvolvimento dos recursos e as suas relações com o ambiente
     }
 
     @Override

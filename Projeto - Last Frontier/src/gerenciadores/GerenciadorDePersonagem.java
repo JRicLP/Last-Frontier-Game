@@ -68,7 +68,6 @@ public class GerenciadorDePersonagem implements AcoesGerenciadorDePersonagens {
 
             System.out.println("Você escolheu " + this.getEscolha());
             System.out.println("Boa sorte em sua jornada!");
-            //Personagem personagemEscolhido = this.getPersonagem();
             break;
         }
     }
@@ -86,15 +85,17 @@ public class GerenciadorDePersonagem implements AcoesGerenciadorDePersonagens {
         Cientista cientista = new Cientista("Criativo, consegue consertar coisas e construir");
         Cacador cacador = new Cacador("Lutador, consegue atacar e se defender muito bem");
 
-        Personagem[] listaPersonagensDisplay = {nomade, pirata, infiltrador, explorador, cientista, cacador}; // Renomeei para evitar confusão com outras listas
+        Personagem[] listaPersonagensDisplay = {nomade, pirata, infiltrador, explorador, cientista, cacador}; //Renomeei para evitar confusão com outras listas
 
         for (Personagem personagem : listaPersonagensDisplay) {
             System.out.println("\nClasse: " + personagem.getClass().getSimpleName()); //Mostrando o nome da Classe - Facilita para a exibição (No meu ponto de vista)
             System.out.println("Nome: " + personagem.getNomePersonagem());
 
             switch (personagem) {
-                case Nomade nomade1 -> System.out.println("Habilidade da Classe: " + nomade1.getHabilidadeNomade());
-                case Pirata pirata1 -> System.out.println("Habilidade da Classe: " + pirata1.getHabilidadePirata());
+                case Nomade nomade1 ->
+                        System.out.println("Habilidade da Classe: " + nomade1.getHabilidadeNomade());
+                case Pirata pirata1 ->
+                        System.out.println("Habilidade da Classe: " + pirata1.getHabilidadePirata());
                 case Infiltrador infiltrador1 ->
                         System.out.println("Habilidade da Classe: " + infiltrador1.getHabilidadeInfiltrador());
                 case Explorador explorador1 ->
@@ -106,9 +107,9 @@ public class GerenciadorDePersonagem implements AcoesGerenciadorDePersonagens {
                 }
             }
 
-            //Habilidade
+            //Habilidade:
             System.out.println("Habilidade Especial (Uso Único): " + personagem.getNomeHabilidadeEspecial());
-            System.out.println("  Descrição da Habilidade Especial: " + personagem.getDescricaoHabilidadeEspecial());
+            System.out.println("Descrição da Habilidade Especial: " + personagem.getDescricaoHabilidadeEspecial());
         }
         System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
     }
@@ -129,16 +130,16 @@ public class GerenciadorDePersonagem implements AcoesGerenciadorDePersonagens {
                 " \ncomo se estivesse viva. Quando removida, queima as impurezas da ferida suavemente.", 20);
 
         if (inventario.adicionarItem(cajadoInicial)) {
-            System.out.println("  + " + cajadoInicial.getNomeItem() + " (" + cajadoInicial.getTipoArma() + ")");
+            System.out.println(" + " + cajadoInicial.getNomeItem() + " (" + cajadoInicial.getTipoArma() + ")");
         } else {
-            System.out.println("  - Falha ao adicionar " + cajadoInicial.getNomeItem() + " (Verifique capacidade/peso do inventário).");
+            System.out.println("- Falha ao adicionar " + cajadoInicial.getNomeItem() + " (Verifique capacidade/peso do inventário).");
         }
 
         if (inventario.adicionarItem(bandagemInicial)) {
-            System.out.println("  + " + bandagemInicial.getNomeItem() + " (Tipo: " + bandagemInicial.getTipoRemedio() + ")");
-            System.out.println("    Efeito: " + bandagemInicial.getEfeitoRemedio());
+            System.out.println(" + " + bandagemInicial.getNomeItem() + " (Tipo: " + bandagemInicial.getTipoRemedio() + ")");
+            System.out.println("Efeito: " + bandagemInicial.getEfeitoRemedio());
         } else {
-            System.out.println("  - Falha ao adicionar " + bandagemInicial.getNomeItem() + " (Verifique capacidade/peso do inventário).");
+            System.out.println("- Falha ao adicionar " + bandagemInicial.getNomeItem() + " (Verifique capacidade/peso do inventário).");
         }
         System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
     }

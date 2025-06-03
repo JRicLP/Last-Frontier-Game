@@ -1,12 +1,12 @@
 package itens;
 
 import eventos.EventoCriatura;
-import eventos.EventoDoencaFerimento; // << IMPORTAR EventoDoencaFerimento
+import eventos.EventoDoencaFerimento;
 import interfaces.AcoesArmas;
 import personagens.Personagem;
-import ambientes.Ambiente; // << IMPORTAR Ambiente
+import ambientes.Ambiente;
 
-import java.util.Random; // << IMPORTAR Random para chance de aplicar efeito
+import java.util.Random;
 import java.util.Scanner;
 
 public class Arma extends Item implements AcoesArmas {
@@ -67,36 +67,34 @@ public class Arma extends Item implements AcoesArmas {
                     this.setDurabilidadeItem(this.getDurabilidadeItem() - 2);
                     if (this.getDurabilidadeItem() <= 0) {
                         System.out.println("Atenção! Sua arma " + this.getNomeItem() + " quebrou!");
-                        // Main.java já tem lógica para descartar a arma quebrada do inventário.
                     }
 
                     if (criaturaAtacada.getVidaCriatura() <= 0) {
                         combateAtivo = false; // Criatura derrotada
-                        break; // Sai do switch, o loop while verificará a condição e terminará
+                        break; //Sai do switch, o loop while verificará a condição e terminará
                     }
 
-                    // Criatura atacando de volta:
+                    //Criatura atacando de volta:
                     System.out.println("A criatura (" + criaturaAtacada.getNomeEvento() + ") atacou você de volta, e causou: " + criaturaAtacada.getDanoCriatura() + " de dano, cuidado!!");
                     personagemEscolhido.setVidaPersonagem(personagemEscolhido.getVidaPersonagem() - criaturaAtacada.getDanoCriatura());
                     System.out.println("Sua vida: " + personagemEscolhido.getVidaPersonagem());
 
-                    // --- INÍCIO DA NOVA LÓGICA: APLICAR EFEITO COLATERAL DA CRIATURA ---
-                    if (personagemEscolhido.getVidaPersonagem() > 0) { // Só aplica se o personagem sobreviveu ao dano direto
+                    if (personagemEscolhido.getVidaPersonagem() > 0) { //Só aplica se o personagem sobreviveu ao dano direto
                         EventoDoencaFerimento efeitoColateral = criaturaAtacada.getEfeitoColateralAtaque();
                         if (efeitoColateral != null) {
-                            // Opcional: Adicionar uma chance de aplicar o efeito, em vez de ser sempre
+                            //Adicionando uma chance de aplicar o efeito:
                             Random rng = new Random();
                             int chanceDeAplicarEfeito = 50; // Ex: 50% de chance
                             if (rng.nextInt(100) < chanceDeAplicarEfeito) {
                                 System.out.println("O ataque da criatura parece ter deixado um efeito nocivo...");
-                                efeitoColateral.executar(personagemEscolhido, ambienteAtual); // Chama o executar do EventoDoencaFerimento
+                                efeitoColateral.executar(personagemEscolhido, ambienteAtual);
                             } else {
                                 System.out.println("Você conseguiu evitar o pior do ataque da criatura!");
                             }
                         }
                     }
 
-                    // Desgastes nos Status do Personagem por estar em combate/atacar
+                    //Desgastes nos Status do Personagem por estar em combate/atacar
                     personagemEscolhido.setEnergiaPersonagem(personagemEscolhido.getEnergiaPersonagem() - 3);
                     personagemEscolhido.setFomePersonagem(personagemEscolhido.getFomePersonagem() - 3);
                     personagemEscolhido.setSedePersonagem(personagemEscolhido.getSedePersonagem() - 3);
@@ -110,7 +108,7 @@ public class Arma extends Item implements AcoesArmas {
 
                     if (personagemEscolhido.getVidaPersonagem() <= 0) {
                         System.out.println("A Criatura desferiu um golpe fatal e você morreu!!");
-                        combateAtivo = false; // Personagem derrotado
+                        combateAtivo = false; //Personagem derrotado
                     }
                     break;
 
@@ -121,18 +119,17 @@ public class Arma extends Item implements AcoesArmas {
 
                 default:
                     System.out.println("Opção Inválida. Você hesita e perde uma oportunidade.");
-                    // Turno de combate perdido, o loop continua e a criatura pode atacar novamente ou
-                    // o jogador é solicitado a agir. (No seu loop atual, o jogador é solicitado novamente)
                     break;
             }
-        } // Fim do while de combate
+        }
+        // Fim do while de combate
 
-        // Mensagens de Resultado do Combate (permanecem as mesmas)
+        // Mensagens de Resultado do Combate:
         if (criaturaAtacada.getVidaCriatura() <= 0 && personagemEscolhido.getVidaPersonagem() > 0) {
             System.out.println("Você venceu o combate e derrotou a criatura " + criaturaAtacada.getTipoCriatura() + " (" + criaturaAtacada.getNomeEvento() + ")!");
         } else if (personagemEscolhido.getVidaPersonagem() <= 0) {
             System.out.println("Você foi derrotado em combate...");
-        } else if (!combateAtivo) { // Chega aqui se fugiu e ambos estão vivos
+        } else if (!combateAtivo) { //Chega aqui se fugiu e ambos estão vivos
             System.out.println("Você conseguiu escapar do combate com " + criaturaAtacada.getTipoCriatura() + " (" + criaturaAtacada.getNomeEvento() + ").");
         }
     }

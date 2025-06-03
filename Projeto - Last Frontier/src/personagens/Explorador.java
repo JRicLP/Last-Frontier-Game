@@ -14,7 +14,7 @@ public class Explorador extends Personagem {
 
     //Metodo construtor
     public Explorador(String descricaoHabilidadeClasseEntrada) {
-        super("Virgil Explorer", 90, 100, 100,75, 80);
+        super("Virgil Explorer - O Explorador Indomável", 90, 100, 100,75, 80);
         this.descricaoHabilidadeClasse = descricaoHabilidadeClasseEntrada;
     }
 

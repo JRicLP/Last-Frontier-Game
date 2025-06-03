@@ -12,17 +12,17 @@ public class MensagensIniciais {
                 "           ╭────┴─────────────────────────────────────────┴────╮",
                 "      ╭────┴───────────────────────────────────────────────────┴────╮",
                 "  ╭───┴─────────────────────────────────────────────────────────────┴───╮",
-                " ╱                      ♦ COPA CELESTIAL ♦                              ╲",
-                "╱           ✦✧✦      ✧✦✧✦✧      ✦✧✦✧      ✧✦✧✦           ╲",
-                "│        ✧✦✧✦✧✦  ✦✧✦✧✦✧✦  ✧✦✧✦✧✦  ✦✧✦✧✦✧        │",
-                "│      ✦✧✦✧✦✧✦✧✦✧✦✧✦✧✦✧✦✧✦✧✦✧✦✧✦✧✦✧✦✧✦✧✦✧✦✧✦      │",
-                "│    ✧✦  ✦✧✦✧✦✧✦✧✦✧✦✧✦✧✦✧✦✧✦✧✦✧✦✧✦✧✦✧✦✧✦  ✧✦    │",
-                "│  ✦✧✦    ✧✦✧✦✧✦✧✦✧✦✧✦✧✦✧✦✧✦✧✦✧✦✧✦✧✦✧✦    ✦✧✦  │",
-                "│✧✦✧        ✦✧✦✧✦✧✦✧✦✧✦✧✦✧✦✧✦✧✦✧✦✧✦        ✧✦✧│",
-                "│✦✧            ✧✦✧      ✦✧✦✧✦      ✧✦✧            ✦✧│",
-                "│✧              ✦          ✧          ✦              ✧│",
+                " ╱                      ♦COPA CELESTIAL♦                              ╲",
+                "╱           ✦✧✦      ✧✦✧✦✧      ✦✧✦✧      ✧✦✧✦                 ╲",
+                "│        ✧✦✧✦✧✦  ✦✧✦✧✦✧✦  ✧✦✧✦✧✦  ✦✧✦✧✦✧                   │",
+                "│      ✦✧✦✧✦✧✦✧✦✧✦✧✦✧✦✧✦✧✦✧✦✧✦✧✦✧✦✧✦✧✦✧✦✧✦✧✦          │",
+                "│    ✧✦  ✦✧✦✧✦✧✦✧✦✧✦✧✦✧✦✧✦✧✦✧✦✧✦✧✦✧✦✧✦✧✦  ✧✦        │",
+                "│  ✦✧✦    ✧✦✧✦✧✦✧✦✧✦✧✦✧✦✧✦✧✦✧✦✧✦✧✦✧✦✧✦    ✦✧✦      │",
+                "│✧✦✧        ✦✧✦✧✦✧✦✧✦✧✦✧✦✧✦✧✦✧✦✧✦✧✦        ✧✦✧     │",
+                "│✦✧            ✧✦✧      ✦✧✦✧✦      ✧✦✧            ✦✧ │",
+                "│✧              ✦          ✧          ✦              ✧  │",
                 "╲                        VARRUNDR                        ╱",
-                " ╲                    o Guardião Celeste                 ╱",
+                " ╲                   o Guardião Celeste                 ╱",
                 "  ╲                        ║ ║                        ╱",
                 "   ╲                       ║ ║                       ╱",
                 "    ╲                      ║ ║                      ╱",
@@ -32,8 +32,8 @@ public class MensagensIniciais {
                 "        ╲                  ║ ║                  ╱",
                 "         ╲═════════════════╬═╬═════════════════╱",
                 "                           ║ ║",
-                "                       ♦ TRONCO ♦",
-                "                    ELDJARN FORJOU",
+                "                        ♦TRONCO♦",
+                "                      ELDJARN FORJOU",
                 "                        ╔══╬═╬══╗",
                 "                        ║  ║ ║  ║   TERRAS PARTIDAS",
                 "                        ║  ║ ║  ║  (Reino de Vaelra)",
@@ -46,8 +46,8 @@ public class MensagensIniciais {
                 "                    ║      ║ ║      ║",
                 "                    ╚══════╬═╬══════╝",
                 "                           ║ ║",
-                "                        ♦ NIÐRYS ♦",
-                "                      A SOMBRA CRESCE",
+                "                        ♦NIÐRYS♦",
+                "                     A SOMBRA CRESCE",
                 "                        ╱╲ ║ ║ ╱╲",
                 "                      ╱    ║ ║    ╲",
                 "                    ╱      ║ ║      ╲",
@@ -61,14 +61,14 @@ public class MensagensIniciais {
                 "    ╱              │                 │              ╲",
                 "  ╱                │  PROFUNDEZAS    │                ╲",
                 "╱                  │ (Reino Sombrio) │                  ╲",
-                "│                  │                 │                  │",
-                "│    ∿∿∿∿∿∿∿∿∿∿∿∿∿│∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿│∿∿∿∿∿∿∿∿∿∿∿∿∿    │",
-                "│  ∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿│  LAGO MJARNVATN   │∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿  │",
-                "│∿∿∿ ÁGUAS DE      │ (Você Desperta) │ ECOS DO        ∿∿∿│",
-                "│∿∿   MEMÓRIA      │     AQUI        │ PASSADO        ∿∿│",
-                "│∿   E ESQUECIMENTO│                 │ SUSSURRAM      ∿│",
+                "│                  │                 │                   │",
+                "│      ∿∿∿∿∿∿∿∿∿∿∿∿                 ∿∿∿∿∿∿∿∿∿∿∿∿      │",
+                "│     ∿∿∿∿∿∿∿∿∿∿∿∿∿ LAGO MJARNVATN  ∿∿∿∿∿∿∿∿∿∿∿∿∿     │",
+                "│     ÁGUAS DE     │ (Você Desperta) │ ECOS DO           │",
+                "│     MEMÓRIA      │      AQUI       │ PASSADO           │",
+                "│   E ESQUECIMENTO │                 │ SUSSURRAM         │",
                 "│  (Seu Limiar...) └─────────────────┘ (...Seu Destino?) │",
-                "│                                                       │",
+                "│                                                        │",
                 "╲                                                       ╱",
                 " ╲        ╔═══╗           ╔═══╗           ╔═══╗         ╱",
                 "  ╲       ║   ║           ║   ║           ║   ║        ╱",
@@ -81,12 +81,12 @@ public class MensagensIniciais {
                 "         ╲║   ║           ║   ║           ║   ║ ╱",
                 "          ╚═══╝           ╚═══╝           ╚═══╝",
                 "             │               │               │",
-                "          ╔══════╗       ╔══════╗       ╔══════╗",
-                "          ║ANTIGA║       ║SKARNIR║       ║MORTE ║",
-                "          ║FORÇA ║       ║ AQUI ║       ║SILENC║",
-                "          ║ VITAL║       ║CORROMPEU║     ║IOSA  ║",
-                "          ║      ║       ║A RAIZ║       ║CRESCE║",
-                "          ╚══════╝       ╚══════╝       ╚══════╝"
+                "         ╔══════╗       ╔ ══════ ╗       ╔══════╗",
+                "         ║ANTIGA║      ║  SKARNIR ║      ║MORTE ║",
+                "         ║FORÇA ║      ║  ATACOU  ║      ║SILENC║",
+                "         ║VITAL ║      ║    A     ║      ║IOSA  ║",
+                "         ║      ║      ║   RAIZ   ║      ║CRESCE║",
+                "         ╚══════╝       ╚ ══════ ╝       ╚══════╝"
         };
 
         long pausaEntreLinhas = 75;
@@ -115,22 +115,21 @@ public class MensagensIniciais {
         }
         sleep(pausaEntreSessoes + 300);
 
-        // Elementos místicos SEM cores
         System.out.println();
         System.out.println("═══════════════════════════════════════════════════════════════════════════════");
         sleep(400);
-        System.out.println("                              ♦ DRAVNIR ♦");
+        System.out.println("                              DRAVNIR");
         sleep(400);
         System.out.println("                        A ÁRVORE PRIMORDIAL");
         sleep(400);
         System.out.println("═══════════════════════════════════════════════════════════════════════════════");
         System.out.println();
         sleep(600);
-        System.out.println("          ✦ Do primeiro sopro nasceram os deuses antigos ✦");
+        System.out.println("           Do primeiro sopro nasceram os deuses antigos");
         sleep(600);
-        System.out.println("           ◊ Uma raiz corrompida espalha a praga ◊");
+        System.out.println("              Uma raiz corrompida espalha a praga");
         sleep(600);
-        System.out.println("        ♦ Dos sonhos de Dravnir nasceram os Vandrers ♦");
+        System.out.println("           Dos sonhos de Dravnir nasceram os Vandrers");
         System.out.println();
         sleep(1200);
     }
@@ -144,7 +143,6 @@ public class MensagensIniciais {
         System.out.println();
         sleep(2500);
 
-        // ... (O restante do seu método mensagensLoreIntroducao permanece igual) ...
         System.out.println("No princípio existia apenas Dravnir, a Árvore Primordial. Seus galhos");
         System.out.println("tocavam as estrelas e suas raízes abraçavam o âmago do mundo.");
         System.out.println();

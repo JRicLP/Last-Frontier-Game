@@ -31,36 +31,49 @@ public class Main {
 
         MensagensIniciais display = new MensagensIniciais();
         display.mensagensLoreIntroducao();
-        display.sleep(3000);
         usuario.nextLine();
+
+        System.out.println();
 
         CondicaoDeVitoriaDerrota display2 = new CondicaoDeVitoriaDerrota();
         display2.condicaoDisplay();
         usuario.nextLine();
 
+        System.out.println();
+
         GerenciadorDePersonagem gerenciadorDePersonagem = new GerenciadorDePersonagem();
         gerenciadorDePersonagem.mostrarPersonagens();
         gerenciadorDePersonagem.escolherPersonagens();
         Personagem personagemEscolhido = gerenciadorDePersonagem.getPersonagem();
+
         System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
+
+        System.out.println();
+
+        System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
+
         ArrayList<Ambiente> listaAmbienteDisponiveis = new ArrayList<>(5); // Usando Ambiente (singular)
         ArrayList<Ambiente> historicoDeMovimentacao = new ArrayList<>(20); // Usando Ambiente (singular)
         GerenciadorDeAmbiente gerenciadorDeAmbiente = new GerenciadorDeAmbiente(listaAmbienteDisponiveis, historicoDeMovimentacao);
         gerenciadorDeAmbiente.gerarAmbientes();
         gerenciadorDeAmbiente.mudarAmbiente(personagemEscolhido, listaAmbienteDisponiveis.getFirst());
         Ambiente ambienteAtual = listaAmbienteDisponiveis.getFirst();
+
         System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
+
         ArrayList<Item> listaItensParaInventario = new ArrayList<>(20);
         Inventario inventarioPersonagem = new Inventario(listaItensParaInventario, 45, 22);
         personagemEscolhido.setInventarioPersonagem(inventarioPersonagem);
+
+        System.out.println();
+
         System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
+
         System.out.println("Preparando equipamentos iniciais...");
         gerenciadorDePersonagem.configurarInventarioInicial(personagemEscolhido);
         System.out.println("Verificando seu inventário após receber os itens iniciais:");
         inventarioPersonagem.mostrarInventario();
-        System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
 
-        inventarioPersonagem.mostrarInventario();
         System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
 
         int turnosMaximos = 24;
@@ -81,6 +94,8 @@ public class Main {
         CatalogoDeReceitas catalogoDeReceitas = new CatalogoDeReceitas();
         ArrayList<Receita> todasAsReceitasDoJogo = catalogoDeReceitas.getTodasAsReceitas();
         GerenciadorDeConstrucao gerenciadorDeConstrucao = new GerenciadorDeConstrucao(todasAsReceitasDoJogo);
+
+        System.out.println();
 
         System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
         System.out.println("Sistema de construção carregado com " + todasAsReceitasDoJogo.size() + " receita(s) conhecidas.");
@@ -299,7 +314,8 @@ public class Main {
                     String opcaoInventario = usuario.nextLine().trim();
 
                     switch (opcaoInventario) {
-                        case "1": inventarioPersonagem.mostrarInventario(); break;
+                        case "1":
+                            inventarioPersonagem.mostrarInventario(); break;
                         case "2":
                             System.out.println("Digite a posição do Item que você deseja usar/selecionar:");
                             int indiceDoItemUsado = usuario.nextInt(); usuario.nextLine();
@@ -324,7 +340,6 @@ public class Main {
 
                             if (receitasDisponiveis.isEmpty()) {
                                 System.out.println("Você não tem materiais (ou ferramentas) suficientes para construir nada no momento.");
-                                //Aqui, 'break;' apenas sairia do switch do inventário. O jogador permaneceria no inventário.
                                 break;
                             }
 
@@ -353,7 +368,7 @@ public class Main {
                             } else {
                                 System.out.println("Entrada inválida.");
                                 usuario.nextLine();
-                                break; //Sai da opção de construção, volta para o menu do inventário/principal
+                                break;
                             }
 
                             if (escolhaReceita == -1) {
@@ -373,7 +388,7 @@ public class Main {
                                             System.out.println("VOCÊ ATINGIU UMA CONDIÇÃO DE VITÓRIA!");
                                             System.out.println("******************************************************************************************");
                                             vitoriaPorConstrucaoDoAbrigo = true;
-                                            personagemVivo = false; // Para encerrar o loop principal do jogo elegantemente (ou use outra flag de fim de jogo)
+                                            personagemVivo = false; //Para encerrar o loop principal do jogo
                                         }
                                     } else {
                                         System.out.println("A construção não pôde ser concluída.");
@@ -384,9 +399,10 @@ public class Main {
                             } else {
                                 System.out.println("Opção de receita inválida.");
                             }
-                            break; // Sai da opção de construção (case "5" do inventário)
+                            break;
                         case "0":
-                            System.out.println("Fechando inventário."); break;
+                            System.out.println("Fechando inventário.");
+                            break;
                         default:
                             System.out.println("Opção inválida para o inventário.");
                             break;
@@ -505,7 +521,8 @@ public class Main {
                 default:
                     System.out.println("Comando inválido. Tente novamente.");
                     continue;
-            } //Fim do Switch
+            }
+            //Fim do Switch
 
             //Lógica: Fim de Turno para Criatura Encontrada:
             if (eventoCriaturaAtual != null && eventoCriaturaAtual.getVidaCriatura() > 0 && personagemVivo) {
@@ -524,36 +541,36 @@ public class Main {
                 Item itemEncontradoTurno = gerenciadorDeItem.gerarItemAleatorioGlobal();
 
                 if (itemEncontradoTurno != null) {
-                    System.out.println("Você encontrou um(a) " + itemEncontradoTurno.getNomeItem() + ".");
                     System.out.print("Deseja pegar este item? (S/N): ");
                     String decisaoPegarItem = usuario.nextLine().trim();
                     if (decisaoPegarItem.equalsIgnoreCase("s")) {
                         if (inventarioPersonagem.adicionarItem(itemEncontradoTurno)) {
-                            System.out.println(itemEncontradoTurno.getNomeItem() + " foi adicionado ao seu inventário.");
+                            System.out.println("Você guarda a recompensa da exploração cuidadosamente.");
                         } else {
-                            System.out.println("Você não conseguiu adicionar " + itemEncontradoTurno.getNomeItem() + " ao inventário (talvez esteja cheio ou muito pesado).");
+                            System.out.println("Talvez seja melhor rever o seu gerenciamento de recursos.");
                         }
                     } else {
-                        System.out.println("Você decidiu deixar " + itemEncontradoTurno.getNomeItem() + " para trás.");
+                        System.out.println("Você decidiu deixar " + itemEncontradoTurno.getNomeItem() + " para trás...");
                     }
                 } else {
-                    System.out.println("Sua busca não revelou nada de útil desta vez.");
+                    System.out.println("Talvez em uma próxima exploração...");
                 }
                 System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
-            }//Fim da Lógica - Item aleatório por turno
-
+            }
+            //Fim da Lógica - Item aleatório por turno
             if (personagemVivo) {
                 contadorTurnos++;
             }
 
-        }//Fim do While (Loop Principal)
+        }
+        //Fim do While (Loop Principal)
 
-        if (vitoriaPorConstrucaoDoAbrigo) { // Verifica a nova flag de vitória primeiro
+        if (vitoriaPorConstrucaoDoAbrigo) { //Verifica a nova flag de vitória primeiro
             System.out.println("\nParabéns, Vandrer! Você construiu o Abrigo Seguro e trouxe um bastião de esperança para este mundo!");
             System.out.println("Sua jornada árdua chegou a um final vitorioso!");
-        } else if (!personagemVivo) { // Se não venceu pela construção, mas morreu
+        } else if (!personagemVivo) { //Se não venceu pela construção, mas morreu
             System.out.println("\nFim de jogo. O personagem não sobreviveu aos perigos de Dravnir.");
-        } else { // Se sobreviveu aos turnos máximos sem construir o abrigo (vitória por tempo/sobrevivência)
+        } else { //Se sobreviveu aos turnos máximos sem construir o abrigo (vitória por tempo/sobrevivência)
             System.out.println("\nParabéns! Você sobreviveu por " + turnosMaximos + " turnos nas Terras Partidas!");
             System.out.println("Sua resiliência é notável, mas o futuro de Dravnir ainda é incerto sem o Abrigo Seguro...");
         }

@@ -11,6 +11,7 @@ import java.util.Random;
 public class GerenciadorDeEvento implements AcoesGerenciadorDeEventos {
 
     //Atributos da classe:
+
     //Removi o atributo int probabilidadeOcorrencia[], pois o mesmo não era utilizado
     private ArrayList<Evento> listaEventoPossiveis;
     private ArrayList<Evento> historicoEventos;
@@ -54,7 +55,7 @@ public class GerenciadorDeEvento implements AcoesGerenciadorDeEventos {
     //Metodos para gerar os objetos:
 
     public EventoCriatura gerarEventosCriatura() {
-        // --- PASSO 1: Definir as instâncias de EventoDoencaFerimento que serão usadas ---
+        //1: Definir as instâncias de EventoDoencaFerimento que serão usadas:
         EventoDoencaFerimento efeitoFrostseidr = new EventoDoencaFerimento("Frostseidr",
                 "O toque gelado de seus chifres pode causar um entorpecimento místico. A pele perde cor e a pessoa sente emoções com menos intensidade, como se estivesse congelando por dentro.",
                 2, "Congelamento e torpor.", false, "Corte e Feitiço", "Ilusão e Hemorragia", true);
@@ -79,7 +80,7 @@ public class GerenciadorDeEvento implements AcoesGerenciadorDeEventos {
                 "Um frio que se espalha pela pele e nunca aquece. Quem carrega a marca ouve sussurros constantes e tem dificuldade para dormir. Pode evoluir para loucura se não for purificada.",
                 2, "Terror e paranoia.", false, "Feitiço", "Ilusão", true);
 
-        // --- PASSO 2: Instanciar as Criaturas, passando o EventoDoencaFerimento apropriado ---
+        //2: Instanciar as Criaturas, passando o EventoDoencaFerimento apropriado:
         EventoCriatura cervo = new EventoCriatura("Hjarnhyrndr", "Um cervo de pelagem prateada...",
                 2, "Encontro majestoso.", false, "Criatura Neutra", 25, 5, 0, 2,
                 efeitoFrostseidr);
@@ -226,51 +227,56 @@ public class GerenciadorDeEvento implements AcoesGerenciadorDeEventos {
                 0, 0, 0, -7, -10);
 
         //Lógica de Geração baseada no Ambiente Atual:
-        if (ambienteAtual instanceof AmbienteFloresta) {
-            //Clima Padrão do Ambiente + 2 Climas Comuns:
-            EventoClimatico floresta = new EventoClimatico("Skógrgufa", "Um clima úmido e perenemente enevoado. A luz do sol raramente atravessa o véu de névoa azulada que dança entre as copas. Chuva fina e sussurros no vento são constantes — alguns dizem que são vozes de espíritos.",
-                    probPadrao, "Névoa densa que afeta levemente a sanidade.", condPadrao,
-                    "Névoa", duracaoPadrao, "Efeito de névoa leve.",
-                    0, 0, 0, -2, -5);
-            EventoClimatico[] listaEventosClimaticos = {floresta, vindkaldr, stormvor};
-            climaSorteado = listaEventosClimaticos[sorteador.nextInt(listaEventosClimaticos.length)];
+        switch (ambienteAtual) {
+            case AmbienteFloresta ambienteFloresta -> {
+                //Clima Padrão do Ambiente + 2 Climas Comuns:
+                EventoClimatico floresta = new EventoClimatico("Skógrgufa", "Um clima úmido e perenemente enevoado. A luz do sol raramente atravessa o véu de névoa azulada que dança entre as copas. Chuva fina e sussurros no vento são constantes — alguns dizem que são vozes de espíritos.",
+                        probPadrao, "Névoa densa que afeta levemente a sanidade.", condPadrao,
+                        "Névoa", duracaoPadrao, "Efeito de névoa leve.",
+                        0, 0, 0, -2, -5);
+                EventoClimatico[] listaEventosClimaticos = {floresta, vindkaldr, stormvor};
+                climaSorteado = listaEventosClimaticos[sorteador.nextInt(listaEventosClimaticos.length)];
 
-        } else if (ambienteAtual instanceof AmbienteMontanha) {
-            //Clima Padrão do Ambiente + 2 Climas Comuns:
-            EventoClimatico montanha = new EventoClimatico("Hrímblóð", "Frio penetrante com ventos cortantes que parecem vivenciar uma vontade própria. Nevascas repentinas tomam tudo de surpresa, e os flocos de neve caem como cinzas pálidas. Em algumas noites, formas espectrais são vistas caminhando pela neve.",
-                    probPadrao, "Frio extremo que causa dano, drena muita energia e aumenta a fome.", condPadrao,
-                    "Nevasca", duracaoPadrao, "Efeito de nevasca severa.",
-                    -5, -8, 0, -15, -3);
-            EventoClimatico[] listaEventosClimaticos = {montanha, vindkaldr, stormvor};
-            climaSorteado = listaEventosClimaticos[sorteador.nextInt(listaEventosClimaticos.length)];
+            }
+            case AmbienteMontanha ambienteMontanha -> {
+                //Clima Padrão do Ambiente + 2 Climas Comuns:
+                EventoClimatico montanha = new EventoClimatico("Hrímblóð", "Frio penetrante com ventos cortantes que parecem vivenciar uma vontade própria. Nevascas repentinas tomam tudo de surpresa, e os flocos de neve caem como cinzas pálidas. Em algumas noites, formas espectrais são vistas caminhando pela neve.",
+                        probPadrao, "Frio extremo que causa dano, drena muita energia e aumenta a fome.", condPadrao,
+                        "Nevasca", duracaoPadrao, "Efeito de nevasca severa.",
+                        -5, -8, 0, -15, -3);
+                EventoClimatico[] listaEventosClimaticos = {montanha, vindkaldr, stormvor};
+                climaSorteado = listaEventosClimaticos[sorteador.nextInt(listaEventosClimaticos.length)];
 
-        } else if (ambienteAtual instanceof AmbienteCaverna) {
-            //Caverna - Clima Único:
-            climaSorteado = new EventoClimatico("Myrrkuldi", "Nenhuma luz penetra a atmosfera opressiva. O ar é frio e úmido, com neblinas subterrâneas que condensam em gotas escuras. Em seu interior, forma-se um microclima gélido e sufocante, como o hálito de um dragão adormecido.",
-                    probPadrao, "Atmosfera opressora que afeta sanidade e energia.", condPadrao,
-                    "Caverna Úmida", duracaoPadrao, "Efeito de ambiente fechado e frio.",
-                    0, 0, 0, -7, -7);
+            }
+            case AmbienteCaverna ambienteCaverna ->
+                //Caverna - Clima Único:
+                    climaSorteado = new EventoClimatico("Myrrkuldi", "Nenhuma luz penetra a atmosfera opressiva. O ar é frio e úmido, com neblinas subterrâneas que condensam em gotas escuras. Em seu interior, forma-se um microclima gélido e sufocante, como o hálito de um dragão adormecido.",
+                            probPadrao, "Atmosfera opressora que afeta sanidade e energia.", condPadrao,
+                            "Caverna Úmida", duracaoPadrao, "Efeito de ambiente fechado e frio.",
+                            0, 0, 0, -7, -7);
+            case AmbienteRuinas ambienteRuinas -> {
+                //Clima Padrão do Ambiente + 2 Climas Comuns:
+                EventoClimatico ruinas = new EventoClimatico("Eldrregn", "Um clima seco e instável. Raios solares intensos esquentam o solo enegrecido, e tempestades de cinzas surgem subitamente, trazendo faíscas e ventos quentes. À noite, a temperatura despenca como se o próprio tempo congelasse.",
+                        probPadrao, "Clima instável que aumenta a sede e afeta a sanidade.", condPadrao,
+                        "Aridez/Cinzas", duracaoPadrao, "Efeito de ambiente árido e poluído.",
+                        0, 0, -10, 0, -5);
+                EventoClimatico[] listaEventosClimaticos = {ruinas, vindkaldr, stormvor};
+                climaSorteado = listaEventosClimaticos[sorteador.nextInt(listaEventosClimaticos.length)];
 
-        } else if (ambienteAtual instanceof AmbienteRuinas) {
-            //Clima Padrão do Ambiente + 2 Climas Comuns:
-            EventoClimatico ruinas = new EventoClimatico("Eldrregn", "Um clima seco e instável. Raios solares intensos esquentam o solo enegrecido, e tempestades de cinzas surgem subitamente, trazendo faíscas e ventos quentes. À noite, a temperatura despenca como se o próprio tempo congelasse.",
-                    probPadrao, "Clima instável que aumenta a sede e afeta a sanidade.", condPadrao,
-                    "Aridez/Cinzas", duracaoPadrao, "Efeito de ambiente árido e poluído.",
-                    0, 0, -10, 0, -5);
-            EventoClimatico[] listaEventosClimaticos = {ruinas, vindkaldr, stormvor};
-            climaSorteado = listaEventosClimaticos[sorteador.nextInt(listaEventosClimaticos.length)];
-
-        } else if (ambienteAtual instanceof AmbienteLagoRio) {
-            //Clima Padrão do Ambiente + 2 Climas Comuns:
-            EventoClimatico lago = new EventoClimatico("Draumslóð", "Clima brando e misterioso, com névoa constante e ar parado. A umidade alta provoca ilusões ópticas, e o clima parece flutuar entre realidade e devaneio. A brisa é suave, mas carrega murmúrios vindos do além.",
-                    probPadrao, "Névoa misteriosa que afeta levemente a sanidade.", condPadrao,
-                    "Névoa Mística", duracaoPadrao, "Efeito de névoa leve e ilusória.",
-                    0, 0, +2, 0, -3);
-            EventoClimatico[] listaEventosClimaticos = {lago, vindkaldr, stormvor};
-            climaSorteado = listaEventosClimaticos[sorteador.nextInt(listaEventosClimaticos.length)];
-        } else {
-            System.out.println("O tempo permanece neutro neste local desconhecido.");
-            return null; // Retorna null se o tipo de ambiente não for reconhecido ou não tiver climas definidos
+            }
+            case AmbienteLagoRio lagoRio -> {
+                //Clima Padrão do Ambiente + 2 Climas Comuns:
+                EventoClimatico lago = new EventoClimatico("Draumslóð", "Clima brando e misterioso, com névoa constante e ar parado. A umidade alta provoca ilusões ópticas, e o clima parece flutuar entre realidade e devaneio. A brisa é suave, mas carrega murmúrios vindos do além.",
+                        probPadrao, "Névoa misteriosa que afeta levemente a sanidade.", condPadrao,
+                        "Névoa Mística", duracaoPadrao, "Efeito de névoa leve e ilusória.",
+                        0, 0, +2, 0, -3);
+                EventoClimatico[] listaEventosClimaticos = {lago, vindkaldr, stormvor};
+                climaSorteado = listaEventosClimaticos[sorteador.nextInt(listaEventosClimaticos.length)];
+            }
+            case null, default -> {
+                System.out.println("O tempo permanece neutro neste local desconhecido.");
+                return null; // Retorna null se o tipo de ambiente não for reconhecido ou não tiver climas definidos
+            }
         }
 
         if (climaSorteado != null) {

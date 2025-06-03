@@ -18,7 +18,7 @@ public class CondicaoDeVitoriaDerrota {
         System.out.println("    2. Sobrevivência Prolongada: Demonstre sua resiliência e capacidade de adaptação");
         System.out.println("       sobrevivendo por 24 turnos nas Terras Partidas. Embora o futuro de");
         System.out.println("       Dravnir possa permanecer incerto sem o Abrigo, sua tenacidade será lembrada.");
-        System.out.println("    (Outros caminhos para a salvação podem existir para aqueles que exploram os segredos mais profundos...)");
+        System.out.println("       (Outros caminhos para a salvação podem existir para aqueles que exploram os segredos mais profundos...)");
         System.out.println();
 
         System.out.println(separadorLongo);

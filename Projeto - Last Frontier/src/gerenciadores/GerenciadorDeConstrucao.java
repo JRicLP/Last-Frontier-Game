@@ -38,7 +38,7 @@ public class GerenciadorDeConstrucao {
     //Metodos Especiais:
     public boolean construcaoDisponivel(Receita receita, Inventario inventario, Personagem personagem) {
         if (receita == null || inventario == null || personagem == null) {
-            System.out.println("DEBUG: Receita, inventário ou personagem nulo em construcaoDisponivel.");
+            System.out.println("Receita, inventário ou personagem nulo em construcaoDisponivel.");
             return false;
         }
 
@@ -47,7 +47,7 @@ public class GerenciadorDeConstrucao {
             String nomeIngrediente = entry.getKey();
             int quantidadeNecessaria = entry.getValue();
             if (!inventario.temItem(nomeIngrediente, quantidadeNecessaria)) {
-                System.out.println("DEBUG: Falta ingrediente para " + receita.getNomeItemResultado() + ": " + nomeIngrediente + " (x" + quantidadeNecessaria + ")");
+                System.out.println("Falta ingrediente para " + receita.getNomeItemResultado() + ": " + nomeIngrediente + " (x" + quantidadeNecessaria + ")");
                 return false; //Falta um ou mais ingredientes
             }
         }
@@ -56,7 +56,7 @@ public class GerenciadorDeConstrucao {
         String nomeFerramentaNecessaria = receita.getFerramentaNecessaria();
         if (nomeFerramentaNecessaria != null && !nomeFerramentaNecessaria.trim().isEmpty()) {
             if (!inventario.temItem(nomeFerramentaNecessaria, 1)) { // Verifica se tem pelo menos 1 da ferramenta
-                System.out.println("DEBUG: Falta ferramenta para " + receita.getNomeItemResultado() + ": " + nomeFerramentaNecessaria);
+                System.out.println("Falta ferramenta para " + receita.getNomeItemResultado() + ": " + nomeFerramentaNecessaria);
                 return false; //Falta a ferramenta
             }
         }
@@ -66,7 +66,7 @@ public class GerenciadorDeConstrucao {
     public ArrayList<Receita> getReceitasDisponiveis(Inventario inventario, Personagem personagem) {
         ArrayList<Receita> receitasConstruiveis = new ArrayList<>();
         if (this.todasAsReceitas == null) {
-            return receitasConstruiveis; // Retorna lista vazia se não houver receitas carregadas
+            return receitasConstruiveis;
         }
         for (Receita receita : this.todasAsReceitas) {
             if (construcaoDisponivel(receita, inventario, personagem)) {
@@ -82,42 +82,39 @@ public class GerenciadorDeConstrucao {
             return null;
         }
 
-        // 1. Consumir os ingredientes do inventário:
+        // 1.Consumindo os ingredientes do inventário:
         if (!inventario.removerIngredientes(receita.getIngredientesNecessarios())) {
             System.err.println("ERRO INESPERADO: Falha ao remover ingredientes para '" + receita.getNomeItemResultado() + "' mesmo após verificação. Construção cancelada.");
             return null;
         }
         System.out.println("Ingredientes consumidos para: " + receita.getNomeItemResultado());
 
-        // 2. Criar um Objeto do item resultado:
+        // 2.Criando um Objeto do item resultado:
         Item itemResultadoTemplate = receita.getItemResultadoTemplate();
         Item itemConstruido = null;
 
         if (itemResultadoTemplate != null) {
-            if (itemResultadoTemplate instanceof Arma) {
-                Arma template = (Arma) itemResultadoTemplate;
-                itemConstruido = new Arma(template.getNomeItem(), template.getPesoItem(), template.getDurabilidadeItem(),
-                        template.getTipoArma(), template.getDanoArma(), template.getAlcanceArma());
-            } else if (itemResultadoTemplate instanceof Remedio) {
-                Remedio template = (Remedio) itemResultadoTemplate;
-                itemConstruido = new Remedio(template.getNomeItem(), template.getPesoItem(), template.getDurabilidadeItem(),
-                        template.getTipoRemedio(), template.getEfeitoRemedio(), template.getCuraRemedio());
-            } else if (itemResultadoTemplate instanceof Ferramenta) {
-                Ferramenta template = (Ferramenta) itemResultadoTemplate;
-                itemConstruido = new Ferramenta(template.getNomeItem(), template.getPesoItem(), template.getDurabilidadeItem(),
-                        template.getTipoFerramenta(), template.getEficienciaFerramenta());
-            } else if (itemResultadoTemplate instanceof Alimento) {
-                Alimento template = (Alimento) itemResultadoTemplate;
-                itemConstruido = new Alimento(template.getNomeItem(), template.getPesoItem(), template.getDurabilidadeItem(),
-                        template.getValorNutricional(), template.getTipoAlimento(), template.getPrazoValidade());
-            } else if (itemResultadoTemplate instanceof Agua) {
-                Agua template = (Agua) itemResultadoTemplate;
-                itemConstruido = new Agua(template.getNomeItem(), template.getPesoItem(), template.getDurabilidadeItem(),
-                        template.getPurezaAgua(), template.getVolumeAgua());
-            } else if (itemResultadoTemplate instanceof Material) {
-                Material template = (Material) itemResultadoTemplate;
-                itemConstruido = new Material(template.getNomeItem(), template.getPesoItem(), template.getDurabilidadeItem(),
-                        template.getTipoMaterial(), template.getResistenciaMaterial());
+            switch (itemResultadoTemplate) {
+                case Arma template ->
+                        itemConstruido = new Arma(template.getNomeItem(), template.getPesoItem(), template.getDurabilidadeItem(),
+                                template.getTipoArma(), template.getDanoArma(), template.getAlcanceArma());
+                case Remedio template ->
+                        itemConstruido = new Remedio(template.getNomeItem(), template.getPesoItem(), template.getDurabilidadeItem(),
+                                template.getTipoRemedio(), template.getEfeitoRemedio(), template.getCuraRemedio());
+                case Ferramenta template ->
+                        itemConstruido = new Ferramenta(template.getNomeItem(), template.getPesoItem(), template.getDurabilidadeItem(),
+                                template.getTipoFerramenta(), template.getEficienciaFerramenta());
+                case Alimento template ->
+                        itemConstruido = new Alimento(template.getNomeItem(), template.getPesoItem(), template.getDurabilidadeItem(),
+                                template.getValorNutricional(), template.getTipoAlimento(), template.getPrazoValidade());
+                case Agua template ->
+                        itemConstruido = new Agua(template.getNomeItem(), template.getPesoItem(), template.getDurabilidadeItem(),
+                                template.getPurezaAgua(), template.getVolumeAgua());
+                case Material template ->
+                        itemConstruido = new Material(template.getNomeItem(), template.getPesoItem(), template.getDurabilidadeItem(),
+                                template.getTipoMaterial(), template.getResistenciaMaterial());
+                default -> {
+                }
             }
         }
         if (itemConstruido == null) {
@@ -129,7 +126,7 @@ public class GerenciadorDeConstrucao {
             }
             return null;
         }
-        // 3. Adicionar o item construído ao inventário:
+        // 3.Adicionando o item construído ao inventário:
         System.out.println("Tentando adicionar '" + itemConstruido.getNomeItem() + "' ao inventário...");
         if (inventario.adicionarItem(itemConstruido)) {
             System.out.println("Você construiu com sucesso: " + itemConstruido.getNomeItem() + "!");

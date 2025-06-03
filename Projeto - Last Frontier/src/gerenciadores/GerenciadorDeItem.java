@@ -24,6 +24,7 @@ public class GerenciadorDeItem {
         //Aqui, estaremos obtendo o elemento da lista que foi sorteado, iremos mostrar ao usuário!
         Agua aguaSorteada = listaItensAgua[indiceSorteado];
         System.out.println("Você achou " + aguaSorteada.getNomeItem()  + "!");
+        System.out.println("Volume: " + aguaSorteada.getVolumeAgua() + "L");
         return aguaSorteada;
 
 
@@ -49,7 +50,7 @@ public class GerenciadorDeItem {
         //Aqui, estaremos a obter o elemento da lista que foi sorteado, iremos mostrar o seu nome e descrição:
         Alimento alimentoSorteado = listaItensAlimentos[indiceSorteado];
         System.out.println("Você achou: " + alimentoSorteado.getNomeItem() + "!");
-        System.out.println(alimentoSorteado.getTipoAlimento());
+        System.out.println("Tipo: " + alimentoSorteado.getTipoAlimento());
         return alimentoSorteado;
 
     }
@@ -58,13 +59,15 @@ public class GerenciadorDeItem {
 
         //Objetos de Remedio:
         Remedio antibiotico = new Remedio("Myrsillblóð",2,4,"Antibiótico","Um extrato espesso e amargo retirado de raízes que crescem apenas nas encostas sombreadas do Fjellgraad. Quando ingerido ou aplicado em feridas," +
-                " impede que infecções se espalhem, mesmo aquelas causadas por criaturas corrompidas. Tem cheiro de terra molhada e cobre.", 15 );
-        Remedio analgesico = new Remedio("Draumrlyng", 2,4,"Analgésico", "Uma infusão feita com pétalas azuis e sementes negras. Alivia dores físicas ao induzir uma calma sonolência, quase onírica." +
+                " \nimpede que infecções se espalhem, mesmo aquelas causadas por criaturas corrompidas. Tem cheiro de terra molhada e cobre.", 15 );
+        Remedio analgesico = new Remedio("Draumrlyng", 2,4,"Analgésico", "Uma infusão feita com pétalas azuis e sementes negras." +
+                " \nAlivia dores físicas ao induzir uma calma sonolência, quase onírica." +
                 " Xamãs dizem que o espírito “sai por um instante” e retorna mais leve.", 10);
-        Remedio antidoto = new Remedio("Eitrskjarr",2,4,"Antídoto", "Uma pasta verde viva feita com folhas fervidas de Skjarrun, planta que cresce perto de tocas de víboras. Quando ingerida ou aplicada sobre feridas venenosas, neutraliza toxinas naturais e arcanas em minutos." +
+        Remedio antidoto = new Remedio("Eitrskjarr",2,4,"Antídoto", "Uma pasta verde viva feita com folhas fervidas de Skjarrun, planta que cresce perto de tocas de víboras." +
+                " \nQuando ingerida ou aplicada sobre feridas venenosas, neutraliza toxinas naturais e arcanas em minutos." +
                 " Seu gosto é descrito como “ferro com trovão”", 5);
         Remedio bandagem = new Remedio("Vefrbind",2,4,"Bandagem", "Tiras de linho consagrado embebidas em seiva de árvore antiga. A bandagem acelera a cicatrização e gruda levemente na pele ao toque," +
-                " como se estivesse viva. Quando removida, queima as impurezas da ferida suavemente.", 20);
+                " \ncomo se estivesse viva. Quando removida, queima as impurezas da ferida suavemente.", 20);
 
         //Lista com os Objetos, utilizaremos uma probabilidade forçada:
         Remedio[] listaItensRemedios = {antibiotico, analgesico, antidoto, bandagem};
@@ -76,7 +79,7 @@ public class GerenciadorDeItem {
         //Aqui, estaremos a obter o elemento da lista que foi sorteado, iremos mostrar o seu nome, tipo e efeito:
         Remedio remedioSorteado = listaItensRemedios[indiceSorteado];
         System.out.println("Você achou: " + remedioSorteado.getNomeItem() + "-" + remedioSorteado.getTipoRemedio());
-        System.out.println(remedioSorteado.getEfeitoRemedio());
+        System.out.println("Efeito: " + remedioSorteado.getEfeitoRemedio());
         return remedioSorteado;
 
     }
@@ -104,6 +107,7 @@ public class GerenciadorDeItem {
         //Aqui, estaremos obtendo o elemento da lista que foi sorteado, iremos mostrar ao usuário!
         Arma armaSorteada = listaItensArmas[indiceSorteado];
         System.out.println("Você achou " + armaSorteada.getNomeItem()  + "!");
+        System.out.println("Tipo de Arma: " + armaSorteada.getTipoArma());
         return armaSorteada;
 
     }
@@ -111,20 +115,20 @@ public class GerenciadorDeItem {
     public Ferramenta gerarItemFerramentas(){
 
         //Objetos de Ferramentas:
-        Ferramenta machado = new Ferramenta("Skallhjǫrr - Machado",7,9,"Um machado de duas lâminas negras, forjado com ferro retirado de túmulos de gigantes. Dizem que ele nunca lasca e corta até através de magia." +
-                " Vibrar com ele nas mãos causa calafrios… mesmo ao empunhador.",9);
+        Ferramenta machado = new Ferramenta("Skallhjǫrr - Machado",7,9,"Um machado de duas lâminas negras, forjado com ferro retirado de túmulos de gigantes." +
+                "\n Dizem que ele nunca lasca e corta até através de magia. Vibrar com ele nas mãos causa calafrios… mesmo ao empunhador.",9);
         Ferramenta picareta = new Ferramenta("Grjótkló - Picareta", 1,6,"Tem dentes de metal azulado, capazes de cortar qualquer rocha, até as encantadas." +
                 " Cada batida deixa um rastro cintilante que brilha por poucos segundos — útil em passagens escuras.",8);
-        Ferramenta lanterna = new Ferramenta("Ljósmodir - Lanterna",2,8,"Uma lanterna de latão antigo que emite uma chama azulada, alimentada não por óleo, mas por fragmentos de sonhos." +
+        Ferramenta lanterna = new Ferramenta("Ljósmodir - Lanterna",2,8,"Uma lanterna de latão antigo que emite uma chama azulada, alimentada não por óleo," +
+                "\n mas por fragmentos de sonhos." +
                 " Sua luz afasta ilusões, espectros e revela inscrições ocultas.",9);
-        Ferramenta chave = new Ferramenta("Lásvísa - Chave",4,8,"Pequena e ornamentada, feita de prata viva. Molda-se a qualquer fechadura antiga, mas só funciona uma vez por noite." +
+        Ferramenta chave = new Ferramenta("Lásvísa - Chave",4,8,"Pequena e ornamentada, feita de prata viva. Molda-se a qualquer fechadura antiga," +
+                "\n mas só funciona uma vez por noite." +
                 " Fala com seu portador em sussurros, revelando segredos das portas que abre.",9);
-        Ferramenta martelo = new Ferramenta("Dundrhamarr - Martelo",4,8,"Um martelo de construção e combate que emite uma pancada seca sem som, como se o ar se curvasse." +
-                " Pode quebrar pedra sem eco — ideal para ruínas ou cavernas onde barulho atrairia horrores.",10);
+        Ferramenta martelo = new Ferramenta("Dundrhamarr - Martelo",4,8,"Um martelo de construção e combate que emite uma pancada seca sem som," +
+                "\n como se o ar se curvasse. Pode quebrar pedra sem eco — ideal para ruínas ou cavernas onde barulho atrairia horrores.",10);
         Ferramenta corda = new Ferramenta("Seidrreip - Corda",4,8,"Uma corda trançada com fios de pelo de criatura mágica e seda de aranha espiritual. Estica ou encolhe conforme a vontade do usuário." +
-                " Pode se firmar sozinha em superfícies ou prender inimigos brevemente." ,10);
-
-        //O Randomizador de Ferramentas deve ser tratado posteriormente!!
+                "\n Pode se firmar sozinha em superfícies ou prender inimigos brevemente." ,10);
 
         //Lista com os Objetos, utilizaremos uma probabilidade forçada:
         Ferramenta[] listaItensFerramentas = {machado, picareta, lanterna, chave, martelo, corda};
@@ -136,7 +140,7 @@ public class GerenciadorDeItem {
         //Aqui, estaremos a obter o elemento da lista que foi sorteado, iremos mostrar ao usuário nome, eficiência e descrição
         Ferramenta ferramentaSorteada = listaItensFerramentas[indiceSorteado];
         System.out.println("Você achou " + ferramentaSorteada.getNomeItem()  + " - Eficiência:" + ferramentaSorteada.getEficienciaFerramenta());
-        System.out.println(ferramentaSorteada.getTipoFerramenta());
+        System.out.println("Tipo da Ferramenta: "  + ferramentaSorteada.getTipoFerramenta());
         return ferramentaSorteada;
     }
 
@@ -160,42 +164,41 @@ public class GerenciadorDeItem {
         //Aqui, estaremos a obter o elemento da lista que foi sorteado, iremos mostrar o seu nome, tipo e efeito:
         Material materialSorteado = listaItensMateriais[indiceSorteado];
         System.out.println("Você achou: " + materialSorteado.getNomeItem() + "!");
-        System.out.println(materialSorteado.getTipoMaterial());
+        System.out.println("Tipo de Material: " + materialSorteado.getTipoMaterial());
         return materialSorteado;
     }
 
     public Item gerarItemAleatorioGlobal() {
         Random sorteadorCategoria = new Random();
-        int categoriaSorteada = sorteadorCategoria.nextInt(6); // 0 a 5, para 6 categorias
+        int categoriaSorteada = sorteadorCategoria.nextInt(6);
 
         Item itemGerado = null;
 
-        System.out.println("Você vasculha os arredores em busca de algo útil..."); // Mensagem genérica
+        System.out.println("Você vasculha os arredores em busca de algo útil...");
 
         switch (categoriaSorteada) {
             case 0:
-                itemGerado = gerarItemAgua(); // gerarItemAgua() já imprime "Você achou..."
+                itemGerado = gerarItemAgua();
                 break;
             case 1:
-                itemGerado = gerarItemAlimento(); // gerarItemAlimento() já imprime "Você achou..."
+                itemGerado = gerarItemAlimento();
                 break;
             case 2:
-                itemGerado = gerarItemRemedio(); // gerarItemRemedio() já imprime "Você achou..."
+                itemGerado = gerarItemRemedio();
                 break;
             case 3:
-                itemGerado = gerarItemArmas(); // gerarItemArmas() já imprime "Você achou..."
+                itemGerado = gerarItemArmas();
                 break;
             case 4:
-                itemGerado = gerarItemFerramentas(); // gerarItemFerramentas() já imprime "Você achou..."
+                itemGerado = gerarItemFerramentas();
                 break;
             case 5:
-                itemGerado = gerarItemMateriais(); // gerarItemMateriais() já imprime "Você achou..."
+                itemGerado = gerarItemMateriais();
                 break;
             default:
                 System.out.println("Estranhamente, você não encontrou nada desta vez.");
-                return null; // Caso algo dê errado com o sorteio de categoria
+                return null;
         }
         return itemGerado;
     }
 }
-

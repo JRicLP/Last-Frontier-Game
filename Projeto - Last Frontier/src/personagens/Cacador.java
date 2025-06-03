@@ -12,7 +12,7 @@ public class Cacador extends Personagem {
 
     //Metodo construtor:
     public Cacador(String descricaoHabilidadeClasseEntrada) {
-        super("Flynn Tracker",100,100,80,75,90);
+        super("Flynn Tracker - A Presa Sombria",100,100,80,75,90);
         this.descricaoHabilidadeClasse = descricaoHabilidadeClasseEntrada;
     }
 

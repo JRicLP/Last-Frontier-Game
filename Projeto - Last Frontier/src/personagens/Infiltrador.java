@@ -12,7 +12,7 @@ public class Infiltrador extends Personagem {
 
     //Metodo construtor:
     public Infiltrador(String descricaoHabilidadeClasseEntrada) {
-        super("Malik Ghost", 85, 70, 70, 90, 100);
+        super("Malik Ghost - O Fantasma da Sombra", 85, 70, 70, 90, 100);
         this.descricaoHabilidadeClasse = descricaoHabilidadeClasseEntrada;
     }
 
