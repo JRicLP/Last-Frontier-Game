@@ -56,12 +56,13 @@ public abstract class Evento implements AcoesEventos {
 
     //Metodos implementados:
     @Override
-    public void executar(Personagem personagemAtual, Ambiente ambienteAtual, Evento eventoAplicado) {
-        if (condicaoEvento) {
-            System.out.println("Evento " + eventoAplicado.getNomeEvento() + " aconteceu: " +
-                    eventoAplicado.getDescricaoEvento());
-            System.out.println("Impacto: " + eventoAplicado.getImpactoEvento());
-            //Futuramente será adicionado um verificador da condição necessária para o evento ocorrer!! - Exception
+    public void executar(Personagem personagemAtual, Ambiente ambienteAtual) {
+        if (this.isCondicaoEvento()) {
+            System.out.println("Evento " + this.getNomeEvento() + " aconteceu no ambiente " + ambienteAtual.getNomeAmbiente() + "!");
+            System.out.println("Descrição: " + this.getDescricaoEvento());
+            System.out.println("Impacto Geral: " + this.getImpactoEvento());
+        } else {
+            System.out.println("As condições para o evento '" + this.getNomeEvento() + "' não foram atendidas.");
         }
     }
 }

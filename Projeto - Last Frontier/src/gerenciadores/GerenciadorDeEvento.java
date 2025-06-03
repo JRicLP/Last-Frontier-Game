@@ -44,8 +44,6 @@ public class GerenciadorDeEvento implements AcoesGerenciadorDeEventos {
         if (eventoAplicado.isCondicaoEvento()) { //Verifica se a condição necessária para o evento está ativa
             System.out.println("O personagem " + personagemAtual.getNomePersonagem() + " está sofrendo as consequências de: " + eventoAplicado.getNomeEvento());
         }
-        //Tem que aplicar no personagem, será evoluído
-        //Essa aplicação será relacionada a um atributo dos itens (Eu acho)
     }
 
     @Override
@@ -55,44 +53,86 @@ public class GerenciadorDeEvento implements AcoesGerenciadorDeEventos {
 
     //Metodos para gerar os objetos:
 
-    // Gerando Eventos Criaturas:
     public EventoCriatura gerarEventosCriatura() {
-        EventoCriatura cervo = new EventoCriatura("Hjarnhyrndr", "Um cervo de pelagem prateada e chifres de cristal gélido. Dizem que ele aparece apenas sob a luz da lua cheia em florestas sagradas. É símbolo de equilíbrio, e caçá-lo é considerado blasfêmia.",
-                2, "O encontro com criaturas possibilita a obtenção de recursos", false, "Criatura Neutra", 25, 5, 0, 2);
-        EventoCriatura serpente = new EventoCriatura("Niðkrága", "Uma serpente subterrânea que se move por vibrações no solo. Ela cospe uma névoa negra que cega e sufoca. Suas escamas são procuradas para rituais de invisibilidade",
-                2, "O encontro com criaturas possibilita a obtenção de recursos", false, "Criatura Hostil", 35, 10, 5, 5);
-        EventoCriatura corvo = new EventoCriatura("Veðrhrafn", "Um corvo colossal com penas de trovão e olhos de relâmpago. Anuncia grandes mudanças ou batalhas. A presença de um Veðrhrafn pode significar bênção divina... ou desgraça inevitável.",
-                2, "O encontro com criaturas possibilita a obtenção de recursos", false, "Criatura Neutra", 40, 10, 0, 2);
-        EventoCriatura javali = new EventoCriatura("Grimsvártr", "Um javali titânico coberto de espinhos ósseos. Habita vales escuros e ruínas esquecidas. Quando furioso, seu grito ecoa por quilômetros e provoca avalanches.",
-                2, "O encontro com criaturas possibilita a obtenção de recursos", false, "Criatura Hostil", 40, 15, 10, 10);
-        EventoCriatura peixe = new EventoCriatura("Silfurskyn", "Um peixe raro que brilha com luz própria em lagos encantados como Mjarnvatn. Quem o captura e o liberta pode receber sonhos proféticos. Comer sua carne, no entanto, causa loucura.",
-                2, "O encontro com criaturas possibilita a obtenção de recursos", false, "Criatura Pacífica", 10, 5, 0, 2);
-        EventoCriatura lobo = new EventoCriatura("Draugrulfr", "Lobo espectral que aparece onde o véu entre mundos se rompe. Seus olhos ardem com chamas verdes e seu uivo atrai os mortos inquietos. Imune a armas normais, só teme fogo.",
-                2, "O encontro com criaturas possibilita a obtenção de recursos", false, "Criatura Hostil", 20, 5, 5, 5);
-        EventoCriatura cabra = new EventoCriatura("Tindgeit", "Cabra das montanhas com patas afiadas como ganchos e pelo que muda de cor com o clima. É usada por caçadores e clérigos como guia em regiões traiçoeiras.",
-                2, "O encontro com criaturas possibilita a obtenção de recursos", false, "Criatura Neutra", 15, 5, 0, 2);
-        EventoCriatura aranha = new EventoCriatura("Skuggadraugr", "Uma criatura que vive entre as sombras de ruínas e cavernas profundas. Não tem forma definida — apenas olhos vermelhos pairando na escuridão. Alimenta-se de medo. Matar uma exige luz.",
-                2, "O encontro com criaturas possibilita a obtenção de recursos", false, "Criatura Hostil", 15, 10, 10, 10);
-        EventoCriatura guerreiroCorrompido = new EventoCriatura("Skarnvaldr", "Um antigo guerreiro-sacerdote banido pelos próprios deuses após desafiar os Pactos do Céu. Usa uma armadura corroída por raios e carrega uma lança de obsidiana viva chamada Mjarkfjaldr." +
-                " Ele percorre as montanhas e ruínas em busca de relíquias perdidas, amaldiçoando qualquer um que cruze seu caminho com visões de agonia eterna.", 2, "O encontro com entidades humanas permite a obtenção de recursos ou batalhas", false,
-                "Humano hostil", 60, 25, 20, 20);
-        EventoCriatura guardiaDoLago = new EventoCriatura("Yndra Sædis", "Uma mulher idosa que vive isolada às margens do lago Mjarnvatn. É uma vidente silenciosa, conhecida por ouvir os sussurros da névoa. Acredita-se que Yndra seja filha de um deus e uma mortal," +
-                " com sangue de tempo em suas veias. Aqueles que buscam respostas em seus sonhos costumam procurá-la — mas ela só fala em enigmas.", 2, "O encontro com entidades humanas permite a obtenção de recursos ou batalhas", false,
-                "Humano pacífico", 80, 0, 0, 40);
-        //Adicionando na lista conforme as probabilidades de cada Evento Criatura:
+        // --- PASSO 1: Definir as instâncias de EventoDoencaFerimento que serão usadas ---
+        EventoDoencaFerimento efeitoFrostseidr = new EventoDoencaFerimento("Frostseidr",
+                "O toque gelado de seus chifres pode causar um entorpecimento místico. A pele perde cor e a pessoa sente emoções com menos intensidade, como se estivesse congelando por dentro.",
+                2, "Congelamento e torpor.", false, "Corte e Feitiço", "Ilusão e Hemorragia", true);
+
+        EventoDoencaFerimento efeitoSotnblar = new EventoDoencaFerimento("Sotnblár",
+                "A mordida da serpente Niðkrága deixa veias azul-escuras ao redor da ferida. A vítima perde a visão por algumas horas e sente uma dormência crescente nos membros.",
+                2, "Envenenamento agudo.", false, "Envenenamento", "Cegueira, Perca de Energia", true);
+
+        EventoDoencaFerimento efeitoAldrgata = new EventoDoencaFerimento("Aldrgáta",
+                "Dizem que quem cruza o olhar direto de um Veðrhrafn recebe visões do seu próprio fim. A mente enfraquece, e testes de coragem ou sabedoria tornam-se mais difíceis por um tempo.",
+                2, "Visões premonitórias.", false, "Feitiço", "Ilusão", true);
+
+        EventoDoencaFerimento efeitoDrottarskor = new EventoDoencaFerimento("Dróttarskör",
+                "Um ferimento profundo e irregular causado por seus chifres ósseos. Nunca cicatriza completamente, e a dor retorna em noites de lua cheia.",
+                2, "Ferimento grave.", false, "Corte", "Hemorragia", true);
+
+        EventoDoencaFerimento efeitoHundraugr = new EventoDoencaFerimento("Húndraugr",
+                "Um arranhão quase imperceptível que infecciona com rapidez sobrenatural. Após três dias, o ferido começa a sonhar com terras mortas e ouvir uivos em pleno dia.",
+                2, "Infecção espectral.", false, "Corte", "Ilusão e Hemorragia", true);
+
+        EventoDoencaFerimento efeitoSkuggbrandr = new EventoDoencaFerimento("Skuggbrandr",
+                "Um frio que se espalha pela pele e nunca aquece. Quem carrega a marca ouve sussurros constantes e tem dificuldade para dormir. Pode evoluir para loucura se não for purificada.",
+                2, "Terror e paranoia.", false, "Feitiço", "Ilusão", true);
+
+        // --- PASSO 2: Instanciar as Criaturas, passando o EventoDoencaFerimento apropriado ---
+        EventoCriatura cervo = new EventoCriatura("Hjarnhyrndr", "Um cervo de pelagem prateada...",
+                2, "Encontro majestoso.", false, "Criatura Neutra", 25, 5, 0, 2,
+                efeitoFrostseidr);
+
+        EventoCriatura serpente = new EventoCriatura("Niðkrága", "Uma serpente subterrânea...",
+                2, "Perigo venenoso.", false, "Criatura Hostil", 35, 10, 5, 5,
+                efeitoSotnblar);
+
+        EventoCriatura corvo = new EventoCriatura("Veðrhrafn", "Um corvo colossal...",
+                2, "Presságio nos céus.", false, "Criatura Neutra", 40, 10, 0, 2,
+                efeitoAldrgata);
+
+        EventoCriatura javali = new EventoCriatura("Grimsvártr", "Um javali titânico...",
+                2, "Fúria indomável.", false, "Criatura Hostil", 40, 15, 10, 10,
+                efeitoDrottarskor);
+
+        EventoCriatura lobo = new EventoCriatura("Draugrulfr", "Lobo espectral...",
+                2, "Uivo da tumba.", false, "Criatura Hostil", 20, 5, 5, 5,
+                efeitoHundraugr);
+
+        EventoCriatura aranha = new EventoCriatura("Skuggadraugr", "Uma criatura que vive entre as sombras...",
+                2, "Terror Aracnídeo.", false, "Criatura Hostil", 15, 10, 10, 10,
+                efeitoSkuggbrandr);
+
+        // Criaturas restantes que não têm um efeito colateral definido (passando null):
+        EventoCriatura peixe = new EventoCriatura("Silfurskyn", "Um peixe raro que brilha...",
+                2, "Vislumbre aquático.", false, "Criatura Pacífica", 10, 5, 0, 2,
+                null);
+
+        EventoCriatura cabra = new EventoCriatura("Tindgeit", "Cabra das montanhas...",
+                2, "Agilidade nas alturas.", false, "Criatura Neutra", 15, 5, 0, 2,
+                null);
+
+        EventoCriatura guerreiroCorrompido = new EventoCriatura("Skarnvaldr", "Um antigo guerreiro-sacerdote...",
+                2, "Desafio ancestral.", false, "Humano hostil", 60, 25, 20, 20,
+                null);
+
+        EventoCriatura guardiaDoLago = new EventoCriatura("Yndra Sædis", "Uma mulher idosa que vive isolada...",
+                2, "Encontro enigmático.", false, "Humano pacífico", 80, 0, 0, 40,
+                null);
+        //Adicionando na lista conforme as probabilidades de cada Evento Descoberta:
         //Inicialmente, vou fazer uma Probabilidade Forçada Simples, com a mesma chance para todos os elementos:
         EventoCriatura[] listaEventosCriatura = {cervo, serpente, corvo, javali, peixe, lobo, cabra, aranha, guardiaDoLago, guerreiroCorrompido};
-        //Sorteio do Evento:
         Random sorteador = new Random();
         int indiceSorteado = sorteador.nextInt(listaEventosCriatura.length);
         EventoCriatura eventoSorteado = listaEventosCriatura[indiceSorteado];
-        //Mostrando o Evento sorteado:
-        System.out.println("Uma criatura apareceu: " + eventoSorteado.getNomeEvento());
+
+        System.out.println("Uma criatura apareceu: " + eventoSorteado.getNomeEvento() + " (" + eventoSorteado.getTipoCriatura() + ")");
         System.out.println("Descrição: " + eventoSorteado.getDescricaoEvento());
-        //Adicionando ao Histórico de Eventos:
-        this.listaEventoPossiveis.add(eventoSorteado);
+
         this.historicoEventos.add(eventoSorteado);
-        //Retornando a Criatura:
+        this.listaEventoPossiveis.add(eventoSorteado);
+
         return eventoSorteado;
     }
 
@@ -163,98 +203,81 @@ public class GerenciadorDeEvento implements AcoesGerenciadorDeEventos {
 
     }
 
-    //Os Eventos Climáticos Não Padrão não serão sorteados
     //Gerando Eventos Climáticos:
     public EventoClimatico gerarEventosClimaticos(Ambiente ambienteAtual) {
+        Random sorteador = new Random();
+        EventoClimatico climaSorteado = null;
 
+        // Valores padrão para parâmetros do construtor de EventoClimatico:
+        int probPadrao = 2;
+        boolean condPadrao = true;
+        int duracaoPadrao = 1;
+
+        //Definição dos Climas com os seus Impactos Específicos:
+
+        //Climas Comuns:
+        EventoClimatico vindkaldr = new EventoClimatico("Vindkaldr", "Correntes de ar gelado uivam pelas encostas, trazendo consigo flocos de neve mesmo fora do inverno. Relâmpagos secos cortam os céus em noites silenciosas, como se os deuses estivessem em guerra.",
+                probPadrao, "Frio intenso que drena energia e aumenta a fome.", condPadrao,
+                "Frio", duracaoPadrao, "Efeito de frio moderado.",
+                0, -5, 0, -10, 0);
+        EventoClimatico stormvor = new EventoClimatico("Stormvǫr", "Céus permanentemente carregados, com nuvens escuras e trovões que rugem como bestas distantes. Ventos fortes e chuvas intensas surgem sem aviso. É dito que esse clima ocorre onde antigos deuses travaram batalhas e seus gritos ainda ecoam nos céus.",
+                probPadrao, "Tempestade que afeta a sanidade e a energia.", condPadrao,
+                "Tempestade", duracaoPadrao, "Efeito de tempestade moderada.",
+                0, 0, 0, -7, -10);
+
+        //Lógica de Geração baseada no Ambiente Atual:
         if (ambienteAtual instanceof AmbienteFloresta) {
-            //Clima padrão - Floresta:
-            EventoClimatico climaFloresta = new EventoClimatico("Skógrgufa", "Um clima úmido e perenemente enevoado. A luz do sol raramente atravessa o véu de névoa azulada que dança entre as copas." +
-                    " Chuva fina e sussurros no vento são constantes — alguns dizem que são vozes de espíritos.", 2, " ", false, " ", 3, " ");
-            EventoClimatico climaVariadoUm = new EventoClimatico("Vindkaldr", "Correntes de ar gelado uivam pelas encostas, trazendo consigo flocos de neve mesmo fora do inverno." +
-                    " Relâmpagos secos cortam os céus em noites silenciosas, como se os deuses estivessem em guerra.", 2, " ", false, " ", 3, " ");
-            EventoClimatico climaVariadoDois = new EventoClimatico("Stormvǫr", "Céus permanentemente carregados, com nuvens escuras e trovões que rugem como bestas distantes. Ventos fortes e chuvas intensas surgem sem aviso." +
-                    " É dito que esse clima ocorre onde antigos deuses travaram batalhas e seus gritos ainda ecoam nos céus.", 2, " ", false, " ", 3, " ");
-            //Sorteando o microclima:
-            Random sorteador = new Random();
-            EventoClimatico[] listaEventosClimaticos = {climaFloresta, climaVariadoUm, climaVariadoDois};
-            int indiceSorteado = sorteador.nextInt(listaEventosClimaticos.length);
-            EventoClimatico climaSorteado = listaEventosClimaticos[indiceSorteado];
-            ambienteAtual.setClimaDominante(climaSorteado.getNomeEvento()); //Inicialmente, vamos tratar como String, mas mudaremos o atributo de Ambientes, posteriormente.
-            System.out.println(climaSorteado.getNomeEvento() + "está acontecendo");
-            System.out.println(climaSorteado.getDescricaoEvento());
-            this.listaEventoPossiveis.add(climaSorteado);
-            this.historicoEventos.add(climaSorteado);
-            return climaSorteado;
+            //Clima Padrão do Ambiente + 2 Climas Comuns:
+            EventoClimatico floresta = new EventoClimatico("Skógrgufa", "Um clima úmido e perenemente enevoado. A luz do sol raramente atravessa o véu de névoa azulada que dança entre as copas. Chuva fina e sussurros no vento são constantes — alguns dizem que são vozes de espíritos.",
+                    probPadrao, "Névoa densa que afeta levemente a sanidade.", condPadrao,
+                    "Névoa", duracaoPadrao, "Efeito de névoa leve.",
+                    0, 0, 0, -2, -5);
+            EventoClimatico[] listaEventosClimaticos = {floresta, vindkaldr, stormvor};
+            climaSorteado = listaEventosClimaticos[sorteador.nextInt(listaEventosClimaticos.length)];
+
         } else if (ambienteAtual instanceof AmbienteMontanha) {
-            //Clima padrão - Montanha:
-            EventoClimatico climaMontanha = new EventoClimatico("Hrímblóð", "Frio penetrante com ventos cortantes que parecem vivenciar uma vontade própria. Nevascas repentinas tomam tudo de surpresa," +
-                    " e os flocos de neve caem como cinzas pálidas. Em algumas noites, formas espectrais são vistas caminhando pela neve.", 2, " ", false, " ", 3, " ");
-            EventoClimatico climaVariadoUm = new EventoClimatico("Vindkaldr", "Correntes de ar gelado uivam pelas encostas, trazendo consigo flocos de neve mesmo fora do inverno." +
-                    " Relâmpagos secos cortam os céus em noites silenciosas, como se os deuses estivessem em guerra.", 2, " ", false, " ", 3, " ");
-            EventoClimatico climaVariadoDois = new EventoClimatico("Stormvǫr", "Céus permanentemente carregados, com nuvens escuras e trovões que rugem como bestas distantes. Ventos fortes e chuvas intensas surgem sem aviso." +
-                    " É dito que esse clima ocorre onde antigos deuses travaram batalhas e seus gritos ainda ecoam nos céus.", 2, " ", false, " ", 3, " ");
-            //Sorteando o microclima:
-            Random sorteador = new Random();
-            EventoClimatico[] listaEventosClimaticos = {climaMontanha, climaVariadoUm, climaVariadoDois};
-            int indiceSorteado = sorteador.nextInt(listaEventosClimaticos.length);
-            EventoClimatico climaSorteado = listaEventosClimaticos[indiceSorteado];
-            ambienteAtual.setClimaDominante(climaSorteado.getNomeEvento());//Inicialmente, vamos tratar como String, mas mudaremos o atributo de Ambientes, posteriormente.
-            System.out.println(climaSorteado.getNomeEvento() + "está acontecendo");
-            System.out.println(climaSorteado.getDescricaoEvento());
-            this.listaEventoPossiveis.add(climaSorteado);
-            this.historicoEventos.add(climaSorteado);
-            return climaSorteado;
+            //Clima Padrão do Ambiente + 2 Climas Comuns:
+            EventoClimatico montanha = new EventoClimatico("Hrímblóð", "Frio penetrante com ventos cortantes que parecem vivenciar uma vontade própria. Nevascas repentinas tomam tudo de surpresa, e os flocos de neve caem como cinzas pálidas. Em algumas noites, formas espectrais são vistas caminhando pela neve.",
+                    probPadrao, "Frio extremo que causa dano, drena muita energia e aumenta a fome.", condPadrao,
+                    "Nevasca", duracaoPadrao, "Efeito de nevasca severa.",
+                    -5, -8, 0, -15, -3);
+            EventoClimatico[] listaEventosClimaticos = {montanha, vindkaldr, stormvor};
+            climaSorteado = listaEventosClimaticos[sorteador.nextInt(listaEventosClimaticos.length)];
+
         } else if (ambienteAtual instanceof AmbienteCaverna) {
-            //Clima padrão - Caverna:
-            EventoClimatico climaCaverna = new EventoClimatico("Myrrkuldi", "Nenhuma luz penetra a atmosfera opressiva. O ar é frio e úmido, com neblinas subterrâneas que condensam em gotas escuras." +
-                    " Em seu interior, forma-se um microclima gélido e sufocante, como o hálito de um dragão adormecido.", 2, " ", false, " ", 3, " ");
-            ambienteAtual.setClimaDominante(climaCaverna.getNomeEvento()); //Inicialmente, vamos tratar como String, mas mudaremos o atributo de Ambientes, posteriormente.
-            System.out.println(climaCaverna.getNomeEvento() + "está acontecendo!");
-            System.out.println(climaCaverna.getDescricaoEvento());
-            this.listaEventoPossiveis.add(climaCaverna);
-            this.historicoEventos.add(climaCaverna);
-            return climaCaverna;
+            //Caverna - Clima Único:
+            climaSorteado = new EventoClimatico("Myrrkuldi", "Nenhuma luz penetra a atmosfera opressiva. O ar é frio e úmido, com neblinas subterrâneas que condensam em gotas escuras. Em seu interior, forma-se um microclima gélido e sufocante, como o hálito de um dragão adormecido.",
+                    probPadrao, "Atmosfera opressora que afeta sanidade e energia.", condPadrao,
+                    "Caverna Úmida", duracaoPadrao, "Efeito de ambiente fechado e frio.",
+                    0, 0, 0, -7, -7);
 
         } else if (ambienteAtual instanceof AmbienteRuinas) {
-            //Clima padrão - Ruinas:
-            EventoClimatico climaRuinas = new EventoClimatico("Eldrregn", "Um clima seco e instável. Raios solares intensos esquentam o solo enegrecido, e tempestades de cinzas surgem subitamente," +
-                    " trazendo faíscas e ventos quentes. À noite, a temperatura despenca como se o próprio tempo congelasse.", 2, " ", false, " ", 3, " ");
-            EventoClimatico climaVariadoUm = new EventoClimatico("Vindkaldr", "Correntes de ar gelado uivam pelas encostas, trazendo consigo flocos de neve mesmo fora do inverno." +
-                    " Relâmpagos secos cortam os céus em noites silenciosas, como se os deuses estivessem em guerra.", 2, " ", false, " ", 3, " ");
-            EventoClimatico climaVariadoDois = new EventoClimatico("Stormvǫr", "Céus permanentemente carregados, com nuvens escuras e trovões que rugem como bestas distantes. Ventos fortes e chuvas intensas surgem sem aviso." +
-                    " É dito que esse clima ocorre onde antigos deuses travaram batalhas e seus gritos ainda ecoam nos céus.", 2, " ", false, " ", 3, " ");
-            //Sorteando o microclima:
-            Random sorteador = new Random();
-            EventoClimatico[] listaEventosClimaticos = {climaRuinas, climaVariadoUm, climaVariadoDois};
-            int indiceSorteado = sorteador.nextInt(listaEventosClimaticos.length);
-            EventoClimatico climaSorteado = listaEventosClimaticos[indiceSorteado];
-            ambienteAtual.setClimaDominante(climaSorteado.getNomeEvento()); //Inicialmente, vamos tratar como String, mas mudaremos o atributo de Ambientes, posteriormente.
-            System.out.println(climaSorteado.getNomeEvento() + "está acontecendo");
-            System.out.println(climaSorteado.getDescricaoEvento());
-            this.listaEventoPossiveis.add(climaSorteado);
-            this.historicoEventos.add(climaSorteado);
-            return climaSorteado;
+            //Clima Padrão do Ambiente + 2 Climas Comuns:
+            EventoClimatico ruinas = new EventoClimatico("Eldrregn", "Um clima seco e instável. Raios solares intensos esquentam o solo enegrecido, e tempestades de cinzas surgem subitamente, trazendo faíscas e ventos quentes. À noite, a temperatura despenca como se o próprio tempo congelasse.",
+                    probPadrao, "Clima instável que aumenta a sede e afeta a sanidade.", condPadrao,
+                    "Aridez/Cinzas", duracaoPadrao, "Efeito de ambiente árido e poluído.",
+                    0, 0, -10, 0, -5);
+            EventoClimatico[] listaEventosClimaticos = {ruinas, vindkaldr, stormvor};
+            climaSorteado = listaEventosClimaticos[sorteador.nextInt(listaEventosClimaticos.length)];
+
         } else if (ambienteAtual instanceof AmbienteLagoRio) {
-            //Clima padrão - Lago:
-            EventoClimatico climaLago = new EventoClimatico("Draumslóð", "Clima brando e misterioso, com névoa constante e ar parado. A umidade alta provoca ilusões ópticas, e o clima parece flutuar entre realidade e devaneio." +
-                    " A brisa é suave, mas carrega murmúrios vindos do além.", 2, " ", false, " ", 3, " ");
-            EventoClimatico climaVariadoUm = new EventoClimatico("Vindkaldr", "Correntes de ar gelado uivam pelas encostas, trazendo consigo flocos de neve mesmo fora do inverno." +
-                    " Relâmpagos secos cortam os céus em noites silenciosas, como se os deuses estivessem em guerra.", 2, " ", false, " ", 3, " ");
-            EventoClimatico climaVariadoDois = new EventoClimatico("Stormvǫr", "Céus permanentemente carregados, com nuvens escuras e trovões que rugem como bestas distantes. Ventos fortes e chuvas intensas surgem sem aviso." +
-                    " É dito que esse clima ocorre onde antigos deuses travaram batalhas e seus gritos ainda ecoam nos céus.", 2, " ", false, " ", 3, " ");
-            //Sorteando o microclima:
-            Random sorteador = new Random();
-            EventoClimatico[] listaEventosClimaticos = {climaLago, climaVariadoUm, climaVariadoDois};
-            int indiceSorteado = sorteador.nextInt(listaEventosClimaticos.length);
-            EventoClimatico climaSorteado = listaEventosClimaticos[indiceSorteado];
-            ambienteAtual.setClimaDominante(climaSorteado.getNomeEvento()); //Inicialmente, vamos tratar como String, mas mudaremos o atributo de Ambientes, posteriormente.
-            System.out.println("Clima " + climaSorteado.getNomeEvento() + "está acontecendo:");
-            System.out.println(climaSorteado.getDescricaoEvento());
-            this.listaEventoPossiveis.add(climaSorteado);
-            this.historicoEventos.add(climaSorteado);
-            return climaSorteado;
+            //Clima Padrão do Ambiente + 2 Climas Comuns:
+            EventoClimatico lago = new EventoClimatico("Draumslóð", "Clima brando e misterioso, com névoa constante e ar parado. A umidade alta provoca ilusões ópticas, e o clima parece flutuar entre realidade e devaneio. A brisa é suave, mas carrega murmúrios vindos do além.",
+                    probPadrao, "Névoa misteriosa que afeta levemente a sanidade.", condPadrao,
+                    "Névoa Mística", duracaoPadrao, "Efeito de névoa leve e ilusória.",
+                    0, 0, +2, 0, -3);
+            EventoClimatico[] listaEventosClimaticos = {lago, vindkaldr, stormvor};
+            climaSorteado = listaEventosClimaticos[sorteador.nextInt(listaEventosClimaticos.length)];
+        } else {
+            System.out.println("O tempo permanece neutro neste local desconhecido.");
+            return null; // Retorna null se o tipo de ambiente não for reconhecido ou não tiver climas definidos
         }
-        return null;
+
+        if (climaSorteado != null) {
+            ambienteAtual.setClimaDominante(climaSorteado.getNomeEvento());
+            this.historicoEventos.add(climaSorteado);
+            this.listaEventoPossiveis.add(climaSorteado);
+        }
+        return climaSorteado;
     }
 }

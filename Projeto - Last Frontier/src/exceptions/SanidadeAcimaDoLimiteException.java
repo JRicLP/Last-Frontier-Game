@@ -1,7 +1,7 @@
 package exceptions;
 
-public class SanidadeAcimaDoLimiteException extends RuntimeException{
-    public SanidadeAcimaDoLimiteException(String mensagem){
-        super(mensagem);
+public class SanidadeAcimaDoLimiteException extends RuntimeException {
+    public SanidadeAcimaDoLimiteException(String message) {
+        super(message);
     }
 }

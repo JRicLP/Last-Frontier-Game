@@ -36,6 +36,7 @@ public abstract class Item implements AcoesItens {
     //Metodos implementados:
     @Override
     public void usar(Item item, Personagem personagem) {
-
+        System.out.println(personagem.getNomePersonagem() + " utilizou " + item.getNomeItem()
+        + " e receberá os benefícios disso!!");
     }
 }

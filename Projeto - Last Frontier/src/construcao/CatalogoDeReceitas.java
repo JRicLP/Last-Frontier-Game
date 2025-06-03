@@ -1,6 +1,5 @@
 package construcao;
 
-import itens.Item;
 import itens.Ferramenta;
 import itens.Remedio;
 
@@ -16,18 +15,20 @@ public class CatalogoDeReceitas {
     }
 
     private void carregarReceitas() {
-        // Template para o Abrigo Seguro:
+        //Template AbrigoSeguro:
         Ferramenta templateAbrigoSeguro = new Ferramenta("Abrigo Seguro", 15, 10, "Estrutura de Proteção Definitiva", 0);
-        // Template para a Panaceia Rúnica:
-        Remedio templatePanaceiaRunica = new Remedio("Panaceia Rúnica", 1, 1, "Panaceia", "Uma poção mística que restaura grandemente a vitalidade e purifica o corpo.",50);
-        // 1. Receita para o Abrigo Seguro
-        Receita receitaAbrigo = new Receita("Abrigo Seguro", templateAbrigoSeguro, "Dundrhamarr - Martelo");
-        // Adicionar ingredientes (nomes exatos dos seus itens Material)
+        //Template Panaceia Runica:
+        Remedio templatePanaceiaRunica = new Remedio("Panaceia Rúnica", 1, 1, "Panaceia", "Uma poção mística que restaura grandemente a vitalidade e purifica o corpo.", 50);
+
+        // 1. Receita para o Abrigo Seguro:
+        Receita receitaAbrigo = new Receita("Abrigo Seguro",templateAbrigoSeguro,"Dundrhamarr - Martelo",true);
+        //Ingredientes:
         receitaAbrigo.adicionarIngrediente("Asktreplate - Madeira", 2);
         receitaAbrigo.adicionarIngrediente("Járnstykket - Ferro", 2);
         this.listaDeTodasReceitas.add(receitaAbrigo);
-        // 2. Receita para a Panaceia Rúnica
-        Receita receitaPanaceia = new Receita("Panaceia Rúnica", templatePanaceiaRunica, null);
+
+        // 2. Receita para a Panaceia Runica:
+        Receita receitaPanaceia = new Receita("Panaceia Rúnica",templatePanaceiaRunica,null,false);
         //Ingredientes:
         receitaPanaceia.adicionarIngrediente("Myrsillblóð", 1);
         receitaPanaceia.adicionarIngrediente("Draumrlyng", 1);

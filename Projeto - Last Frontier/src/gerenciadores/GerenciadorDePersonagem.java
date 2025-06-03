@@ -43,7 +43,7 @@ public class GerenciadorDePersonagem implements AcoesGerenciadorDePersonagens {
             this.setEscolha(escolha);
 
             switch (escolha) {
-                case "Nômade":
+                case "Nomade":
                     this.setPersonagem(new Nomade("Adaptativo, possui grande resistência, conhecimento médico e adaptabilidade à mudanças climáticas"));
                     break;
                 case "Pirata":
@@ -78,7 +78,7 @@ public class GerenciadorDePersonagem implements AcoesGerenciadorDePersonagens {
         System.out.println("Escolha uma classe de Personagem:");
         System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
 
-        // Instanciando temporariamente para obter informações:
+        //Instanciando temporariamente para obter informações:
         Nomade nomade = new Nomade("Adaptativo, possui grande resistência, conhecimento médico e adaptabilidade à mudanças climáticas");
         Pirata pirata = new Pirata("Navegador, conhecedor das águas e apto para pescaria");
         Infiltrador infiltrador = new Infiltrador("Camuflador, consegue passar despercebido conseguir comida e armas sem ser pego");
@@ -106,7 +106,7 @@ public class GerenciadorDePersonagem implements AcoesGerenciadorDePersonagens {
                 }
             }
 
-            // --- NOVO: Exibindo a Habilidade Especial de Uso Único ---
+            //Habilidade
             System.out.println("Habilidade Especial (Uso Único): " + personagem.getNomeHabilidadeEspecial());
             System.out.println("  Descrição da Habilidade Especial: " + personagem.getDescricaoHabilidadeEspecial());
         }
@@ -125,7 +125,8 @@ public class GerenciadorDePersonagem implements AcoesGerenciadorDePersonagens {
 
         System.out.println(personagem.getNomePersonagem() + " recebe seus equipamentos iniciais para a jornada:");
         Arma cajadoInicial = new Arma("Vetrkvistr", 4, 20, "Arma à distância", 10, 10);
-        Remedio bandagemInicial = new Remedio("Vefrbind", 2, 4, "Bandagem", "Tiras de linho consagrado...");
+        Remedio bandagemInicial = new Remedio("Vefrbind",2,4,"Bandagem", "Tiras de linho consagrado embebidas em seiva de árvore antiga. A bandagem acelera a cicatrização e gruda levemente na pele ao toque," +
+                " \ncomo se estivesse viva. Quando removida, queima as impurezas da ferida suavemente.", 20);
 
         if (inventario.adicionarItem(cajadoInicial)) {
             System.out.println("  + " + cajadoInicial.getNomeItem() + " (" + cajadoInicial.getTipoArma() + ")");

@@ -3,7 +3,6 @@ package itens;
 import exceptions.EnergiaAcimaDoLimiteException;
 import exceptions.FomeAcimaDoLimiteException;
 import exceptions.SanidadeAcimaDoLimiteException;
-import interfaces.AcoesItens;
 import personagens.Personagem;
 
 public class Alimento extends Item {
@@ -46,7 +45,7 @@ public class Alimento extends Item {
     }
 
 
-    // Método sobrescrito
+    //Metodo sobrescrito:
     @Override
     public void usar(Item item, Personagem personagem) {
         System.out.println("Você come " + this.getNomeItem() + ".");

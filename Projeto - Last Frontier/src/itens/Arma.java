@@ -1,9 +1,12 @@
 package itens;
 
 import eventos.EventoCriatura;
+import eventos.EventoDoencaFerimento; // << IMPORTAR EventoDoencaFerimento
 import interfaces.AcoesArmas;
 import personagens.Personagem;
+import ambientes.Ambiente; // << IMPORTAR Ambiente
 
+import java.util.Random; // << IMPORTAR Random para chance de aplicar efeito
 import java.util.Scanner;
 
 public class Arma extends Item implements AcoesArmas {
@@ -21,29 +24,17 @@ public class Arma extends Item implements AcoesArmas {
         this.alcanceArma = alcanceArma;
     }
 
-    //Metodos acessores:
-    public void setTipoArma(String tipoArma){
-        this.tipoArma = tipoArma;
-    }
-    public String getTipoArma(){
-        return tipoArma;
-    }
-    public void setDanoArma( int danoArma){
-        this.danoArma = danoArma;
-    }
-    public int getDanoArma(){
-        return danoArma;
-    }
-    public void setAlcanceArma(int alcanceArma){
-        this.alcanceArma = alcanceArma;
-    }
-    public int getAlcanceArma(){
-        return alcanceArma;
-    }
+    //Metodos acessores (existentes):
+    public String getTipoArma(){ return tipoArma; }
+    public void setTipoArma(String tipoArma){ this.tipoArma = tipoArma; }
+    public int getDanoArma(){ return danoArma; }
+    public void setDanoArma( int danoArma){ this.danoArma = danoArma; }
+    public int getAlcanceArma(){ return alcanceArma; }
+    public void setAlcanceArma(int alcanceArma){ this.alcanceArma = alcanceArma; }
 
     //Metodos implementados:
     @Override
-    public void atacar(Personagem personagemEscolhido, EventoCriatura criaturaAtacada, Scanner entradaUsuario) { // Scanner passado como parâmetro
+    public void atacar(Personagem personagemEscolhido, EventoCriatura criaturaAtacada, Scanner entradaUsuario, Ambiente ambienteAtual) {
 
         System.out.println("Atacar um alvo consome Energia e utiliza pontos de Fome e Sede, além disso sua arma será desgastada!");
         System.out.println("Dano da sua arma ("+ this.getNomeItem() +"):" + this.getDanoArma());
@@ -53,68 +44,73 @@ public class Arma extends Item implements AcoesArmas {
             System.out.println("Alcance da sua Arma: " + this.getAlcanceArma());
             System.out.println("Distância da Criatura: " + criaturaAtacada.getDistanciaCriatura());
             System.out.println("Essa criatura não está no seu alcance, talvez seja melhor recuar e ficar mais forte!");
-            return; //Finalizando aqui, caso a Criatura esteja fora de alcance, ai não ocorre o combate
+            return;
         }
 
         System.out.println("Você cria coragem e parte para atacar " + criaturaAtacada.getTipoCriatura() + "!");
+        boolean combateAtivo = true;
 
-        boolean combateAtivo = true; // Flag de controle de combate
-
-        //Aqui, estamos validando o Loop a partir da vida da Criatura, do Personagem ou da Flag de Combate
         while (criaturaAtacada.getVidaCriatura() > 0 && personagemEscolhido.getVidaPersonagem() > 0 && combateAtivo) {
-
-            //Opções do Usuário:
             System.out.println("\nEscolha a sua ação:");
             System.out.println("1 - Atacar");
             System.out.println("2 - Fugir");
             System.out.print("Opção: ");
-
             String opcaoUsuario = entradaUsuario.nextLine().trim();
 
             switch (opcaoUsuario) {
                 case "1": // Atacar
-
-                    //A Mecânica de Combate se inicia a partir daqui:
-
                     System.out.println("Você desferiu um ataque certeiro em " + criaturaAtacada.getTipoCriatura() + " e seu sangue jorrou!");
                     System.out.println("Seu ataque causou " + this.getDanoArma() + " de dano!");
                     criaturaAtacada.setVidaCriatura(criaturaAtacada.getVidaCriatura() - this.getDanoArma());
                     System.out.println("Vida da criatura: " + criaturaAtacada.getVidaCriatura());
 
-                    //Caso a arma quebre:
                     this.setDurabilidadeItem(this.getDurabilidadeItem() - 2);
                     if (this.getDurabilidadeItem() <= 0) {
                         System.out.println("Atenção! Sua arma " + this.getNomeItem() + " quebrou!");
+                        // Main.java já tem lógica para descartar a arma quebrada do inventário.
                     }
 
-                    //Morte da Criatura que está sendo atacada:
                     if (criaturaAtacada.getVidaCriatura() <= 0) {
-                        combateAtivo = false;
-                        break;
+                        combateAtivo = false; // Criatura derrotada
+                        break; // Sai do switch, o loop while verificará a condição e terminará
                     }
 
-                    //Criatura atacando de volta:
-                    System.out.println("A criatura atacou você de volta, e causou: " + criaturaAtacada.getDanoCriatura() + " de dano, cuidado!!");
+                    // Criatura atacando de volta:
+                    System.out.println("A criatura (" + criaturaAtacada.getNomeEvento() + ") atacou você de volta, e causou: " + criaturaAtacada.getDanoCriatura() + " de dano, cuidado!!");
                     personagemEscolhido.setVidaPersonagem(personagemEscolhido.getVidaPersonagem() - criaturaAtacada.getDanoCriatura());
                     System.out.println("Sua vida: " + personagemEscolhido.getVidaPersonagem());
 
-                    //Aqui, são feitos os desgastes nos Staus do Personagem:
+                    // --- INÍCIO DA NOVA LÓGICA: APLICAR EFEITO COLATERAL DA CRIATURA ---
+                    if (personagemEscolhido.getVidaPersonagem() > 0) { // Só aplica se o personagem sobreviveu ao dano direto
+                        EventoDoencaFerimento efeitoColateral = criaturaAtacada.getEfeitoColateralAtaque();
+                        if (efeitoColateral != null) {
+                            // Opcional: Adicionar uma chance de aplicar o efeito, em vez de ser sempre
+                            Random rng = new Random();
+                            int chanceDeAplicarEfeito = 50; // Ex: 50% de chance
+                            if (rng.nextInt(100) < chanceDeAplicarEfeito) {
+                                System.out.println("O ataque da criatura parece ter deixado um efeito nocivo...");
+                                efeitoColateral.executar(personagemEscolhido, ambienteAtual); // Chama o executar do EventoDoencaFerimento
+                            } else {
+                                System.out.println("Você conseguiu evitar o pior do ataque da criatura!");
+                            }
+                        }
+                    }
+
+                    // Desgastes nos Status do Personagem por estar em combate/atacar
                     personagemEscolhido.setEnergiaPersonagem(personagemEscolhido.getEnergiaPersonagem() - 3);
                     personagemEscolhido.setFomePersonagem(personagemEscolhido.getFomePersonagem() - 3);
                     personagemEscolhido.setSedePersonagem(personagemEscolhido.getSedePersonagem() - 3);
 
-                    //Mostrando o Status do Personagem:
                     System.out.println("\nStatus de Batalha:");
-                    System.out.println("Vida: " + personagemEscolhido.getVidaPersonagem());
-                    System.out.println("Energia: " + personagemEscolhido.getEnergiaPersonagem());
-                    System.out.println("Fome: " + personagemEscolhido.getFomePersonagem());
-                    System.out.println("Sede: " + personagemEscolhido.getSedePersonagem());
+                    System.out.println("Vida: " + personagemEscolhido.getVidaPersonagem() + "/" + personagemEscolhido.getVidaInicialPersonagem());
+                    System.out.println("Energia: " + personagemEscolhido.getEnergiaPersonagem() + "/" + personagemEscolhido.getEnergiaInicialPersonagem());
+                    System.out.println("Fome: " + personagemEscolhido.getFomePersonagem() + "/" + personagemEscolhido.getFomeInicialPersonagem());
+                    System.out.println("Sede: " + personagemEscolhido.getSedePersonagem() + "/" + personagemEscolhido.getSedeInicialPersonagem());
                     System.out.println("Durabilidade da Arma (" + this.getNomeItem() + "): " + this.getDurabilidadeItem());
 
-                    //Aqui, verificamos se o Personagem morreu:
                     if (personagemEscolhido.getVidaPersonagem() <= 0) {
                         System.out.println("A Criatura desferiu um golpe fatal e você morreu!!");
-                        combateAtivo = false;
+                        combateAtivo = false; // Personagem derrotado
                     }
                     break;
 
@@ -125,16 +121,19 @@ public class Arma extends Item implements AcoesArmas {
 
                 default:
                     System.out.println("Opção Inválida. Você hesita e perde uma oportunidade.");
+                    // Turno de combate perdido, o loop continua e a criatura pode atacar novamente ou
+                    // o jogador é solicitado a agir. (No seu loop atual, o jogador é solicitado novamente)
                     break;
             }
-        }
-        //Mensagens de Resultado do Combate:
+        } // Fim do while de combate
+
+        // Mensagens de Resultado do Combate (permanecem as mesmas)
         if (criaturaAtacada.getVidaCriatura() <= 0 && personagemEscolhido.getVidaPersonagem() > 0) {
-            System.out.println("Você venceu o combate e derrotou a criatura " + criaturaAtacada.getTipoCriatura() + "!");
+            System.out.println("Você venceu o combate e derrotou a criatura " + criaturaAtacada.getTipoCriatura() + " (" + criaturaAtacada.getNomeEvento() + ")!");
         } else if (personagemEscolhido.getVidaPersonagem() <= 0) {
             System.out.println("Você foi derrotado em combate...");
-        } else if (!combateAtivo) {
-            System.out.println("Você conseguiu escapar do combate com " + criaturaAtacada.getTipoCriatura() + ".");
+        } else if (!combateAtivo) { // Chega aqui se fugiu e ambos estão vivos
+            System.out.println("Você conseguiu escapar do combate com " + criaturaAtacada.getTipoCriatura() + " (" + criaturaAtacada.getNomeEvento() + ").");
         }
     }
 }

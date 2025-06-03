@@ -66,6 +66,7 @@ public class Main {
         int turnosMaximos = 24;
         int contadorTurnos = 0;
         boolean personagemVivo = true;
+        boolean vitoriaPorConstrucaoDoAbrigo = false;
 
         EventoClimatico eventoClimaticoAtual = null;
         EventoCriatura eventoCriaturaAtual = null;
@@ -135,6 +136,11 @@ public class Main {
                     System.out.println("Eventos ocorrem durante a exploração:");
                     eventoClimaticoAtual = gerenciadorDeEvento.gerarEventosClimaticos(ambienteAtual);
 
+                    if (eventoClimaticoAtual != null) {
+                        eventoClimaticoAtual.executar(personagemEscolhido, ambienteAtual);
+                        System.out.println("---");
+                    }
+
                     if (eventoCriaturaAtual == null || eventoCriaturaAtual.getVidaCriatura() <= 0) {
                         EventoCriatura criaturaRecemGerada = gerenciadorDeEvento.gerarEventosCriatura();
                         if (criaturaRecemGerada != null) {
@@ -191,8 +197,10 @@ public class Main {
                         } else { // Se gerenciadorDeEvento.gerarEventosDescoberta() retornou null no turno certo
                             System.out.println("Sua exploração não revelou nenhuma descoberta especial desta vez.");
                         }
+                        System.out.println("---");
                     }
                     System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
+                    System.out.println("Status após exploração e eventos:");
                     personagemEscolhido.statusPersonagem();
 
                     if (personagemEscolhido.getVidaPersonagem() <= 0 || personagemEscolhido.getSedePersonagem() <= 0 || personagemEscolhido.getFomePersonagem() <= 0 || personagemEscolhido.getSanidadePersonagem() <= 0) {
@@ -232,7 +240,7 @@ public class Main {
                         // Dentro deste bloco, armaRealSelecionada JÁ É DO TIPO Arma
                         System.out.println("Você empunha sua " + armaRealSelecionada.getNomeItem() + ".");
                         System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
-                        armaRealSelecionada.atacar(personagemEscolhido, eventoCriaturaAtual, usuario);
+                        armaRealSelecionada.atacar(personagemEscolhido, eventoCriaturaAtual, usuario, ambienteAtual);
 
                         // --- INÍCIO: Lógica Pós-combate e Recompensa ---
                         if (eventoCriaturaAtual != null && eventoCriaturaAtual.getVidaCriatura() <= 0) { //Vou deixar essa segunda verificação por segurança
@@ -357,7 +365,16 @@ public class Main {
                                 if (usuario.nextLine().trim().equalsIgnoreCase("s")) {
                                     Item itemConstruido = gerenciadorDeConstrucao.construirItem(receitaSelecionada, inventarioPersonagem, personagemEscolhido);
                                     if (itemConstruido != null) {
-                                        System.out.println("Construção bem-sucedida!");
+                                        System.out.println("Construção bem-sucedida: " + itemConstruido.getNomeItem() + "!");
+                                        if (receitaSelecionada.isCondicaoDeVitoria()) {
+                                            System.out.println("******************************************************************************************");
+                                            System.out.println(" невероятно! Ao construir o " + itemConstruido.getNomeItem() + ", você sente uma energia ancestral fluir!");
+                                            System.out.println("Este era um dos artefatos chave para garantir um refúgio seguro e restaurar a esperança nestas terras!");
+                                            System.out.println("VOCÊ ATINGIU UMA CONDIÇÃO DE VITÓRIA!");
+                                            System.out.println("******************************************************************************************");
+                                            vitoriaPorConstrucaoDoAbrigo = true;
+                                            personagemVivo = false; // Para encerrar o loop principal do jogo elegantemente (ou use outra flag de fim de jogo)
+                                        }
                                     } else {
                                         System.out.println("A construção não pôde ser concluída.");
                                     }
@@ -383,15 +400,67 @@ public class Main {
                     continue;
 
                 case "5": // Descansar
-                    System.out.println("Você escolheu descansar, repor energias e acalmar a mente...");
-                    System.out.println("Seu corpo não parou de funcionar, você consumiu pontos de Fome e Sede");
-                    personagemEscolhido.setEnergiaPersonagem(personagemEscolhido.getEnergiaPersonagem() + 20);
-                    personagemEscolhido.setSanidadePersonagem(personagemEscolhido.getSanidadePersonagem() + 10);
-                    personagemEscolhido.setSedePersonagem(personagemEscolhido.getSedePersonagem() - 8); // Assumindo que descansar consome um pouco
-                    personagemEscolhido.setFomePersonagem(personagemEscolhido.getFomePersonagem() - 8);  // Assumindo que descansar consome um pouco
-                    System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
-                    personagemEscolhido.statusPersonagem();
-                    break;
+                    System.out.println("Você considera encontrar um local para descansar e recuperar suas forças...");
+
+                    boolean precisaRecuperarEnergia = personagemEscolhido.getEnergiaPersonagem() < personagemEscolhido.getEnergiaInicialPersonagem();
+                    boolean precisaRecuperarSanidade = personagemEscolhido.getSanidadePersonagem() < personagemEscolhido.getSanidadeInicialPersonagem();
+
+                    if (precisaRecuperarEnergia || precisaRecuperarSanidade) {
+                        System.out.println("Você se acomoda e decide descansar um pouco.");
+                        System.out.println("Isso irá repor sua energia e acalmar sua mente, mas consumirá algumas de suas provisões (Fome e Sede).");
+
+                        int energiaAntes = personagemEscolhido.getEnergiaPersonagem();
+                        int sanidadeAntes = personagemEscolhido.getSanidadePersonagem();
+
+                        // Aplicar benefícios do descanso
+                        int energiaGanha = 20;
+                        int sanidadeGanha = 10;
+
+                        personagemEscolhido.setEnergiaPersonagem(energiaAntes + energiaGanha);
+                        if (personagemEscolhido.getEnergiaPersonagem() > personagemEscolhido.getEnergiaInicialPersonagem()) {
+                            personagemEscolhido.setEnergiaPersonagem(personagemEscolhido.getEnergiaInicialPersonagem());
+                        }
+
+                        personagemEscolhido.setSanidadePersonagem(sanidadeAntes + sanidadeGanha);
+                        if (personagemEscolhido.getSanidadePersonagem() > personagemEscolhido.getSanidadeInicialPersonagem()) {
+                            personagemEscolhido.setSanidadePersonagem(personagemEscolhido.getSanidadeInicialPersonagem());
+                        }
+
+                        // Aplicar custos do descanso
+                        int fomeConsumida = 8;
+                        int sedeConsumida = 8;
+
+                        personagemEscolhido.setFomePersonagem(personagemEscolhido.getFomePersonagem() - fomeConsumida);
+                        if (personagemEscolhido.getFomePersonagem() < 0) {
+                            personagemEscolhido.setFomePersonagem(0);
+                        }
+
+                        personagemEscolhido.setSedePersonagem(personagemEscolhido.getSedePersonagem() - sedeConsumida);
+                        if (personagemEscolhido.getSedePersonagem() < 0) {
+                            personagemEscolhido.setSedePersonagem(0);
+                        }
+
+                        System.out.println("\nApós um breve descanso, você se sente melhor!");
+                        if (personagemEscolhido.getEnergiaPersonagem() > energiaAntes) {
+                            System.out.println("  + Energia recuperada: " + (personagemEscolhido.getEnergiaPersonagem() - energiaAntes));
+                        }
+                        if (personagemEscolhido.getSanidadePersonagem() > sanidadeAntes) {
+                            System.out.println("  + Sanidade recuperada: " + (personagemEscolhido.getSanidadePersonagem() - sanidadeAntes));
+                        }
+                        System.out.println("  - Fome consumida: " + fomeConsumida + " (Restante: " + personagemEscolhido.getFomePersonagem() + "/" + personagemEscolhido.getFomeInicialPersonagem() + ")");
+                        System.out.println("  - Sede consumida: " + sedeConsumida + " (Restante: " + personagemEscolhido.getSedePersonagem() + "/" + personagemEscolhido.getSedeInicialPersonagem() + ")");
+
+                        System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
+                        personagemEscolhido.statusPersonagem(); // Mostra o status completo após o descanso efetivo
+                        break; // O turno é consumido porque o descanso (com seus custos e benefícios) ocorreu
+
+                    } else {
+                        System.out.println("Você já está com sua energia e sanidade no máximo.");
+                        System.out.println("Descansar mais não traria benefícios agora, então você decide poupar suas provisões e seguir em frente.");
+                        System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
+                        // Não é necessário mostrar o statusPersonagem() novamente aqui, pois ele já foi mostrado no início do turno e nada mudou.
+                        continue; // NÃO consome o turno principal, o jogador pode escolher outra ação.
+                    }
 
                 case "6": // Usar Habilidade Especial
                     if (personagemEscolhido.isHabilidadeEspecialJaUsada()) {
@@ -479,10 +548,14 @@ public class Main {
 
         }//Fim do While (Loop Principal)
 
-        if (!personagemVivo) {
-            System.out.println("\nFim de jogo. O personagem não sobreviveu.");
-        } else {
-            System.out.println("\nParabéns! Você sobreviveu por " + turnosMaximos + " turnos!");
+        if (vitoriaPorConstrucaoDoAbrigo) { // Verifica a nova flag de vitória primeiro
+            System.out.println("\nParabéns, Vandrer! Você construiu o Abrigo Seguro e trouxe um bastião de esperança para este mundo!");
+            System.out.println("Sua jornada árdua chegou a um final vitorioso!");
+        } else if (!personagemVivo) { // Se não venceu pela construção, mas morreu
+            System.out.println("\nFim de jogo. O personagem não sobreviveu aos perigos de Dravnir.");
+        } else { // Se sobreviveu aos turnos máximos sem construir o abrigo (vitória por tempo/sobrevivência)
+            System.out.println("\nParabéns! Você sobreviveu por " + turnosMaximos + " turnos nas Terras Partidas!");
+            System.out.println("Sua resiliência é notável, mas o futuro de Dravnir ainda é incerto sem o Abrigo Seguro...");
         }
         usuario.close();
     }

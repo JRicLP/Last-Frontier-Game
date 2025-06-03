@@ -58,13 +58,13 @@ public class GerenciadorDeItem {
 
         //Objetos de Remedio:
         Remedio antibiotico = new Remedio("Myrsillblóð",2,4,"Antibiótico","Um extrato espesso e amargo retirado de raízes que crescem apenas nas encostas sombreadas do Fjellgraad. Quando ingerido ou aplicado em feridas," +
-                " impede que infecções se espalhem, mesmo aquelas causadas por criaturas corrompidas. Tem cheiro de terra molhada e cobre.",15 );
+                " impede que infecções se espalhem, mesmo aquelas causadas por criaturas corrompidas. Tem cheiro de terra molhada e cobre.", 15 );
         Remedio analgesico = new Remedio("Draumrlyng", 2,4,"Analgésico", "Uma infusão feita com pétalas azuis e sementes negras. Alivia dores físicas ao induzir uma calma sonolência, quase onírica." +
-                " Xamãs dizem que o espírito “sai por um instante” e retorna mais leve.",10);
+                " Xamãs dizem que o espírito “sai por um instante” e retorna mais leve.", 10);
         Remedio antidoto = new Remedio("Eitrskjarr",2,4,"Antídoto", "Uma pasta verde viva feita com folhas fervidas de Skjarrun, planta que cresce perto de tocas de víboras. Quando ingerida ou aplicada sobre feridas venenosas, neutraliza toxinas naturais e arcanas em minutos." +
-                " Seu gosto é descrito como “ferro com trovão”",5);
+                " Seu gosto é descrito como “ferro com trovão”", 5);
         Remedio bandagem = new Remedio("Vefrbind",2,4,"Bandagem", "Tiras de linho consagrado embebidas em seiva de árvore antiga. A bandagem acelera a cicatrização e gruda levemente na pele ao toque," +
-                " como se estivesse viva. Quando removida, queima as impurezas da ferida suavemente.",20);
+                " como se estivesse viva. Quando removida, queima as impurezas da ferida suavemente.", 20);
 
         //Lista com os Objetos, utilizaremos uma probabilidade forçada:
         Remedio[] listaItensRemedios = {antibiotico, analgesico, antidoto, bandagem};

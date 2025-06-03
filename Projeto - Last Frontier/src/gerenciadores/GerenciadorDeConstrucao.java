@@ -101,7 +101,7 @@ public class GerenciadorDeConstrucao {
             } else if (itemResultadoTemplate instanceof Remedio) {
                 Remedio template = (Remedio) itemResultadoTemplate;
                 itemConstruido = new Remedio(template.getNomeItem(), template.getPesoItem(), template.getDurabilidadeItem(),
-                        template.getTipoRemedio(), template.getEfeitoRemedio());
+                        template.getTipoRemedio(), template.getEfeitoRemedio(), template.getCuraRemedio());
             } else if (itemResultadoTemplate instanceof Ferramenta) {
                 Ferramenta template = (Ferramenta) itemResultadoTemplate;
                 itemConstruido = new Ferramenta(template.getNomeItem(), template.getPesoItem(), template.getDurabilidadeItem(),

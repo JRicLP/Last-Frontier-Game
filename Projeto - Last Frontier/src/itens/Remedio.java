@@ -1,6 +1,5 @@
 package itens;
 
-import exceptions.EnergiaAcimaDoLimiteException;
 import exceptions.SanidadeAcimaDoLimiteException;
 import exceptions.VidaAcimaDoLimiteException;
 import personagens.Personagem;
@@ -45,6 +44,10 @@ public class Remedio extends Item {
     @Override
     public void usar(Item itemUsado, Personagem personagem) {
 
+        //Variaveis modificadoras:
+        int novaVida;
+        int novaSanidade;
+
         System.out.println(personagem.getNomePersonagem() + " usa " + this.getNomeItem() + "...");
         boolean usouComSucesso = false; //Flag para indicar se o remédio teve algum efeito
 
@@ -56,7 +59,7 @@ public class Remedio extends Item {
                         System.out.println("A infecção cedeu com o " + this.getNomeItem() + "!");
                         usouComSucesso = true;
                     }
-                    int novaVida=personagem.getVidaPersonagem()+ this.getCuraRemedio();
+                    novaVida = personagem.getVidaPersonagem() + this.getCuraRemedio();
                     if (novaVida > personagem.getVidaInicialPersonagem()) {
                         throw new VidaAcimaDoLimiteException("A vida não pode ultrapassar o valor máximo!.");
 
@@ -70,7 +73,7 @@ public class Remedio extends Item {
                 case "Analgésico": // Corresponde ao 'tipoRemedio' passado no construtor para "Draumrlyng"
                     int bonusSanidadeAnalgesico = 5;
                     novaVida = personagem.getVidaPersonagem() + this.getCuraRemedio();
-                    int novaSanidade = personagem.getSanidadePersonagem() + bonusSanidadeAnalgesico;
+                    novaSanidade = personagem.getSanidadePersonagem() + bonusSanidadeAnalgesico;
                     if(novaVida>personagem.getVidaInicialPersonagem()){
                         throw new VidaAcimaDoLimiteException("A vida não pode ultrapassar o valor máximo!");
                     }else {

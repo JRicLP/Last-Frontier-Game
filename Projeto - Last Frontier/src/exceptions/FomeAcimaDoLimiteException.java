@@ -1,7 +1,7 @@
 package exceptions;
 
-public class FomeAcimaDoLimiteException extends RuntimeException{
-    public FomeAcimaDoLimiteException(String mensagem){
-        super(mensagem);
+public class FomeAcimaDoLimiteException extends RuntimeException {
+    public FomeAcimaDoLimiteException(String message) {
+        super(message);
     }
 }
