@@ -1,12 +1,12 @@
 package interfaces;
 
-import ambientes.Ambientes;
-import eventos.Eventos;
+import ambientes.Ambiente;
+import eventos.Evento;
 import personagens.Personagem;
 
 public interface AcoesGerenciadorDeEventos {
     //Nessa interface serão implementados os metodos usados na classe GerenciadorDeEventos:
-    public abstract void sortearEvento(Ambientes ambienteAtual);
-    public abstract void aplicarEvento(Personagem personagemAtual, Eventos eventoAplicado);
-    public abstract void removerEvento(Eventos eventoAtual);
+    public abstract Evento sortearEvento(Ambiente ambienteAtual, Personagem personagem);
+    public abstract void aplicarEvento(Personagem personagemAtual, Evento eventoAplicado);
+    public abstract void removerEvento(Evento eventoAtual);
 }
