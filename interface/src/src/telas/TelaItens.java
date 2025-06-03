@@ -3,6 +3,7 @@ package telas;
 
 import gerenciadores.GerenciadorDeItens;
 import itens.*;
+import personagens.Personagem;
 import util.DescricaoItemUtils;
 
 import javax.swing.*;
@@ -14,10 +15,11 @@ public class TelaItens extends JPanel {
     private JPanel painelItens;
     private JFrame framePai;
     private DescricaoItemUtils descricaoUtils;
+    private Personagem personagem;
 
     public TelaItens(JFrame frame) {
         this.framePai = frame;
-        this.gerenciador = new GerenciadorDeItens();
+        this.gerenciador = new GerenciadorDeItens(personagem);
         this.descricaoUtils = new DescricaoItemUtils();
 
         setLayout(new BorderLayout());
@@ -74,7 +76,7 @@ public class TelaItens extends JPanel {
     }
 
     private void estilizarBotao(JButton botao) {
-        botao.setFont(new Font("Arial", Font.BOLD, 15));         // Fonte maior
+        botao.setFont(new Font("Arial", Font.BOLD, 15));
         botao.setPreferredSize(new Dimension(140, 30));
         botao.setBackground(new Color(180, 160, 120));
         botao.setForeground(Color.WHITE);
@@ -92,12 +94,12 @@ public class TelaItens extends JPanel {
             painelItem.setBorder(BorderFactory.createLineBorder(Color.WHITE, 2));
 
             String caminho = "imagens/";
-            if (item instanceof Armas) caminho += "armas/";
-            else if (item instanceof Ferramentas) caminho += "ferramentas/";
-            else if (item instanceof Remedios) caminho += "remedios/";
-            else if (item instanceof Alimentos) caminho += "alimentos/";
+            if (item instanceof Arma) caminho += "armas/";
+            else if (item instanceof Ferramenta) caminho += "ferramentas/";
+            else if (item instanceof Remedio) caminho += "remedios/";
+            else if (item instanceof Alimento) caminho += "alimentos/";
             else if (item instanceof Agua) caminho += "agua/";
-            else if (item instanceof Materiais) caminho += "materiais/";
+            else if (item instanceof Material) caminho += "materiais/";
 
             caminho += item.getNomeItem() + ".png";
 

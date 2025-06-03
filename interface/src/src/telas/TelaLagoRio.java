@@ -13,7 +13,7 @@ public class TelaLagoRio extends JPanel {
         setLayout(new BorderLayout());
         setBackground(Color.BLACK);
 
-      //fundo com imagem do lago
+        //fundo com imagem do lago
         ImageIcon imagemFundo = new ImageIcon("imagens/lagoRio.png"); // coloque uma imagem com esse nome
         Image imagemRedimensionada = imagemFundo.getImage().getScaledInstance(900, 600, Image.SCALE_SMOOTH);
         JLabel fundo = new JLabel(new ImageIcon(imagemRedimensionada));

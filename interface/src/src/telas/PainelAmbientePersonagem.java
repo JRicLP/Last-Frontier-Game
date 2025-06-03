@@ -10,7 +10,7 @@ import java.io.IOException;
 public class PainelAmbientePersonagem extends JPanel {
 
     private BufferedImage imagemAmbiente;
-    private BufferedImage imagemItem; // Se quiser mostrar um item encontrado
+    private BufferedImage imagemItem;
     private String legendaItem;
 
     public PainelAmbientePersonagem(String caminhoImagemInicial) {
@@ -33,7 +33,7 @@ public class PainelAmbientePersonagem extends JPanel {
                 imagemItem = ImageIO.read(new File(caminhoImagemItem));
                 legendaItem = legenda;
             } catch (IOException e) {
-                System.err.println("Erro ao carregar imagem do item: " + caminhoImagemItem);
+               // System.err.println("Erro ao carregar imagem do item: " + caminhoImagemItem);
                 imagemItem = null;
                 legendaItem = null;
             }

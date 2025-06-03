@@ -4,7 +4,7 @@ import gerenciadores.GerenciadorDeItens;
 import itens.*;
 import personagens.Personagem;
 import util.DescricaoItemUtils;
-import telas.PainelAmbientePersonagem;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -78,16 +78,32 @@ public class TelaPrincipalJogo extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if (gerenciadorDeItens.verificarVitoria()) {
                     JOptionPane.showMessageDialog(null, "Parabéns! Você construiu um lar seguro e venceu o jogo!");
-                  // Aqui você pode encerrar o jogo ou fazer algo como:
-                  // System.exit(0);
-                 } else {
-                    List<String> faltando = gerenciadorDeItens.itensFaltandoParaVitoria();
-                    JOptionPane.showMessageDialog(null,
-                            "Você ainda precisa dos seguintes itens para vencer:\n- " + String.join("\n- ", faltando),
-                            "Itens Faltando", JOptionPane.INFORMATION_MESSAGE);
-              }
-          }
-                                              });
+                } else {
+                    List<Item> faltando = gerenciadorDeItens.itensFaltandoParaVitoria();
+
+                    JPanel painel = new JPanel();
+                    painel.setLayout(new BoxLayout(painel, BoxLayout.Y_AXIS));
+
+                    for (Item item : faltando) {
+                        JPanel itemPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+                        JLabel nome = new JLabel(item.getNomeItem());
+
+                        // Carregar imagem e redimensionar
+                        ImageIcon icone = new ImageIcon(item.getCaminhoImagem());
+                        Image imagem = icone.getImage().getScaledInstance(32, 32, Image.SCALE_SMOOTH);
+                        JLabel imagemLabel = new JLabel(new ImageIcon(imagem));
+
+                        itemPanel.add(imagemLabel);
+                        itemPanel.add(nome);
+
+                        painel.add(itemPanel);
+                    }
+
+                    JOptionPane.showMessageDialog(null, painel, "Itens Faltando", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
+        });
+
 
         painelBotoes.add(btnExplorar);
         painelBotoes.add(btnAtacar);
@@ -174,7 +190,7 @@ public class TelaPrincipalJogo extends JFrame {
             });
 
             btnDeixar.addActionListener(ev -> {
-                JOptionPane.showMessageDialog(this, "Você deixou o item para trás.");
+                //JOptionPane.showMessageDialog(this, "Você deixou o item para trás.");
                 dialogo.dispose();
             });
 
@@ -234,19 +250,18 @@ public class TelaPrincipalJogo extends JFrame {
         String nomeAmbiente = ambientes.get(indexAmbiente);
         labelAmbiente.setText("Ambiente: " + nomeAmbiente);
 
-        labelStatus.setText("❤️ Vida: " + personagem.getVidaPersonagem() +
-                " | 🍗 Fome: " + personagem.getFomePersonagem() +
-                " | 💧 Sede: " + personagem.getSedePersonagem() +
-                " | ⚡ Energia: " + personagem.getEnergiaPersonagem() +
-                " | 🧠 Sanidade: " + personagem.getSanidadePersonagem());
+        labelStatus.setText(" Vida: " + personagem.getVidaPersonagem() +
+                " |  Fome: " + personagem.getFomePersonagem() +
+                " |  Sede: " + personagem.getSedePersonagem() +
+                " |  Energia: " + personagem.getEnergiaPersonagem() +
+                " |  Sanidade: " + personagem.getSanidadePersonagem());
     }
 
     // Este método agora constrói o caminho da imagem corretamente
     private String getCaminhoImagemAmbiente(int indexAmbiente) {
-        String nomeAmbiente = ambientes.get(indexAmbiente).toLowerCase(); // Ex: "lago"
-        // Agora, personagem.getImagemPersonagemNoAmbiente() retornará "cacador"
+        String nomeAmbiente = ambientes.get(indexAmbiente).toLowerCase();
         String nomeDoArquivoDoPersonagem = personagem.getImagemPersonagemNoAmbiente();
-        // Construindo o caminho completo e CORRETO
+
         return "imagens/ambientes/" + nomeAmbiente + "_" + nomeDoArquivoDoPersonagem + ".png";
     }
     private void exibirPainelTemporarioDoItem(Item item) {
@@ -255,12 +270,12 @@ public class TelaPrincipalJogo extends JFrame {
         painelItem.setBackground(Color.BLACK);
 
         String caminho = "imagens/";
-        if (item instanceof Armas) caminho += "armas/";
-        else if (item instanceof Ferramentas) caminho += "ferramentas/";
-        else if (item instanceof Remedios) caminho += "remedios/";
+        if (item instanceof Arma) caminho += "armas/";
+        else if (item instanceof Ferramenta) caminho += "ferramentas/";
+        else if (item instanceof Remedio) caminho += "remedios/";
         else if (item instanceof Alimento) caminho += "alimentos/";
         else if (item instanceof Agua) caminho += "agua/";
-        else if (item instanceof Materiais) caminho += "materiais/";
+        else if (item instanceof Material) caminho += "materiais/";
 
         caminho += item.getNomeItem() + ".png";
 
@@ -283,8 +298,8 @@ public class TelaPrincipalJogo extends JFrame {
         dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         dialog.setVisible(true);
 
-        // Fecha automaticamente após 3 segundos
-        new Timer(3000, e -> dialog.dispose()).start();
+        // Fecha automaticamente após 2 segundos
+        new Timer(2000, e -> dialog.dispose()).start();
     }
 
 }

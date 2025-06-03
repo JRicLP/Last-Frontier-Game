@@ -4,10 +4,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
+import gerenciadores.GerenciadorDeEventos;
+import gerenciadores.GerenciadorDeItens;
 import personagens.*;
 
 public class TelaPersonagem extends JPanel {
     private Personagem personagemSelecionado;
+    GerenciadorDeItens gerenciadorDeItens;
+
 
     public TelaPersonagem(JFrame frame) {
         setLayout(new BorderLayout());
@@ -56,6 +60,8 @@ public class TelaPersonagem extends JPanel {
 
             selecionar.addActionListener((ActionEvent e) -> {
                 personagemSelecionado = criarPersonagemPorIndice(index);
+                this.gerenciadorDeItens = new GerenciadorDeItens(personagemSelecionado);
+
 
                 String mensagem = String.format(
                         "Nome: %s\n\nVida: %d\nFome: %d\nSede: %d\nEnergia: %d\nSanidade: %d\n\nDeseja escolher este personagem?",
@@ -80,6 +86,7 @@ public class TelaPersonagem extends JPanel {
 
                     // Mudar para a tela inicial do jogo
                     frame.setContentPane(new TelaLagoRio(frame, personagemSelecionado));
+
                     frame.revalidate();
                 }
             });
