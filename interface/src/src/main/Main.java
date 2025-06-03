@@ -1,3 +1,7 @@
+package main;
+
+import telas.TelaInicial;
+
 import javax.swing.*;
 
 
@@ -26,4 +30,3 @@ public class Main {
         });
     }
 }
-
