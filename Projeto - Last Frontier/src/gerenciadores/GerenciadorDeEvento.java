@@ -42,7 +42,7 @@ public class GerenciadorDeEvento implements AcoesGerenciadorDeEventos {
 
     @Override
     public void aplicarEvento(Personagem personagemAtual, Evento eventoAplicado) {
-        if (eventoAplicado.isCondicaoEvento()) { //Verifica se a condição necessária para o evento está ativa
+        if (eventoAplicado.isCondicaoEvento()) {
             System.out.println("O personagem " + personagemAtual.getNomePersonagem() + " está sofrendo as consequências de: " + eventoAplicado.getNomeEvento());
         }
     }
@@ -52,7 +52,7 @@ public class GerenciadorDeEvento implements AcoesGerenciadorDeEventos {
         System.out.println("O evento " + eventoAtual.getNomeEvento() + "foi removido com sucesso!!");
     }
 
-    //Metodos para gerar os objetos:
+    //Metodos para Gerar os Objetos:
 
     public EventoCriatura gerarEventosCriatura() {
         //1: Definir as instâncias de EventoDoencaFerimento que serão usadas:
@@ -127,13 +127,13 @@ public class GerenciadorDeEvento implements AcoesGerenciadorDeEventos {
         Random sorteador = new Random();
         int indiceSorteado = sorteador.nextInt(listaEventosCriatura.length);
         EventoCriatura eventoSorteado = listaEventosCriatura[indiceSorteado];
-
+        //Mostrando o Evento sorteado:
         System.out.println("Uma criatura apareceu: " + eventoSorteado.getNomeEvento() + " (" + eventoSorteado.getTipoCriatura() + ")");
         System.out.println("Descrição: " + eventoSorteado.getDescricaoEvento());
-
+        //Adicionando ao Histórico de Eventos:
         this.historicoEventos.add(eventoSorteado);
         this.listaEventoPossiveis.add(eventoSorteado);
-
+        //Retornando a Criatura:
         return eventoSorteado;
     }
 
@@ -280,7 +280,7 @@ public class GerenciadorDeEvento implements AcoesGerenciadorDeEventos {
             }
             case null, default -> {
                 System.out.println("O tempo permanece neutro neste local desconhecido.");
-                return null; // Retorna null se o tipo de ambiente não for reconhecido ou não tiver climas definidos
+                return null;
             }
         }
 

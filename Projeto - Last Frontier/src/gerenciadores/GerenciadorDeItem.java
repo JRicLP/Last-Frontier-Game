@@ -95,8 +95,6 @@ public class GerenciadorDeItem {
         Arma faca = new Arma("Kviðskera - Faca",4,9,"Arma corpo a corpo",7,5);
         Arma escudo = new Arma("Vardstein - Escudo",5, 8, "Arma corpo a corpo", 4, 5);
 
-        //O Randomizador de Armas deve ser tratado posteriormente!!
-
         //Lista com os Objetos, utilizaremos uma probabilidade forçada:
         Arma[] listaItensArmas = {cajado, arco, espada, lanca, gancho, faca, escudo};
 
@@ -137,7 +135,7 @@ public class GerenciadorDeItem {
         Random sorteador = new Random();
         int indiceSorteado = sorteador.nextInt(listaItensFerramentas.length);
 
-        //Aqui, estaremos a obter o elemento da lista que foi sorteado, iremos mostrar ao usuário nome, eficiência e descrição
+        //Aqui, estaremos a obter o elemento da lista que foi sorteado, iremos mostrar ao usuário nome, eficiência e descrição:
         Ferramenta ferramentaSorteada = listaItensFerramentas[indiceSorteado];
         System.out.println("Você achou " + ferramentaSorteada.getNomeItem()  + " - Eficiência: " + ferramentaSorteada.getEficienciaFerramenta());
         System.out.println("Tipo da Ferramenta: "  + ferramentaSorteada.getTipoFerramenta());

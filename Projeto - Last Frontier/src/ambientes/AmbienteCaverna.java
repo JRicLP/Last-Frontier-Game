@@ -1,6 +1,6 @@
 package ambientes;
 
-public class AmbienteCaverna extends Ambiente { //Falta a adição dos recursos disponíveis e ligação com os eventos
+public class AmbienteCaverna extends Ambiente {
 
     //Atributos da subclasse:
     private boolean poucaLuz; //Como esse atributo é uma condição, iremos torná-lo boolean para verificar e atribuir um evento

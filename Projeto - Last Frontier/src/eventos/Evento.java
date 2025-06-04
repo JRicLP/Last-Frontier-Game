@@ -10,7 +10,7 @@ public abstract class Evento implements AcoesEventos {
     private String nomeEvento;
     private String descricaoEvento;
     private int probabilidadeEvento;
-    private String impactoEvento; //É necessário revisar esse atributo e sua relação com a classe
+    private String impactoEvento;
     private boolean condicaoEvento; //Como esse atributo é uma condição, iremos torná-lo boolean para verificar e atribuir um evento
 
     //Metodo construtor:

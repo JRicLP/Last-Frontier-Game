@@ -31,6 +31,5 @@ public class Ferramenta extends Item implements AcoesFerramentas {
     public void utilizar(Ambiente recursosAlvo) {
         System.out.println("A ferramenta selecionada " + this.getNomeItem() + " foi utilizada para extrair recursos de "
                 + recursosAlvo.getRecursosAmbiente());
-        //Futuramente esse metodo também deve exibir os itens extraídos.
     }
 }

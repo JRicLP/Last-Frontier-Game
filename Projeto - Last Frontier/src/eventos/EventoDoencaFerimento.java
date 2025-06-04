@@ -7,7 +7,7 @@ public class EventoDoencaFerimento extends Evento {
 
     //Atributos da Subclasse:
     private String tipoDoenca;
-    private String impactoDoencaFerimento; //Descrição do que acontece
+    private String impactoDoencaFerimento;
     private boolean curaDisponivel;
 
     //Metodo Construtor:
@@ -29,7 +29,7 @@ public class EventoDoencaFerimento extends Evento {
     //Metodo Herdado:
     @Override
     public void executar(Personagem personagemAfetado, Ambiente ambienteAtual) {
-        if (!this.isCondicaoEvento()) { //Verificando a condição base do evento
+        if (!this.isCondicaoEvento()) {
             System.out.println("As condições para '" + getNomeEvento() + "' não foram atendidas.");
             return;
         }
@@ -79,7 +79,7 @@ public class EventoDoencaFerimento extends Evento {
                 break;
         }
 
-        //Garantindo que os status não fiquem abaixo de 0 (ou acima do máximo, se aplicável)
+        //Garantindo que os status não fiquem abaixo de 0:
         if (personagemAfetado.getVidaPersonagem() < 0) personagemAfetado.setVidaPersonagem(0);
         if (personagemAfetado.getFomePersonagem() < 0) personagemAfetado.setFomePersonagem(0);
         if (personagemAfetado.getSedePersonagem() < 0) personagemAfetado.setSedePersonagem(0);

@@ -22,7 +22,7 @@ public class EventoCriatura extends Evento {
         this.distanciaCriatura = distanciaCriatura;
         this.nivelPerigo = nivelPerigo;
         this.danoCriatura = danoCriatura;
-        this.efeitoColateralAtaque = efeitoColateralAtaque; // Atribui o novo atributo
+        this.efeitoColateralAtaque = efeitoColateralAtaque;
     }
 
     //Metodos acessores (existentes):

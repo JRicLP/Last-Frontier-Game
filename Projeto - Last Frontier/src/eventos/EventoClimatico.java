@@ -6,9 +6,9 @@ import personagens.Personagem;
 public class EventoClimatico extends Evento {
 
     //Atributos da subclasse:
-    private String tipoClima; //É necessário revisar a utilidade desse atributo
+    private String tipoClima;
     private int duracaoClima; //Baseado no número de turnos
-    private String efeitoClima; //É necessário revisar como esse atributo irá funcionar
+    private String efeitoClima;
     //Atributos de Impacto do Clima:
     private int impactoVida;
     private int impactoFome;
@@ -143,6 +143,6 @@ public class EventoClimatico extends Evento {
         System.out.println("CLIMA: " + this.getNomeEvento() + " se manifesta em " + ambienteNoQualOcorre.getNomeAmbiente() + "!");
         System.out.println(this.getDescricaoEvento());
 
-        aplicarImpactoDireto(personagemAfetado); // Passa apenas o personagem
+        aplicarImpactoDireto(personagemAfetado); //Passa apenas o personagem
     }
 }

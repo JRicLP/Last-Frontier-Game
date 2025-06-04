@@ -10,9 +10,9 @@ public abstract class Ambiente implements AcoesAmbientes {
     private String nomeAmbiente;
     private String descricaoAmbiente;
     private int dificuldadeAmbiente;
-    private String recursosAmbiente; //Precisamos verificar como esse atributo irá se relacionar com a classe
-    private int probabilidadeEventos; //Precisamos verificar como esse atributo irá se relacionar com a classe
-    private String climaDominante; //Precisamos verificar como esse atributo irá se relacionar com a classe
+    private String recursosAmbiente;
+    private int probabilidadeEventos;
+    private String climaDominante;
 
     //Metodo construtor da superclasse:
     public Ambiente(String nomeAmbiente, String descricaoAmbiente, int dificuldadeAmbiente,
@@ -68,11 +68,6 @@ public abstract class Ambiente implements AcoesAmbientes {
     public void exlorar(Personagem personagemAtual) {
         System.out.println("Explorar o ambiente consome pontos de Energia, Fome e Sede");
         System.out.println(personagemAtual.getNomePersonagem() + " explorou o ambiente de forma incansável e encontrou alguns recursos!");
-        //Futuramente esse metodo irá mostrar os recursos encontrados no ambiente que foi explorado!
-    }
-    @Override
-    public void gerarEvento() {
-        //Esse metodo utiliza algumas questões probabilísticas que serão alteradas no futuro!
     }
     @Override
     public void modificarClima(Ambiente ambienteAtual, EventoClimatico novoClima) {
