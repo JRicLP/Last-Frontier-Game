@@ -89,24 +89,51 @@ Escolha entre diferentes classes, cada uma com habilidades e histórias únicas:
 
 ## 🎮 Como Jogar
 
-> Detalhes sobre instalação e controles serão adicionados em breve.
+Este jogo é uma aventura em texto e é executado através de um console ou terminal compatível.
 
----
+Requisitos:
 
-## Gameplay Screenshots:
+Java Development Kit (JDK) instalado (versão 17 ou superior recomendada para funcionalidades como pattern matching em switch).
 
+Execução:
+
+Faça o download ou clone o repositório do projeto.
+
+Abra o projeto em uma IDE Java (como IntelliJ IDEA, Eclipse, VS Code com o Java Extension Pack).
+
+Localize e execute a classe principal: game.Main.java.
+
+Alternativamente, compile manualmente via terminal (navegue até o diretório src):
+
+(A ordem e os wildcards de compilação podem precisar de ajuste dependendo da sua estrutura de pastas exata e dependências entre elas.)
+
+Comandos:
+
+O jogo apresentará opções numeradas para suas ações principais.
+
+Dentro de submenus (como Inventário), novas opções serão apresentadas.
+
+Digite o número da opção desejada e pressione Enter para confirmar.
 
 ---
 
 ## 🛠️ Tecnologias Utilizadas
 
-> Detalhes sobre o motor do jogo e tecnologias utilizadas serão adicionados em breve.
+Linguagem Principal: Java (OpenJDK 23)
+
+Controle de Versão: Git e GitHub.
+
+IDE Comum: IntelliJ IDEA, Eclipse, Visual Studio Code.
+
+Gerenciamento de Projeto:
 
 ---
 
 ## 📝 Status do Desenvolvimento
 
-O jogo está atualmente em **fase de desenvolvimento ativo**. Acompanhe as atualizações através das releases e do Trello do projeto.
+O jogo encontra-se em sua versão finalizada, conforme os requisitos e o escopo definidos para o projeto.
+
+- Em breve, melhorias na Interface Gráfica!
 
 ---
 
@@ -138,7 +165,7 @@ Email - Paola Hannah: phmc@poli.br
 
 *Em Dravnir, cada escolha ecoa através das eras...*
 
-[![Status](https://img.shields.io/badge/Status-Em%20Desenvolvimento-orange)](https://github.com/seu-usuario/last-frontier)
+[![Status](https://img.shields.io/badge/Status-Finalizado-green)](https://github.com/seu-usuario/last-frontier)
 [![License](https://img.shields.io/badge/License-Todos%20os%20direitos%20reservados-red)](LICENSE)
 
 </div>
