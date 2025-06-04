@@ -58,68 +58,68 @@ public class GerenciadorDeEvento implements AcoesGerenciadorDeEventos {
         //1: Definir as instâncias de EventoDoencaFerimento que serão usadas:
         EventoDoencaFerimento efeitoFrostseidr = new EventoDoencaFerimento("Frostseidr",
                 "O toque gelado de seus chifres pode causar um entorpecimento místico. A pele perde cor e a pessoa sente emoções com menos intensidade, como se estivesse congelando por dentro.",
-                2, "Congelamento e torpor.", false, "Corte e Feitiço", "Ilusão e Hemorragia", true);
+                2, "Congelamento e torpor.", true, "Corte e Feitiço", "Ilusão e Hemorragia", true);
 
         EventoDoencaFerimento efeitoSotnblar = new EventoDoencaFerimento("Sotnblár",
                 "A mordida da serpente Niðkrága deixa veias azul-escuras ao redor da ferida. A vítima perde a visão por algumas horas e sente uma dormência crescente nos membros.",
-                2, "Envenenamento agudo.", false, "Envenenamento", "Cegueira, Perca de Energia", true);
+                2, "Envenenamento agudo.", true, "Envenenamento", "Cegueira, Perca de Energia", true);
 
         EventoDoencaFerimento efeitoAldrgata = new EventoDoencaFerimento("Aldrgáta",
                 "Dizem que quem cruza o olhar direto de um Veðrhrafn recebe visões do seu próprio fim. A mente enfraquece, e testes de coragem ou sabedoria tornam-se mais difíceis por um tempo.",
-                2, "Visões premonitórias.", false, "Feitiço", "Ilusão", true);
+                2, "Visões premonitórias.", true, "Feitiço", "Ilusão", true);
 
         EventoDoencaFerimento efeitoDrottarskor = new EventoDoencaFerimento("Dróttarskör",
                 "Um ferimento profundo e irregular causado por seus chifres ósseos. Nunca cicatriza completamente, e a dor retorna em noites de lua cheia.",
-                2, "Ferimento grave.", false, "Corte", "Hemorragia", true);
+                2, "Ferimento grave.", true, "Corte", "Hemorragia", true);
 
         EventoDoencaFerimento efeitoHundraugr = new EventoDoencaFerimento("Húndraugr",
                 "Um arranhão quase imperceptível que infecciona com rapidez sobrenatural. Após três dias, o ferido começa a sonhar com terras mortas e ouvir uivos em pleno dia.",
-                2, "Infecção espectral.", false, "Corte", "Ilusão e Hemorragia", true);
+                2, "Infecção espectral.", true, "Corte", "Ilusão e Hemorragia", true);
 
         EventoDoencaFerimento efeitoSkuggbrandr = new EventoDoencaFerimento("Skuggbrandr",
                 "Um frio que se espalha pela pele e nunca aquece. Quem carrega a marca ouve sussurros constantes e tem dificuldade para dormir. Pode evoluir para loucura se não for purificada.",
-                2, "Terror e paranoia.", false, "Feitiço", "Ilusão", true);
+                2, "Terror e paranoia.", true, "Feitiço", "Ilusão", true);
 
         //2: Instanciar as Criaturas, passando o EventoDoencaFerimento apropriado:
         EventoCriatura cervo = new EventoCriatura("Hjarnhyrndr", "Um cervo de pelagem prateada...",
-                2, "Encontro majestoso.", false, "Criatura Neutra", 25, 5, 0, 2,
+                2, "Encontro majestoso.", true, "Criatura Neutra", 25, 5, 0, 2,
                 efeitoFrostseidr);
 
         EventoCriatura serpente = new EventoCriatura("Niðkrága", "Uma serpente subterrânea...",
-                2, "Perigo venenoso.", false, "Criatura Hostil", 35, 10, 5, 5,
+                2, "Perigo venenoso.", true, "Criatura Hostil", 35, 10, 5, 5,
                 efeitoSotnblar);
 
         EventoCriatura corvo = new EventoCriatura("Veðrhrafn", "Um corvo colossal...",
-                2, "Presságio nos céus.", false, "Criatura Neutra", 40, 10, 0, 2,
+                2, "Presságio nos céus.", true, "Criatura Neutra", 40, 10, 0, 2,
                 efeitoAldrgata);
 
         EventoCriatura javali = new EventoCriatura("Grimsvártr", "Um javali titânico...",
-                2, "Fúria indomável.", false, "Criatura Hostil", 40, 15, 10, 10,
+                2, "Fúria indomável.", true, "Criatura Hostil", 40, 10, 10, 10,
                 efeitoDrottarskor);
 
         EventoCriatura lobo = new EventoCriatura("Draugrulfr", "Lobo espectral...",
-                2, "Uivo da tumba.", false, "Criatura Hostil", 20, 5, 5, 5,
+                2, "Uivo da tumba.", true, "Criatura Hostil", 20, 5, 5, 5,
                 efeitoHundraugr);
 
         EventoCriatura aranha = new EventoCriatura("Skuggadraugr", "Uma criatura que vive entre as sombras...",
-                2, "Terror Aracnídeo.", false, "Criatura Hostil", 15, 10, 10, 10,
+                2, "Terror Aracnídeo.", true, "Criatura Hostil", 15, 10, 10, 10,
                 efeitoSkuggbrandr);
 
         // Criaturas restantes que não têm um efeito colateral definido (passando null):
         EventoCriatura peixe = new EventoCriatura("Silfurskyn", "Um peixe raro que brilha...",
-                2, "Vislumbre aquático.", false, "Criatura Pacífica", 10, 5, 0, 2,
+                2, "Vislumbre aquático.", true, "Criatura Pacífica", 10, 5, 0, 2,
                 null);
 
         EventoCriatura cabra = new EventoCriatura("Tindgeit", "Cabra das montanhas...",
-                2, "Agilidade nas alturas.", false, "Criatura Neutra", 15, 5, 0, 2,
+                2, "Agilidade nas alturas.", true, "Criatura Neutra", 15, 5, 0, 2,
                 null);
 
         EventoCriatura guerreiroCorrompido = new EventoCriatura("Skarnvaldr", "Um antigo guerreiro-sacerdote...",
-                2, "Desafio ancestral.", false, "Humano hostil", 60, 25, 20, 20,
+                2, "Desafio ancestral.", true, "Humano hostil", 60, 10, 20, 20,
                 null);
 
         EventoCriatura guardiaDoLago = new EventoCriatura("Yndra Sædis", "Uma mulher idosa que vive isolada...",
-                2, "Encontro enigmático.", false, "Humano pacífico", 80, 0, 0, 40,
+                2, "Encontro enigmático.", true, "Humano pacífico", 80, 0, 0, 40,
                 null);
         //Adicionando na lista conforme as probabilidades de cada Evento Descoberta:
         //Inicialmente, vou fazer uma Probabilidade Forçada Simples, com a mesma chance para todos os elementos:
@@ -169,23 +169,28 @@ public class GerenciadorDeEvento implements AcoesGerenciadorDeEventos {
     //Gerando Eventos de Doença e Ferimento:
     public EventoDoencaFerimento gerarEventoDoencaFerimento() {
         //Mordida da Cobra:
-        EventoDoencaFerimento mordida = new EventoDoencaFerimento("Sotnblár", "A mordida da serpente Niðkrága deixa veias azul-escuras ao redor da ferida. A vítima perde a visão por algumas horas e sente uma dormência crescente nos membros.", 2,
-                " ", false, "Envenenamento", "Cegueira, Perca de Energia", true);
+        EventoDoencaFerimento mordida = new EventoDoencaFerimento("Sotnblár", "A mordida da serpente Niðkrága deixa veias azul-escuras ao redor da ferida." +
+                "\nA vítima perde a visão por algumas horas e sente uma dormência crescente nos membros.", 2,
+                "Criaturas são boas oportunidades para conseguir itens", true, "Envenenamento", "Cegueira, Perca de Energia", true);
         //Chifrada do Javali:
-        EventoDoencaFerimento chifrada = new EventoDoencaFerimento("Dróttarskör", "Um ferimento profundo e irregular causado por seus chifres ósseos. Nunca cicatriza completamente, e a dor retorna em noites de lua cheia.", 2,
-                " ", false, "Corte", "Hemorragia", true);
+        EventoDoencaFerimento chifrada = new EventoDoencaFerimento("Dróttarskör", "Um ferimento profundo e irregular causado por seus chifres ósseos. " +
+                "\nNunca cicatriza completamente, e a dor retorna em noites de lua cheia.", 2,
+                "Criaturas são boas oportunidades para conseguir itens", true, "Corte", "Hemorragia", true);
         //Contato com a Aranha:
         EventoDoencaFerimento contato = new EventoDoencaFerimento("Skuggbrandr", "Um frio que se espalha pela pele e nunca aquece. Quem carrega a marca ouve sussurros constantes e tem dificuldade para dormir. Pode evoluir para loucura se não for purificada.", 2,
-                " ", false, "Feitiço", "Ilusão", true);
+                "Criaturas são boas oportunidades para conseguir itens", true, "Feitiço", "Ilusão", true);
         //Arranhão do Lobo:
-        EventoDoencaFerimento arranhao = new EventoDoencaFerimento("Húndraugr", "Um arranhão quase imperceptível que infecciona com rapidez sobrenatural. Após três dias, o ferido começa a sonhar com terras mortas e ouvir uivos em pleno dia.", 2,
-                " ", false, "Corte", "Ilusão e Hemorragia", true);
+        EventoDoencaFerimento arranhao = new EventoDoencaFerimento("Húndraugr", "Um arranhão quase imperceptível que infecciona com rapidez sobrenatural. " +
+                "\nApós três dias, o ferido começa a sonhar com terras mortas e ouvir uivos em pleno dia.", 2,
+                "Criaturas são boas oportunidades para conseguir itens", true, "Corte", "Ilusão e Hemorragia", true);
         //Olhar do Pássaro:
-        EventoDoencaFerimento olhar = new EventoDoencaFerimento("Aldrgáta", "Dizem que quem cruza o olhar direto de um Veðrhrafn recebe visões do seu próprio fim. A mente enfraquece, e testes de coragem ou sabedoria tornam-se mais difíceis por um tempo.", 2,
-                " ", false, "Feitiço", "Ilusão", true);
+        EventoDoencaFerimento olhar = new EventoDoencaFerimento("Aldrgáta", "Dizem que quem cruza o olhar direto de um Veðrhrafn recebe visões do seu próprio fim." +
+                "\nA mente enfraquece, e testes de coragem ou sabedoria tornam-se mais difíceis por um tempo.", 2,
+                "Criaturas são boas oportunidades para conseguir itens", true, "Feitiço", "Ilusão", true);
         //Toque do Cervo:
-        EventoDoencaFerimento toque = new EventoDoencaFerimento("Frostseidr", "O toque gelado de seus chifres pode causar um entorpecimento místico. A pele perde cor e a pessoa sente emoções com menos intensidade, como se estivesse congelando por dentro.", 2,
-                " ", false, "Corte e Feitiço", "Ilusão e Hemorragia", true);
+        EventoDoencaFerimento toque = new EventoDoencaFerimento("Frostseidr", "O toque gelado de seus chifres pode causar um entorpecimento místico." +
+                "\nA pele perde cor e a pessoa sente emoções com menos intensidade, como se estivesse congelando por dentro.", 2,
+                "Criaturas são boas oportunidades para conseguir itens", true, "Corte e Feitiço", "Ilusão e Hemorragia", true);
         //Adicionando na lista conforme as probabilidades de cada Evento Descoberta:
         //Inicialmente, vou fazer uma Probabilidade Forçada Simples, com a mesma chance para todos os elementos:
         EventoDoencaFerimento[] listaEventosDoencaFerimento = {mordida, chifrada, contato, arranhao, olhar, toque};

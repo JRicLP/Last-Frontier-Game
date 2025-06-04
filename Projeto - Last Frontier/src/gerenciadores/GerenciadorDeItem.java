@@ -87,13 +87,13 @@ public class GerenciadorDeItem {
     public Arma gerarItemArmas(){
 
         //Objetos de armas:
-        Arma cajado = new Arma("Vetrkvistr - Cajado", 4,9,"Arma à distância",10,10);
-        Arma arco = new Arma("Naustrál - Arco",5,8,"Arma à distância",8,10);
-        Arma espada = new Arma("Deyðrblóð - Espada",7,9,"Arma corpo a corpo",10,2);
+        Arma cajado = new Arma("Vetrkvistr - Cajado", 4,9,"Arma à distância",15,10);
+        Arma arco = new Arma("Naustrál - Arco",5,8,"Arma à distância",10,10);
+        Arma espada = new Arma("Deyðrblóð - Espada",7,9,"Arma corpo a corpo",12,5);
         Arma lanca = new Arma("Skjalfheimr - Lança ",4,6,"Arma à distância",8,10);
-        Arma gancho = new Arma("Hyrndrgrip - Gancho",4,8,"Arma corpo a corpo",8,2);
-        Arma faca = new Arma("Kviðskera - Faca",4,9,"Arma corpo a corpo",9,2);
-        Arma escudo = new Arma("Vardstein - Escudo",5, 8, "Arma corpo a corpo", 4, 2);
+        Arma gancho = new Arma("Hyrndrgrip - Gancho",4,8,"Arma corpo a corpo",8,5);
+        Arma faca = new Arma("Kviðskera - Faca",4,9,"Arma corpo a corpo",7,5);
+        Arma escudo = new Arma("Vardstein - Escudo",5, 8, "Arma corpo a corpo", 4, 5);
 
         //O Randomizador de Armas deve ser tratado posteriormente!!
 
@@ -116,19 +116,19 @@ public class GerenciadorDeItem {
 
         //Objetos de Ferramentas:
         Ferramenta machado = new Ferramenta("Skallhjǫrr - Machado",7,9,"Um machado de duas lâminas negras, forjado com ferro retirado de túmulos de gigantes." +
-                "\n Dizem que ele nunca lasca e corta até através de magia. Vibrar com ele nas mãos causa calafrios… mesmo ao empunhador.",9);
+                "\nDizem que ele nunca lasca e corta até através de magia. Vibrar com ele nas mãos causa calafrios… mesmo ao empunhador.",9);
         Ferramenta picareta = new Ferramenta("Grjótkló - Picareta", 1,6,"Tem dentes de metal azulado, capazes de cortar qualquer rocha, até as encantadas." +
-                " Cada batida deixa um rastro cintilante que brilha por poucos segundos — útil em passagens escuras.",8);
+                "\nCada batida deixa um rastro cintilante que brilha por poucos segundos — útil em passagens escuras.",8);
         Ferramenta lanterna = new Ferramenta("Ljósmodir - Lanterna",2,8,"Uma lanterna de latão antigo que emite uma chama azulada, alimentada não por óleo," +
-                "\n mas por fragmentos de sonhos." +
+                "\nmas por fragmentos de sonhos." +
                 " Sua luz afasta ilusões, espectros e revela inscrições ocultas.",9);
         Ferramenta chave = new Ferramenta("Lásvísa - Chave",4,8,"Pequena e ornamentada, feita de prata viva. Molda-se a qualquer fechadura antiga," +
-                "\n mas só funciona uma vez por noite." +
+                "\nmas só funciona uma vez por noite." +
                 " Fala com seu portador em sussurros, revelando segredos das portas que abre.",9);
         Ferramenta martelo = new Ferramenta("Dundrhamarr - Martelo",4,8,"Um martelo de construção e combate que emite uma pancada seca sem som," +
-                "\n como se o ar se curvasse. Pode quebrar pedra sem eco — ideal para ruínas ou cavernas onde barulho atrairia horrores.",10);
+                "\ncomo se o ar se curvasse. Pode quebrar pedra sem eco — ideal para ruínas ou cavernas onde barulho atrairia horrores.",10);
         Ferramenta corda = new Ferramenta("Seidrreip - Corda",4,8,"Uma corda trançada com fios de pelo de criatura mágica e seda de aranha espiritual. Estica ou encolhe conforme a vontade do usuário." +
-                "\n Pode se firmar sozinha em superfícies ou prender inimigos brevemente." ,10);
+                "\nPode se firmar sozinha em superfícies ou prender inimigos brevemente." ,10);
 
         //Lista com os Objetos, utilizaremos uma probabilidade forçada:
         Ferramenta[] listaItensFerramentas = {machado, picareta, lanterna, chave, martelo, corda};
@@ -139,7 +139,7 @@ public class GerenciadorDeItem {
 
         //Aqui, estaremos a obter o elemento da lista que foi sorteado, iremos mostrar ao usuário nome, eficiência e descrição
         Ferramenta ferramentaSorteada = listaItensFerramentas[indiceSorteado];
-        System.out.println("Você achou " + ferramentaSorteada.getNomeItem()  + " - Eficiência:" + ferramentaSorteada.getEficienciaFerramenta());
+        System.out.println("Você achou " + ferramentaSorteada.getNomeItem()  + " - Eficiência: " + ferramentaSorteada.getEficienciaFerramenta());
         System.out.println("Tipo da Ferramenta: "  + ferramentaSorteada.getTipoFerramenta());
         return ferramentaSorteada;
     }

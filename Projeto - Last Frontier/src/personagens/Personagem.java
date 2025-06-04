@@ -9,7 +9,7 @@ import gerenciadores.GerenciadorDeItem;
 
 public abstract class Personagem implements AcoesPersonagens {
 
-    //Atributos da superclasse:
+    //Atributos da Superclasse:
     private String nomePersonagem;
     private int vidaPersonagem;
     private int fomePersonagem;
@@ -17,7 +17,7 @@ public abstract class Personagem implements AcoesPersonagens {
     private int energiaPersonagem;
     private int sanidadePersonagem;
 
-    //Atributos para os valores máximos/iniciais dos status
+    //Atributos para os valores máximos/iniciais dos status:
     private int vidaInicialPersonagem;
     private int fomeInicialPersonagem;
     private int sedeInicialPersonagem;
@@ -26,7 +26,7 @@ public abstract class Personagem implements AcoesPersonagens {
 
     //Atributos especiais:
     private Inventario inventarioPersonagem;
-    private String localizacaoPersonagem; //Nome do ambiente atual
+    private String localizacaoPersonagem;
     private boolean contaminacaoPersonagem;
 
     //Novo atributo para o sistema de Habilidade Especial:
@@ -51,8 +51,8 @@ public abstract class Personagem implements AcoesPersonagens {
         this.energiaInicialPersonagem = energiaInicial;
         this.energiaPersonagem = energiaInicial;
 
-        this.contaminacaoPersonagem = false; //Padrão
-        this.habilidadeEspecialJaUsada = false; //Padrão
+        this.contaminacaoPersonagem = false;
+        this.habilidadeEspecialJaUsada = false;
 
     }
 
@@ -84,7 +84,7 @@ public abstract class Personagem implements AcoesPersonagens {
     public boolean getContaminacaoPersonagem() { return contaminacaoPersonagem; }
     public void setContaminacaoPersonagem(boolean contaminacaoPersonagem) { this.contaminacaoPersonagem = contaminacaoPersonagem; }
 
-    // Getters para os status INICIAIS/MÁXIMOS (importantes para cura/restauração com teto):
+    //Getters para os status Iniciais/Maximos:
     public int getVidaInicialPersonagem() { return vidaInicialPersonagem; }
     public void setVidaInicialPersonagem(int vidaInicialPersonagem) { this.vidaInicialPersonagem = vidaInicialPersonagem; }
 

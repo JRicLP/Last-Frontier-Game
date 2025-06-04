@@ -7,16 +7,16 @@ import gerenciadores.GerenciadorDeItem;
 
 public class Infiltrador extends Personagem {
 
-    //Atributos da classe:
+    //Atributos da Classe:
     private String descricaoHabilidadeClasse;
 
-    //Metodo construtor:
+    //Metodo Construtor:
     public Infiltrador(String descricaoHabilidadeClasseEntrada) {
         super("Malik Ghost - O Fantasma da Sombra", 85, 70, 70, 90, 100);
         this.descricaoHabilidadeClasse = descricaoHabilidadeClasseEntrada;
     }
 
-    //Metodos acessores para a descrição da habilidade da classe:
+    //Metodos Acessores para a descrição da Habilidade da classe:
     public String getDescricaoHabilidadeClasse() {
         return descricaoHabilidadeClasse;
     }
@@ -25,7 +25,7 @@ public class Infiltrador extends Personagem {
         this.descricaoHabilidadeClasse = descricaoHabilidadeClasse;
     }
 
-    // --- Implementação dos Métodos Abstratos da Habilidade Especial ---
+    //Implementação dos Métodos Abstratos da Habilidade Especial:
     @Override
     public String getNomeHabilidadeEspecial() {
         return "Manto Etéreo";
@@ -39,7 +39,7 @@ public class Infiltrador extends Personagem {
         System.out.println(this.getNomePersonagem() + " ativa o " + getNomeHabilidadeEspecial() + "!");
 
         if (criaturaAlvo != null && criaturaAlvo.getVidaCriatura() > 0) {
-            //Existência da Criatura para tu espacar
+            //Existência da Criatura para tu escapar
             System.out.println("Você se dissolve nas sombras, escapando de " + criaturaAlvo.getNomeEvento() + " sem deixar rastros!");
             return true;
         } else {

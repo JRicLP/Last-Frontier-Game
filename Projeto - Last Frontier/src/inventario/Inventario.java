@@ -154,7 +154,7 @@ public class Inventario implements AcoesInventario {
     //Métodos para o Sistema de Craft:
     public boolean temItem(String nomeItem, int quantidadeNecessaria) { //Paola, estou usando boolean para melhorar o retorno das validações
         if (nomeItem == null || quantidadeNecessaria <= 0) {
-            return false; // Não faz sentido procurar por quantidade nula/negativa ou nome nulo
+            return false; //Não faz sentido procurar por quantidade nula/negativa ou nome nulo
         }
         int contador = 0;
         for (Item item : this.listaItens) {
@@ -170,59 +170,56 @@ public class Inventario implements AcoesInventario {
             return false;
         }
 
-        // Primeiro, verificamos se realmente temos o suficiente (dupla checagem é segura)
+        //Primeiro, verificamos se realmente temos o suficiente:
         if (!temItem(nomeItem, quantidadeParaRemover)) {
-            System.out.println("DEBUG: Tentativa de remover " + nomeItem + " falhou na verificação interna de quantidade."); // Para debug
+            System.out.println("Tentativa de remover " + nomeItem + " falhou na verificação interna de quantidade.");
             return false;
         }
 
         int removidos = 0;
-        // Usar um Iterator é mais seguro para remover enquanto itera sobre uma ArrayList
+        //Usar um Iterator é mais seguro para remover enquanto itera sobre uma ArrayList:
         Iterator<Item> iterador = this.listaItens.iterator();
         while (iterador.hasNext()) {
             if (removidos >= quantidadeParaRemover) {
-                break; // Já removemos o suficiente
+                break;
             }
             Item itemAtual = iterador.next();
             if (itemAtual.getNomeItem().equals(nomeItem)) {
-                this.setPesoSuportado(this.getPesoSuportado() + itemAtual.getPesoItem()); // Ajusta o peso
-                iterador.remove(); // Remove o item de forma segura
+                this.setPesoSuportado(this.getPesoSuportado() + itemAtual.getPesoItem());
+                iterador.remove();
                 removidos++;
             }
         }
-
-        // Confirma se o número correto foi removido. Deveria ser sempre true se temItem() passou.
+        //Confirmando se o número correto foi removido. Deve ser sempre true se temItem() passou.
         return removidos == quantidadeParaRemover;
     }
 
     public boolean removerIngredientes(Map<String, Integer> ingredientesNecessarios) {
         if (ingredientesNecessarios == null || ingredientesNecessarios.isEmpty()) {
-            return true; // Nenhum ingrediente para remover, considera sucesso
+            return true; //Nenhum ingrediente para remover
         }
 
-        // Passo 1: Verificar se TODOS os ingredientes estão disponíveis nas quantidades necessárias
+        //1: Verificando se os ingredientes estão disponíveis nas quantidades necessárias:
         for (Map.Entry<String, Integer> entrada : ingredientesNecessarios.entrySet()) {
             String nomeIngrediente = entrada.getKey();
             int quantidadeRequerida = entrada.getValue();
             if (!temItem(nomeIngrediente, quantidadeRequerida)) {
-                System.out.println("DEBUG: Falta ingrediente para construção: " + nomeIngrediente + ", necessário: " + quantidadeRequerida); // Para debug
-                return false; // Se um único ingrediente faltar, a operação inteira falha
+                System.out.println("Falta ingrediente para construção: " + nomeIngrediente + ", necessário: " + quantidadeRequerida);
+                return false; //Se um único ingrediente faltar, a operação inteira falha
             }
         }
 
-        // Passo 2: Se todos os ingredientes foram verificados, proceder com a remoção
+        //2: Se todos os ingredientes foram verificados, proceder com a remoção:
         for (Map.Entry<String, Integer> entrada : ingredientesNecessarios.entrySet()) {
             String nomeIngrediente = entrada.getKey();
             int quantidadeRequerida = entrada.getValue();
-            // Aqui, esperamos que removerItemPorNomeEQuantidade retorne true,
-            // pois já verificamos com temItem.
+            //Aqui, esperamos que removerItemPorNomeEQuantidade retorne true, pois já verificamos com temItem.
             if (!removerItemPorNomeEQuantidade(nomeIngrediente, quantidadeRequerida)) {
-                // Isso indicaria um problema de lógica ou estado inconsistente se chegarmos aqui.
-                // Por simplicidade, se isso acontecer, a construção falhou parcialmente.
-                System.err.println("ERRO CRÍTICO: Falha ao remover '" + nomeIngrediente + "' após verificação. Inventário pode estar inconsistente.");
-                return false; // Indica falha
+                //Se chegar aqui, então a construção falhou parcialmente.
+                System.err.println("Falha ao remover '" + nomeIngrediente + "' após verificação. Inventário pode estar inconsistente.");
+                return false;
             }
         }
-        return true; // Todos os ingredientes foram removidos com sucesso
+        return true; //Todos os ingredientes foram removidos com sucesso
     }
 }

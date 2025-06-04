@@ -142,6 +142,7 @@ public class Main {
 
             switch (comando) {
                 case "1": // Explorar
+                    System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
                     System.out.println("Você explora os arredores...");
                     personagemEscolhido.setEnergiaPersonagem(personagemEscolhido.getEnergiaPersonagem() - 8);
                     personagemEscolhido.setFomePersonagem(personagemEscolhido.getFomePersonagem() - 8);
@@ -149,6 +150,7 @@ public class Main {
                     personagemEscolhido.setSanidadePersonagem(personagemEscolhido.getSanidadePersonagem() - 5);
 
                     System.out.println("Eventos ocorrem durante a exploração:");
+                    System.out.println("---");
                     eventoClimaticoAtual = gerenciadorDeEvento.gerarEventosClimaticos(ambienteAtual);
 
                     if (eventoClimaticoAtual != null) {
@@ -170,12 +172,15 @@ public class Main {
                     eventoDescobertaAtual = null; //Limpa descoberta anterior para não reprocessar
 
                     if ((contadorTurnos + 1) % 4 == 0 && contadorTurnos > 0) {
+                        System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
                         System.out.println("Sua exploração atenta revela algo interessante!");
-                        eventoDescobertaAtual = gerenciadorDeEvento.gerarEventosDescoberta(); // Gera SOMENTE no turno certo
+                        eventoDescobertaAtual = gerenciadorDeEvento.gerarEventosDescoberta();
+
 
                         if (eventoDescobertaAtual != null) {
                             String recursosString = eventoDescobertaAtual.getRecursoEncontrado();
                             System.out.println("Parece conter: " + recursosString);
+                            System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
 
                             ArrayList<Item> itensDaDescoberta = new ArrayList<>();
                             //Drop de acordo com o conteúdo da Descoberta:
@@ -200,17 +205,17 @@ public class Main {
                                     String decisaoPegar = usuario.nextLine().trim();
                                     if (decisaoPegar.equalsIgnoreCase("s")) {
                                         if (inventarioPersonagem.adicionarItem(itemAchado)) {
-                                            System.out.println(itemAchado.getNomeItem() + " foi adicionado ao seu inventário.");
+                                            System.out.println("Você guarda a recompensa da exploração cuidadosamente.");
                                         } else {
-                                            System.out.println("Não foi possível adicionar " + itemAchado.getNomeItem() + ". Inventário cheio ou pesado demais.");
+                                            System.out.println("Talvez seja melhor rever o seu gerenciamento de recursos.");
                                         }
                                     } else {
-                                        System.out.println("Você deixou " + itemAchado.getNomeItem() + " para trás.");
+                                        System.out.println("Você deixou " + itemAchado.getNomeItem() + " para trás...");
                                     }
                                 }
                             }
-                        } else { // Se gerenciadorDeEvento.gerarEventosDescoberta() retornou null no turno certo
-                            System.out.println("Sua exploração não revelou nenhuma descoberta especial desta vez.");
+                        } else {
+                            System.out.println("Talvez em uma próxima exploração...");
                         }
                         System.out.println("---");
                     }
@@ -226,76 +231,93 @@ public class Main {
                 case "2": // Atacar Criatura
                     if (eventoCriaturaAtual == null || eventoCriaturaAtual.getVidaCriatura() <= 0) {
                         System.out.println("Não há nenhuma criatura para atacar no momento.");
-                        continue;
-                    }
-
-                    System.out.println("Você se prepara para enfrentar: " + eventoCriaturaAtual.getNomeEvento() + " (Vida: " + eventoCriaturaAtual.getVidaCriatura() + ")");
-                    System.out.println("Antes de atacar, selecione uma Arma do seu inventário!");
-                    inventarioPersonagem.mostrarInventario();
-                    System.out.print("Digite o índice da Arma (começando em 0) ou -1 para reconsiderar: ");
-
-                    int indiceArmaSelecionada;
-                    if (usuario.hasNextInt()) {
-                        indiceArmaSelecionada = usuario.nextInt();
-                        usuario.nextLine();
-                    } else {
-                        System.out.println("Entrada de índice inválida. Ação cancelada.");
-                        usuario.nextLine();
-                        continue;
-                    }
-
-                    if (indiceArmaSelecionada == -1) {
-                        System.out.println("Você decide não atacar desta vez.");
-                        continue;
-                    }
-
-                    Item itemEscolhido = inventarioPersonagem.getItemPeloIndice(indiceArmaSelecionada);
-
-                    if (itemEscolhido instanceof Arma armaRealSelecionada) {
-                        // Dentro deste bloco, armaRealSelecionada JÁ É DO TIPO Arma
-                        System.out.println("Você empunha sua " + armaRealSelecionada.getNomeItem() + ".");
                         System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
-                        armaRealSelecionada.atacar(personagemEscolhido, eventoCriaturaAtual, usuario, ambienteAtual);
+                        continue;
+                    }
 
-                        // --- INÍCIO: Lógica Pós-combate e Recompensa ---
-                        if (eventoCriaturaAtual != null && eventoCriaturaAtual.getVidaCriatura() <= 0) { //Vou deixar essa segunda verificação por segurança
-                            System.out.println("\n>> O corpo de " + eventoCriaturaAtual.getNomeEvento() + " jaz imóvel. O perigo passou, por ora. <<");
+                    System.out.println("Você se prepara para enfrentar: " + eventoCriaturaAtual.getNomeEvento() +
+                            " (Vida: " + eventoCriaturaAtual.getVidaCriatura() +
+                            " | Dano: " + eventoCriaturaAtual.getDanoCriatura() +
+                            " | Distância: " + eventoCriaturaAtual.getDistanciaCriatura() + ")");
 
-                            System.out.println("Você vasculha os restos de " + eventoCriaturaAtual.getNomeEvento() + " por algo de valor...");
-                            Item recompensaDropada = gerenciadorDeItem.gerarItemAleatorioGlobal();
+                    Arma armaRealSelecionada = null;
+                    boolean ataqueCanceladoPeloJogador = false;
 
-                            if (recompensaDropada != null) {
-                                System.out.print("Nos restos da criatura, você encontrou " + recompensaDropada.getNomeItem() + "! Deseja pegar? (s/n): ");
-                                String pegarRecompensa = usuario.nextLine().trim();
-                                if (pegarRecompensa.equalsIgnoreCase("s")) {
-                                    if (inventarioPersonagem.adicionarItem(recompensaDropada)) {
-                                        System.out.println(recompensaDropada.getNomeItem() + " adicionado ao inventário.");
-                                    } else {
-                                        System.out.println("Inventário cheio ou item muito pesado. Não foi possível pegar " + recompensaDropada.getNomeItem() + ".");
-                                    }
-                                } else {
-                                    System.out.println("Você deixou a recompensa para trás.");
+                    // Loop para seleção de arma
+                    while (true) {
+                        System.out.println("\nAntes de atacar, selecione uma Arma do seu inventário!");
+                        inventarioPersonagem.mostrarInventario();
+                        System.out.print("Digite o índice da Arma (começando em 0) ou -1 para cancelar o ataque: ");
+
+                        int indiceArmaInput;
+                        if (usuario.hasNextInt()) {
+                            indiceArmaInput = usuario.nextInt();
+                            usuario.nextLine();
+
+                            if (indiceArmaInput == -1) {
+                                System.out.println("Você decidiu não atacar desta vez.");
+                                ataqueCanceladoPeloJogador = true;
+                                break;
+                            }
+
+                            Item itemEscolhidoLoop = inventarioPersonagem.getItemPeloIndice(indiceArmaInput);
+
+                            if (itemEscolhidoLoop instanceof Arma) {
+                                armaRealSelecionada = (Arma) itemEscolhidoLoop;
+                                break;
+                            } else {
+                                System.out.println("O item no índice " + indiceArmaInput + " não é uma Arma ou o índice é inválido. Tente novamente.");
+                            }
+                        } else {
+                            System.out.println("Entrada de índice inválida. Por favor, digite um número. Tente novamente.");
+                            usuario.nextLine();
+                        }
+                        System.out.println();
+                    }
+                    //Fim do loop de seleção de arma
+
+                    if (ataqueCanceladoPeloJogador) {
+                        //Se o jogador cancelou ou se, por algum motivo, nenhuma arma foi selecionada:
+                        System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
+                        continue;
+                    }
+
+                    //Se chegou aqui, uma arma válida foi selecionada e o ataque não foi cancelado.
+                    System.out.println("Você empunha sua " + armaRealSelecionada.getNomeItem() + ".");
+                    System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
+
+                    //A partir daqui, se inicia a dinâmica de ataque:
+                    armaRealSelecionada.atacar(personagemEscolhido, eventoCriaturaAtual, usuario, ambienteAtual);
+
+                    //Lógica Pós-combate e Recompensa:
+                    if (eventoCriaturaAtual != null && eventoCriaturaAtual.getVidaCriatura() <= 0) { //Vou optar por deixar a segunda verificação para evitar Bugs
+                        System.out.println("\n>> O corpo de " + eventoCriaturaAtual.getNomeEvento() + " jaz imóvel. O perigo passou, por ora. <<");
+                        System.out.println("Você vasculha os restos de " + eventoCriaturaAtual.getNomeEvento() + " por algo de valor...");
+                        Item recompensaDropada = gerenciadorDeItem.gerarItemAleatorioGlobal();
+                        if (recompensaDropada != null) {
+                            System.out.print("Deseja pegar " + recompensaDropada.getNomeItem() + "? (s/n): ");
+                            String pegarRecompensa = usuario.nextLine().trim();
+                            if (pegarRecompensa.equalsIgnoreCase("s")) {
+                                if (inventarioPersonagem.adicionarItem(recompensaDropada)) {
+                                    System.out.println("Você guarda a recompensa da exploração cuidadosamente.");
                                 }
                             } else {
-                                System.out.println("Não havia nada de útil para recuperar dos restos da criatura.");
+                                System.out.println("Você deixou a recompensa para trás.");
                             }
-                            System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
-
-                            eventoCriaturaAtual = null;
-                            turnosDesdeEncontroCriatura = -1;
+                        } else {
+                            System.out.println("Talvez em um outro momento...");
                         }
-                        // --- FIM: Lógica Pós-combate e Recompensa ---
-
-                        if (personagemEscolhido.getVidaPersonagem() <= 0) {
-                            personagemVivo = false;
-                        }
-                        if (armaRealSelecionada.getDurabilidadeItem() <= 0) {
-                            System.out.println("Sua arma " + armaRealSelecionada.getNomeItem() + " quebrou com o esforço da batalha!");
-                            inventarioPersonagem.descartarItem(armaRealSelecionada);
-                        }
-
-                    } else {
-                        System.out.println("O item no índice " + indiceArmaSelecionada + " não é uma Arma ou o índice é inválido!");
+                        System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
+                        eventoCriaturaAtual = null;
+                        turnosDesdeEncontroCriatura = -1;
+                    }
+                    //Fim da Lógica Pós-combate e Recompensa
+                    if (personagemEscolhido.getVidaPersonagem() <= 0) {
+                        personagemVivo = false;
+                    }
+                    if (armaRealSelecionada.getDurabilidadeItem() <= 0) {
+                        System.out.println("Sua arma " + armaRealSelecionada.getNomeItem() + " quebrou com o esforço da batalha!");
+                        inventarioPersonagem.descartarItem(armaRealSelecionada);
                     }
                     System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
                     personagemEscolhido.statusPersonagem();
@@ -408,8 +430,7 @@ public class Main {
                             break;
                     }
                     System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
-                    personagemEscolhido.statusPersonagem();
-                    break;
+                    continue;
 
                 case "4": // Ver status
                     personagemEscolhido.statusPersonagem();
@@ -428,7 +449,7 @@ public class Main {
                         int energiaAntes = personagemEscolhido.getEnergiaPersonagem();
                         int sanidadeAntes = personagemEscolhido.getSanidadePersonagem();
 
-                        // Aplicar benefícios do descanso
+                        // Aplicando benefícios do descanso:
                         int energiaGanha = 20;
                         int sanidadeGanha = 10;
 
@@ -442,7 +463,7 @@ public class Main {
                             personagemEscolhido.setSanidadePersonagem(personagemEscolhido.getSanidadeInicialPersonagem());
                         }
 
-                        // Aplicar custos do descanso
+                        //Aplicando custos do descanso:
                         int fomeConsumida = 8;
                         int sedeConsumida = 8;
 
@@ -467,15 +488,14 @@ public class Main {
                         System.out.println("  - Sede consumida: " + sedeConsumida + " (Restante: " + personagemEscolhido.getSedePersonagem() + "/" + personagemEscolhido.getSedeInicialPersonagem() + ")");
 
                         System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
-                        personagemEscolhido.statusPersonagem(); // Mostra o status completo após o descanso efetivo
-                        break; // O turno é consumido porque o descanso (com seus custos e benefícios) ocorreu
+                        personagemEscolhido.statusPersonagem();
+                        break;
 
                     } else {
                         System.out.println("Você já está com sua energia e sanidade no máximo.");
                         System.out.println("Descansar mais não traria benefícios agora, então você decide poupar suas provisões e seguir em frente.");
                         System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
-                        // Não é necessário mostrar o statusPersonagem() novamente aqui, pois ele já foi mostrado no início do turno e nada mudou.
-                        continue; // NÃO consome o turno principal, o jogador pode escolher outra ação.
+                        continue;
                     }
 
                 case "6": // Usar Habilidade Especial
@@ -492,7 +512,6 @@ public class Main {
                         String confirmarHabilidade = usuario.nextLine().trim();
 
                         if (confirmarHabilidade.equalsIgnoreCase("s")) {
-                            //Chamando o metodo da subclasse específica de Personagem
                             boolean sucessoAoAtivar = personagemEscolhido.ativarHabilidadeEspecial(eventoCriaturaAtual,ambienteAtual,gerenciadorDeItem,inventarioPersonagem);
 
                             if (sucessoAoAtivar) {

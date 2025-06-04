@@ -10,16 +10,16 @@ import gerenciadores.GerenciadorDeItem;
 
 public class Pirata extends Personagem {
 
-    //Atributos da classe:
+    //Atributos da Classe:
     private String descricaoHabilidadeClasse;
 
-    //Metodo construtor:
+    //Metodo Construtor:
     public Pirata(String descricaoHabilidadeClasseEntrada) {
         super("Scarlet Tempest - A Pirata Infame",100,90,90,70,100);
         this.descricaoHabilidadeClasse = descricaoHabilidadeClasseEntrada;
     }
 
-    //Metodos acessores para a descrição da habilidade da classe:
+    //Metodos acessores para a descrição da Habilidade da classe:
     public String getDescricaoHabilidadeClasse() {
         return descricaoHabilidadeClasse;
     }
@@ -28,7 +28,7 @@ public class Pirata extends Personagem {
         this.descricaoHabilidadeClasse = descricaoHabilidadeClasse;
     }
 
-    // --- Implementação dos Métodos Abstratos da Habilidade Especial ---
+    //Implementação dos Métodos Abstratos da Habilidade Especial:
     @Override
     public String getNomeHabilidadeEspecial() {
         return "Pilhagem Afortunada";
@@ -46,7 +46,7 @@ public class Pirata extends Personagem {
 
         boolean algoAdicionado = false;
 
-        //Item 1: Um alimento de alta qualidade:
+        //Item 1: Um alimento bom:
         Alimento alimentoValioso = new Alimento("Pote de Vaelra (Pilhagem)", 3, 6, 20, "Pote de Vaelra", 10);
         System.out.println("Você 'encontra' um " + alimentoValioso.getNomeItem() + "!");
         if (inventarioPersonagem.adicionarItem(alimentoValioso)) {
@@ -55,7 +55,7 @@ public class Pirata extends Personagem {
             System.out.println("...mas seu inventário está cheio para o " + alimentoValioso.getNomeItem() + ".");
         }
 
-        //Item 2: Agua de boa qualidade:
+        //Item 2: Agua boa:
         Agua aguaBoa = new Agua("Cantil de Rum... digo, Água Fresca (Pilhagem)", 1, 10, 9, 5);
         System.out.println("Você também 'descobre' um " + aguaBoa.getNomeItem() + "!");
         if (inventarioPersonagem.adicionarItem(aguaBoa)) {
@@ -64,7 +64,7 @@ public class Pirata extends Personagem {
             System.out.println("...mas seu inventário está cheio para o " + aguaBoa.getNomeItem() + ".");
         }
 
-        //Item 3: Um material aleatório:
+        //Item 3: Um material aleatorio:
         System.out.println("E parece que havia mais alguma coisa...");
         Item materialExtra = gerenciadorDeItem.gerarItemMateriais();
         if (materialExtra != null) {

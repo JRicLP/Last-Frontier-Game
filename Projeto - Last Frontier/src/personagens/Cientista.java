@@ -12,15 +12,14 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Cientista extends Personagem {
-    //Atributos da classe:
+    //Atributos da Classe:
     private String descricaoHabilidadeClasse;
-    //Metodo construtor:
+    //Metodo Construtor:
     public Cientista(String descricaoHabilidadeClasseEntrada) {
         super("GearHead Martinez - O Cientista Criativo", 80, 90, 90, 100, 100);
         this.descricaoHabilidadeClasse = descricaoHabilidadeClasseEntrada;
-        //O inventário e localização são definidos externamente pelo Main.
     }
-    //Metodos acessores para a descrição da habilidade da classe:
+    //Metodos Acessores para a descrição da Habilidade da classe:
     public String getDescricaoHabilidadeClasse() {
         return descricaoHabilidadeClasse;
     }
@@ -71,8 +70,7 @@ public class Cientista extends Personagem {
         }
         if (escolhaIndiceRelativo >= 0 && escolhaIndiceRelativo < itensReparaveis.size()) {
             Item itemEscolhidoParaReparo = itensReparaveis.get(escolhaIndiceRelativo);
-            int durabilidadeRestaurada = itemEscolhidoParaReparo.getDurabilidadeItem() + 25; // Exemplo: adiciona 25
-            //Não vou usar sistema de durabilidade máxima
+            int durabilidadeRestaurada = itemEscolhidoParaReparo.getDurabilidadeItem() + 25;
             System.out.println("Reparando " + itemEscolhidoParaReparo.getNomeItem() + " de " + itemEscolhidoParaReparo.getDurabilidadeItem() + " para " + durabilidadeRestaurada + "...");
             itemEscolhidoParaReparo.setDurabilidadeItem(durabilidadeRestaurada);
             System.out.println(itemEscolhidoParaReparo.getNomeItem() + " foi reparado! Durabilidade atual: " + itemEscolhidoParaReparo.getDurabilidadeItem());

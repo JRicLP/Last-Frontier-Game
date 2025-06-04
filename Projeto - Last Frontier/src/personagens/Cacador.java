@@ -7,16 +7,16 @@ import inventario.Inventario;
 
 public class Cacador extends Personagem {
 
-    //Atributos da classe:
+    //Atributos da Classe:
     private String descricaoHabilidadeClasse;
 
-    //Metodo construtor:
+    //Metodo Construtor:
     public Cacador(String descricaoHabilidadeClasseEntrada) {
         super("Flynn Tracker - A Presa Sombria",100,100,80,75,90);
         this.descricaoHabilidadeClasse = descricaoHabilidadeClasseEntrada;
     }
 
-    //Metodos acessores para a descrição da habilidade da classe:
+    //Metodos Acessores para a descrição da Habilidade da classe:
     public String getDescricaoHabilidadeClasse() {
         return descricaoHabilidadeClasse;
     }
@@ -25,7 +25,7 @@ public class Cacador extends Personagem {
         this.descricaoHabilidadeClasse = descricaoHabilidadeClasse;
     }
 
-    // --- Implementação dos Métodos Abstratos da Habilidade Especial ---
+    //Implementação dos Métodos Abstratos da Habilidade Especial:
     @Override
     public String getNomeHabilidadeEspecial() {
         return "Golpe Certeiro do Predador";

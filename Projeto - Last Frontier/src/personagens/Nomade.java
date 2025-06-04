@@ -7,16 +7,16 @@ import gerenciadores.GerenciadorDeItem;
 
 public class Nomade extends Personagem {
 
-    //Atributos da classe:
+    //Atributos da Classe:
     private String descricaoHabilidadeClasse;
 
-    //Metodo construtor:
+    //Metodo Construtor:
     public Nomade(String descricaoHabilidadeClasseEntrada) {
         super("Jack Nomad - O Nômade Rústico", 100,100,100,80,80);
         this.descricaoHabilidadeClasse = descricaoHabilidadeClasseEntrada;
     }
 
-    //Metodos acessores para a descrição da habilidade da classe:
+    //Metodos Acessores para a descrição da Habilidade da classe:
     public String getDescricaoHabilidadeClasse() {
         return descricaoHabilidadeClasse;
     }
@@ -25,7 +25,7 @@ public class Nomade extends Personagem {
         this.descricaoHabilidadeClasse = descricaoHabilidadeClasse;
     }
 
-    // --- Implementação dos Métodos Abstratos da Habilidade Especial ---
+    //Implementação dos Métodos Abstratos da Habilidade Especial:
     @Override
     public String getNomeHabilidadeEspecial() {
         return "Bênção da Resiliência";
@@ -40,7 +40,7 @@ public class Nomade extends Personagem {
     public boolean ativarHabilidadeEspecial(EventoCriatura criaturaAlvo, Ambiente ambienteAtual, GerenciadorDeItem gerenciadorDeItem, Inventario inventarioPersonagem) {
         System.out.println(this.getNomePersonagem() + " invoca a " + getNomeHabilidadeEspecial() + "!");
         System.out.println("Uma onda de energia vital percorre seu corpo, vinda da sua incrível adaptabilidade...");
-        //Restaura todos os status para o máximo:
+        //Restaurando todos os status para o máximo:
         this.setVidaPersonagem(this.getVidaInicialPersonagem());
         this.setFomePersonagem(this.getFomeInicialPersonagem());
         this.setSedePersonagem(this.getSedeInicialPersonagem());

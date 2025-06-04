@@ -24,7 +24,7 @@ public class Arma extends Item implements AcoesArmas {
         this.alcanceArma = alcanceArma;
     }
 
-    //Metodos acessores (existentes):
+    //Metodos acessores:
     public String getTipoArma(){ return tipoArma; }
     public void setTipoArma(String tipoArma){ this.tipoArma = tipoArma; }
     public int getDanoArma(){ return danoArma; }
@@ -59,10 +59,16 @@ public class Arma extends Item implements AcoesArmas {
 
             switch (opcaoUsuario) {
                 case "1": // Atacar
+                    System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
                     System.out.println("Você desferiu um ataque certeiro em " + criaturaAtacada.getTipoCriatura() + " e seu sangue jorrou!");
                     System.out.println("Seu ataque causou " + this.getDanoArma() + " de dano!");
                     criaturaAtacada.setVidaCriatura(criaturaAtacada.getVidaCriatura() - this.getDanoArma());
-                    System.out.println("Vida da criatura: " + criaturaAtacada.getVidaCriatura());
+                    if (criaturaAtacada.getVidaCriatura() >= 0) {
+                        System.out.println("Vida da criatura: " + criaturaAtacada.getVidaCriatura());
+                    } else {
+                        System.out.println("Vida da criatura: " + 0);
+                    }
+                    System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
 
                     this.setDurabilidadeItem(this.getDurabilidadeItem() - 2);
                     if (this.getDurabilidadeItem() <= 0) {
@@ -70,26 +76,31 @@ public class Arma extends Item implements AcoesArmas {
                     }
 
                     if (criaturaAtacada.getVidaCriatura() <= 0) {
-                        combateAtivo = false; // Criatura derrotada
-                        break; //Sai do switch, o loop while verificará a condição e terminará
+                        combateAtivo = false; //Criatura derrotada
+                        break; //Sai do switch, o loop while verifica a condição e termina
                     }
 
                     //Criatura atacando de volta:
+                    System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
                     System.out.println("A criatura (" + criaturaAtacada.getNomeEvento() + ") atacou você de volta, e causou: " + criaturaAtacada.getDanoCriatura() + " de dano, cuidado!!");
                     personagemEscolhido.setVidaPersonagem(personagemEscolhido.getVidaPersonagem() - criaturaAtacada.getDanoCriatura());
                     System.out.println("Sua vida: " + personagemEscolhido.getVidaPersonagem());
-
+                    System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
                     if (personagemEscolhido.getVidaPersonagem() > 0) { //Só aplica se o personagem sobreviveu ao dano direto
                         EventoDoencaFerimento efeitoColateral = criaturaAtacada.getEfeitoColateralAtaque();
                         if (efeitoColateral != null) {
                             //Adicionando uma chance de aplicar o efeito:
                             Random rng = new Random();
-                            int chanceDeAplicarEfeito = 50; // Ex: 50% de chance
+                            int chanceDeAplicarEfeito = 50; //50% de chance
                             if (rng.nextInt(100) < chanceDeAplicarEfeito) {
+                                System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
                                 System.out.println("O ataque da criatura parece ter deixado um efeito nocivo...");
                                 efeitoColateral.executar(personagemEscolhido, ambienteAtual);
+                                System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
                             } else {
+                                System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
                                 System.out.println("Você conseguiu evitar o pior do ataque da criatura!");
+                                System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
                             }
                         }
                     }
@@ -98,13 +109,14 @@ public class Arma extends Item implements AcoesArmas {
                     personagemEscolhido.setEnergiaPersonagem(personagemEscolhido.getEnergiaPersonagem() - 3);
                     personagemEscolhido.setFomePersonagem(personagemEscolhido.getFomePersonagem() - 3);
                     personagemEscolhido.setSedePersonagem(personagemEscolhido.getSedePersonagem() - 3);
-
-                    System.out.println("\nStatus de Batalha:");
+                    System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
+                    System.out.println("Status de Batalha:");
                     System.out.println("Vida: " + personagemEscolhido.getVidaPersonagem() + "/" + personagemEscolhido.getVidaInicialPersonagem());
                     System.out.println("Energia: " + personagemEscolhido.getEnergiaPersonagem() + "/" + personagemEscolhido.getEnergiaInicialPersonagem());
                     System.out.println("Fome: " + personagemEscolhido.getFomePersonagem() + "/" + personagemEscolhido.getFomeInicialPersonagem());
                     System.out.println("Sede: " + personagemEscolhido.getSedePersonagem() + "/" + personagemEscolhido.getSedeInicialPersonagem());
                     System.out.println("Durabilidade da Arma (" + this.getNomeItem() + "): " + this.getDurabilidadeItem());
+                    System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
 
                     if (personagemEscolhido.getVidaPersonagem() <= 0) {
                         System.out.println("A Criatura desferiu um golpe fatal e você morreu!!");
@@ -113,7 +125,9 @@ public class Arma extends Item implements AcoesArmas {
                     break;
 
                 case "2": // Fugir
+                    System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
                     System.out.println("Você está fugindo do combate!!");
+                    System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
                     combateAtivo = false;
                     break;
 
@@ -124,9 +138,9 @@ public class Arma extends Item implements AcoesArmas {
         }
         // Fim do while de combate
 
-        // Mensagens de Resultado do Combate:
+        //Mensagens de Resultado do Combate:
         if (criaturaAtacada.getVidaCriatura() <= 0 && personagemEscolhido.getVidaPersonagem() > 0) {
-            System.out.println("Você venceu o combate e derrotou a criatura " + criaturaAtacada.getTipoCriatura() + " (" + criaturaAtacada.getNomeEvento() + ")!");
+            System.out.println("Você venceu o combate e derrotou " + criaturaAtacada.getTipoCriatura() + " (" + criaturaAtacada.getNomeEvento() + ")!");
         } else if (personagemEscolhido.getVidaPersonagem() <= 0) {
             System.out.println("Você foi derrotado em combate...");
         } else if (!combateAtivo) { //Chega aqui se fugiu e ambos estão vivos

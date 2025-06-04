@@ -9,16 +9,16 @@ import gerenciadores.GerenciadorDeItem;
 
 public class Explorador extends Personagem {
 
-    //Atributos da classe:
+    //Atributos da Classe:
     private String descricaoHabilidadeClasse;
 
-    //Metodo construtor
+    //Metodo Construtor
     public Explorador(String descricaoHabilidadeClasseEntrada) {
         super("Virgil Explorer - O Explorador Indomável", 90, 100, 100,75, 80);
         this.descricaoHabilidadeClasse = descricaoHabilidadeClasseEntrada;
     }
 
-    //Metodos acessores para a descrição da habilidade da classe:
+    //Metodos Acessores para a descrição da Habilidade da classe:
     public String getDescricaoHabilidadeClasse() {
         return descricaoHabilidadeClasse;
     }
@@ -27,7 +27,7 @@ public class Explorador extends Personagem {
         this.descricaoHabilidadeClasse = descricaoHabilidadeClasse;
     }
 
-    // --- Implementação dos Métodos Abstratos da Habilidade Especial ---
+    //Implementação dos Métodos Abstratos da Habilidade Especial:
     @Override
     public String getNomeHabilidadeEspecial() {
         return "Dádivas Ocultas da Natureza";
